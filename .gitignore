@@ -1,0 +1,23 @@
+# .gitignore File to Ignore:
+
+# Virtual Environments
+# Node Modules
+# Environment Files
+# OS-Related Files
+
+# Python Virtual Environment
+venv/
+
+# Node.js Dependencies
+node.modules/
+
+# Python Bytecode Files
+*.pyc
+__pycache__/
+
+# Environment Files
+.env
+
+# OS Files
+.DS_Store
+Thumbs.db
