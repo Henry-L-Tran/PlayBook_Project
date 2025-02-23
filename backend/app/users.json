@@ -2,8 +2,21 @@
     "users": [
         {
             "id": 1,
-            "username": "henry.tran-1",
-            "email": "password123"
+            "first_name": "Henry",
+            "last_name": "Tran",
+            "email": "henry.l.tran-1@ou.edu",
+            "password": "password123",
+            "address": "1234 Main St",
+            "birthday": "01/01/1990",
+            "payment_info": {
+                "credit_card": true,
+                "bank_account": false,
+                "card_type": "Visa",
+                "card_number": "1234567890123456",
+                "expiration_date": "01/27",
+                "cvv": "123"
+            }
+
         }
     ]
 }
