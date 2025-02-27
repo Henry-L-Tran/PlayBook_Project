@@ -2,7 +2,7 @@ import os
 import json
 import requests
 from fastapi import FastAPI, HTTPException
-from backend.app.users import RegisterUser
+from app.users import RegisterUser
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
