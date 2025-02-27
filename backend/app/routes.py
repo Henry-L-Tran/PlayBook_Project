@@ -2,7 +2,7 @@ import os
 import json
 import requests
 from fastapi import FastAPI, HTTPException
-from app.models import RegisterUser
+from backend.app.users import RegisterUser
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -10,9 +10,6 @@ app = FastAPI()
 origins = [
     # React Frontend
     "http://localhost:5173",
-
-    # Alternative localhost Address for Frontend
-    "http://127.0.0.1:5173",
 ]
 
 app.add_middleware(
@@ -31,29 +28,30 @@ app.add_middleware(
 # Load Users from JSON File
 def loadUsers():
     with open("app/users.json", "r") as file:
-        users = json.load(file)
+        data = json.load(file)
 
-    return users
+    return data["users"]
 
 # Save Updated Users to JSON File
 def saveUsers(users):
-    with open("apps/users.json", "w") as file:
-        json.dump(users, file, indent = 4)
+    with open("app/users.json", "w") as file:
+        json.dump({"users": users}, file, indent = 4)
 
 
 # Register Route
-@app.get("/register")
+@app.post("/register")
 def register(user_data: RegisterUser):
     users = loadUsers()
 
+    # Check if Email Already Exists (Account Already Registered)
     for user in users:
         if user["email"] == user_data.email:
             raise HTTPException(status_code = 400, detail="Email already exists")
         
     # Create New User Object
     new_user = {
-        "firstName": user_data.first_name,
-        "lastName": user_data.last_name,
+        "first_name": user_data.first_name,
+        "last_name": user_data.last_name,
         "email": user_data.email,
         "password": user_data.password,
         "address": user_data.address,
@@ -72,7 +70,7 @@ def register(user_data: RegisterUser):
     users.append(new_user)
     saveUsers(users)
 
-    return {"status": "User Registered"}
+    return {"message": "User Registered"}
 
 
 
