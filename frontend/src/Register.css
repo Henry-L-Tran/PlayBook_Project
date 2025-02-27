@@ -17,79 +17,78 @@ body, html {
     position: fixed;
     top: 0;
     left: 100px;
-    z-index: 1000
+    z-index: 1000;
   }
   
   /* Center the registration form */
   .register-container {
     display: flex;
-    justify-content: center;
+    float: left;
     align-items: center;
-    padding-right: 1000px;
+    justify-content: flex-start;
     height: 200px;
     width: 200px;
   }
-  
-  /* Registration form box */
+
+  .form-container {
+    display: left;
+    justify-content: flex-start;
+    margin-left: -1150px;
+  }
+
   .first-name {
-    background: rgb(207, 188, 188);
-    padding: 2rem;
+    color: #ffffff;
+    padding: 3rem;
     border-radius: 10px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
     width: 400px;
     text-align: center;
+    margin-right: 10px; 
   }
   
   .last-name {
-    background: rgb(216, 188, 188);
-    padding: 2rem;
+    color: #ffffff;
+    padding: 3rem;
     border-radius: 10px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
     width: 400px;
     text-align: center;
   }
 
   .email {
-    background: rgb(219, 196, 196);
+    color: #ffffff;
     padding: 2rem;
     border-radius: 10px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
     width: 400px;
     text-align: center;
   }
   
   .password {
-    background: rgb(212, 194, 194);
+    color: #ffffff;
     padding: 2rem;
     border-radius: 10px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
     width: 400px;
     text-align: center;
   }
 
   .confirm-password {
-    background: rgb(206, 188, 188);
+    color: #ffffff;
     padding: 2rem;
     border-radius: 10px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
     width: 400px;
     text-align: center;
   }
   
   .address {
-    background: rgb(136, 116, 116);
+    color: #ffffff;
     padding: 2rem;
     border-radius: 10px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
     width: 400px;
     text-align: center;
   }
 
   .birthday {
-    background: rgb(197, 165, 165);
+    color: #ffffff;
     padding: 2rem;
     border-radius: 10px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
     width: 400px;
     text-align: center;
   }
@@ -112,7 +111,7 @@ body, html {
   
   /* Submit button */
   .create-account-button {
-    width: 100%;
+    width: 500px;
     padding: 12px;
     color: rgb(107, 17, 17);
     border: none;
@@ -127,7 +126,7 @@ body, html {
   }
   
   /* Responsive Design */
-  @media (max-width: 500px) {
+  @media (max-width: 768px) {
     .register-form {
       width: 90%;
       padding: 1.5rem;
