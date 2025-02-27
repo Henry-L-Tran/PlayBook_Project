@@ -74,6 +74,7 @@ def register(user_data: RegisterUser):
 
 
 
+# Just a Check Route to Ensure Backend is Running
 @app.get("/check")
 
 def sports_check():

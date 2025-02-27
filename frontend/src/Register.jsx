@@ -71,9 +71,67 @@ function Register() {
     }
   }
 
+  const handleUserInput = (e) => {
+    const {name, value} = e.target;
+    setRegisterData({ ...registerData, [name]: value});
+  }
+
   return (
     <div>
       <h1>Register</h1>
+      <form onSubmit={handleRegister}>
+        <input
+          type="text"
+          name="first_name"
+          placeholder="First Name"
+          value={registerData.first_name}
+          onChange={handleUserInput}
+          required
+        />
+        <input
+          type="text"
+          name="last_name"
+          placeholder="Last Name"
+          value={registerData.last_name}
+          onChange={handleUserInput}
+          required
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={registerData.email}
+          onChange={handleUserInput}
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={registerData.password}
+          onChange={handleUserInput}
+          required
+        />
+        <input
+          type="text"
+          name="address"
+          placeholder="Address"
+          value={registerData.address}
+          onChange={handleUserInput}
+          required
+        />
+        <input
+          type="date"
+          name="birthday"
+          placeholder="Birthday"
+          value={registerData.birthday}
+          onChange={handleUserInput}
+          required
+        />
+
+        <button type="submit">Create Account</button>
+
+      </form>
     </div>
   );
 }
