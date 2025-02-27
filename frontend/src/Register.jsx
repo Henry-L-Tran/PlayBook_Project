@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import './App.css'
+import './Register.css'
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
 
 function Register() {
@@ -20,7 +20,7 @@ function Register() {
     cvv: "",
     }
   });
-  
+
   const navigator = useNavigate();
 
   useEffect(() => {
@@ -87,17 +87,23 @@ function Register() {
   }
 
   return (
-    <div>
+    <div className="register-container">
       <h1>Register</h1>
       <form onSubmit={handleRegister}>
-        <input
-          type="text"
-          name="first_name"
-          placeholder="First Name"
-          value={registerData.first_name}
-          onChange={handleUserInput}
-          required
-        />
+        <div className="first-name">
+          <label>First Name</label>
+          <input
+            type="text"
+            name="first_name"
+            placeholder="First Name"
+            value={registerData.first_name}
+            onChange={handleUserInput}
+            required
+          />  
+        </div>
+
+        <div className="last-name">
+        <label>Last Name</label>
         <input
           type="text"
           name="last_name"
@@ -106,15 +112,23 @@ function Register() {
           onChange={handleUserInput}
           required
         />
-        <input
+        </div>
+        
+        <div className="email">
+          <label>Email</label>
+          <input
           type="email"
           name="email"
           placeholder="Email"
           value={registerData.email}
           onChange={handleUserInput}
           required
-        />
-        <input
+        />  
+        </div>
+
+        <div className="password">
+          <label>password</label>
+          <input
           type="password"
           name="password"
           placeholder="Password"
@@ -122,15 +136,35 @@ function Register() {
           onChange={handleUserInput}
           required
         />
-        <input
-          type="text"
-          name="address"
-          placeholder="Address"
-          value={registerData.address}
-          onChange={handleUserInput}
-          required
-        />
-        <input
+        </div>
+
+        <div className="confirm-password">
+          <label>Confirm-Password</label>
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={registerData.password}
+            onChange={handleUserInput}
+            required
+          />
+        </div>
+
+        <div className="address">
+          <label>Address</label>
+          <input
+            type="text"
+            name="address"
+            placeholder="Address"
+            value={registerData.address}
+            onChange={handleUserInput}
+            required
+          />
+        </div>
+
+        <div className="birthday">
+          <label>Date of Birth</label>
+          <input
           type="date"
           name="birthday"
           placeholder="Birthday"
@@ -138,8 +172,10 @@ function Register() {
           onChange={handleUserInput}
           required
         />
-
-        <button type="submit">Create Account</button>
+        </div>
+        
+        <div className="create-account-button"><button type="submit">Create Account</button></div>
+        
 
       </form>
     </div>
