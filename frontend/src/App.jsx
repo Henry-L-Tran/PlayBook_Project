@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import Register from './Register.jsx'
+import Login from './Login.jsx'
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
 
 function App() {
   const [message, setMessage] = useState(null)
@@ -16,9 +18,12 @@ function App() {
     }, []);
 
   return (
-      <div>
-        <Register />
-      </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
 
 function Register() {
   const [message, setMessage] = useState(0);
@@ -19,6 +20,8 @@ function Register() {
     cvv: "",
     }
   });
+  
+  const navigator = useNavigate();
 
   useEffect(() => {
     const backendCheck = async () => {
@@ -63,8 +66,15 @@ function Register() {
         },
         body: JSON.stringify(requestBody),
       });
-      const data = await response.json();
-      console.log("Response Data:", data);
+
+      /*If the Server Status is 200, It'll Bring the User to the Login Page*/
+      if(response.status === 200) {
+        console.log("Registration Successful");
+        navigator('/login');
+      }
+      else {
+        console.log("Registration Failed");
+      }
     }
     catch (error) {
       console.error("Registration Failed: ", error);
