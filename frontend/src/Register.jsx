@@ -11,9 +11,9 @@ function Register() {
     password: "",
     address: "",
     birthday: "",
+    balance: 0,
     payment_info: {
       credit_card: false,
-      bank_account: false,
     card_type: "",
     card_number: "",
     expiration_date: "",
@@ -48,9 +48,9 @@ function Register() {
       password: registerData.password,
       address: registerData.address,
       birthday: registerData.birthday,
+      balance: registerData.balance,
       payment_info: {
         credit_card: registerData.payment_info.credit_card ?? false,
-        bank_account: registerData.bank_account ?? false,
         card_type: registerData.card_type ?? "",
         card_number: registerData.card_number ?? "",
         expiration_date: registerData.expiration_date ?? "",

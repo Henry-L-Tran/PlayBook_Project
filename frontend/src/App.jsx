@@ -3,6 +3,7 @@ import './App.css'
 import Register from './Register.jsx'
 import Login from './Login.jsx'
 import Home from './Home.jsx'
+import Funds from './Funds.jsx'
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/funds" element={<Funds />} />
       </Routes>
     </BrowserRouter>
   )

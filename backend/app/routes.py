@@ -75,9 +75,9 @@ def register(user_data: RegisterUser):
         "password": user_data.password,
         "address": user_data.address,
         "birthday": user_data.birthday,
+        "balance": user_data.balance,
         "payment_info": {
             "credit_card": user_data.payment_info.credit_card,
-            "bank_account": user_data.payment_info.bank_account,
             "card_type": user_data.payment_info.card_type,
             "card_number": user_data.payment_info.card_number,
             "expiration_date": user_data.payment_info.expiration_date,
