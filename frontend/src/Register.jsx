@@ -127,7 +127,7 @@ function Register() {
         </div>
 
         <div className="password">
-          <label>password</label>
+          <label>Password</label>
           <input
           type="password"
           name="password"
@@ -174,7 +174,9 @@ function Register() {
         />
         </div>
         
-        <div className="create-account-button"><button type="submit">Create Account</button></div>
+        <div className="create-account-button">
+          <button type="submit">Create Account</button>
+        </div>
         
 
       </form>

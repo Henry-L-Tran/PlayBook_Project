@@ -4,6 +4,7 @@ import requests
 from fastapi import FastAPI, HTTPException
 from app.users import RegisterUser
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 
 app = FastAPI()
 
@@ -25,6 +26,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+class LoginRequest(BaseModel):
+    email: str
+    password: str
+
 # Load Users from JSON File
 def loadUsers():
     with open("app/users.json", "r") as file:
@@ -37,6 +42,20 @@ def saveUsers(users):
     with open("app/users.json", "w") as file:
         json.dump({"users": users}, file, indent = 4)
 
+# Login Route
+@app.post("/login")
+def login(request: LoginRequest):
+    users = loadUsers()
+
+    for user in users:
+        # Checks if Email and Password Match with User in JSON File
+        if user["email"] == request.email and user["password"] == request.password:
+
+            # Logs In if Email and Password Match
+            return {"message": "Login Successful", "user": user}
+        else:
+            raise HTTPException(status_code = 400, detail="Invalid Credentials")
+    
 
 # Register Route
 @app.post("/register")
