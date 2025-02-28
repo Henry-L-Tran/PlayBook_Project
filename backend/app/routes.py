@@ -53,8 +53,8 @@ def login(request: LoginRequest):
 
             # Logs In if Email and Password Match
             return {"message": "Login Successful", "user": user}
-        else:
-            raise HTTPException(status_code = 400, detail="Invalid Credentials")
+        
+    raise HTTPException(status_code = 400, detail="Invalid Credentials")
     
 
 # Register Route
