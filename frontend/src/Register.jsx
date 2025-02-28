@@ -88,7 +88,8 @@ function Register() {
 
   return (
     <div className="register-container">
-      <h1>Register</h1>
+      <h1>PlayBook</h1>
+      <h2>Enter Your Full Name</h2>
       <form className="form-container" onSubmit={handleRegister}>
         <div className="first-name">
           <label>First Name</label>
@@ -113,6 +114,11 @@ function Register() {
           required
         />
         </div>
+
+        <div className="buttons">
+          <button type="back" className="back-button">Back</button>
+          <button type="next" className="next-button">Next</button>
+        </div>
         
         <div className="email">
           <label>Email</label>
@@ -124,6 +130,11 @@ function Register() {
           onChange={handleUserInput}
           required
         />  
+        </div>
+
+        <div className="buttons">
+          <button type="back" className="back-button">Back</button>
+          <button type="next" className="next-button">Next</button>
         </div>
 
         <div className="password">
@@ -150,6 +161,11 @@ function Register() {
           />
         </div>
 
+        <div className="buttons">
+          <button type="back" className="back-button">Back</button>
+          <button type="next" className="next-button">Next</button>
+        </div>
+
         <div className="address">
           <label>Address</label>
           <input
@@ -174,10 +190,10 @@ function Register() {
         />
         </div>
         
-        <div className="create-account-button">
-          <button type="submit">Create Account</button>
+        <div className="buttons">
+          <button type="back" className="back-button">Back</button>
+          <div className="create-account-button"><button type="submit">Create Account</button></div>
         </div>
-        
 
       </form>
     </div>
