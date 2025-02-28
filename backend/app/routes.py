@@ -30,6 +30,19 @@ class LoginRequest(BaseModel):
     email: str
     password: str
 
+
+class CardInfo(BaseModel):
+    email: str
+    card_type: str
+    card_number: str
+    expiration_date: str
+    cvv: str
+
+class DepositOrWithdraw(BaseModel):
+    email: str
+    amount: int
+
+
 # Load Users from JSON File
 def loadUsers():
     with open("app/users.json", "r") as file:
@@ -41,6 +54,86 @@ def loadUsers():
 def saveUsers(users):
     with open("app/users.json", "w") as file:
         json.dump({"users": users}, file, indent = 4)
+
+
+# User Login Route
+@app.get("/funds/user/{email}")
+def get_curr_user(email: str):
+    users = loadUsers()
+
+    for user in users:
+        if user["email"] == email:
+            return user
+        
+    raise HTTPException(status_code=400, detail="User Not Found")
+
+
+# Funds/Adding Card Information Route
+@app.post("/funds/add_card_info")
+def add_card_info(request: CardInfo):
+    users = loadUsers()
+
+    # Check if User Exists from Email 
+    for user in users:
+        if user["email"] == request.email:
+            user["payment_info"] = {
+                "credit_card": True,
+                "card_type": request.card_type,
+                "card_number": request.card_number,
+                "expiration_date": request.expiration_date,
+                "cvv": request.cvv
+            }
+
+            # Save Updated User Information to JSON File
+            saveUsers(users)
+            return {"message": "Card Information Added Successfully"}
+        
+    raise HTTPException(status_code=400, detail="User Not Found")
+
+# Funds/Deposit Route
+@app.post("/funds/deposit")
+def deposit(request: DepositOrWithdraw):
+    users = loadUsers()
+
+    # Check if User Exists from Email
+    for user in users:
+
+        if user["email"] == request.email:
+            if not user.get("payment_info") or not any(user["payment_info"].values()):
+                return {"message": "No Card Found. Add a Card"}
+            
+            # Deposit Amount to User Balance and Update JSON File
+            user["balance"] = user.get("balance", 0) + request.amount
+            saveUsers(users)
+
+            return {"message": "Deposit Successful!", "balance": user["balance"]}
+
+    raise HTTPException(status_code = 400, detail="User Not Found. Deposit Failed")
+
+
+# Funds/Withdraw Route
+@app.post("/funds/withdraw")
+def withdraw(request: DepositOrWithdraw):
+    users = loadUsers()
+
+    # Check if User Exists from Email
+    for user in users:
+        if user["email"] == request.email:
+            if not user.get("payment_info") or not any(user["payment_info"].values()):
+                return {"message": "No Card Found. Add a Card"}
+            
+            # Withdraw Funds If User Balance is Greater than Withdrawal Amount and Update JSON File
+            if user.get("balance", 0) >= request.amount:
+                user["balance"] -= request.amount
+                saveUsers(users)
+
+                return {"message": "Withdrawal Successful!", "balance": user["balance"]}
+            
+            else:
+                return {"message": "Withdrawal Failed. Insufficient Funds"}
+    
+    raise HTTPException(status_code = 400, detail="User Not Found. Withdrawal Failed")
+
 
 # Login Route
 @app.post("/login")
