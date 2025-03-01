@@ -85,11 +85,41 @@ function Register() {
     setRegisterData({ ...registerData, [name]: value});
   }
 
+  const handleNextStep = (e) => {
+    e.preventDefault();
+
+    if (step === 1 && (!registerData.first_name || !registerData.last_name)) {
+    alert("Please enter your First and Last Name");
+    return;
+  }
+  if (step === 2 && !registerData.email) {
+    alert("Please enter your Email");
+    return;
+  }
+  if (step === 3 && (!registerData.password || registerData.password !== registerData.confirm_password)) {
+    alert("Passwords do not match!");
+    return;
+  }
+
+  // Move to the next step
+  setStep((prevStep) => prevStep + 1);
+
+  // Scroll smoothly to the next section
+  setTimeout(() => {
+    sectionRefs[step]?.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }, 100);
+};
+
+  
+
   return (
     <div className="register-container">
       <h1>PlayBook</h1>
-      <h2>Enter Your Full Name</h2>
-      <form className="form-container" onSubmit={handleRegister}>
+      <form className="form-container-name" onSubmit={handleRegister}>
+        <h2>Enter Your Full Name</h2>
         <div className="first-name">
           <label>First Name</label>
           <input
@@ -115,10 +145,12 @@ function Register() {
         </div>
 
         <div className="buttons">
-          <button type="back" className="back-button">Back</button>
-          <button type="next" className="next-button">Next</button>
+          <button type="button" className="back-button">Back</button>
+          <button type="button" className="next-button">Next</button>
         </div>
-        
+      </form>
+      <form className="form-container-email" onSubmit={handleRegister}>  
+        <h3>Enter Your Email</h3>
         <div className="email">
           <label>Email</label>
           <input
@@ -132,10 +164,12 @@ function Register() {
         </div>
 
         <div className="buttons">
-          <button type="back" className="back-button">Back</button>
-          <button type="next" className="next-button">Next</button>
+          <button type="button" className="back-button">Back</button>
+          <button type="button" className="next-button" onClick={handleNextStep}>Next</button>
         </div>
-
+      </form>
+      <form className="form-container-password" onSubmit={handleRegister}>
+        <h4>Enter Your Password</h4>
         <div className="password">
           <label>Password</label>
           <input
@@ -161,10 +195,12 @@ function Register() {
         </div>
 
         <div className="buttons">
-          <button type="back" className="back-button">Back</button>
-          <button type="next" className="next-button">Next</button>
+          <button type="button" className="back-button">Back</button>
+          <button type="button" className="next-button" onClick={handleNextStep}>Next</button>
         </div>
-
+      </form>
+      <form className="form-container-address-dob" onSubmit={handleRegister}>
+        <h5>Enter Your Address & Date of Birth</h5>
         <div className="address">
           <label>Address</label>
           <input
@@ -190,9 +226,9 @@ function Register() {
         </div>
         
         <div className="buttons">
-          <button type="back" className="back-button">Back</button>
-          <div className="create-account-button"><button type="submit">Create Account</button></div>
+          <button type="button" className="back-button">Back</button>
         </div>
+        <button type="submit" className="create-account-button">Create Account</button>
 
       </form>
     </div>

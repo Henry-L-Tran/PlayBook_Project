@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
-import './App.css'
+import './Login.css'
 
 function Login() {
     const [loginData, setLoginData] = useState({
@@ -45,7 +45,7 @@ function Login() {
 
 
     return (
-        <div>
+        <div className="login-container">
             <h1>Login</h1>
             <form onSubmit={handleLogin}>
                 <div className ="email">
