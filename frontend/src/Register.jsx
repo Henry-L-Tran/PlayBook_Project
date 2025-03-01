@@ -67,7 +67,6 @@ function Register() {
         body: JSON.stringify(requestBody),
       });
 
-      /*If the Server Status is 200, It'll Bring the User to the Login Page*/
       if(response.status === 200) {
         console.log("Registration Successful");
         navigator('/login');

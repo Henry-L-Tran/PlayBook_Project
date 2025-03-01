@@ -32,7 +32,7 @@ function Funds() {
         catch (error) {
             console.error("Error Fetching User Data", error);
         }
-    };
+    }
 
     const handleUserInput = (e) => {
         const { name, value } = e.target;
@@ -40,7 +40,7 @@ function Funds() {
           ...prevUser,
           payment_info: { ...prevUser.payment_info, [name]: value },
         }))
-    };
+    }
 
     const saveCardInfo = async () => {
 
@@ -214,7 +214,7 @@ function Funds() {
                         onChange={(e) => setCard(e.target.value)}>
                         <option value="">Select a Card</option>
                         <option value={user.payment_info.card_number}>
-                            {user.payment_info.card_type} - {user.payment_info.card_number}
+                            {user.payment_info.card_type} - {user.payment_info.card_number.slice(-4)}
                         </option>
                     </select>
                     
