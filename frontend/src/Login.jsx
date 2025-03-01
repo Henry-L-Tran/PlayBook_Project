@@ -28,7 +28,9 @@ function Login() {
             });
             
             if(response.status === 200) {
-                console.log("Login Successful");
+                const data = await response.json()
+                localStorage.setItem("currUser", data.user.email)
+                console.log("Login Successful, User:", data.user.email);
                 navigator('/home');
             }
             else {

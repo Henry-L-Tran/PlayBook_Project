@@ -7,12 +7,12 @@
             "password": "password123",
             "address": "1234 Main St",
             "birthday": "01/01/1990",
+            "balance": 3160,
             "payment_info": {
                 "credit_card": true,
-                "bank_account": false,
                 "card_type": "Visa",
-                "card_number": "1234567890123456",
-                "expiration_date": "01/27",
+                "card_number": "435345343345345",
+                "expiration_date": "33/77",
                 "cvv": "123"
             }
         }

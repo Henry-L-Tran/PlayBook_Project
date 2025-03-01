@@ -5,7 +5,6 @@ from typing import Optional
 
 class PaymentInfo(BaseModel):
     credit_card: bool
-    bank_account: bool
     card_type: Optional[str] = None
     card_number: Optional[str] = None
     expiration_date: Optional[str] = None
@@ -18,6 +17,7 @@ class RegisterUser(BaseModel):
     password: str
     address: str
     birthday: str
+    balance: int
     payment_info: PaymentInfo
 
 
