@@ -7,6 +7,7 @@ function Funds() {
     const [currTab, setCurrTab] = useState("card-info")
     const [amount, setAmount] = useState("")
     const [card, setCard] = useState("")
+    const navigator = useNavigate()
 
 
     useEffect(() => {
@@ -78,44 +79,53 @@ function Funds() {
     }
 
 
-const userTransactions = async (type) => {
-    if(!user) {
-        console.error("Error Loading User Data")
-        return
-    }
-
-
-    const requestInfo = {
-        email: user.email,
-        amount: amount,
-        card_number: card
-    }
-
-    try {
-        const response = await fetch(`http://localhost:8000/funds/${type}`, {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(requestInfo)
-
-        })
-
-        const data = await response.json()
-        if(response.status == 200) {
-            alert(data.message)
-            getUserData()
+    const userTransactions = async (type) => {
+        if(!user) {
+            console.error("Error Loading User Data")
+            return
         }
-        else {
-            alert("Transction Failed")
+
+
+        const requestInfo = {
+            email: user.email,
+            amount: amount,
+            card_number: card
+        }
+
+        try {
+            const response = await fetch(`http://localhost:8000/funds/${type}`, {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(requestInfo)
+
+            })
+
+            const data = await response.json()
+            if(response.status == 200) {
+                alert(data.message)
+                getUserData()
+            }
+            else {
+                alert("Transction Failed")
+            }
+        }
+
+        catch (error) {
+            console.error(`${type} Failed:`, error)
         }
     }
 
-    catch (error) {
-        console.error(`${type} Failed:`, error)
+    const handleUserLogout = () => {
+        localStorage.removeItem("currUser")
+        console.log("User Sucessfully Logged Out")
+        navigator("/login")
     }
-}
+
 
     return (
         <div>
+
+            <button onClick={handleUserLogout}>Logout</button> 
             <h1>Funds</h1>
             <p>Balance: ${user?.balance || 0}</p>
 
@@ -186,7 +196,7 @@ const userTransactions = async (type) => {
 
                     <button onClick={() => userTransactions("deposit")}>Confirm</button>
                     </div>
-                )}
+            )}
 
                 {currTab === "withdraw" && user?.payment_info?.card_number && (
                     <div>
@@ -210,7 +220,8 @@ const userTransactions = async (type) => {
                     
                     <button onClick={() => userTransactions("withdraw")}>Confirm</button>
                     </div>
-                )}
+            )} 
+
         </div>
     )
 }
