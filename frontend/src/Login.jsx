@@ -43,23 +43,33 @@ function Login() {
   };
 
   return (
-    <Box className="flex items-center justify-center ">
-      <Card className="w-96 shadow-lg" variant="outlined">
-        <CardContent>
-          <Typography variant="h5" className="text-black text-center mb-4">
-            Login
+    <Box className="flex items-center flex-col justify-center ">
+      <Typography
+        fontSize={"4rem"}
+        fontWeight={"bold"}
+        className="top-0 py-12 absolute text-blue-300"
+      >
+        Welcome to PlayBook
+      </Typography>
+      <Card className="w-96 " variant="outlined">
+        <CardContent className="border-3 border-blue-300 rounded-md">
+          <Typography
+            className="text-center py-8 text-blue-300 "
+            fontWeight={"600"}
+            fontSize={"2rem"}
+          >
+            Login to PlayBook
           </Typography>
-          <form onSubmit={handleLogin} className="space-y-4">
+          <form onSubmit={handleLogin} className="space-y-4 px-2">
             <TextField
               label="Email"
-              variant="outlined"
+              // variant="outlined"
               type="email"
               name="email"
               fullWidth
               value={loginData.email}
               onChange={handleUserInput}
-              InputLabelProps={{ className: "text-gray-300" }}
-              InputProps={{ className: "text-white" }}
+              sx={{ marginBottom: "2rem" }}
             />
             <TextField
               label="Password"
@@ -69,25 +79,26 @@ function Login() {
               fullWidth
               value={loginData.password}
               onChange={handleUserInput}
-              InputLabelProps={{ className: "text-gray-300" }}
-              InputProps={{ className: "text-white" }}
+              sx={{ marginBottom: "2rem" }}
             />
-            <Button
-              type="submit"
-              variant="contained"
-              fullWidth
-              className="bg-blue-500 hover:bg-blue-600"
-            >
-              Sign In
-            </Button>
-            <Button
-              variant="outlined"
-              fullWidth
-              className="border-blue-500 text-blue-400 hover:bg-blue-600 hover:text-white"
-              onClick={() => navigate("/register")}
-            >
-              Register
-            </Button>
+            <div className="flex flex-col gap-4 mb-4">
+              <Button
+                type="submit"
+                variant="contained"
+                fullWidth
+                className="bg-blue-500 hover:bg-blue-600"
+              >
+                Sign In
+              </Button>
+              <Button
+                variant="outlined"
+                fullWidth
+                className="border-blue-500 text-blue-400 hover:bg-blue-600 hover:text-white"
+                onClick={() => navigate("/register")}
+              >
+                Register
+              </Button>
+            </div>
           </form>
         </CardContent>
       </Card>
