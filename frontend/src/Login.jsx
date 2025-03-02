@@ -43,10 +43,10 @@ function Login() {
   };
 
   return (
-    <Box className="flex items-center justify-center h-screen w-full bg-green-400">
+    <Box className="flex items-center justify-center ">
       <Card className="w-96 shadow-lg" variant="outlined">
         <CardContent>
-          <Typography variant="h5" className="text-white text-center mb-4">
+          <Typography variant="h5" className="text-black text-center mb-4">
             Login
           </Typography>
           <form onSubmit={handleLogin} className="space-y-4">
