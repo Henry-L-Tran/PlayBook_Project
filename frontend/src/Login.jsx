@@ -47,12 +47,12 @@ function Login() {
       <Typography
         fontSize={"4rem"}
         fontWeight={"bold"}
-        className="top-0 py-12 absolute text-blue-300"
+        className="top-0 py-12 sticky text-blue-300"
       >
         Welcome to PlayBook
       </Typography>
-      <Card className="w-96 " variant="outlined">
-        <CardContent className="border-3 border-blue-300 rounded-md">
+      <Card className="w-full sm:w-3/5 " variant="outlined">
+        <CardContent className=" border-3   border-blue-300 rounded-md">
           <Typography
             className="text-center py-8 text-blue-300 "
             fontWeight={"600"}
