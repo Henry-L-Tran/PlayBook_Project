@@ -1,87 +1,169 @@
-import { useState, useEffect } from 'react'
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
-import './Login.css'
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  TextField,
+  Button,
+  Card,
+  CardContent,
+  Typography,
+  Box,
+} from "@mui/material";
+// import "./index.css";
 
 function Login() {
-    const [loginData, setLoginData] = useState({
-        email: "",
-        password: ""
-    })
-    
-    const navigator = useNavigate()
+  const [loginData, setLoginData] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
 
-    const handleUserInput = (e) => {
-        const {name, value} = e.target;
-        setLoginData({ ...loginData, [name]: value});
+  const handleUserInput = (e) => {
+    const { name, value } = e.target;
+    setLoginData({ ...loginData, [name]: value });
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("http://localhost:8000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(loginData),
+      });
+
+      if (response.status === 200) {
+        const data = await response.json();
+        localStorage.setItem("currUser", data.user.email);
+        console.log("Login Successful, User:", data.user.email);
+        navigate("/home");
+      } else {
+        console.log("Login Failed");
       }
+    } catch (error) {
+      console.error("Login Failed:", error);
+    }
+  };
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
+  return (
+    <Box 
+      className="flex items-center gap-0 flex-col justify-center min-h-screen"
+      sx={{
+        width: "100vw",
+        height: "100vh",
+        display: "flex",
+        backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('/images/playbook_background2.png')",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        gap: "1px",
+      }}>
 
-        try {
-            const response = await fetch("http://localhost:8000/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
+      <img
+        src="/images/logo.png"
+        alt="PlayBook Logo"
+        style={{
+          width: "110px", 
+          height: "110px",
+          alignSelf: "center",
+          marginTop: "-6rem",
+          marginBottom: "8rem",
+        }}
+      />
+
+      <Card 
+        className="w-full sm:w-3/5 " 
+        variant="outlined"
+        sx={{
+          width: "500px",
+          backgroundColor: "rgba(0, 0, 0, 0.3)",
+          marginTop: "-4rem",
+        }}
+        >
+        <CardContent className=" border-3 border-white rounded-md">
+          <Typography
+            className="text-center py-8 text-white"
+            fontWeight={"600"}
+            fontSize={"4rem"}
+            fontFamily={"monospace"}
+          >
+            PlayBook
+          </Typography>
+          <form onSubmit={handleLogin} className="space-y-4 px-2">
+            <TextField
+              label="Email"
+              type="email"
+              name="email"
+              fullWidth
+              value={loginData.email}
+              onChange={handleUserInput}
+              sx={{ 
+                marginBottom: "2rem",
+                "& label.Mui-focused": { color: "white" },
+                "& input": { color: "white" }, 
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": { borderColor: "white" }, 
+                  "&:hover fieldset": { borderColor: "gray" }, 
+                  "&.Mui-focused fieldset": { borderColor: "white" }, 
+               },
+              }}
+            />
+
+            <TextField
+              label="Password"
+              type="password"
+              name="password"
+              fullWidth
+              value={loginData.password}
+              onChange={handleUserInput}
+              sx={{
+                marginBottom: "2rem",
+                "& label.Mui-focused": { color: "white" }, 
+                "& input": { color: "white" },
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": { borderColor: "white" },
+                  "&:hover fieldset": { borderColor: "gray" },
+                  "&.Mui-focused fieldset": { borderColor: "white" },
                 },
-                body: JSON.stringify(loginData)
-            });
-            
-            if(response.status === 200) {
-                const data = await response.json()
-                localStorage.setItem("currUser", data.user.email)
-                console.log("Login Successful, User:", data.user.email);
-                navigator('/home');
-            }
-            else {
-                console.log("Login Failed");
-            }
-        }
+              }}
+            />
+            <div className="flex flex-col gap-4 mb-4">
+              <Button
+                type="submit"
+                variant="outlined"
+                fullWidth
+                sx={{
+                  backgroundColor: "white",
+                  color: "black",
+                  "&:hover": {
+                    backgroundColor: "black",
+                    color: "white",
+                    borderColor: "white",
+                  },
+                }}
 
-        catch (error) {
-            console.error("Login Failed: ", error);
-        }
-    };
+              >
+                Sign In
+              </Button>
 
-
-    return (
-        <div className="login-container">
-            <h1>Login</h1>
-            <form onSubmit={handleLogin}>
-                <div className ="email">
-                    <label>Email</label>
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                        value={loginData.email}
-                        onChange={handleUserInput}
-                    />
-                </div>
-
-                <div className="password">
-                    <label>Password</label>
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        value={loginData.password}
-                        onChange={handleUserInput}
-                    />
-                </div>
-
-                <div className="login-button">
-                    <button type="submit">Sign In</button>
-                </div>
-
-                <div className="register-button">
-                    <button type="button" onClick={() => navigator("/register")}>Register</button>
-                </div>
-
-                
-            </form>
-        </div>
-    )
+              <Button
+                variant="outlined"
+                fullWidth
+                sx={{
+                  backgroundColor: "white",
+                  color: "black",
+                  "&:hover": {
+                    backgroundColor: "black",
+                    color: "white",
+                    borderColor: "white",
+                  },
+                }}
+                onClick={() => navigate("/register")}
+              >
+                Register
+              </Button>
+            </div>
+          </form>
+        </CardContent>
+      </Card>
+    </Box>
+  );
 }
 
-export default Login
+export default Login;

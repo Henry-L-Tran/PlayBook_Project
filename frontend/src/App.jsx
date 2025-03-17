@@ -1,13 +1,21 @@
-import { useState, useEffect } from 'react'
-import './App.css'
-import Register from './Register.jsx'
-import Login from './Login.jsx'
-import Home from './Home.jsx'
-import Funds from './Funds.jsx'
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
+import { useState, useEffect } from "react";
+import "./App.css";
+import Register from "./Register.jsx";
+import Login from "./Login.jsx";
+import Home from "./Home.jsx";
+import Funds from "./Funds.jsx";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 
 function App() {
-  const [message, setMessage] = useState(null)
+  const [message, setMessage] = useState(null);
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: "dark",
+    },
+  });
 
   useEffect(() => {
     const backendCheck = async () => {
@@ -17,19 +25,23 @@ function App() {
     };
 
     backendCheck();
-    }, []);
+  }, []);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/funds" element={<Funds />} />
-      </Routes>
-    </BrowserRouter>
-  )
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/funds" element={<Funds />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
+  );
 }
 
-export default App
+export default App;
