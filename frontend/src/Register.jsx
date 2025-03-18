@@ -75,22 +75,48 @@ function Register() {
   };
 
   return (
-    <Box className="flex items-center flex-col justify-center">
-      <Typography
-        fontSize={"4rem"}
-        fontWeight={"bold"}
-        className="top-0 py-12 sticky text-blue-300"
-      >
-        Welcome to PlayBook
-      </Typography>
-      <Card className="w-full sm:w-3/5" variant="outlined">
-        <CardContent className="border-3 border-blue-300 rounded-md">
+    <Box className="flex items-center flex-col justify-center min-h-screen"
+      sx={{
+        width: "100vw",
+        height: "auto",
+        display: "flex",
+        backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('/images/playbook_background2.png')",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        overflowY: "auto",
+        overflowX: "hidden",
+      }}>
+      
+      <img
+        src="/images/logo.png"
+        alt="PlayBook Logo"
+        style={{
+          width: "110px", 
+          height: "110px",
+          alignSelf: "center",
+          marginTop: "5rem",
+          marginBottom: "6rem",
+        }}
+      />
+
+      <Card 
+        className="w-full sm:w-3/5" 
+        variant="outlined"
+        sx={{
+          width: "500px",
+          backgroundColor: "rgba(0, 0, 0, 0.3)",
+          marginTop: "-3rem",
+          paddingBottom: "5rem",
+        }}
+        >
+        <CardContent className="border-3 border-white rounded-md">
           <Typography
-            className="text-center py-8 text-blue-300"
+            className="text-center py-8 text-white"
             fontWeight={"600"}
-            fontSize={"2rem"}
+            fontSize={"4rem"}
+            fontFamily={"monospace"}
           >
-            Register for PlayBook
+            PlayBook
           </Typography>
           <form
             onSubmit={handleRegister}
@@ -102,6 +128,16 @@ function Register() {
               fullWidth
               value={registerData.first_name}
               onChange={handleUserInput}
+              sx={{ 
+                marginBottom: "2rem",
+                "& label.Mui-focused": { color: "white" },
+                "& input": { color: "white" }, 
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": { borderColor: "white" }, 
+                  "&:hover fieldset": { borderColor: "gray" }, 
+                  "&.Mui-focused fieldset": { borderColor: "white" }, 
+               },
+              }}
             />
             <TextField
               label="Last Name"
@@ -109,6 +145,16 @@ function Register() {
               fullWidth
               value={registerData.last_name}
               onChange={handleUserInput}
+              sx={{ 
+                marginBottom: "2rem",
+                "& label.Mui-focused": { color: "white" },
+                "& input": { color: "white" }, 
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": { borderColor: "white" }, 
+                  "&:hover fieldset": { borderColor: "gray" }, 
+                  "&.Mui-focused fieldset": { borderColor: "white" }, 
+               },
+              }}
             />
             <TextField
               label="Email"
@@ -117,6 +163,16 @@ function Register() {
               fullWidth
               value={registerData.email}
               onChange={handleUserInput}
+              sx={{ 
+                marginBottom: "2rem",
+                "& label.Mui-focused": { color: "white" },
+                "& input": { color: "white" }, 
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": { borderColor: "white" }, 
+                  "&:hover fieldset": { borderColor: "gray" }, 
+                  "&.Mui-focused fieldset": { borderColor: "white" }, 
+               },
+              }}
             />
             <TextField
               label="Password"
@@ -125,6 +181,16 @@ function Register() {
               fullWidth
               value={registerData.password}
               onChange={handleUserInput}
+              sx={{ 
+                marginBottom: "2rem",
+                "& label.Mui-focused": { color: "white" },
+                "& input": { color: "white" }, 
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": { borderColor: "white" }, 
+                  "&:hover fieldset": { borderColor: "gray" }, 
+                  "&.Mui-focused fieldset": { borderColor: "white" }, 
+               },
+              }}
             />
             <TextField
               label="Confirm Password"
@@ -133,6 +199,16 @@ function Register() {
               fullWidth
               value={registerData.confirm_password}
               onChange={handleUserInput}
+              sx={{ 
+                marginBottom: "2rem",
+                "& label.Mui-focused": { color: "white" },
+                "& input": { color: "white" }, 
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": { borderColor: "white" }, 
+                  "&:hover fieldset": { borderColor: "gray" }, 
+                  "&.Mui-focused fieldset": { borderColor: "white" }, 
+               },
+              }}
             />
             <TextField
               label="Address"
@@ -140,6 +216,16 @@ function Register() {
               fullWidth
               value={registerData.address}
               onChange={handleUserInput}
+              sx={{ 
+                marginBottom: "2rem",
+                "& label.Mui-focused": { color: "white" },
+                "& input": { color: "white" }, 
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": { borderColor: "white" }, 
+                  "&:hover fieldset": { borderColor: "gray" }, 
+                  "&.Mui-focused fieldset": { borderColor: "white" }, 
+               },
+              }}
             />
             <TextField
               label="Date of Birth"
@@ -149,20 +235,47 @@ function Register() {
               value={registerData.birthday}
               onChange={handleUserInput}
               InputLabelProps={{ shrink: true }}
+              sx={{ 
+                marginBottom: "2rem",
+                "& label.Mui-focused": { color: "white" },
+                "& input": { color: "white" }, 
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": { borderColor: "white" }, 
+                  "&:hover fieldset": { borderColor: "gray" }, 
+                  "&.Mui-focused fieldset": { borderColor: "white" }, 
+               },
+              }}
             />
             <div className="flex flex-col gap-4 mb-4">
               <Button
                 type="submit"
-                variant="contained"
+                variant="outlined"
                 fullWidth
-                className="bg-blue-500 hover:bg-blue-600"
+                sx={{
+                  backgroundColor: "white",
+                  color: "black",
+                  "&:hover": {
+                    backgroundColor: "black",
+                    color: "white",
+                    borderColor: "white",
+                  },
+                }}
               >
                 Register
               </Button>
+
               <Button
                 variant="outlined"
                 fullWidth
-                className="border-blue-500 text-blue-400 hover:bg-blue-600 hover:text-white"
+                sx={{
+                  backgroundColor: "white",
+                  color: "black",
+                  "&:hover": {
+                    backgroundColor: "black",
+                    color: "white",
+                    borderColor: "white",
+                  },
+                }}
                 onClick={() => navigate("/login")}
               >
                 Back to Login
