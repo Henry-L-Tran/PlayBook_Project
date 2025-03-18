@@ -77,14 +77,15 @@ function Register() {
   return (
     <Box className="flex items-center flex-col justify-center min-h-screen"
       sx={{
-        width: "100vw",
-        height: "auto",
+        position: "absolute",
+        top: "0", left: "0", right: "0", 
+        width: "100%",
+        minHeight: "100vh",
         display: "flex",
         backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('/images/playbook_background2.png')",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         overflowY: "auto",
-        overflowX: "hidden",
       }}>
       
       <img
@@ -106,7 +107,8 @@ function Register() {
           width: "500px",
           backgroundColor: "rgba(0, 0, 0, 0.3)",
           marginTop: "-3rem",
-          paddingBottom: "5rem",
+          marginBottom: "8rem",
+          
         }}
         >
         <CardContent className="border-3 border-white rounded-md">
