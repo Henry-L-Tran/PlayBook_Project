@@ -64,11 +64,97 @@ function Home() {
                 <div
                     className="absolute"
                     style={{
-                        position: "absolute",
+                        position: "absolute flex items-center gap-4",
                         top: "3.2rem",
-                        right: "6rem",
+                        display: "flex",
+                        gap: "5rem",
+                        right: "15rem",
                     }}
                 >       
+                    <Button
+                        variant="text"
+                        disableRipple
+                        sx={{
+                            color: "white",
+                            fontSize: "2rem",
+                            fontWeight: "600",
+                            textTransform: "none",
+                            border: "none",
+                            backgroundColor: "transparent",
+                            boxShadow: "none",
+                            padding: "0",
+                            fontFamily: "monospace",
+                            "&:hover": {
+                                backgroundColor: "transparent",
+                                textDecoration: "underline",
+                            },                
+                            "&:focus": {
+                                backgroundColor: "transparent",
+                                border: "none",
+                                outline: "none",
+                                boxShadow: "none",
+                            },
+                        }}
+                    >
+                        Lineups
+                    </Button>
+
+                    <Button
+                        variant="text"
+                        disableRipple
+                        sx={{
+                            color: "white",
+                            fontSize: "2rem",
+                            fontWeight: "600",
+                            textTransform: "none",
+                            border: "none",
+                            backgroundColor: "transparent",
+                            boxShadow: "none",
+                            padding: "0",
+                            fontFamily: "monospace",
+                            "&:hover": {
+                                backgroundColor: "transparent",
+                                textDecoration: "underline",
+                            },                
+                            "&:focus": {
+                                backgroundColor: "transparent",
+                                border: "none",
+                                outline: "none",
+                                boxShadow: "none",
+                            },
+                        }}
+                    >
+                        Promos
+                    </Button>
+
+                    <Button
+                        variant="text"
+                        disableRipple
+                        sx={{
+                            color: "white",
+                            fontSize: "2rem",
+                            fontWeight: "600",
+                            textTransform: "none",
+                            border: "none",
+                            backgroundColor: "transparent",
+                            boxShadow: "none",
+                            padding: "0",
+                            fontFamily: "monospace",
+                            "&:hover": {
+                                backgroundColor: "transparent",
+                                textDecoration: "underline",
+                            },                
+                            "&:focus": {
+                                backgroundColor: "transparent",
+                                border: "none",
+                                outline: "none",
+                                boxShadow: "none",
+                            },
+                        }}
+                    >
+                        Social
+                    </Button>
+
                     <Button
                         variant="text"
                         disableRipple
@@ -97,6 +183,7 @@ function Home() {
                     >
                         Funds
                     </Button>
+
                 </div>
 
                 <div style={{
@@ -105,6 +192,7 @@ function Home() {
                         height: "4px",
                         backgroundColor: "white",
                         top: "8rem",
+                        borderRadius: "20px",
                     }}>
                     </div>
         </Box>
