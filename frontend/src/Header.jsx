@@ -7,10 +7,10 @@ const Header = () => {
 
   return (
     <div className=" w-full py-6 px-12">
-      <div className="flex justify-between items-center w-full">
+      <div className="flex justify-between items-center w-full flex-wrap">
         {/* Logo and Brand Name */}
         <div
-          className="flex items-center gap-4"
+          className="flex items-center gap-4 min-w-1/4"
           onClick={() => navigate("/home")}
         >
           <img
@@ -31,7 +31,7 @@ const Header = () => {
         </div>
 
         {/* Navigation Links */}
-        <div className="flex items-center gap-16">
+        <div className="flex items-center gap-16 min-w/3/4 flex-wrap">
           {["Lineups", "Promos", "Social", "Funds"].map((item, index) => (
             <Button
               key={index}
