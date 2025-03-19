@@ -9,8 +9,8 @@ const Header = ({ onNavigate }) => {
   const navItems = ["Lineups", "Promos", "Social", "Funds"];
 
   return (
-    <div className=" w-full py-6 px-12">
-      <div className="flex justify-between items-center w-full flex-wrap">
+    <div className=" w-full sm:py-6 sm:px-12">
+      <div className="flex flex-col sm:flex-row justify-between items-center w-full flex-wrap">
         {/* Logo and Brand Name */}
         <div
           className="flex items-center gap-4 min-w-1/4"
@@ -34,7 +34,7 @@ const Header = ({ onNavigate }) => {
         </div>
 
         {/* Navigation Links */}
-        <div className="flex items-center gap-16 min-w/3/4">
+        <div className="flex items-center gap-4 sm:gap-16 min-w/3/4 flex-col sm:flex-row">
           {navItems.map((item, index) => (
             <Button
               key={index}

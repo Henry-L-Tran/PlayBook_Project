@@ -40,7 +40,7 @@ function Home() {
       <Header onNavigate={handleNavigation} />
 
       {/* Dynamic content area */}
-      <div className="flex-1 flex items-center justify-center p-8">
+      <div className="flex-1 flex items-center justify-center  sm:p-8 ">
         {renderComponent()}
       </div>
     </Box>
