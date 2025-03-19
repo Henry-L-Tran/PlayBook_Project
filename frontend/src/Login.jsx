@@ -43,39 +43,43 @@ function Login() {
   };
 
   return (
-    <Box 
-      className="flex items-center gap-0 flex-col justify-center min-h-screen"
+    <Box
+      className="flex items-center flex-col justify-center min-h-screen"
       sx={{
-        width: "100vw",
-        height: "100vh",
+        position: "absolute",
+        top: "0",
+        left: "0",
+        right: "0",
+        width: "100%",
+        minHeight: "100vh",
         display: "flex",
-        backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('/images/playbook_background2.png')",
+        backgroundImage:
+          "linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('/images/playbook_background2.png')",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
-        gap: "1px",
-      }}>
-
+        overflowY: "auto",
+      }}
+    >
       <img
         src="/images/logo.png"
         alt="PlayBook Logo"
         style={{
-          width: "110px", 
+          width: "110px",
           height: "110px",
           alignSelf: "center",
-          marginTop: "-6rem",
-          marginBottom: "8rem",
+          marginBottom: "6rem",
         }}
       />
 
-      <Card 
-        className="w-full sm:w-3/5 " 
+      <Card
+        className="w-full sm:w-3/5 "
         variant="outlined"
         sx={{
           width: "500px",
           backgroundColor: "rgba(0, 0, 0, 0.3)",
           marginTop: "-4rem",
         }}
-        >
+      >
         <CardContent className=" border-3 border-white rounded-md">
           <Typography
             className="text-center py-8 text-white"
@@ -93,15 +97,15 @@ function Login() {
               fullWidth
               value={loginData.email}
               onChange={handleUserInput}
-              sx={{ 
+              sx={{
                 marginBottom: "2rem",
                 "& label.Mui-focused": { color: "white" },
-                "& input": { color: "white" }, 
+                "& input": { color: "white" },
                 "& .MuiOutlinedInput-root": {
-                  "& fieldset": { borderColor: "white" }, 
-                  "&:hover fieldset": { borderColor: "gray" }, 
-                  "&.Mui-focused fieldset": { borderColor: "white" }, 
-               },
+                  "& fieldset": { borderColor: "white" },
+                  "&:hover fieldset": { borderColor: "gray" },
+                  "&.Mui-focused fieldset": { borderColor: "white" },
+                },
               }}
             />
 
@@ -114,7 +118,7 @@ function Login() {
               onChange={handleUserInput}
               sx={{
                 marginBottom: "2rem",
-                "& label.Mui-focused": { color: "white" }, 
+                "& label.Mui-focused": { color: "white" },
                 "& input": { color: "white" },
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": { borderColor: "white" },
@@ -137,7 +141,6 @@ function Login() {
                     borderColor: "white",
                   },
                 }}
-
               >
                 Sign In
               </Button>
