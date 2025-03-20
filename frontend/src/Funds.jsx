@@ -121,32 +121,39 @@ function Funds() {
         navigator("/login")
     }
 
-
     return (
         <div>
 
-            <button onClick={handleUserLogout}>Logout</button> 
-            <h1>Funds</h1>
-            <p>Balance: ${user?.balance || 0}</p>
+            {/* Logout Button */}
+            <button className="absolute top-35 right-12 px-4 py-2"
+                onClick={handleUserLogout}>Logout
+            </button> 
+            
+            <h1 className="flex items-center flex-col justify-center -mt-120">Funds</h1>
 
-            <div>
+            <p className="flex items-center flex-col justify-center mt-10 text-2xl">Balance: ${user?.balance || 0}</p>
+
+            <div className="mt-5">
                 <button onClick={() => setCurrTab("card-info")}>Card Information</button>
+            </div>
+
+            <div className="flex justify-center gap-15 mt-5 ">
                 <button onClick={() => setCurrTab("deposit")}>Deposit</button>
                 <button onClick={() => setCurrTab("withdraw")}>Withdraw</button>
             </div>
 
             {currTab === "card-info" && (
                 <div>
-                    <h2>Payment Information</h2>
-                    <input 
+                    <h2 className="mt-5 text-2xl">Payment Information</h2>
+                    <input className="mt-5" 
                         type="text" 
                         name="card_type" 
-                        placeholder="Card Type" 
+                        placeholder="Card Name" 
                         value={user?.payment_info?.card_type || ""} 
                         onChange={handleUserInput}
                     />
 
-                    <input 
+                    <input  
                         type="text" 
                         name="card_number" 
                         placeholder="Card Number" 
@@ -176,9 +183,9 @@ function Funds() {
 
             {currTab === "deposit" && user?.payment_info?.card_number && (
                     <div>
-                    <h2>Deposit Funds</h2>
+                    <h2 className="mt-5 text-2xl">Deposit Funds</h2>
 
-                    <input 
+                    <input className="mt-5"
                         type="number" 
                         placeholder="Amount" 
                         value={amount} 
@@ -200,9 +207,9 @@ function Funds() {
 
                 {currTab === "withdraw" && user?.payment_info?.card_number && (
                     <div>
-                    <h2>Withdraw Funds</h2>
+                    <h2 className="mt-5 text-2xl">Withdraw Funds</h2>
 
-                    <input 
+                    <input className="mt-5"
                         type="number" 
                         placeholder="Amount" 
                         value={amount} 
