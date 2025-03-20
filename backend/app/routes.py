@@ -202,7 +202,7 @@ def register(user_data: RegisterUser):
 @app.get("/nba/scores")
 def nba_scores():
     try:
-        with open("live_nba_scores.json", "r") as file:
+        with open("app/nba_data/live_nba_scores.json", "r") as file:
             data = json.load(file)
             return data
         
@@ -247,7 +247,7 @@ def fetch_nba_live_scores():
 
 
             # Save NBA Live Scores to JSON File
-            with open("live_nba_scores.json", "w") as file:
+            with open("app/nba_data/live_nba_scores.json", "w") as file:
                 json.dump(filtered_nba_data, file, indent=4)
 
         except Exception as e:
