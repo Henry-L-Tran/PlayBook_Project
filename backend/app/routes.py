@@ -1,10 +1,14 @@
 import os
 import json
 import requests
+import time
+import threading
 from fastapi import FastAPI, HTTPException
 from app.users import RegisterUser
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from nba_api.live.nba.endpoints import scoreboard
+
 
 app = FastAPI()
 
@@ -54,6 +58,15 @@ def loadUsers():
 def saveUsers(users):
     with open("app/users.json", "w") as file:
         json.dump({"users": users}, file, indent = 4)
+
+
+####### ROUTES #######
+
+# Just a Check Route to Ensure Backend is Running
+@app.get("/check")
+
+def sports_check():
+    return {"status": "Backend Running"}
 
 
 # User Login Route
@@ -185,10 +198,62 @@ def register(user_data: RegisterUser):
     return {"message": "User Registered"}
 
 
+# NBA Live Scores Route
+@app.get("/nba/scores")
+def nba_scores():
+    try:
+        with open("live_nba_scores.json", "r") as file:
+            data = json.load(file)
+            return data
+        
+    except FileNotFoundError:
+        return {"message": "No Scores Found"}
 
-# Just a Check Route to Ensure Backend is Running
-@app.get("/check")
 
-def sports_check():
-    return {"status": "Backend Running"}
+def fetch_nba_live_scores():
+    while True:
+        try:
+            # Fetch NBA Live Scores from NBA API
+            scores = scoreboard.ScoreBoard()
+            data = scores.get_dict()
 
+            filtered_nba_data = []
+
+            for games in data["scoreboard"]["games"]:
+                filtered_nba_data.append({
+                    "gameId": games["gameId"],
+                    "gameStatus": games["gameStatus"],
+                    "gameClock": games["gameClock"],
+                    "gameTimeUTC": games["gameTimeUTC"],
+                    "homeTeam": {
+                        "teamId": games["homeTeam"]["teamId"],
+                        "teaName": games["homeTeam"]["teamName"],
+                        "teamTriCode": games["homeTeam"]["teamTricode"],
+                        "wins": games["homeTeam"]["wins"],
+                        "losses": games["homeTeam"]["losses"],
+                        "score": games["homeTeam"]["score"],
+                        "periods": games["homeTeam"]["periods"],
+                    },
+                    "awayTeam": {
+                        "teamId": games["awayTeam"]["teamId"],
+                        "teamName": games["awayTeam"]["teamName"],
+                        "teamTriCode": games["awayTeam"]["teamTricode"],
+                        "wins": games["awayTeam"]["wins"],
+                        "losses": games["awayTeam"]["losses"],
+                        "score": games["awayTeam"]["score"],
+                        "periods": games["awayTeam"]["periods"],
+                    }
+                })
+
+
+            # Save NBA Live Scores to JSON File
+            with open("live_nba_scores.json", "w") as file:
+                json.dump(filtered_nba_data, file, indent=4)
+
+        except Exception as e:
+            print(e)
+
+        # Fetch NBA Live Scores Every 30 Seconds
+        time.sleep(30)
+
+threading.Thread(target=fetch_nba_live_scores, daemon=True).start()
