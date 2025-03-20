@@ -2,11 +2,18 @@ import { Typography, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Divider from "@mui/material/Divider";
 
-// eslint-disable-next-line react/prop-types
-const Header = ({ onNavigate }) => {
+function Header() {
+
+  // Navigation Function
   const navigate = useNavigate();
+  
   // Navigation items
-  const navItems = ["Lineups", "Promos", "Social", "Funds"];
+  const navItems = [
+    {name: "Lineups", path: "/lineups"},
+    {name: "Promos", path: "/promos"},
+    {name: "Social", path: "/social"},
+    {name: "Funds", path: "/funds"},
+  ];
 
   return (
     <div className=" w-full sm:py-6 sm:px-12">
@@ -40,7 +47,7 @@ const Header = ({ onNavigate }) => {
               key={index}
               variant="text"
               disableRipple
-              onClick={() => onNavigate(item)}
+              onClick={() => navigate(item.path)}
               sx={{
                 color: "white",
                 fontSize: "1.5rem",
@@ -59,7 +66,7 @@ const Header = ({ onNavigate }) => {
                 },
               }}
             >
-              {item}
+              {item.name}
             </Button>
           ))}
         </div>

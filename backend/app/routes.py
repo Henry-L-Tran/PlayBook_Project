@@ -257,3 +257,4 @@ def fetch_nba_live_scores():
         time.sleep(30)
 
 threading.Thread(target=fetch_nba_live_scores, daemon=True).start()
+
