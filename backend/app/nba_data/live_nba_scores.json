@@ -1,74 +1,8 @@
 [
     {
-        "gameId": "0022401010",
-        "gameStatus": 1,
-        "gameClock": "",
-        "gameTimeUTC": "2025-03-20T23:00:00Z",
-        "homeTeam": {
-            "teamId": 1610612766,
-            "teaName": "Hornets",
-            "teamTriCode": "CHA",
-            "wins": 17,
-            "losses": 51,
-            "score": 0,
-            "periods": [
-                {
-                    "period": 1,
-                    "periodType": "REGULAR",
-                    "score": 0
-                },
-                {
-                    "period": 2,
-                    "periodType": "REGULAR",
-                    "score": 0
-                },
-                {
-                    "period": 3,
-                    "periodType": "REGULAR",
-                    "score": 0
-                },
-                {
-                    "period": 4,
-                    "periodType": "REGULAR",
-                    "score": 0
-                }
-            ]
-        },
-        "awayTeam": {
-            "teamId": 1610612752,
-            "teamName": "Knicks",
-            "teamTriCode": "NYK",
-            "wins": 43,
-            "losses": 25,
-            "score": 0,
-            "periods": [
-                {
-                    "period": 1,
-                    "periodType": "REGULAR",
-                    "score": 0
-                },
-                {
-                    "period": 2,
-                    "periodType": "REGULAR",
-                    "score": 0
-                },
-                {
-                    "period": 3,
-                    "periodType": "REGULAR",
-                    "score": 0
-                },
-                {
-                    "period": 4,
-                    "periodType": "REGULAR",
-                    "score": 0
-                }
-            ]
-        }
-    },
-    {
         "gameId": "0022401011",
-        "gameStatus": 1,
-        "gameClock": "",
+        "gameStatus": 2,
+        "gameClock": "PT00M00.00S",
         "gameTimeUTC": "2025-03-20T23:00:00Z",
         "homeTeam": {
             "teamId": 1610612754,
@@ -76,17 +10,17 @@
             "teamTriCode": "IND",
             "wins": 39,
             "losses": 29,
-            "score": 0,
+            "score": 42,
             "periods": [
                 {
                     "period": 1,
                     "periodType": "REGULAR",
-                    "score": 0
+                    "score": 23
                 },
                 {
                     "period": 2,
                     "periodType": "REGULAR",
-                    "score": 0
+                    "score": 19
                 },
                 {
                     "period": 3,
@@ -106,17 +40,83 @@
             "teamTriCode": "BKN",
             "wins": 23,
             "losses": 46,
-            "score": 0,
+            "score": 52,
             "periods": [
                 {
                     "period": 1,
                     "periodType": "REGULAR",
-                    "score": 0
+                    "score": 28
                 },
                 {
                     "period": 2,
                     "periodType": "REGULAR",
+                    "score": 24
+                },
+                {
+                    "period": 3,
+                    "periodType": "REGULAR",
                     "score": 0
+                },
+                {
+                    "period": 4,
+                    "periodType": "REGULAR",
+                    "score": 0
+                }
+            ]
+        }
+    },
+    {
+        "gameId": "0022401010",
+        "gameStatus": 2,
+        "gameClock": "PT00M00.00S",
+        "gameTimeUTC": "2025-03-20T23:00:00Z",
+        "homeTeam": {
+            "teamId": 1610612766,
+            "teaName": "Hornets",
+            "teamTriCode": "CHA",
+            "wins": 17,
+            "losses": 51,
+            "score": 54,
+            "periods": [
+                {
+                    "period": 1,
+                    "periodType": "REGULAR",
+                    "score": 27
+                },
+                {
+                    "period": 2,
+                    "periodType": "REGULAR",
+                    "score": 27
+                },
+                {
+                    "period": 3,
+                    "periodType": "REGULAR",
+                    "score": 0
+                },
+                {
+                    "period": 4,
+                    "periodType": "REGULAR",
+                    "score": 0
+                }
+            ]
+        },
+        "awayTeam": {
+            "teamId": 1610612752,
+            "teamName": "Knicks",
+            "teamTriCode": "NYK",
+            "wins": 43,
+            "losses": 25,
+            "score": 44,
+            "periods": [
+                {
+                    "period": 1,
+                    "periodType": "REGULAR",
+                    "score": 19
+                },
+                {
+                    "period": 2,
+                    "periodType": "REGULAR",
+                    "score": 25
                 },
                 {
                     "period": 3,

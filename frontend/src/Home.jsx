@@ -36,16 +36,13 @@ function Home() {
     >
 
       <Header />
-        <div className="flex flex-col items-center justify-center sm:p-8">
-          <h1 className="text-6xl text-white font-mono">Welcome to PlayBook</h1>
-        </div>
 
       <Box className="w-full p-8 text-white">
         <Typography variant="h4" className="font-mono mb-4">
           NBA Live Scores
         </Typography>
 
-        {nbaLiveGames === 0 ? (
+        {nbaLiveGames.length === 0 ? (
           <Typography> No scheduled games </Typography>
         ) : (
           nbaLiveGames.map((game, index) => (
@@ -53,45 +50,100 @@ function Home() {
               <Box
                 sx={{
                   display: "flex",
-                  jsutifuContent: "flex-start",
+                  justifyContent: "flex-start",
                   alignItems: "center",
                   gap: "1rem",
-                  fontFamily: "monospace",
                 }}
                 >
-                <Typography variant="h6"
-                  sx={{
-                    
-                  }}> {game.awayTeam.teamTriCode} </Typography>
+                <Typography variant="h6"> {game.awayTeam.teamTriCode} </Typography>
                 <Typography 
                   sx={{
                     fontWeight: "bold",
                     fontSize: "0.75rem",
                   }}> {game.awayTeam.wins} - {game.awayTeam.losses} </Typography>
+
+                <Box className="mt-2">
+                  <Box className="grid grid-cols-5 text-white gap-x-8 ml-40">
+                    {game.awayTeam.periods.map((period, index) => (
+                      <Box key={index} className="text-center">
+                        <Typography 
+                          sx={{fontFamily: "monospace"}}
+                          className="text-center"
+                          >
+                          {period.period}
+                        </Typography>
+
+                        <Typography
+                          sx={{
+                            fontFamily: "monospace",
+                            fontSize: "0.75rem",
+                          }}
+                          className="text-center"
+                          >
+                          {period.score}
+                        </Typography>
+                      </Box>                          
+                    ))}
+                    <Typography> {game.awayTeam.score} </Typography>
+                  </Box>
+                </Box>
+              </Box>
+
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                  gap: "1rem",
+                }}
+              >
                 <Typography variant="h6"> {game.homeTeam.teamTriCode} </Typography>
                 <Typography
                   sx={{
                     fontWeight: "bold",
                     fontSize: "0.75rem",
                   }}> {game.homeTeam.wins} - {game.homeTeam.losses} </Typography>
-                <Typography> {game.awayTeam.score} </Typography>
-                <Typography> {game.homeTeam.score} </Typography>
-                <Typography> {game.gameStatus} </Typography>
-                <Typography> {game.gameClock} </Typography>
-                <Typography> {game.gameTimeUTC} </Typography>
-                <Typography> {game.periods} </Typography>
 
-                <Box className="mt-2">
-                  <Box className="grid grid-cols-5 text-white">
+<Box className="mt-2">
+                  <Box className="grid grid-cols-5 text-white gap-x-8 ml-40">
                     {game.homeTeam.periods.map((period, index) => (
-                      <Typography key={index} className="text-center">{period.period} </Typography>
-                    ))}
+                      <Box key={index} className="text-center">
+                        <Typography 
+                          sx={{fontFamily: "monospace"}}
+                          className="text-center"
+                          >
+                          {period.period}
+                        </Typography>
 
-                    {game.awayTeam.periods.map((period, index) => (
-                      <Typography key={index} className="text-center">{period.period} </Typography>
+                        <Typography
+                          sx={{
+                            fontFamily: "monospace",
+                            fontSize: "0.75rem",
+                          }}
+                          className="text-center"
+                          >
+                          {period.score}
+                        </Typography>
+                      </Box>                          
                     ))}
+                    <Typography> {game.homeTeam.score} </Typography>
                   </Box>
                 </Box>
+              </Box>
+
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: "1rem",
+                  fontFamily: "monospace",
+                  marginLeft: "6rem",
+                }}
+              >
+                <Typography> Q{game.gameStatus} </Typography>
+                <Typography> {game.gameClock} </Typography>
+                <Typography> {game.gameTimeUTC} </Typography>
               </Box>
             </Box>
           ))
