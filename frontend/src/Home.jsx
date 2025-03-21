@@ -16,14 +16,45 @@ function Home() {
       }
       catch (error) {
         console.error("Error: ", error);
+      }
+    };
+
+    fetchNbaLiveGames();
+    const fetchTimer = setInterval(fetchNbaLiveGames, 30000);
+
+    return () => {
+      clearInterval(fetchTimer);
     }
+  }, []);
+    
+
+
+  const gameClockConverter = (isoTime) => {
+    if(!isoTime)
+      return "00:00";
+
+    const time = isoTime.match(/PT(\d+)M(\d+(\.\d*)?)S/);
+    if(!time)
+      return isoTime;
+
+    let minutes = time[1].padStart(2, "0");
+    let seconds = Math.floor(parseFloat(time[2])).toString().padStart(2, "0");
+
+    return `${minutes}:${seconds}`;
   }
 
-  fetchNbaLiveGames();
-  const fetchTimer = setInterval(fetchNbaLiveGames, 30000);
+  const gameTimeConverter = (utcString) => {
+    if(!utcString)
+      return "N/A";
 
-  return () => clearInterval(fetchTimer);
-}, []);
+    const date = new Date(utcString);
+    return date.toLocaleString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+      timeZone: "America/New_York",
+    });
+  };
 
   return (
     
@@ -104,7 +135,7 @@ function Home() {
                     fontSize: "0.75rem",
                   }}> {game.homeTeam.wins} - {game.homeTeam.losses} </Typography>
 
-<Box className="mt-2">
+              <Box className="mt-2">
                   <Box className="grid grid-cols-5 text-white gap-x-8 ml-40">
                     {game.homeTeam.periods.map((period, index) => (
                       <Box key={index} className="text-center">
@@ -141,9 +172,9 @@ function Home() {
                   marginLeft: "6rem",
                 }}
               >
-                <Typography> Q{game.gameStatus} </Typography>
-                <Typography> {game.gameClock} </Typography>
-                <Typography> {game.gameTimeUTC} </Typography>
+                <Typography> {game.gameStatusText} </Typography>
+                <Typography> {gameClockConverter(game.gameClock)} </Typography>
+                <Typography> {gameTimeConverter(game.gameTimeUTC)} </Typography>
               </Box>
             </Box>
           ))
