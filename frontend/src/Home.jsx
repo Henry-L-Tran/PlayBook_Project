@@ -5,7 +5,7 @@ import { Box, Typography } from "@mui/material";
 
 function Home() {
 
-  const [nbaLiveGames, setNbaLiveGames] = useState([]);
+  const [nbaLiveGames, setNbaLiveGames] = useState({gameDate: "", gameData: []});
 
   useEffect(() => {
     const fetchNbaLiveGames = async () => {
@@ -43,18 +43,6 @@ function Home() {
     return `${minutes}:${seconds}`;
   }
 
-  const gameTimeConverter = (utcString) => {
-    if(!utcString)
-      return "N/A";
-
-    const date = new Date(utcString);
-    return date.toLocaleString("en-US", {
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: true,
-      timeZone: "America/New_York",
-    });
-  };
 
   return (
     
@@ -68,16 +56,47 @@ function Home() {
 
       <Header />
 
-      <Box className="w-full p-8 text-white">
+      <Box className="w-full p-8 text-white"
+        sx={{
+          width: "100%",
+          maxWidth: "1200px",
+          marginLeft: "3.5rem",
+          backgroundColor: "rgba(0, 0, 0, 0.3)",
+          borderRadius: "rem",
+        }}>
         <Typography variant="h4" className="font-mono mb-4">
           NBA Live Scores
         </Typography>
+        
+        <Typography
+                  sx={{
+                    fontSize: "1.2rem",
+                    fontFamily: "monospace",
+                    width: "20rem",
+                    paddingTop: "1rem",
+                    marginLeft: "26rem",
+                  }}> {nbaLiveGames.gameDate} 
+          </Typography>
 
         {nbaLiveGames.length === 0 ? (
           <Typography> No scheduled games </Typography>
         ) : (
-          nbaLiveGames.map((game, index) => (
-            <Box key={index} className="mb-4 p-4 bg-gray-900 rounded-lg">
+          nbaLiveGames.gameData.map((game, index) => (
+            <Box key={index}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "2rem",
+                padding: "2rem",
+                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                borderRadius: "0.5rem",
+                marginBottom: "1rem",
+                alignItems: "flex-start",
+                textAlign: "left",
+                paddingLeft: "10rem",
+              }}>
               <Box
                 sx={{
                   display: "flex",
@@ -115,7 +134,11 @@ function Home() {
                         </Typography>
                       </Box>                          
                     ))}
-                    <Typography> {game.awayTeam.score} </Typography>
+                    <Typography
+                      sx={{
+                        fontFamily: "monospace",
+                        fontSize: "1.3rem",
+                      }}> {game.awayTeam.score} </Typography>
                   </Box>
                 </Box>
               </Box>
@@ -157,7 +180,11 @@ function Home() {
                         </Typography>
                       </Box>                          
                     ))}
-                    <Typography> {game.homeTeam.score} </Typography>
+                    <Typography
+                      sx={{
+                        fontFamily: "monospace",
+                        fontSize: "1.3rem",
+                      }}> {game.homeTeam.score} </Typography>
                   </Box>
                 </Box>
               </Box>
@@ -165,16 +192,33 @@ function Home() {
               <Box
                 sx={{
                   display: "flex",
+                  flexDirection: "column",
                   justifyContent: "center",
                   alignItems: "center",
                   gap: "1rem",
                   fontFamily: "monospace",
-                  marginLeft: "6rem",
+                  marginTop: "1rem",
+                  
                 }}
               >
-                <Typography> {game.gameStatusText} </Typography>
-                <Typography> {gameClockConverter(game.gameClock)} </Typography>
-                <Typography> {gameTimeConverter(game.gameTimeUTC)} </Typography>
+                <Typography
+                  sx={{
+                    fontSize: "1.2rem",
+                    fontFamily: "monospace",
+                    width: "20rem",
+                    marginLeft: "30rem",
+                    marginTop: "-8rem",
+                    textAlign: "right",
+
+                  }}> {game.gameStatusText} </Typography>
+                <Typography
+                  sx={{
+                    fontSize: "1.2rem",
+                    fontFamily: "monospace",
+                    width: "20rem",
+                    marginLeft: "30rem",
+                    textAlign: "right",
+                  }}> {gameClockConverter(game.gameClock)} </Typography>
               </Box>
             </Box>
           ))

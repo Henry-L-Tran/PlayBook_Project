@@ -217,31 +217,34 @@ def fetch_nba_live_scores():
             scores = scoreboard.ScoreBoard()
             data = scores.get_dict()
 
-            filtered_nba_data = []
+            gameDate = data["scoreboard"].get("gameDate", "N/A")
+            filtered_nba_data = {
+                "gameDate": gameDate,
+                "gameData": []
+            }
 
-            for games in data["scoreboard"]["games"]:
-                filtered_nba_data.append({
-                    "gameId": games["gameId"],
-                    "gameStatusText": games["gameStatusText"],
-                    "gameClock": games["gameClock"],
-                    "gameTimeUTC": games["gameTimeUTC"],
+            for gameData in data["scoreboard"]["games"]:
+                filtered_nba_data["gameData"].append({
+                    "gameId": gameData["gameId"],
+                    "gameStatusText": gameData["gameStatusText"],
+                    "gameClock": gameData["gameClock"],
                     "homeTeam": {
-                        "teamId": games["homeTeam"]["teamId"],
-                        "teaName": games["homeTeam"]["teamName"],
-                        "teamTriCode": games["homeTeam"]["teamTricode"],
-                        "wins": games["homeTeam"]["wins"],
-                        "losses": games["homeTeam"]["losses"],
-                        "score": games["homeTeam"]["score"],
-                        "periods": games["homeTeam"]["periods"],
+                        "teamId": gameData["homeTeam"]["teamId"],
+                        "teaName": gameData["homeTeam"]["teamName"],
+                        "teamTriCode": gameData["homeTeam"]["teamTricode"],
+                        "wins": gameData["homeTeam"]["wins"],
+                        "losses": gameData["homeTeam"]["losses"],
+                        "score": gameData["homeTeam"]["score"],
+                        "periods": gameData["homeTeam"]["periods"],
                     },
                     "awayTeam": {
-                        "teamId": games["awayTeam"]["teamId"],
-                        "teamName": games["awayTeam"]["teamName"],
-                        "teamTriCode": games["awayTeam"]["teamTricode"],
-                        "wins": games["awayTeam"]["wins"],
-                        "losses": games["awayTeam"]["losses"],
-                        "score": games["awayTeam"]["score"],
-                        "periods": games["awayTeam"]["periods"],
+                        "teamId": gameData["awayTeam"]["teamId"],
+                        "teamName": gameData["awayTeam"]["teamName"],
+                        "teamTriCode": gameData["awayTeam"]["teamTricode"],
+                        "wins": gameData["awayTeam"]["wins"],
+                        "losses": gameData["awayTeam"]["losses"],
+                        "score": gameData["awayTeam"]["score"],
+                        "periods": gameData["awayTeam"]["periods"],
                     }
                 })
 
