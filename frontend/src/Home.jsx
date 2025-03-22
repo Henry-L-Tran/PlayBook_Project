@@ -26,7 +26,6 @@ function Home() {
       clearInterval(fetchTimer);
     }
   }, []);
-    
 
 
   const gameClockConverter = (isoTime) => {
@@ -183,7 +182,8 @@ function Home() {
                       sx={{
                         fontFamily: "monospace",
                         fontSize: "1.3rem",
-                      }}> {game.homeTeam.score} </Typography>
+                      }}> {game.homeTeam.score} 
+                    </Typography>
                   </Box>
                 </Box>
               </Box>
@@ -209,15 +209,20 @@ function Home() {
                     marginTop: "-8rem",
                     textAlign: "right",
 
-                  }}> {game.gameStatusText} </Typography>
-                <Typography
-                  sx={{
-                    fontSize: "1.2rem",
-                    fontFamily: "monospace",
-                    width: "20rem",
-                    marginLeft: "30rem",
-                    textAlign: "right",
-                  }}> {gameClockConverter(game.gameClock)} </Typography>
+                  }}> {game.gameStatusText} 
+                </Typography>
+
+                {game.gameStatus === 2 && (
+                  <Typography
+                    sx={{
+                      fontSize: "1.2rem",
+                      fontFamily: "monospace",
+                      width: "20rem",
+                      marginLeft: "30rem",
+                      textAlign: "right",
+                    }}> {gameClockConverter(game.gameClock)} 
+                  </Typography>
+                )}
               </Box>
             </Box>
           ))

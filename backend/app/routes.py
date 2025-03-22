@@ -226,6 +226,7 @@ def fetch_nba_live_scores():
             for gameData in data["scoreboard"]["games"]:
                 filtered_nba_data["gameData"].append({
                     "gameId": gameData["gameId"],
+                    "gameStatus": gameData["gameStatus"],
                     "gameStatusText": gameData["gameStatusText"],
                     "gameClock": gameData["gameClock"],
                     "homeTeam": {
