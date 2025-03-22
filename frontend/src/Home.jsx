@@ -103,7 +103,10 @@ function Home() {
                   alignItems: "center",
                 }}
                 >
-                <Typography variant="h6"> {game.awayTeam.teamTriCode} </Typography>
+                <Typography variant="h6"
+                  sx={{
+                    color: game.gameStatus === 3 && game.awayTeam.score > game.homeTeam.score ? "#10833C" : "white",
+                  }}> {game.awayTeam.teamTriCode} </Typography>
                 <Typography 
                   sx={{
                     fontWeight: "bold",
@@ -139,6 +142,7 @@ function Home() {
                       sx={{
                         fontFamily: "monospace",
                         fontSize: "1.3rem",
+                        color: game.gameStatus === 3 && game.awayTeam.score > game.homeTeam.score ? "#10833C" : "white",
                       }}> {game.awayTeam.score} </Typography>
                   </Box>
                 </Box>
@@ -151,7 +155,10 @@ function Home() {
                   alignItems: "center",
                 }}
               >
-                <Typography variant="h6"> {game.homeTeam.teamTriCode} </Typography>
+                <Typography variant="h6"
+                  sx={{
+                    color: game.gameStatus === 3 && game.homeTeam.score > game.awayTeam.score ? "#10833C" : "white",
+                  }}> {game.homeTeam.teamTriCode} </Typography>
                 <Typography
                   sx={{
                     fontWeight: "bold",
@@ -184,6 +191,7 @@ function Home() {
                       sx={{
                         fontFamily: "monospace",
                         fontSize: "1.3rem",
+                        color: game.gameStatus === 3 && game.homeTeam.score > game.awayTeam.score ? "#10833C" : "white",
                       }}> {game.homeTeam.score} 
                     </Typography>
                   </Box>
@@ -205,6 +213,7 @@ function Home() {
                 <Typography
                   sx={{
                     fontSize: "1.2rem",
+                    fontWeight: "bold",
                     fontFamily: "monospace",
                     width: "20rem",
                     marginLeft: "30rem",
