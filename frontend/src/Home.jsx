@@ -94,13 +94,13 @@ function Home() {
                 alignItems: "flex-start",
                 textAlign: "left",
                 paddingLeft: "10rem",
+                gridTemplateColumns: "80px 80px 200px 80px",
               }}>
               <Box
                 sx={{
-                  display: "flex",
-                  justifyContent: "flex-start",
+                  display: "grid",
+                  gridTemplateColumns: "80px 80px 240px 1fr",
                   alignItems: "center",
-                  gap: "1rem",
                 }}
                 >
                 <Typography variant="h6"> {game.awayTeam.teamTriCode} </Typography>
@@ -115,8 +115,11 @@ function Home() {
                     {game.awayTeam.periods.map((period, index) => (
                       <Box key={index} className="text-center">
                         <Typography 
-                          sx={{fontFamily: "monospace"}}
-                          className="text-center"
+                          sx={{
+                            fontFamily: "monospace",
+                            gridTemplateColumns: "repeat(4, 40px) 60px",
+                          }}
+                            className="text-center"
                           >
                           {period.period}
                         </Typography>
@@ -143,10 +146,9 @@ function Home() {
 
               <Box
                 sx={{
-                  display: "flex",
-                  justifyContent: "flex-start",
+                  display: "grid",
+                  gridTemplateColumns: "80px 80px 240px 1fr",
                   alignItems: "center",
-                  gap: "1rem",
                 }}
               >
                 <Typography variant="h6"> {game.homeTeam.teamTriCode} </Typography>
@@ -206,7 +208,7 @@ function Home() {
                     fontFamily: "monospace",
                     width: "20rem",
                     marginLeft: "30rem",
-                    marginTop: "-8rem",
+                    marginTop: "-12rem",
                     textAlign: "right",
 
                   }}> {game.gameStatusText} 
