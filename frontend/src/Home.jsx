@@ -87,7 +87,6 @@ function Home() {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
-                alignItems: "center",
                 gap: "2rem",
                 padding: "2rem",
                 backgroundColor: "rgba(0, 0, 0, 0.5)",
