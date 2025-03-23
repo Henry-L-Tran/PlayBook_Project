@@ -67,7 +67,7 @@ function Home() {
           maxWidth: "1200px",
           marginLeft: "3.5rem",
           backgroundColor: "rgba(0, 0, 0, 0.3)",
-          borderRadius: "rem",
+          borderRadius: "1rem",
         }}>
 
         <Tabs
@@ -75,13 +75,18 @@ function Home() {
           onChange={handleCategoryTabChange}
           centered
           textColor="inherit"
-          TabIndicatorProps={{
-            style: {
-              backgroundColor: "white",
-              height: "0.25rem",
-              borderRadius: "1rem",
-            },
+          slotProps={{
+            indicator: {
+              sx: {
+                backgroundColor: "white",
+                height: "0.25rem",
+                borderRadius: "1rem",
+                marginTop: "1rem",
+                textDecorationColor: "white",
+              },
+            }
           }}
+
           sx={{
             marginTop: "1rem",
             textDecorationColor: "white",
