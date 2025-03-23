@@ -74,6 +74,7 @@ function Home() {
           value={activeCategoryTab}
           onChange={handleCategoryTabChange}
           centered
+          textColor="inherit"
           TabIndicatorProps={{
             style: {
               backgroundColor: "white",
@@ -95,10 +96,14 @@ function Home() {
               textColor: "inherit",
               color: "white",
               outline: "none",
+              "&.Mui-selected": {
+                color: "white",
+                fontWeight: "bold",
+                outline: "none",
+              },
               "&:focus": {
                 outline: "none",
                 color: "white",
-                fontWeight: "bold",
               },
             }} />
           <Tab label="NFL" value="NFL"
