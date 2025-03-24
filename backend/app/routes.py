@@ -8,6 +8,7 @@ from app.users import RegisterUser
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from nba_api.live.nba.endpoints import scoreboard
+from nba_api.stats.endpoints import scoreboardv2, boxscoretraditionalv2
 
 
 app = FastAPI()
@@ -231,7 +232,7 @@ def fetch_nba_live_scores():
                     "gameClock": gameData["gameClock"],
                     "homeTeam": {
                         "teamId": gameData["homeTeam"]["teamId"],
-                        "teaName": gameData["homeTeam"]["teamName"],
+                        "teamName": gameData["homeTeam"]["teamName"],
                         "teamTriCode": gameData["homeTeam"]["teamTricode"],
                         "wins": gameData["homeTeam"]["wins"],
                         "losses": gameData["homeTeam"]["losses"],
@@ -261,4 +262,42 @@ def fetch_nba_live_scores():
         time.sleep(30)
 
 threading.Thread(target=fetch_nba_live_scores, daemon=True).start()
+
+
+def fetch_player_stats():
+    while True:
+        try:
+            games = scoreboard.ScoreBoard().get_dict()["scoreboard"]["games"]
+
+            # Trying to Fetch Game IDs for Games that are In Progress or Completed
+            game_ids = [game["gameId"] for game in games if game["gameStatus"] in (2, 3)]
+
+            all_game_stats = []
+
+            for game_id in game_ids:
+                try:
+                    boxscore = boxscoretraditionalv2.BoxScoreTraditionalV2(game_id=game_id)
+                    players = boxscore.get_normalized_dict()["PlayerStats"]
+                    all_game_stats.append({
+                        "gameId": game_id,
+                        "players": players
+                    })
+
+                    # Sleep for 1.5 Seconds
+                    time.sleep(1.5)
+
+                except Exception as e:
+                    print("Error: ", e)
+
+            with open("app/nba_data/live_player_data.json", "w") as file:
+                json.dump({"games": all_game_stats}, file, indent=4)
+
+        except Exception as e:
+            print("Error: ", e)
+
+        time.sleep(30)
+
+threading.Thread(target=fetch_player_stats, daemon=True).start()
+
+
 
