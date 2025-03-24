@@ -263,6 +263,42 @@ def fetch_nba_live_scores():
 
 threading.Thread(target=fetch_nba_live_scores, daemon=True).start()
 
+# def fetch_nba_live_player_stats():
+#     try:
+#         games = scoreboard.get_normalized_dict()["scoreboard"]["games"]
+#         gameIds = [game["gameId"] for game in games if game["gameStatus"] == 2]
+
+#         filtered_player_stats = []
+
+#         for gameId in gameIds:
+#             try:
+#                 boxscore = boxscoretraditionalv2.BoxScoreTraditionalV2(gameId=gameId)
+#                 playerStats = boxscore.get_dict()["game"]["players"]
+                
+#                 for player in playerStats:
+#                     filtered_player_stats.append({
+#                         "gameId": gameId,
+#                         "playerId": player["personId"],
+#                         "playerName": player["firstName"] + " " + player["lastName"],
+#                         "teamId": player["teamId"],
+#                         "teamTriCode": player["teamTricode"],
+#                         "points": player["points"],
+#                         "assists": player["assists"],
+#                         "rebounds": player["totReb"],
+#                         "steals": player["steals"],
+#                         "blocks": player["blocks"],
+#                         "turnovers": player["turnovers"],
+#                     })
+
+#                 time.sleep(1.5)
+#             except Exception as e:
+#                 print("Error fetching live stats: ", e)
+
+#         return filtered_player_stats
+    
+#     except Exception as e:
+#         print("Error accessing scoreboard: ", e)
+#         return []
 
 def fetch_player_stats():
     while True:
@@ -272,29 +308,45 @@ def fetch_player_stats():
             # Trying to Fetch Game IDs for Games that are In Progress or Completed
             game_ids = [game["gameId"] for game in games if game["gameStatus"] in (2, 3)]
 
-            all_game_stats = []
+            filtered_player_stats = []
 
             for game_id in game_ids:
                 try:
                     boxscore = boxscoretraditionalv2.BoxScoreTraditionalV2(game_id=game_id)
-                    players = boxscore.get_normalized_dict()["PlayerStats"]
-                    all_game_stats.append({
-                        "gameId": game_id,
-                        "players": players
-                    })
 
-                    # Sleep for 1.5 Seconds
+                    # Using Normalized Dict to Avoid Matching Header w/ Values 
+                    playerStats = boxscore.get_normalized_dict()["PlayerStats"]
+
+                    for player in playerStats:
+                        filtered_player_stats.append({
+                            "gameId": game_id,
+                            "playerId": player["PLAYER_ID"],
+                            "playerName": player["PLAYER_NAME"],
+                            "playerPosition": player["START_POSITION"],
+                            "teamId": player["TEAM_ID"],
+                            "teamTriCode": player["TEAM_ABBREVIATION"],
+                            "points": player["PTS"],
+                            "rebounds": player["REB"],
+                            "assists": player["AST"],
+                            "3ptMade": player["FG3M"],
+                            "steals": player["STL"],
+                            "blocks": player["BLK"],
+                            "turnovers": player["TO"],
+                        })
+
+                    # Fetch Individual Player Stats Every 1.5 Seconds
                     time.sleep(1.5)
 
                 except Exception as e:
                     print("Error: ", e)
 
             with open("app/nba_data/live_player_data.json", "w") as file:
-                json.dump({"games": all_game_stats}, file, indent=4)
+                json.dump({"games": filtered_player_stats}, file, indent=4)
 
         except Exception as e:
             print("Error: ", e)
 
+        # Refreshes All Player Stats in JSON File Every 30 Seconds
         time.sleep(30)
 
 threading.Thread(target=fetch_player_stats, daemon=True).start()
