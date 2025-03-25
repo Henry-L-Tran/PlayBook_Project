@@ -268,7 +268,20 @@ def fetch_nba_live_scores():
 threading.Thread(target=fetch_nba_live_scores, daemon=True).start()
 
 
-def fetch_player_stats():
+
+# NBA Live Player Stats Route
+@app.get("/nba/player_live_stats")
+def nba_player_stats():
+    try:
+        with open("app/nba_data/live_player_data.json", "r") as file:
+            data = json.load(file)
+        return data
+    
+    except FileNotFoundError:
+        return {"message": "No Live Player Stats Found"}
+    
+
+def fetch_player_live_stats():
     while True:
         try:
             games = scoreboard.ScoreBoard().get_dict()["scoreboard"]["games"]
@@ -317,8 +330,20 @@ def fetch_player_stats():
         # Refreshes All Player Stats in JSON File Every 30 Seconds
         time.sleep(30)
 
-threading.Thread(target=fetch_player_stats, daemon=True).start()
+threading.Thread(target=fetch_player_live_stats, daemon=True).start()
 
+
+# NBA Player Season Stats Route
+@app.get("/nba/player_season_stats")
+def nba_player_season_stats():
+    try:
+        with open("app/nba_data/player_season_data.json", "r") as file:
+            data = json.load(file)
+        return data
+    
+    except FileNotFoundError:
+        return {"message": "No Player Season Stats Found"}
+    
 
 def fetch_player_season_stats():
     try:
