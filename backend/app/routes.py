@@ -3,12 +3,16 @@ import json
 import requests
 import time
 import threading
+import pandas as pd
 from fastapi import FastAPI, HTTPException
 from app.users import RegisterUser
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from nba_api.live.nba.endpoints import scoreboard
-from nba_api.stats.endpoints import scoreboardv2, boxscoretraditionalv2
+from nba_api.stats.endpoints import boxscoretraditionalv2
+from nba_api.stats.static import players
+from nba_api.stats.endpoints import LeagueDashPlayerStats
+from nba_api.stats.library.http import NBAStatsHTTP
 
 
 app = FastAPI()
@@ -263,42 +267,6 @@ def fetch_nba_live_scores():
 
 threading.Thread(target=fetch_nba_live_scores, daemon=True).start()
 
-# def fetch_nba_live_player_stats():
-#     try:
-#         games = scoreboard.get_normalized_dict()["scoreboard"]["games"]
-#         gameIds = [game["gameId"] for game in games if game["gameStatus"] == 2]
-
-#         filtered_player_stats = []
-
-#         for gameId in gameIds:
-#             try:
-#                 boxscore = boxscoretraditionalv2.BoxScoreTraditionalV2(gameId=gameId)
-#                 playerStats = boxscore.get_dict()["game"]["players"]
-                
-#                 for player in playerStats:
-#                     filtered_player_stats.append({
-#                         "gameId": gameId,
-#                         "playerId": player["personId"],
-#                         "playerName": player["firstName"] + " " + player["lastName"],
-#                         "teamId": player["teamId"],
-#                         "teamTriCode": player["teamTricode"],
-#                         "points": player["points"],
-#                         "assists": player["assists"],
-#                         "rebounds": player["totReb"],
-#                         "steals": player["steals"],
-#                         "blocks": player["blocks"],
-#                         "turnovers": player["turnovers"],
-#                     })
-
-#                 time.sleep(1.5)
-#             except Exception as e:
-#                 print("Error fetching live stats: ", e)
-
-#         return filtered_player_stats
-    
-#     except Exception as e:
-#         print("Error accessing scoreboard: ", e)
-#         return []
 
 def fetch_player_stats():
     while True:
@@ -352,4 +320,52 @@ def fetch_player_stats():
 threading.Thread(target=fetch_player_stats, daemon=True).start()
 
 
+def fetch_player_season_stats():
+    try:
+        player_total_stats = LeagueDashPlayerStats(season="2024-25")
 
+        # Gets the Main Stats Table
+        stats = player_total_stats.get_data_frames()[0]
+
+        # I'm Just Doing Players with More Than 20 Games Played for Filtering
+        stats = stats[stats["GP"] > 20]
+
+        # Players with More Than 14 Minutes For Filtering
+        stats = stats[stats['MIN'] > 14]
+
+        # If the Player Has All NULL Stats I'm Excluding Them
+        stat_cols = ["PTS", "REB", "AST", "FG3M", "STL", "BLK", "TOV"]
+        stats = stats[(stats[stat_cols] != 0).any(axis=1)]
+
+        filtered_data = []
+
+        # Dividing Totals by Games Played for Averages
+        for index, row in stats.iterrows():
+
+            # Avoiding Division by Zero
+            games_played = row["GP"]
+            if games_played == 0:
+                games_played = 1
+
+            filtered_data.append({
+                "playerId": row["PLAYER_ID"],
+                "playerName": row["PLAYER_NAME"],
+                "teamTriCode": row["TEAM_ABBREVIATION"],
+                "points": round(row["PTS"] / games_played, 1),
+                "rebounds": round(row["REB"] / games_played, 1),
+                "assists": round(row["AST"] / games_played, 1),
+                "3ptMade": round(row["FG3M"] / games_played, 1),
+                "steals": round(row["STL"] / games_played, 1),
+                "blocks": round(row["BLK"] / games_played, 1),
+                "turnovers": round(row["TOV"] / games_played, 1),
+                "minutes": round(row["MIN"] / games_played, 1),
+                "gamesPlayed": row["GP"]
+            })
+
+        with open("app/nba_data/player_season_data.json", "w") as file:
+            json.dump({"players": filtered_data}, file, indent=4)
+
+    except Exception as e:
+        print("Error: ", e)
+
+threading.Thread(target=fetch_player_season_stats, daemon=True).start()
