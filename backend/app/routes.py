@@ -1,10 +1,19 @@
 import os
 import json
 import requests
+import time
+import threading
+import pandas as pd
 from fastapi import FastAPI, HTTPException
 from app.users import RegisterUser
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from nba_api.live.nba.endpoints import scoreboard
+from nba_api.stats.endpoints import boxscoretraditionalv2
+from nba_api.stats.static import players
+from nba_api.stats.endpoints import LeagueDashPlayerStats
+from nba_api.stats.library.http import NBAStatsHTTP
+
 
 app = FastAPI()
 
@@ -54,6 +63,15 @@ def loadUsers():
 def saveUsers(users):
     with open("app/users.json", "w") as file:
         json.dump({"users": users}, file, indent = 4)
+
+
+####### ROUTES #######
+
+# Just a Check Route to Ensure Backend is Running
+@app.get("/check")
+
+def sports_check():
+    return {"status": "Backend Running"}
 
 
 # User Login Route
@@ -185,10 +203,194 @@ def register(user_data: RegisterUser):
     return {"message": "User Registered"}
 
 
+# NBA Live Scores Route
+@app.get("/nba/scores")
+def nba_scores():
+    try:
+        with open("app/nba_data/live_nba_scores.json", "r") as file:
+            data = json.load(file)
+            return data
+        
+    except FileNotFoundError:
+        return {"message": "No Scores Found"}
 
-# Just a Check Route to Ensure Backend is Running
-@app.get("/check")
 
-def sports_check():
-    return {"status": "Backend Running"}
+def fetch_nba_live_scores():
+    while True:
+        try:
+            # Fetch NBA Live Scores from NBA API
+            scores = scoreboard.ScoreBoard()
+            data = scores.get_dict()
 
+            gameDate = data["scoreboard"].get("gameDate", "N/A")
+            filtered_nba_data = {
+                "gameDate": gameDate,
+                "gameData": []
+            }
+
+            for gameData in data["scoreboard"]["games"]:
+                filtered_nba_data["gameData"].append({
+                    "gameId": gameData["gameId"],
+                    "gameStatus": gameData["gameStatus"],
+                    "gameStatusText": gameData["gameStatusText"],
+                    "gameClock": gameData["gameClock"],
+                    "homeTeam": {
+                        "teamId": gameData["homeTeam"]["teamId"],
+                        "teamName": gameData["homeTeam"]["teamName"],
+                        "teamTriCode": gameData["homeTeam"]["teamTricode"],
+                        "wins": gameData["homeTeam"]["wins"],
+                        "losses": gameData["homeTeam"]["losses"],
+                        "score": gameData["homeTeam"]["score"],
+                        "periods": gameData["homeTeam"]["periods"],
+                    },
+                    "awayTeam": {
+                        "teamId": gameData["awayTeam"]["teamId"],
+                        "teamName": gameData["awayTeam"]["teamName"],
+                        "teamTriCode": gameData["awayTeam"]["teamTricode"],
+                        "wins": gameData["awayTeam"]["wins"],
+                        "losses": gameData["awayTeam"]["losses"],
+                        "score": gameData["awayTeam"]["score"],
+                        "periods": gameData["awayTeam"]["periods"],
+                    }
+                })
+
+
+            # Save NBA Live Scores to JSON File
+            with open("app/nba_data/live_nba_scores.json", "w") as file:
+                json.dump(filtered_nba_data, file, indent=4)
+
+        except Exception as e:
+            print(e)
+
+        # Fetch NBA Live Scores Every 30 Seconds
+        time.sleep(30)
+
+threading.Thread(target=fetch_nba_live_scores, daemon=True).start()
+
+
+
+# NBA Live Player Stats Route
+@app.get("/nba/player_live_stats")
+def nba_player_stats():
+    try:
+        with open("app/nba_data/live_player_data.json", "r") as file:
+            data = json.load(file)
+        return data
+    
+    except FileNotFoundError:
+        return {"message": "No Live Player Stats Found"}
+    
+
+def fetch_player_live_stats():
+    while True:
+        try:
+            games = scoreboard.ScoreBoard().get_dict()["scoreboard"]["games"]
+
+            # Trying to Fetch Game IDs for Games that are In Progress or Completed
+            game_ids = [game["gameId"] for game in games if game["gameStatus"] in (2, 3)]
+
+            filtered_player_stats = []
+
+            for game_id in game_ids:
+                try:
+                    boxscore = boxscoretraditionalv2.BoxScoreTraditionalV2(game_id=game_id)
+
+                    # Using Normalized Dict to Avoid Matching Header w/ Values 
+                    playerStats = boxscore.get_normalized_dict()["PlayerStats"]
+
+                    for player in playerStats:
+                        filtered_player_stats.append({
+                            "gameId": game_id,
+                            "playerId": player["PLAYER_ID"],
+                            "playerName": player["PLAYER_NAME"],
+                            "playerPosition": player["START_POSITION"],
+                            "teamId": player["TEAM_ID"],
+                            "teamTriCode": player["TEAM_ABBREVIATION"],
+                            "points": player["PTS"],
+                            "rebounds": player["REB"],
+                            "assists": player["AST"],
+                            "3ptMade": player["FG3M"],
+                            "steals": player["STL"],
+                            "blocks": player["BLK"],
+                            "turnovers": player["TO"],
+                        })
+
+                    # Fetch Individual Player Stats Every 1.5 Seconds
+                    time.sleep(1.5)
+
+                except Exception as e:
+                    print("Error: ", e)
+
+            with open("app/nba_data/live_player_data.json", "w") as file:
+                json.dump({"games": filtered_player_stats}, file, indent=4)
+
+        except Exception as e:
+            print("Error: ", e)
+
+        # Refreshes All Player Stats in JSON File Every 30 Seconds
+        time.sleep(30)
+
+threading.Thread(target=fetch_player_live_stats, daemon=True).start()
+
+
+# NBA Player Season Stats Route
+@app.get("/nba/player_season_stats")
+def nba_player_season_stats():
+    try:
+        with open("app/nba_data/player_season_data.json", "r") as file:
+            data = json.load(file)
+        return data
+    
+    except FileNotFoundError:
+        return {"message": "No Player Season Stats Found"}
+    
+
+def fetch_player_season_stats():
+    try:
+        player_total_stats = LeagueDashPlayerStats(season="2024-25")
+
+        # Gets the Main Stats Table
+        stats = player_total_stats.get_data_frames()[0]
+
+        # I'm Just Doing Players with More Than 20 Games Played for Filtering
+        stats = stats[stats["GP"] > 20]
+
+        # Players with More Than 14 Minutes For Filtering
+        stats = stats[stats['MIN'] > 14]
+
+        # If the Player Has All NULL Stats I'm Excluding Them
+        stat_cols = ["PTS", "REB", "AST", "FG3M", "STL", "BLK", "TOV"]
+        stats = stats[(stats[stat_cols] != 0).any(axis=1)]
+
+        filtered_data = []
+
+        # Dividing Totals by Games Played for Averages
+        for index, row in stats.iterrows():
+
+            # Avoiding Division by Zero
+            games_played = row["GP"]
+            if games_played == 0:
+                games_played = 1
+
+            filtered_data.append({
+                "playerId": row["PLAYER_ID"],
+                "playerName": row["PLAYER_NAME"],
+                "teamTriCode": row["TEAM_ABBREVIATION"],
+                "points": round(row["PTS"] / games_played, 1),
+                "rebounds": round(row["REB"] / games_played, 1),
+                "assists": round(row["AST"] / games_played, 1),
+                "3ptMade": round(row["FG3M"] / games_played, 1),
+                "steals": round(row["STL"] / games_played, 1),
+                "blocks": round(row["BLK"] / games_played, 1),
+                "turnovers": round(row["TOV"] / games_played, 1),
+                "minutes": round(row["MIN"] / games_played, 1),
+                "gamesPlayed": row["GP"]
+            })
+
+        with open("app/nba_data/player_season_data.json", "w") as file:
+            json.dump({"players": filtered_data}, file, indent=4)
+
+    except Exception as e:
+        print("Error: ", e)
+
+threading.Thread(target=fetch_player_season_stats, daemon=True).start()
