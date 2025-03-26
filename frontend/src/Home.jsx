@@ -7,7 +7,11 @@ import { Box, Typography } from "@mui/material";
 function Home() {
 
   const [nbaLiveGames, setNbaLiveGames] = useState({gameDate: "", gameData: []});
+  const [nbaPlayerStats, setnbaPlayerStats] = useState([]); 
+  const [nbaSelectedGame, setnbaselectedGame] = useState(null);
+  const [showBettingLines, setShowBettingLines] = useState(false);
   const [activeCategoryTab, setActiveCategoryTab] = useState("NBA");
+
 
   useEffect(() => {
     const fetchNbaLiveGames = async () => {
@@ -46,6 +50,29 @@ function Home() {
 
   const handleCategoryTabChange = (event, newValue) => {
     setActiveCategoryTab(newValue);
+  }
+
+
+  useEffect(() => {
+    const fetchnbaPlayerStats = async () => {
+      try {
+        const response = await fetch("http://localhost:8000/nba/player_season_stats");
+        const data = await response.json();
+        setnbaPlayerStats(data.players);
+      }
+
+      catch (error) {
+        console.error("Error: ", error);
+      }
+    }
+    fetchnbaPlayerStats();
+  }, []);
+
+
+  const playersInGame = (game) => {
+    return nbaPlayerStats.filter(player =>
+      player.teamTriCode === game.awayTeam.teamTriCode || player.teamTriCode === game.homeTeam.teamTriCode
+    )
   }
 
 
@@ -173,6 +200,12 @@ function Home() {
             ) : (
               nbaLiveGames.gameData.map((game, index) => (
                 <Box key={index}
+                  onClick={() => {
+                    if(game.gameStatus === 1) {
+                      setnbaselectedGame(game);
+                      setShowBettingLines(true);
+                    }
+                  }}
                   sx={{
                     display: "flex",
                     flexDirection: "column",
@@ -335,6 +368,50 @@ function Home() {
           </>
         )}
       </Box>
+
+      {activeCategoryTab === "NBA" && showBettingLines && nbaSelectedGame && (
+        <Box 
+          sx={{
+            position: "fixed",
+            backgroundColor: "rgba(0, 0, 0, 0.8)",
+            border: "2px solid white",
+            borderRadius: "1rem",
+            justifyContent: "center",
+            fontFamily: "monospace",
+            marginTop: "1rem",
+            width: "100%",
+
+          }}
+        >
+
+          <Typography variant="h6"> 
+            Betting Lines: {nbaSelectedGame.awayTeam.teamTriCode} @ {nbaSelectedGame.homeTeam.teamTriCode} 
+          </Typography>
+
+          <button onClick={() => setShowBettingLines(false)}> Close </button>
+
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr 1fr",
+              gap: "1rem",
+            }}
+          >
+            {playersInGame(nbaSelectedGame).map((player, index) => (
+              <Box key={index}>
+                <Typography> {player.playerName} </Typography>
+                <Typography> PTS {player.points} </Typography>
+                <Typography> REB {player.rebounds} </Typography>
+                <Typography> AST {player.assists} </Typography>
+                <Typography> STL {player.steals} </Typography>
+                <Typography> BLK {player.blocks} </Typography>
+                <Typography> TO {player.turnovers} </Typography>
+                <Typography> 3PM {player["3ptMade"]}</Typography>
+              </Box>
+            ))}
+          </Box>
+        </Box>
+      )}
     </Box>
   );
 }
