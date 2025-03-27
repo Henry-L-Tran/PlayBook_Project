@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Tabs, Tab } from "@mui/material";
 import { Box, Typography } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
 
 function Home() {
 
@@ -74,6 +76,19 @@ function Home() {
       player.teamTriCode === game.awayTeam.teamTriCode || player.teamTriCode === game.homeTeam.teamTriCode
     )
   }
+
+  useEffect(() => {
+    if(showBettingLines) {
+      document.body.style.overflow = "hidden";
+    }
+    else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    }
+  }, [showBettingLines]);
 
 
   return (
@@ -369,51 +384,201 @@ function Home() {
         )}
       </Box>
 
-      {activeCategoryTab === "NBA" && showBettingLines && nbaSelectedGame && (
-        <Box 
-          sx={{
-            position: "fixed",
-            backgroundColor: "rgba(0, 0, 0, 0.8)",
-            border: "2px solid white",
-            borderRadius: "1rem",
-            justifyContent: "center",
-            fontFamily: "monospace",
-            marginTop: "1rem",
-            width: "100%",
+      {activeCategoryTab === "NBA" && showBettingLines && nbaSelectedGame && (() => {
+        const awayPlayers = playersInGame(nbaSelectedGame).filter(
+          (player) => player.teamTriCode === nbaSelectedGame.awayTeam.teamTriCode
+        );
 
-          }}
-        >
+        const homePlayers = playersInGame(nbaSelectedGame).filter(
+          (player) => player.teamTriCode === nbaSelectedGame.homeTeam.teamTriCode
+        );
 
-          <Typography variant="h6"> 
-            Betting Lines: {nbaSelectedGame.awayTeam.teamTriCode} @ {nbaSelectedGame.homeTeam.teamTriCode} 
-          </Typography>
+        return (
 
-          <button onClick={() => setShowBettingLines(false)}> Close </button>
-
-          <Box
+          <Box 
             sx={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr 1fr",
-              gap: "1rem",
+              position: "fixed",
+              backgroundColor: "rgba(0, 0, 0, 0.8)",
+              borderRadius: "1rem",
+              justifyContent: "center",
+              fontFamily: "monospace",
+              width: "100%",
+              maxHeight: "100vh",
+              overflowY: "auto",
+
             }}
           >
-            {playersInGame(nbaSelectedGame).map((player, index) => (
-              <Box key={index}>
-                <Typography> {player.playerName} </Typography>
-                <Typography> PTS {player.points} </Typography>
-                <Typography> REB {player.rebounds} </Typography>
-                <Typography> AST {player.assists} </Typography>
-                <Typography> STL {player.steals} </Typography>
-                <Typography> BLK {player.blocks} </Typography>
-                <Typography> TO {player.turnovers} </Typography>
-                <Typography> 3PM {player["3ptMade"]}</Typography>
+            <Box
+              sx={{
+                backgroundColor: "rgba(0, 0, 0, 0.8)",
+                borderRadius: "1rem",
+              }}
+            >
+
+            <Typography variant="h6"
+              sx={{
+                textAlign: "center",
+                paddingTop: "3rem",
+                fontFamily: "monospace",
+              }}> 
+              {nbaSelectedGame.awayTeam.teamTriCode} @ {nbaSelectedGame.homeTeam.teamTriCode} 
+            </Typography>
+
+            <IconButton
+              sx={{
+                position: "absolute",
+                right: "1rem",
+                top: "1rem",
+                "&:hover": {
+                  background: "none",
+                },
+                "&:focus": {
+                  outline: "none",
+                }
+              }}
+              onClick={() => setShowBettingLines(false)}
+            >
+              <CloseIcon />
+            </IconButton>
+              
+            
+
+            <Box
+              sx={{
+                display: "flex",
+                gridTemplateColumns: "1fr 1fr 1fr",
+                gap: "1rem",
+              }}
+            >
+              <Box
+                sx={{
+                  flex: 1,
+                  paddingBottom: "4rem",
+               
+                }}
+                >
+                <Typography variant="h6"
+                  sx={{
+                    textAlign: "center",
+                    fontFamily: "monospace",
+                    mb: 2,
+                  }}
+                >
+                  {nbaSelectedGame.awayTeam.teamTriCode}
+                </Typography>
+                {awayPlayers.map((player, index) => (
+                  <Box key={index} >
+                    <Typography
+                      sx={{
+                        fontFamily: "monospace",
+                        textAlign: "center",
+                      }}> {player.playerName} </Typography>
+                    <Typography
+                      sx={{
+                        fontFamily: "monospace",
+                        textAlign: "center",
+                      }}> PTS {player.points} </Typography>
+                    <Typography
+                      sx={{
+                        fontFamily: "monospace",
+                        textAlign: "center",
+                      }}> REB {player.rebounds} </Typography>
+                    <Typography
+                      sx={{
+                        fontFamily: "monospace",
+                        textAlign: "center",
+                      }}> AST {player.assists} </Typography>
+                    <Typography
+                      sx = {{
+                        fontFamily: "monospace",
+                        textAlign: "center",
+                      }}> STL {player.steals} </Typography>
+                    <Typography
+                      sx={{
+                        fontFamily: "monospace",
+                        textAlign: "center",
+                      }}> BLK {player.blocks} </Typography>
+                    <Typography
+                      sx={{
+                        fontFamily: "monospace",
+                        textAlign: "center",
+                      }}> TO {player.turnovers} </Typography>
+                    <Typography
+                      sx={{
+                        fontFamily: "monospace",
+                        textAlign: "center",
+                      }}> 3PM {player["3ptMade"]} </Typography>
+                  </Box>
+                ))}
               </Box>
-            ))}
+
+              <Box
+                sx={{
+                  flex: 1,
+                }}
+              >
+                <Typography variant="h6"
+                  sx={{
+                    textAlign: "center",
+                    fontFamily: "monospace",
+                    mb: 2,
+                  }}
+                >
+                  {nbaSelectedGame.homeTeam.teamTriCode}
+                </Typography>
+                {homePlayers.map((player, index) => (
+                  <Box key={index}>
+                    <Typography
+                      sx={{
+                        fontFamily: "monospace",
+                        textAlign: "center",
+                      }}> {player.playerName} </Typography>
+                    <Typography
+                      sx={{
+                        fontFamily: "monospace",
+                        textAlign: "center",
+                      }}> PTS {player.points} </Typography>
+                    <Typography
+                      sx={{
+                        fontFamily: "monospace",
+                        textAlign: "center",
+                      }}> REB {player.rebounds} </Typography>
+                    <Typography
+                      sx={{
+                        fontFamily: "monospace",
+                        textAlign: "center",
+                      }}> AST {player.assists} </Typography>
+                    <Typography
+                      sx = {{
+                        fontFamily: "monospace",
+                        textAlign: "center",
+                      }}> STL {player.steals} </Typography>
+                    <Typography
+                      sx={{
+                        fontFamily: "monospace",
+                        textAlign: "center",
+                      }}> BLK {player.blocks} </Typography>
+                    <Typography
+                      sx={{
+                        fontFamily: "monospace",
+                        textAlign: "center",
+                      }}> TO {player.turnovers} </Typography>
+                    <Typography
+                      sx={{
+                        fontFamily: "monospace",
+                        textAlign: "center",
+                      }}> 3PM {player["3ptMade"]} </Typography>
+                  </Box>
+                ))}
+            </Box>
           </Box>
         </Box>
-      )}
-    </Box>
+      </Box>
+    );
+  })()}
+</Box>
   );
 }
+
 
 export default Home;
