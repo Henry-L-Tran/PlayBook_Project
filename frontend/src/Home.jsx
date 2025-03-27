@@ -461,13 +461,25 @@ function Home() {
                   sx={{
                     textAlign: "center",
                     fontFamily: "monospace",
-                    mb: 2,
+                    marginBottom: "2rem",
+                    marginRight: "21rem",
                   }}
                 >
                   {nbaSelectedGame.awayTeam.teamTriCode}
                 </Typography>
+
                 {awayPlayers.map((player, index) => (
-                  <Box key={index} >
+                  <Box key={index}
+                    sx={{
+                        border: "2px solid gray",
+                        borderRadius: "1rem",
+                        padding: "1rem",
+                        backgroundColor: "rgba(0, 0, 0, 0.5)",
+                        marginBottom: "1rem",
+                        width: "22rem",
+                        marginLeft: "2rem",
+                        height: "18rem",
+                    }}>
                     <Typography
                       sx={{
                         fontFamily: "monospace",
@@ -521,13 +533,24 @@ function Home() {
                   sx={{
                     textAlign: "center",
                     fontFamily: "monospace",
-                    mb: 2,
+                    marginBottom: "2rem",
+                    marginLeft: "19rem",
                   }}
                 >
                   {nbaSelectedGame.homeTeam.teamTriCode}
                 </Typography>
                 {homePlayers.map((player, index) => (
-                  <Box key={index}>
+                  <Box key={index}
+                    sx={{
+                      border: "2px solid gray",
+                      borderRadius: "1rem",
+                      padding: "1rem",
+                      backgroundColor: "rgba(0, 0, 0, 0.5)",
+                      marginBottom: "1rem",
+                      width: "22rem",
+                      marginLeft: "22rem",
+                      height: "18rem",
+                    }}>
                     <Typography
                       sx={{
                         fontFamily: "monospace",
