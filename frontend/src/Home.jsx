@@ -91,6 +91,19 @@ function Home() {
   }, [showBettingLines]);
 
 
+  const lineRounding = (line) => {
+    const lineInteger = parseFloat(line);
+    const lineDecimal = lineInteger % 1;
+
+    if(lineDecimal >= 0.3 && lineDecimal <= 0.7) {
+      return Math.floor(lineInteger) + 0.5;
+    }
+    else {
+      return Math.round(lineInteger).toString();
+    }
+  }
+
+
   return (
     
     <Box
@@ -216,7 +229,7 @@ function Home() {
               nbaLiveGames.gameData.map((game, index) => (
                 <Box key={index}
                   onClick={() => {
-                    if(game.gameStatus === 1) {
+                    if(game.gameStatus === 3) {
                       setnbaselectedGame(game);
                       setShowBettingLines(true);
                     }
@@ -489,37 +502,32 @@ function Home() {
                       sx={{
                         fontFamily: "monospace",
                         textAlign: "center",
-                      }}> PTS {player.points} </Typography>
+                      }}> PTS {lineRounding(player.points)} </Typography>
                     <Typography
                       sx={{
                         fontFamily: "monospace",
                         textAlign: "center",
-                      }}> REB {player.rebounds} </Typography>
+                      }}> REB {lineRounding(player.rebounds)} </Typography>
                     <Typography
                       sx={{
                         fontFamily: "monospace",
                         textAlign: "center",
-                      }}> AST {player.assists} </Typography>
+                      }}> AST {lineRounding(player.assists)} </Typography>
                     <Typography
                       sx = {{
                         fontFamily: "monospace",
                         textAlign: "center",
-                      }}> STL {player.steals} </Typography>
+                      }}> BLKS + STLS {lineRounding(player.blocks + player.steals)} </Typography>
                     <Typography
                       sx={{
                         fontFamily: "monospace",
                         textAlign: "center",
-                      }}> BLK {player.blocks} </Typography>
+                      }}> TO {lineRounding(player.turnovers)} </Typography>
                     <Typography
                       sx={{
                         fontFamily: "monospace",
                         textAlign: "center",
-                      }}> TO {player.turnovers} </Typography>
-                    <Typography
-                      sx={{
-                        fontFamily: "monospace",
-                        textAlign: "center",
-                      }}> 3PM {player["3ptMade"]} </Typography>
+                      }}> 3PM {lineRounding(player["3ptMade"])} </Typography>
                   </Box>
                 ))}
               </Box>
@@ -560,37 +568,32 @@ function Home() {
                       sx={{
                         fontFamily: "monospace",
                         textAlign: "center",
-                      }}> PTS {player.points} </Typography>
+                      }}> PTS {lineRounding(player.points)} </Typography>
                     <Typography
                       sx={{
                         fontFamily: "monospace",
                         textAlign: "center",
-                      }}> REB {player.rebounds} </Typography>
+                      }}> REB {lineRounding(player.rebounds)} </Typography>
                     <Typography
                       sx={{
                         fontFamily: "monospace",
                         textAlign: "center",
-                      }}> AST {player.assists} </Typography>
+                      }}> AST {lineRounding(player.assists)} </Typography>
                     <Typography
                       sx = {{
                         fontFamily: "monospace",
                         textAlign: "center",
-                      }}> STL {player.steals} </Typography>
+                      }}> BLKS + STLS {lineRounding(player.blocks  + player.steals)} </Typography>
                     <Typography
                       sx={{
                         fontFamily: "monospace",
                         textAlign: "center",
-                      }}> BLK {player.blocks} </Typography>
+                      }}> TO {lineRounding(player.turnovers)} </Typography>
                     <Typography
                       sx={{
                         fontFamily: "monospace",
                         textAlign: "center",
-                      }}> TO {player.turnovers} </Typography>
-                    <Typography
-                      sx={{
-                        fontFamily: "monospace",
-                        textAlign: "center",
-                      }}> 3PM {player["3ptMade"]} </Typography>
+                      }}> 3PM {lineRounding(player["3ptMade"])} </Typography>
                   </Box>
                 ))}
             </Box>
