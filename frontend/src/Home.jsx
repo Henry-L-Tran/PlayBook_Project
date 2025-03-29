@@ -13,6 +13,7 @@ function Home() {
   const [nbaSelectedGame, setnbaselectedGame] = useState(null);
   const [showBettingLines, setShowBettingLines] = useState(false);
   const [activeCategoryTab, setActiveCategoryTab] = useState("NBA");
+  const [lineCategory, setLineCategory] = useState("PTS");
 
 
   useEffect(() => {
@@ -100,6 +101,48 @@ function Home() {
     }
     else {
       return Math.round(lineInteger).toString();
+    }
+  }
+
+
+  const lineCategoryOptions = [
+    "PTS",
+    "REB",
+    "AST",
+    "3PM",
+    "TO",
+    "PTS + REB",
+    "PTS + AST",
+    "REB + AST",
+    "PTS + REB + AST",
+    "BLKS + STLS",
+  ];
+
+
+  const getStatCategory = (player) => {
+    switch(lineCategory) {
+      case "PTS":
+        return lineRounding(player.points);
+      case "REB":
+        return lineRounding(player.rebounds);
+      case "AST":
+        return lineRounding(player.assists);
+      case "BLKS + STLS":
+        return lineRounding(player.blocks + player.steals);
+      case "TO":
+        return lineRounding(player.turnovers);
+      case "3PM":
+        return lineRounding(player["3ptMade"]);
+      case "PTS + REB":
+        return lineRounding(player.points + player.rebounds);
+      case "PTS + AST":
+        return lineRounding(player.points + player.assists);
+      case "REB + AST":
+        return lineRounding(player.rebounds + player.assists);
+      case "PTS + REB + AST":
+        return lineRounding(player.points + player.rebounds + player.assists);
+      default:
+        return 0;
     }
   }
 
@@ -229,7 +272,7 @@ function Home() {
               nbaLiveGames.gameData.map((game, index) => (
                 <Box key={index}
                   onClick={() => {
-                    if(game.gameStatus === 3) {
+                    if(game.gameStatus === 1) {
                       setnbaselectedGame(game);
                       setShowBettingLines(true);
                     }
@@ -454,7 +497,32 @@ function Home() {
               <CloseIcon />
             </IconButton>
               
-            
+      
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                marginTop: "2rem",
+                gap: "2rem",
+              }}
+            >
+              {lineCategoryOptions.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setLineCategory(category)}
+                  style={{
+                    fontFamily: "monospace",
+                    backgroundColor: lineCategory === category ? "white" : "transparent",
+                    color: lineCategory === category ? "black" : "white",
+                    border: "1px solid white",
+                    borderRadius: "5rem",
+                  }}
+                  >
+                  {category}
+                  </button>
+              ))}
+            </Box>
 
             <Box
               sx={{
@@ -502,32 +570,10 @@ function Home() {
                       sx={{
                         fontFamily: "monospace",
                         textAlign: "center",
-                      }}> PTS {lineRounding(player.points)} </Typography>
-                    <Typography
-                      sx={{
-                        fontFamily: "monospace",
-                        textAlign: "center",
-                      }}> REB {lineRounding(player.rebounds)} </Typography>
-                    <Typography
-                      sx={{
-                        fontFamily: "monospace",
-                        textAlign: "center",
-                      }}> AST {lineRounding(player.assists)} </Typography>
-                    <Typography
-                      sx = {{
-                        fontFamily: "monospace",
-                        textAlign: "center",
-                      }}> BLKS + STLS {lineRounding(player.blocks + player.steals)} </Typography>
-                    <Typography
-                      sx={{
-                        fontFamily: "monospace",
-                        textAlign: "center",
-                      }}> TO {lineRounding(player.turnovers)} </Typography>
-                    <Typography
-                      sx={{
-                        fontFamily: "monospace",
-                        textAlign: "center",
-                      }}> 3PM {lineRounding(player["3ptMade"])} </Typography>
+                        marginTop: "1rem",
+                      }}>
+                        {lineCategory}: {getStatCategory(player)}
+                      </Typography>
                   </Box>
                 ))}
               </Box>
@@ -568,32 +614,10 @@ function Home() {
                       sx={{
                         fontFamily: "monospace",
                         textAlign: "center",
-                      }}> PTS {lineRounding(player.points)} </Typography>
-                    <Typography
-                      sx={{
-                        fontFamily: "monospace",
-                        textAlign: "center",
-                      }}> REB {lineRounding(player.rebounds)} </Typography>
-                    <Typography
-                      sx={{
-                        fontFamily: "monospace",
-                        textAlign: "center",
-                      }}> AST {lineRounding(player.assists)} </Typography>
-                    <Typography
-                      sx = {{
-                        fontFamily: "monospace",
-                        textAlign: "center",
-                      }}> BLKS + STLS {lineRounding(player.blocks  + player.steals)} </Typography>
-                    <Typography
-                      sx={{
-                        fontFamily: "monospace",
-                        textAlign: "center",
-                      }}> TO {lineRounding(player.turnovers)} </Typography>
-                    <Typography
-                      sx={{
-                        fontFamily: "monospace",
-                        textAlign: "center",
-                      }}> 3PM {lineRounding(player["3ptMade"])} </Typography>
+                        marginTop: "1rem",
+                      }}>
+                        {lineCategory}: {getStatCategory(player)}
+                      </Typography>
                   </Box>
                 ))}
             </Box>
