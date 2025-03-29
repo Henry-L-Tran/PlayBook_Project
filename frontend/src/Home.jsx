@@ -272,7 +272,7 @@ function Home() {
               nbaLiveGames.gameData.map((game, index) => (
                 <Box key={index}
                   onClick={() => {
-                    if(game.gameStatus === 1) {
+                    if(game.gameStatus === 3) {
                       setnbaselectedGame(game);
                       setShowBettingLines(true);
                     }
@@ -549,7 +549,7 @@ function Home() {
                   {nbaSelectedGame.awayTeam.teamTriCode}
                 </Typography>
 
-                {awayPlayers.map((player, index) => (
+                {awayPlayers.filter((player) => parseFloat(getStatCategory(player)) !== 0).map((player, index) => (
                   <Box key={index}
                     sx={{
                         border: "2px solid gray",
@@ -564,16 +564,38 @@ function Home() {
                     <Typography
                       sx={{
                         fontFamily: "monospace",
+                        fontSize: "0.8rem",
                         textAlign: "center",
-                      }}> {player.playerName} </Typography>
+                      }}> {player.teamTriCode}
+                    </Typography>
+
+                    <Typography
+                      sx={{
+                        fontFamily: "monospace",
+                        textAlign: "center",
+                      }}> {player.playerName} 
+                    </Typography>
+
                     <Typography
                       sx={{
                         fontFamily: "monospace",
                         textAlign: "center",
                         marginTop: "1rem",
+                        fontSize: "0.8rem",
                       }}>
-                        {lineCategory}: {getStatCategory(player)}
+                        vs {nbaSelectedGame.homeTeam.teamTriCode}{" "} {nbaSelectedGame.gameStatusText}
                       </Typography>
+
+                    <Typography
+                      sx={{
+                        fontFamily: "monospace",
+                        textAlign: "center",
+                        marginTop: "1rem",
+                        fontSize: "1.2rem",
+                      }}>
+                        {getStatCategory(player)}{" "} {lineCategory}
+                      </Typography>
+
                   </Box>
                 ))}
               </Box>
@@ -593,7 +615,7 @@ function Home() {
                 >
                   {nbaSelectedGame.homeTeam.teamTriCode}
                 </Typography>
-                {homePlayers.map((player, index) => (
+                {homePlayers.filter((player) => parseFloat(getStatCategory(player)) !== 0).map((player, index) => (
                   <Box key={index}
                     sx={{
                       border: "2px solid gray",
@@ -608,15 +630,36 @@ function Home() {
                     <Typography
                       sx={{
                         fontFamily: "monospace",
+                        fontSize: "0.8rem",
                         textAlign: "center",
-                      }}> {player.playerName} </Typography>
+                      }}> {player.teamTriCode}
+                    </Typography>
+
+                    <Typography
+                      sx={{
+                        fontFamily: "monospace",
+                        textAlign: "center",
+                      }}> {player.playerName} 
+                    </Typography>
+
                     <Typography
                       sx={{
                         fontFamily: "monospace",
                         textAlign: "center",
                         marginTop: "1rem",
+                        fontSize: "0.8rem",
                       }}>
-                        {lineCategory}: {getStatCategory(player)}
+                        vs {nbaSelectedGame.awayTeam.teamTriCode}{" "} {nbaSelectedGame.gameStatusText}
+                      </Typography>
+
+                    <Typography
+                      sx={{
+                        fontFamily: "monospace",
+                        textAlign: "center",
+                        marginTop: "1rem",
+                        fontSize: "1.2rem",
+                      }}>
+                        {getStatCategory(player)}{" "} {lineCategory}
                       </Typography>
                   </Box>
                 ))}
