@@ -540,6 +540,7 @@ function Home() {
                
                 }}
                 >
+
                 <Typography variant="h6"
                   sx={{
                     textAlign: "center",
@@ -573,6 +574,27 @@ function Home() {
                         padding: "0.5rem",
                       }}
                     >
+
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          marginTop: "0.5rem",
+                          marginBottom: "0.5rem",
+                        }}
+                      >
+                        <img
+                          src={player.playerPicture}
+                          alt={player.playerName}
+                          style={{
+                            width: "5rem",
+                            marginTop: "1rem",
+                            
+                          }}
+                        />
+                      </Box>
+
                       <Typography
                         sx={{
                           fontFamily: "monospace",
@@ -711,6 +733,26 @@ function Home() {
                       padding: "0.5rem",
                     }}
                   >
+
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        marginTop: "0.5rem",
+                        marginBottom: "0.5rem",
+                      }}
+                    >
+                      <img
+                        src={player.playerPicture}
+                        alt={player.playerName}
+                        style={{
+                          width: "5rem",
+                          marginTop: "1rem",
+                        }}
+                      />
+                    </Box>
+
                     <Typography
                       sx={{
                         fontFamily: "monospace",
