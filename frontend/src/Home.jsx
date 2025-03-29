@@ -272,7 +272,7 @@ function Home() {
               nbaLiveGames.gameData.map((game, index) => (
                 <Box key={index}
                   onClick={() => {
-                    if(game.gameStatus === 3) {
+                    if(game.gameStatus === 1) {
                       setnbaselectedGame(game);
                       setShowBettingLines(true);
                     }
@@ -527,8 +527,10 @@ function Home() {
             <Box
               sx={{
                 display: "flex",
-                gridTemplateColumns: "1fr 1fr 1fr",
-                gap: "1rem",
+                justifyContent: "space-between",
+                padding: "2rem 4rem",
+                width: "100%",
+                gap: "2rem",
               }}
             >
               <Box
@@ -541,9 +543,9 @@ function Home() {
                 <Typography variant="h6"
                   sx={{
                     textAlign: "center",
+                    width: "40%",
                     fontFamily: "monospace",
-                    marginBottom: "2rem",
-                    marginRight: "21rem",
+                    marginBottom: "1rem",
                   }}
                 >
                   {nbaSelectedGame.awayTeam.teamTriCode}
@@ -554,48 +556,117 @@ function Home() {
                     sx={{
                         border: "2px solid gray",
                         borderRadius: "1rem",
-                        padding: "1rem",
+                        padding: 0,
                         backgroundColor: "rgba(0, 0, 0, 0.5)",
                         marginBottom: "1rem",
                         width: "22rem",
-                        marginLeft: "2rem",
                         height: "18rem",
+                        overflow: "hidden",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "space-between",
+
                     }}>
-                    <Typography
+                      
+                    <Box
                       sx={{
-                        fontFamily: "monospace",
-                        fontSize: "0.8rem",
-                        textAlign: "center",
-                      }}> {player.teamTriCode}
-                    </Typography>
-
-                    <Typography
-                      sx={{
-                        fontFamily: "monospace",
-                        textAlign: "center",
-                      }}> {player.playerName} 
-                    </Typography>
-
-                    <Typography
-                      sx={{
-                        fontFamily: "monospace",
-                        textAlign: "center",
-                        marginTop: "1rem",
-                        fontSize: "0.8rem",
-                      }}>
-                        vs {nbaSelectedGame.homeTeam.teamTriCode}{" "} {nbaSelectedGame.gameStatusText}
+                        padding: "0.5rem",
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          fontFamily: "monospace",
+                          fontSize: "0.8rem",
+                          textAlign: "center",
+                        }}> {player.teamTriCode}
                       </Typography>
 
-                    <Typography
-                      sx={{
-                        fontFamily: "monospace",
-                        textAlign: "center",
-                        marginTop: "1rem",
-                        fontSize: "1.2rem",
-                      }}>
-                        {getStatCategory(player)}{" "} {lineCategory}
+                      <Typography
+                        sx={{
+                          fontFamily: "monospace",
+                          textAlign: "center",
+                        }}> {player.playerName} 
                       </Typography>
 
+                      <Typography
+                        sx={{
+                          fontFamily: "monospace",
+                          textAlign: "center",
+                          fontSize: "0.8rem",
+                        }}>
+                          vs {nbaSelectedGame.homeTeam.teamTriCode}{" "} {nbaSelectedGame.gameStatusText}
+                        </Typography>
+
+                        <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Typography
+                          sx={{
+                            fontFamily: "monospace",
+                            textAlign: "center",
+                            marginTop: "0.5rem",
+                            fontSize: "1.2rem",
+                            fontWeight: "bold",
+                          }}>
+                            {getStatCategory(player)}
+                        </Typography>
+
+                        <Typography
+                          sx={{
+                            display: "flex",
+                            fontFamily: "monospace",
+                            textAlign: "center",
+                            marginTop: "0.9rem",
+                            fontSize: "0.8rem",
+                            justifyContent: "right",
+                            marginLeft: "0.5rem",
+                            
+                          }}>
+                            {lineCategory}
+                        </Typography>
+                      </Box>
+                    </Box>
+
+                    <Box
+                      sx={{                    
+                        display: "flex",
+                        borderTop: "1px solid gray",
+                        width: "100%",
+                      }}
+                    >
+                      <button
+                        style={{
+                          flex: 1,
+                          backgroundColor: "transparent",
+                          color: "white",
+                          padding: "0.5rem",
+                          fontFamily: "monospace",
+                          border: "none",
+                          borderRight: "1px solid gray",
+                          cursor: "pointer",
+                          borderRadius: "0 0 0 1rem",
+                        }}
+                      >
+                        ↓ Under
+                      </button>
+                      <button
+                        style={{
+                          flex: 1,
+                          backgroundColor: "transparent",
+                          color: "white",
+                          padding: "0.5rem",
+                          fontFamily: "monospace",
+                          border: "none",
+                          cursor: "pointer",
+                          borderRadius: "0 0 1rem 0"
+                        }}
+                      >
+                        ↑ Over
+                      </button>
+                    </Box>
                   </Box>
                 ))}
               </Box>
@@ -603,30 +674,43 @@ function Home() {
               <Box
                 sx={{
                   flex: 1,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-end",
                 }}
               >
                 <Typography variant="h6"
                   sx={{
                     textAlign: "center",
+                    width: "40%",
                     fontFamily: "monospace",
-                    marginBottom: "2rem",
-                    marginLeft: "19rem",
+                    marginBottom: "1rem",
                   }}
                 >
                   {nbaSelectedGame.homeTeam.teamTriCode}
                 </Typography>
                 {homePlayers.filter((player) => parseFloat(getStatCategory(player)) !== 0).map((player, index) => (
                   <Box key={index}
-                    sx={{
+                  sx={{
                       border: "2px solid gray",
                       borderRadius: "1rem",
-                      padding: "1rem",
+                      padding: 0,
                       backgroundColor: "rgba(0, 0, 0, 0.5)",
                       marginBottom: "1rem",
                       width: "22rem",
-                      marginLeft: "22rem",
                       height: "18rem",
-                    }}>
+                      overflow: "hidden",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+
+                  }}>
+                    
+                  <Box
+                    sx={{
+                      padding: "0.5rem",
+                    }}
+                  >
                     <Typography
                       sx={{
                         fontFamily: "monospace",
@@ -646,22 +730,82 @@ function Home() {
                       sx={{
                         fontFamily: "monospace",
                         textAlign: "center",
-                        marginTop: "1rem",
                         fontSize: "0.8rem",
                       }}>
                         vs {nbaSelectedGame.awayTeam.teamTriCode}{" "} {nbaSelectedGame.gameStatusText}
                       </Typography>
 
-                    <Typography
+                      <Box
                       sx={{
-                        fontFamily: "monospace",
-                        textAlign: "center",
-                        marginTop: "1rem",
-                        fontSize: "1.2rem",
-                      }}>
-                        {getStatCategory(player)}{" "} {lineCategory}
+                        display: "flex",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          fontFamily: "monospace",
+                          textAlign: "center",
+                          marginTop: "0.5rem",
+                          fontSize: "1.2rem",
+                          fontWeight: "bold",
+                        }}>
+                          {getStatCategory(player)}
                       </Typography>
+
+                      <Typography
+                        sx={{
+                          display: "flex",
+                          fontFamily: "monospace",
+                          textAlign: "center",
+                          marginTop: "0.9rem",
+                          fontSize: "0.8rem",
+                          justifyContent: "right",
+                          marginLeft: "0.5rem",
+                          
+                        }}>
+                          {lineCategory}
+                      </Typography>
+                    </Box>
                   </Box>
+
+                  <Box
+                    sx={{                    
+                      display: "flex",
+                      borderTop: "1px solid gray",
+                      width: "100%",
+                    }}
+                  >
+                    <button
+                      style={{
+                        flex: 1,
+                        backgroundColor: "transparent",
+                        color: "white",
+                        padding: "0.5rem",
+                        fontFamily: "monospace",
+                        border: "none",
+                        borderRight: "1px solid gray",
+                        cursor: "pointer",
+                        borderRadius: "0 0 0 1rem",
+                      }}
+                    >
+                      ↓ Under
+                    </button>
+                    <button
+                      style={{
+                        flex: 1,
+                        backgroundColor: "transparent",
+                        color: "white",
+                        padding: "0.5rem",
+                        fontFamily: "monospace",
+                        border: "none",
+                        cursor: "pointer",
+                        borderRadius: "0 0 1rem 0"
+                      }}
+                    >
+                      ↑ Over
+                    </button>
+                  </Box>
+                </Box>
                 ))}
             </Box>
           </Box>
