@@ -148,18 +148,36 @@ function Home() {
   }
 
   const handleUserLines = (player, usersPick) => {
-    const lineValue = parseFloat(getStatCategory(player));
-    const newEntry = {
-      player_id: player.playerId,
-      player_name: player.playerName,
-      team_tri_code: player.teamTriCode,
-      player_picture: player.playerPicture,
-      line_category: lineCategory,
-      projected_line: parseFloat(getStatCategory(player)),
-      users_pick: usersPick
-    };
+    const playerId = player.playerId;
 
-    setLineup((prevLines) => [...prevLines, newEntry]);
+    setLineup((prevLines) => {
+      const existing = prevLines.find(entry => entry.player_id === playerId);
+      if(existing) {
+        if(existing.users_pick === usersPick) {
+          return prevLines.filter(entry => entry.player_id !== playerId);
+        }
+        else {
+          return prevLines.map(entry =>
+            entry.player_id === playerId
+              ? { ...entry, users_pick: usersPick }
+              : entry
+          )
+        }
+      }
+      
+      return [
+        ...prevLines,
+        {
+          player_id: player.playerId,
+          player_name: player.playerName,
+          team_tri_code: player.teamTriCode,
+          player_picture: player.playerPicture,
+          line_category: lineCategory,
+          projected_line: parseFloat(getStatCategory(player)),
+          users_pick: usersPick
+        }
+      ];
+    });
   }
 
   const submitLineup = async () => {
@@ -180,7 +198,7 @@ function Home() {
       console.log("User not logged in.");
       return;
     }
-    
+
     try {
       const response = await fetch("http://localhost:8000/lineups/submit", {
         method: "POST",
@@ -196,7 +214,9 @@ function Home() {
 
       if(response.status === 200) {
         console.log("Lineup submitted successfully.");
-        setShowBettingLines(false);
+
+        // Resets the Lineup State After Submitting Lineup
+        setLineup([]);
       }
       else {
         console.log("Error submitting lineup");
@@ -205,6 +225,16 @@ function Home() {
     catch (error) {
       console.error("Error submitting lineup");
     }
+  }
+
+  // Function to Highlight the Selected Over/Under Buttons Green 
+  const selectedBetButton = (playerId, pick) => {
+    return lineup.some(entry => entry.player_id === playerId && entry.users_pick === pick);
+  }
+
+  // Function to Highlight the Selected Player Card Green
+  const selectedSquare = (playerId) => {
+    return lineup.some(entry => entry.player_id === playerId);
   }
 
 
@@ -616,7 +646,8 @@ function Home() {
                 {awayPlayers.filter((player) => parseFloat(getStatCategory(player)) !== 0).map((player, index) => (
                   <Box key={index}
                     sx={{
-                        border: "2px solid gray",
+                        border: selectedSquare(player.playerId)
+                        ? "2px solid green": "2px solid gray",
                         borderRadius: "1rem",
                         padding: 0,
                         backgroundColor: "rgba(0, 0, 0, 0.5)",
@@ -724,7 +755,8 @@ function Home() {
                         onClick={() => handleUserLines(player, "Under")}
                         style={{
                           flex: 1,
-                          backgroundColor: "transparent",
+                          backgroundColor: selectedBetButton(player.playerId, "Under")
+                            ? "green": "transparent",
                           color: "white",
                           padding: "0.5rem",
                           fontFamily: "monospace",
@@ -741,7 +773,8 @@ function Home() {
                         onClick={() => handleUserLines(player, "Over")}
                         style={{
                           flex: 1,
-                          backgroundColor: "transparent",
+                          backgroundColor: selectedBetButton(player.playerId, "Over")
+                          ? "green": "transparent",
                           color: "white",
                           padding: "0.5rem",
                           fontFamily: "monospace",
@@ -778,7 +811,8 @@ function Home() {
                 {homePlayers.filter((player) => parseFloat(getStatCategory(player)) !== 0).map((player, index) => (
                   <Box key={index}
                   sx={{
-                      border: "2px solid gray",
+                      border: selectedSquare(player.playerId)
+                      ? "2px solid green": "2px solid gray",
                       borderRadius: "1rem",
                       padding: 0,
                       backgroundColor: "rgba(0, 0, 0, 0.5)",
@@ -885,7 +919,8 @@ function Home() {
                       onClick={() => handleUserLines(player, "Under")}
                       style={{
                         flex: 1,
-                        backgroundColor: "transparent",
+                        backgroundColor: selectedBetButton(player.playerId, "Under")
+                        ? "green": "transparent",
                         color: "white",
                         padding: "0.5rem",
                         fontFamily: "monospace",
@@ -901,8 +936,8 @@ function Home() {
                       onClick={() => handleUserLines(player, "Over")}
                       style={{
                         flex: 1,
-                        backgroundColor: "transparent",
-                        color: "white",
+                        backgroundColor: selectedBetButton(player.playerId, "Over")
+                        ? "green": "transparent",
                         padding: "0.5rem",
                         fontFamily: "monospace",
                         border: "none",

@@ -32,7 +32,7 @@ class SubmitLineup(BaseModel):
 # Fetch Lineups from JSON File
 def fetch_lineups():
     filepath = os.path.join(os.path.dirname(__file__), "lineups.json")
-    if not os.path.exists("lineups.json"):
+    if not os.path.exists(filepath):
         return []
     with open(filepath, "r") as file:
         content = file.read().strip()
