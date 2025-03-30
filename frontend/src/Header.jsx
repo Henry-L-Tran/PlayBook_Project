@@ -6,7 +6,7 @@ import Divider from "@mui/material/Divider";
 const Header = ({ onNavigate }) => {
   const navigate = useNavigate();
   // Navigation items
-  const navItems = ["Lineups", "Promos", "Social", "Funds"];
+  const navItems = ["Dashboard", "Lineups", "Promos", "Social", "Funds"];
 
   return (
     <div className=" w-full py-6 px-12">
@@ -14,7 +14,7 @@ const Header = ({ onNavigate }) => {
         {/* Logo and Brand Name */}
         <div
           className="flex items-center gap-4 min-w-1/4"
-          onClick={() => navigate("/home")}
+          onClick={() => navigate("/dashboard")}
         >
           <img
             src="/images/logo.png"
