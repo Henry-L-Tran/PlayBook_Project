@@ -588,7 +588,7 @@ function Home() {
                           src={player.playerPicture}
                           alt={player.playerName}
                           style={{
-                            width: "5rem",
+                            width: "6rem",
                             marginTop: "1rem",
                             
                           }}
@@ -747,7 +747,7 @@ function Home() {
                         src={player.playerPicture}
                         alt={player.playerName}
                         style={{
-                          width: "5rem",
+                          width: "6rem",
                           marginTop: "1rem",
                         }}
                       />

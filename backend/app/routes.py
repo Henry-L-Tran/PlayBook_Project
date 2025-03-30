@@ -12,7 +12,6 @@ from nba_api.live.nba.endpoints import scoreboard
 from nba_api.stats.endpoints import boxscoretraditionalv2
 from nba_api.stats.static import players
 from nba_api.stats.endpoints import LeagueDashPlayerStats
-from nba_api.stats.library.http import NBAStatsHTTP
 
 
 app = FastAPI()
