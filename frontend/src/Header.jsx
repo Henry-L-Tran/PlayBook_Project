@@ -2,22 +2,15 @@ import { Typography, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Divider from "@mui/material/Divider";
 
-function Header() {
-
-  // Navigation Function
+// eslint-disable-next-line react/prop-types
+const Header = ({ onNavigate }) => {
   const navigate = useNavigate();
-  
   // Navigation items
-  const navItems = [
-    {name: "Lineups", path: "/lineups"},
-    {name: "Promos", path: "/promos"},
-    {name: "Social", path: "/social"},
-    {name: "Funds", path: "/funds"},
-  ];
+  const navItems = ["Lineups", "Promos", "Social", "Funds"];
 
   return (
-    <div className=" w-full sm:py-6 sm:px-12">
-      <div className="flex flex-col sm:flex-row justify-between items-center w-full flex-wrap">
+    <div className=" w-full py-6 px-12">
+      <div className="flex justify-between items-center w-full flex-wrap">
         {/* Logo and Brand Name */}
         <div
           className="flex items-center gap-4 min-w-1/4"
@@ -41,13 +34,13 @@ function Header() {
         </div>
 
         {/* Navigation Links */}
-        <div className="flex items-center gap-4 sm:gap-16 min-w/3/4 flex-col sm:flex-row">
+        <div className="flex items-center gap-16 min-w/3/4">
           {navItems.map((item, index) => (
             <Button
               key={index}
               variant="text"
               disableRipple
-              onClick={() => navigate(item.path)}
+              onClick={() => onNavigate(item)}
               sx={{
                 color: "white",
                 fontSize: "1.5rem",
@@ -66,7 +59,7 @@ function Header() {
                 },
               }}
             >
-              {item.name}
+              {item}
             </Button>
           ))}
         </div>

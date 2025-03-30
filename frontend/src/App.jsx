@@ -4,6 +4,7 @@ import Register from "./Register.jsx";
 import Login from "./Login.jsx";
 import Home from "./Home.jsx";
 import Funds from "./Funds.jsx";
+import Promos from "./Promos.jsx";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -37,8 +38,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/home" element={<Home />} />
-          {/*<Route path="/lineups" element={<Lineups />} />
           <Route path="/promos" element={<Promos />} />
+          {/*<Route path="/lineups" element={<Lineups />} />
           <Route path="/social" element={<Social />} />*/}
           <Route path="/funds" element={<Funds />} />
         </Routes>
