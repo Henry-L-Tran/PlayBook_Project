@@ -25,12 +25,10 @@ function Home() {
       //     return <Social />;
       case "funds":
         return <Funds />;
-      case "dashboard":
-        return <Dashboard />;
       case "promos":
         return <Promos />;
-      //   default:
-      //     return <Dashboard />;
+      default:
+        return <Dashboard />;
     }
   };
 
