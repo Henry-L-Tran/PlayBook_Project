@@ -12,7 +12,6 @@ from nba_api.live.nba.endpoints import scoreboard
 from nba_api.stats.endpoints import boxscoretraditionalv2
 from nba_api.stats.static import players
 from nba_api.stats.endpoints import LeagueDashPlayerStats
-from nba_api.stats.library.http import NBAStatsHTTP
 
 
 app = FastAPI()
@@ -376,6 +375,7 @@ def fetch_player_season_stats():
                 "playerId": row["PLAYER_ID"],
                 "playerName": row["PLAYER_NAME"],
                 "teamTriCode": row["TEAM_ABBREVIATION"],
+                "playerPicture": fetch_player_pictures(row["PLAYER_ID"]),
                 "points": round(row["PTS"] / games_played, 1),
                 "rebounds": round(row["REB"] / games_played, 1),
                 "assists": round(row["AST"] / games_played, 1),
@@ -394,3 +394,12 @@ def fetch_player_season_stats():
         print("Error: ", e)
 
 threading.Thread(target=fetch_player_season_stats, daemon=True).start()
+
+
+# NBA Players' Pictures for Player Props
+def fetch_player_pictures(player_id):
+    return f"https://cdn.nba.com/headshots/nba/latest/1040x760/{player_id}.png"
+
+
+
+
