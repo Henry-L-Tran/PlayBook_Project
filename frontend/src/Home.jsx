@@ -1,5 +1,5 @@
 import Header from "./Header";
-import { useState } from "react";
+import { act, useState } from "react";
 import { useEffect } from "react";
 import { Tabs, Tab } from "@mui/material";
 import { Box, Typography } from "@mui/material";
@@ -14,6 +14,7 @@ function Home() {
   const [showBettingLines, setShowBettingLines] = useState(false);
   const [activeCategoryTab, setActiveCategoryTab] = useState("NBA");
   const [lineCategory, setLineCategory] = useState("PTS");
+  const [lineup, setLineup] = useState([]);
 
 
   useEffect(() => {
@@ -146,6 +147,66 @@ function Home() {
     }
   }
 
+  const handleUserLines = (player, usersPick) => {
+    const lineValue = parseFloat(getStatCategory(player));
+    const newEntry = {
+      player_id: player.playerId,
+      player_name: player.playerName,
+      team_tri_code: player.teamTriCode,
+      player_picture: player.playerPicture,
+      line_category: lineCategory,
+      projected_line: parseFloat(getStatCategory(player)),
+      users_pick: usersPick
+    };
+
+    setLineup((prevLines) => [...prevLines, newEntry]);
+  }
+
+  const submitLineup = async () => {
+    if(lineup.length < 2 || lineup.length > 6) {
+      console.log("Lineup must be between 2 and 6 players.");
+      return;
+    }
+
+    const sameTeam = new Set(lineup.map(player => player.team_tri_code)).size === 1;
+    if(sameTeam) {
+      console.log("Lineup cannot contain players from the same team.");
+      return;
+    }
+
+    const email = localStorage.getItem("currUser");
+
+    if(!email) {
+      console.log("User not logged in.");
+      return;
+    }
+    
+    try {
+      const response = await fetch("http://localhost:8000/lineups/submit", {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json" 
+        },
+        body: JSON.stringify({ 
+          email, 
+          category: activeCategoryTab,
+          entries: lineup,
+        }),
+      });
+
+      if(response.status === 200) {
+        console.log("Lineup submitted successfully.");
+        setShowBettingLines(false);
+      }
+      else {
+        console.log("Error submitting lineup");
+      }
+    }
+    catch (error) {
+      console.error("Error submitting lineup");
+    }
+  }
+
 
   return (
     
@@ -272,7 +333,7 @@ function Home() {
               nbaLiveGames.gameData.map((game, index) => (
                 <Box key={index}
                   onClick={() => {
-                    if(game.gameStatus === 1) {
+                    if(game.gameStatus === 3) {
                       setnbaselectedGame(game);
                       setShowBettingLines(true);
                     }
@@ -508,7 +569,7 @@ function Home() {
               }}
             >
               {lineCategoryOptions.map((category) => (
-                <button
+                <button          
                   key={category}
                   onClick={() => setLineCategory(category)}
                   style={{
@@ -660,6 +721,7 @@ function Home() {
                       }}
                     >
                       <button
+                        onClick={() => handleUserLines(player, "Under")}
                         style={{
                           flex: 1,
                           backgroundColor: "transparent",
@@ -674,7 +736,9 @@ function Home() {
                       >
                         ↓ Under
                       </button>
+
                       <button
+                        onClick={() => handleUserLines(player, "Over")}
                         style={{
                           flex: 1,
                           backgroundColor: "transparent",
@@ -818,6 +882,7 @@ function Home() {
                     }}
                   >
                     <button
+                      onClick={() => handleUserLines(player, "Under")}
                       style={{
                         flex: 1,
                         backgroundColor: "transparent",
@@ -833,6 +898,7 @@ function Home() {
                       ↓ Under
                     </button>
                     <button
+                      onClick={() => handleUserLines(player, "Over")}
                       style={{
                         flex: 1,
                         backgroundColor: "transparent",
@@ -847,6 +913,35 @@ function Home() {
                       ↑ Over
                     </button>
                   </Box>
+
+                  <Box
+                    sx={{
+                      position: "fixed",
+                      bottom: "2rem",
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                      zIndex: 2000,
+                    }}
+                  >
+                    <button
+                      onClick={submitLineup}
+                      style={{
+                        backgroundColor: "rgba(0, 0, 0, 0.3)",
+                        color: "white",
+                        outline: "1px solid white",
+                        fontFamily: "monospace",
+                        fontSize: "1rem",
+                        padding: "0.75rem 2rem",
+                        borderRadius: "2rem",
+                        border: "none",
+                        cursor: "pointer",
+                     
+                      }}
+                    >
+                      Submit Lineup
+                    </button>
+                  </Box>
+
                 </Box>
                 ))}
             </Box>
