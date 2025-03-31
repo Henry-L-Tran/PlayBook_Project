@@ -408,6 +408,7 @@ function Dashboard() {
                 fontFamily: "monospace",
                 // width: "20rem",
                 paddingTop: "1rem",
+                paddingBottom: "1rem",
                 textAlign: "center",
                 // marginLeft: "26rem",
               }}
