@@ -104,7 +104,7 @@ function Register() {
         className="w-full sm:w-3/5" 
         variant="outlined"
         sx={{
-          width: "500px",
+          width: "36rem",
           backgroundColor: "rgba(0, 0, 0, 0.3)",
           marginTop: "-3rem",
           marginBottom: "8rem",
