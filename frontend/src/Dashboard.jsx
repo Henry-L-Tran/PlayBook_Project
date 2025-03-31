@@ -262,13 +262,12 @@ function Dashboard() {
   };
 
   return (
-    <Box>
+    <Box className="flex justify-center items-center ">
       <Box
-        className="w-full p-8 text-white"
+        className="w-full p-8 text-white overflow-auto"
         sx={{
           width: "100%",
           maxWidth: "1200px",
-          marginLeft: "3.5rem",
           backgroundColor: "rgba(0, 0, 0, 0.3)",
           borderRadius: "1rem",
         }}
