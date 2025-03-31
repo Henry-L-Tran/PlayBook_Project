@@ -111,7 +111,7 @@ function Funds() {
           Funds
         </h1>
 
-        <p className="flex items-center flex-col justify-center mt-10 text-2xl font-mono">
+        <p className="flex items-center flex-col justify-center mt-10 text-2xl font-mono font-bold">
           Balance: ${user?.balance || 0}
         </p>
 
@@ -264,12 +264,14 @@ function Funds() {
           )}
 
           {currTab === "withdraw" && user?.payment_info?.card_number && (
-            <div>
+            <div className="flex w-full flex-col items-center justify-center">
               <h2 className="text-3xl font-mono pb-10">Withdraw Funds</h2>
-              <div>
-                <span className="text-gray-400 font-mono">$</span>
+              <div className="relative w-full sm:w-4/5 flex items-center">
+                <span className="absolute inset-y-8 left-4 flex text-gray-400 font-mono font-bold">
+                  $
+                </span>
                 <input
-                  className="w-200 p-3 rounded bg-gray-900 text-white border border-gray-600 mt-5 font-mono"
+                  className="pl-9 w-full p-3 rounded bg-gray-900 text-white border border-gray-600 mt-5 font-mono"
                   type="number"
                   placeholder="Amount"
                   value={amount}
@@ -279,7 +281,7 @@ function Funds() {
 
               <div className="flex justify-center gap-5">
                 <select
-                  className="w-98 mt-10 px-3 py-3 rounded-md bg-gray-900 font-mono"
+                  className="w-fit sm:w-98 mt-10 px-3 py-3 rounded-md bg-gray-900 font-mono"
                   value={card}
                   onChange={(e) => setCard(e.target.value)}
                 >
@@ -292,7 +294,7 @@ function Funds() {
 
                 <button
                   onClick={() => userTransactions("withdraw")}
-                  className="w-98 mt-10 font-mono"
+                  className="w-fit sm:w-98 mt-10 font-mono"
                 >
                   Confirm
                 </button>
