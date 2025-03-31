@@ -1,9 +1,9 @@
 import { Box } from "@mui/material";
 import Header from "./Header";
 import Funds from "./Funds";
+import { useState } from "react";
 import Dashboard from "./Dashboard";
 import Promos from "./Promos";
-import { useState } from "react";
 
 function Home() {
   // State to track which component to display
@@ -19,14 +19,12 @@ function Home() {
     switch (activeComponent) {
       //   case "lineups":
       //     return <Lineups />;
-      //   case "promos":
-      //     return <Promos />;
+      case "promos":
+        return <Promos />;
       //   case "social":
       //     return <Social />;
       case "funds":
         return <Funds />;
-      case "promos":
-        return <Promos />;
       default:
         return <Dashboard />;
     }
@@ -44,12 +42,11 @@ function Home() {
       <Header onNavigate={handleNavigation} />
 
       {/* Dynamic content area */}
-      <div className="flex-1 flex items-center justify-center p-8">
+      <div className="flex-1 flex items-start justify-center overflow-x-auto sm:p-8 ">
         {renderComponent()}
       </div>
     </Box>
   );
 }
-
 
 export default Home;
