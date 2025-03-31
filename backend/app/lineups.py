@@ -23,6 +23,7 @@ class LineupEntry(BaseModel):
 class SubmitLineup(BaseModel):
     email: str
     category: str
+    entry_id: str
     entries: List[LineupEntry]
 
 
@@ -61,6 +62,7 @@ def submit_lineup(lineup_data: SubmitLineup):
     new_lineup = {
         "email": lineup_data.email,
         "category": lineup_data.category,
+        "entry_id": lineup_data.entry_id,
         "entries": [entry.dict() for entry in lineup_data.entries],
         "time": datetime.utcnow().isoformat()
     }

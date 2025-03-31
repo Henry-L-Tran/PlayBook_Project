@@ -1,0 +1,28 @@
+[
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "henry.l.tran-1@ou.edu_1743395219441_bfce25d0-0476-4f27-8723-809806883f86",
+        "entries": [
+            {
+                "player_id": 1629599,
+                "player_name": "Amir Coffey",
+                "team_tri_code": "LAC",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629599.png",
+                "line_category": "PTS",
+                "projected_line": 10.0,
+                "users_pick": "Over"
+            },
+            {
+                "player_id": 1641854,
+                "player_name": "Craig Porter Jr.",
+                "team_tri_code": "CLE",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1641854.png",
+                "line_category": "PTS",
+                "projected_line": 3.0,
+                "users_pick": "Over"
+            }
+        ],
+        "time": "2025-03-31T04:26:59.746359"
+    }
+]

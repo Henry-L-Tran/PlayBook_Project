@@ -4,6 +4,8 @@ import { Tabs, Tab } from "@mui/material";
 import { Box, Typography } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
+import { v4 as uuidv4 } from "uuid";
+
 
 function Dashboard() {
   const [nbaLiveGames, setNbaLiveGames] = useState({
@@ -176,18 +178,17 @@ function Dashboard() {
         }
       }
       else {
-        newCategoryLineup = [
-          ...categoryLineup,
-        {
+        const newEntry = {
           player_id: player.playerId,
           player_name: player.playerName,
           team_tri_code: player.teamTriCode,
           player_picture: player.playerPicture,
           line_category: viewLineCategory,
           projected_line: parseFloat(getStatCategory(player)),
-          users_pick: usersPick
-        },
-      ];
+          users_pick: usersPick,
+        };
+
+        newCategoryLineup = [...categoryLineup, newEntry];
     }
     
     return {
@@ -218,6 +219,8 @@ function Dashboard() {
       return;
     }
 
+    const entryId = `${email}_${Date.now()}_${uuidv4()}`;
+
     try {
       const response = await fetch("http://localhost:8000/lineups/submit", {
         method: "POST",
@@ -227,6 +230,7 @@ function Dashboard() {
         body: JSON.stringify({ 
           email, 
           category: activeCategoryTab,
+          entry_id: entryId,
           entries: allEntries,
         }),
       });
@@ -235,7 +239,7 @@ function Dashboard() {
         console.log("Lineup submitted successfully.");
 
         // Resets the Lineup State After Submitting Lineup
-        setLineup([]);
+        setLineup({});
       }
       else {
         console.log("Error submitting lineup");
