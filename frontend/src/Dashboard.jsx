@@ -636,7 +636,7 @@ function Dashboard() {
         )}
       </Box>
 
-      {/* {activeCategoryTab === "NBA" &&
+      {activeCategoryTab === "NBA" &&
         showBettingLines &&
         nbaSelectedGame &&
         (() => {
@@ -1141,7 +1141,7 @@ function Dashboard() {
               </Box>
             </Box>
           );
-        })()} */}
+        })()}
     </Box>
   );
 }
