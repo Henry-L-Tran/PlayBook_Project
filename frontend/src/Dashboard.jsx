@@ -262,9 +262,9 @@ function Dashboard() {
   };
 
   return (
-    <Box className="flex w-full h-full overflow-hidden justify-center items-center">
+    <Box className="flex w-full  overflow-scroll justify-center items-center">
       <Box
-        className="w-full max-w-full p-2 md:p-8 text-white overflow-hidden"
+        className="w-full max-w-full p-2 md:p-8 text-white"
         sx={{
           maxWidth: "1200px",
           backgroundColor: "rgba(0, 0, 0, 0.3)",
@@ -400,15 +400,16 @@ function Dashboard() {
           />
         </Tabs>
 
-        {/* {activeCategoryTab === "NBA" && (
-          <>
+        {activeCategoryTab === "NBA" && (
+          <Box className="flex flex-col w-full h-full overflow-auto">
             <Typography
               sx={{
                 fontSize: "1.2rem",
                 fontFamily: "monospace",
-                width: "20rem",
+                // width: "20rem",
                 paddingTop: "1rem",
-                marginLeft: "26rem",
+                textAlign: "center",
+                // marginLeft: "26rem",
               }}
             >
               {" "}
@@ -630,8 +631,8 @@ function Dashboard() {
                 </Box>
               ))
             )}
-          </>
-        )} */}
+          </Box>
+        )}
       </Box>
 
       {/* {activeCategoryTab === "NBA" &&

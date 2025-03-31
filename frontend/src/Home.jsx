@@ -44,7 +44,7 @@ function Home() {
       <Header onNavigate={handleNavigation} />
 
       {/* Dynamic content area */}
-      <div className="flex-1 flex items-start justify-center p-8  overflow-auto w-fit h-fit">
+      <div className="flex-1 flex items-start justify-center p-8  overflow-auto w-full h-full">
         {renderComponent()}
       </div>
     </Box>
