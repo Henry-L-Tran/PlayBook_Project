@@ -14,8 +14,9 @@ function Dashboard() {
   const [nbaSelectedGame, setnbaselectedGame] = useState(null);
   const [showBettingLines, setShowBettingLines] = useState(false);
   const [activeCategoryTab, setActiveCategoryTab] = useState("NBA");
-  const [lineCategory, setLineCategory] = useState("PTS");
-  const [lineup, setLineup] = useState([]);
+  const [viewLineCategory, setViewLineCategory] = useState("PTS");
+  const [lineup, setLineup] = useState({});
+  const currentLineup = lineup[viewLineCategory] || [];
 
   useEffect(() => {
     const fetchNbaLiveGames = async () => {
@@ -118,7 +119,7 @@ function Dashboard() {
 
 
   const getStatCategory = (player) => {
-    switch(lineCategory) {
+    switch(viewLineCategory) {
       case "PTS":
         return lineRounding(player.points);
       case "REB":
@@ -148,42 +149,63 @@ function Dashboard() {
     const playerId = player.playerId;
 
     setLineup((prevLines) => {
-      const existing = prevLines.find(entry => entry.player_id === playerId);
+      const categoryLineup = prevLines[viewLineCategory] || [];
+
+      const noDuplicatePlayers = Object.values(prevLines).flat()
+      const playerAlreadyExists = noDuplicatePlayers.find(entry => entry.player_id === playerId);
+
+      if(playerAlreadyExists && playerAlreadyExists.line_category !== viewLineCategory) {
+        console.log("Cannot use the same player more than once in a lineup.");
+        return prevLines;
+      }
+
+      const existing = categoryLineup.find(entry => entry.player_id === playerId);
+
+      let newCategoryLineup;
+
       if(existing) {
         if(existing.users_pick === usersPick) {
-          return prevLines.filter(entry => entry.player_id !== playerId);
+          newCategoryLineup = categoryLineup.filter(entry => entry.player_id !== playerId);
         }
         else {
-          return prevLines.map(entry =>
+          newCategoryLineup = categoryLineup.map(entry =>
             entry.player_id === playerId
               ? { ...entry, users_pick: usersPick }
               : entry
-          )
+          );
         }
       }
-      
-      return [
-        ...prevLines,
+      else {
+        newCategoryLineup = [
+          ...categoryLineup,
         {
           player_id: player.playerId,
           player_name: player.playerName,
           team_tri_code: player.teamTriCode,
           player_picture: player.playerPicture,
-          line_category: lineCategory,
+          line_category: viewLineCategory,
           projected_line: parseFloat(getStatCategory(player)),
           users_pick: usersPick
-        }
+        },
       ];
-    });
-  }
+    }
+    
+    return {
+      ...prevLines,
+      [viewLineCategory]: newCategoryLineup,
+    };
+  });
+};
 
   const submitLineup = async () => {
-    if(lineup.length < 2 || lineup.length > 6) {
+    const allEntries = Object.values(lineup).flat();
+
+    if(allEntries.length < 2 || allEntries.length > 6) {
       console.log("Lineup must be between 2 and 6 players.");
       return;
     }
 
-    const sameTeam = new Set(lineup.map(player => player.team_tri_code)).size === 1;
+    const sameTeam = new Set(allEntries.map(player => player.team_tri_code)).size === 1;
     if(sameTeam) {
       console.log("Lineup cannot contain players from the same team.");
       return;
@@ -205,7 +227,7 @@ function Dashboard() {
         body: JSON.stringify({ 
           email, 
           category: activeCategoryTab,
-          entries: lineup,
+          entries: allEntries,
         }),
       });
 
@@ -226,12 +248,12 @@ function Dashboard() {
 
   // Function to Highlight the Selected Over/Under Buttons Green 
   const selectedBetButton = (playerId, pick) => {
-    return lineup.some(entry => entry.player_id === playerId && entry.users_pick === pick);
+    return currentLineup.some(entry => entry.player_id === playerId && entry.users_pick === pick);
   }
 
   // Function to Highlight the Selected Player Card Green
   const selectedSquare = (playerId) => {
-    return lineup.some(entry => entry.player_id === playerId);
+    return currentLineup.some(entry => entry.player_id === playerId);
   }
 
   return (
@@ -598,11 +620,13 @@ function Dashboard() {
               {lineCategoryOptions.map((category) => (
                 <button          
                   key={category}
-                  onClick={() => setLineCategory(category)}
+                  onClick={() => {
+                    setViewLineCategory(category)
+                  }}
                   style={{
                     fontFamily: "monospace",
-                    backgroundColor: lineCategory === category ? "white" : "transparent",
-                    color: lineCategory === category ? "black" : "white",
+                    backgroundColor: viewLineCategory === category ? "white" : "transparent",
+                    color: viewLineCategory === category ? "black" : "white",
                     border: "1px solid white",
                     borderRadius: "5rem",
                   }}
@@ -736,7 +760,7 @@ function Dashboard() {
                             marginLeft: "0.5rem",
                             
                           }}>
-                            {lineCategory}
+                            {viewLineCategory}
                         </Typography>
                       </Box>
                     </Box>
@@ -900,7 +924,7 @@ function Dashboard() {
                           marginLeft: "0.5rem",
                           
                         }}>
-                          {lineCategory}
+                          {viewLineCategory}
                       </Typography>
                     </Box>
                   </Box>
