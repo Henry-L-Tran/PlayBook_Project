@@ -125,17 +125,15 @@ function Funds() {
 
     return (
         <>
-            <Box>
-
-                <div className="font-mono">
+                <div className="font-mono mb-80">
                     {/* Logout Button */}
                     <button className="absolute top-30 right-12 px-4 py-2"
                         onClick={handleUserLogout}>Logout
                     </button> 
 
-                    <h1 className="flex items-center flex-col justify-center mt-10 font-mono">Funds</h1>
+                    <h1 className="flex items-center flex-col justify-center font-mono">Funds</h1>
 
-                        <p className="flex items-center flex-col justify-center mt-10 text-2xl font-mono">Balance: ${user?.balance || 0}</p>
+                        <p className="flex items-center flex-col justify-center mt-10 text-2xl font-mono font-bold">Balance: ${user?.balance || 0}</p>
 
                         <div className="flex flex-wrap justify-center mt-5 gap-3 font-mono">
                             <button onClick={() => setCurrTab("card-info")} className="w-98">Card Information</button>
@@ -143,13 +141,12 @@ function Funds() {
                             <button onClick={() => setCurrTab("withdraw")} className="w-98">Withdraw</button>
                         </div>
 
-                    <Box className="flex justify-center flex-col mt-10"
+                    <Box className="flex justify-center flex-col mt-10 p-25"
                         sx={{
                             width: "100%",
-                            maxWidth: "47%",
+                            maxWidth: "100%",
                             height: "100%",
                             minHeight: "100%",
-                            marginLeft: "42rem",
                             backgroundColor: "rgba(0, 0, 0, 0.4)",
                             borderRadius: "1rem",
                         }}>
@@ -201,13 +198,16 @@ function Funds() {
                                 <div>
                                 <h2 className="text-3xl font-mono pb-10">Deposit Funds</h2>
 
-                                <span className="text-gray-400 font-mono">$</span>
-                                <input className="w-200 p-3 rounded bg-gray-900 text-white border border-gray-600 mt-5 font-mono"
-                                    type="number" 
-                                    placeholder="Amount" 
-                                    value={amount} 
-                                    onChange={(e) => setAmount(e.target.value)} 
-                                />
+                                <div className="relative w-64 mt-5 ml-25">
+
+                                    <span className="absolute inset-y-8 left-4 flex text-gray-400 font-mono font-bold">$</span>
+                                    <input className="pl-9 w-200 p-3 rounded bg-gray-900 text-white border border-gray-600 mt-5 font-mono"
+                                        type="number" 
+                                        placeholder="Amount" 
+                                        value={amount} 
+                                        onChange={(e) => setAmount(e.target.value)} 
+                                    />
+                                </div>
 
                                 <div className="flex justify-center mt-5 gap-5 font-mono">
                                     {[10, 25, 50, 100, 250].map((amt) => (
@@ -226,9 +226,9 @@ function Funds() {
                                     ))}
                                 </div>
 
-                                <div className="gap-10 mt-4 font-mono">
+                                <div className="flex flex-row justify-center items-center gap-5 mt-5 font-mono">
                                     <select 
-                                        className="mt-10 px-3 py-3 rounded-md bg-gray-900"
+                                        className="w-98 h-12 px-3 py-3 rounded-md bg-gray-900"
                                         value={card} 
                                         onChange={(e) => setCard(e.target.value)}>
                                         <option value="">Select a Card</option>
@@ -238,7 +238,7 @@ function Funds() {
                                     </select>
 
                                     <input
-                                        className="px-4 py-3 rounded-md bg-gray-900 text-white border-gray-600 font-mono"
+                                        className="w-98 h-12 px-3 py-3 rounded-md bg-gray-900 text-white border-gray-600 font-mono"
                                         type="text"
                                         name="cvv"
                                         placeholder="CVV"
@@ -257,9 +257,9 @@ function Funds() {
                         {currTab === "withdraw" && user?.payment_info?.card_number && (
                             <div>
                                 <h2 className="text-3xl font-mono pb-10">Withdraw Funds</h2>
-                                    <div>
-                                        <span className="text-gray-400 font-mono">$</span>
-                                        <input className="w-200 p-3 rounded bg-gray-900 text-white border border-gray-600 mt-5 font-mono"
+                                    <div className="relative w-64 mt-5 ml-25">
+                                        <span className="absolute inset-y-8 left-4 flex text-gray-400 font-mono font-bold">$</span>
+                                        <input className="pl-9 w-200 p-3 rounded bg-gray-900 text-white border border-gray-600 mt-5 font-mono"
                                             type="number" 
                                             placeholder="Amount" 
                                             value={amount} 
@@ -286,7 +286,7 @@ function Funds() {
 
                 </div>
     
-            </Box>
+            
 
         </>
     )
