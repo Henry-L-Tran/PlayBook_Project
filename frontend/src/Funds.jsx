@@ -125,15 +125,13 @@ function Funds() {
 
     return (
         <>
-            <Box>
-
-                <div className="font-mono">
+                <div className="font-mono mb-80">
                     {/* Logout Button */}
                     <button className="absolute top-30 right-12 px-4 py-2"
                         onClick={handleUserLogout}>Logout
                     </button> 
 
-                    <h1 className="flex items-center flex-col justify-center mt-10 font-mono">Funds</h1>
+                    <h1 className="flex items-center flex-col justify-center font-mono">Funds</h1>
 
                         <p className="flex items-center flex-col justify-center mt-10 text-2xl font-mono">Balance: ${user?.balance || 0}</p>
 
@@ -143,13 +141,12 @@ function Funds() {
                             <button onClick={() => setCurrTab("withdraw")} className="w-98">Withdraw</button>
                         </div>
 
-                    <Box className="flex justify-center flex-col mt-10"
+                    <Box className="flex justify-center flex-col mt-10 p-25"
                         sx={{
                             width: "100%",
-                            maxWidth: "47%",
+                            maxWidth: "100%",
                             height: "100%",
                             minHeight: "100%",
-                            marginLeft: "42rem",
                             backgroundColor: "rgba(0, 0, 0, 0.4)",
                             borderRadius: "1rem",
                         }}>
@@ -286,7 +283,7 @@ function Funds() {
 
                 </div>
     
-            </Box>
+            
 
         </>
     )
