@@ -6,7 +6,6 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { v4 as uuidv4 } from "uuid";
 
-
 function Dashboard() {
   const [nbaLiveGames, setNbaLiveGames] = useState({
     gameDate: "",
@@ -78,33 +77,28 @@ function Dashboard() {
     );
   };
 
-
   useEffect(() => {
-    if(showBettingLines) {
+    if (showBettingLines) {
       document.body.style.overflow = "hidden";
-    }
-    else {
+    } else {
       document.body.style.overflow = "auto";
     }
 
     return () => {
       document.body.style.overflow = "auto";
-    }
+    };
   }, [showBettingLines]);
-
 
   const lineRounding = (line) => {
     const lineInteger = parseFloat(line);
     const lineDecimal = lineInteger % 1;
 
-    if(lineDecimal >= 0.3 && lineDecimal <= 0.7) {
+    if (lineDecimal >= 0.3 && lineDecimal <= 0.7) {
       return Math.floor(lineInteger) + 0.5;
-    }
-    else {
+    } else {
       return Math.round(lineInteger).toString();
     }
-  }
-
+  };
 
   const lineCategoryOptions = [
     "PTS",
@@ -119,9 +113,8 @@ function Dashboard() {
     "BLKS + STLS",
   ];
 
-
   const getStatCategory = (player) => {
-    switch(viewLineCategory) {
+    switch (viewLineCategory) {
       case "PTS":
         return lineRounding(player.points);
       case "REB":
@@ -145,7 +138,7 @@ function Dashboard() {
       default:
         return 0;
     }
-  }
+  };
 
   const handleUserLines = (player, usersPick) => {
     const playerId = player.playerId;
@@ -153,31 +146,38 @@ function Dashboard() {
     setLineup((prevLines) => {
       const categoryLineup = prevLines[viewLineCategory] || [];
 
-      const noDuplicatePlayers = Object.values(prevLines).flat()
-      const playerAlreadyExists = noDuplicatePlayers.find(entry => entry.player_id === playerId);
+      const noDuplicatePlayers = Object.values(prevLines).flat();
+      const playerAlreadyExists = noDuplicatePlayers.find(
+        (entry) => entry.player_id === playerId
+      );
 
-      if(playerAlreadyExists && playerAlreadyExists.line_category !== viewLineCategory) {
+      if (
+        playerAlreadyExists &&
+        playerAlreadyExists.line_category !== viewLineCategory
+      ) {
         console.log("Cannot use the same player more than once in a lineup.");
         return prevLines;
       }
 
-      const existing = categoryLineup.find(entry => entry.player_id === playerId);
+      const existing = categoryLineup.find(
+        (entry) => entry.player_id === playerId
+      );
 
       let newCategoryLineup;
 
-      if(existing) {
-        if(existing.users_pick === usersPick) {
-          newCategoryLineup = categoryLineup.filter(entry => entry.player_id !== playerId);
-        }
-        else {
-          newCategoryLineup = categoryLineup.map(entry =>
+      if (existing) {
+        if (existing.users_pick === usersPick) {
+          newCategoryLineup = categoryLineup.filter(
+            (entry) => entry.player_id !== playerId
+          );
+        } else {
+          newCategoryLineup = categoryLineup.map((entry) =>
             entry.player_id === playerId
               ? { ...entry, users_pick: usersPick }
               : entry
           );
         }
-      }
-      else {
+      } else {
         const newEntry = {
           player_id: player.playerId,
           player_name: player.playerName,
@@ -189,32 +189,33 @@ function Dashboard() {
         };
 
         newCategoryLineup = [...categoryLineup, newEntry];
-    }
-    
-    return {
-      ...prevLines,
-      [viewLineCategory]: newCategoryLineup,
-    };
-  });
-};
+      }
+
+      return {
+        ...prevLines,
+        [viewLineCategory]: newCategoryLineup,
+      };
+    });
+  };
 
   const submitLineup = async () => {
     const allEntries = Object.values(lineup).flat();
 
-    if(allEntries.length < 2 || allEntries.length > 6) {
+    if (allEntries.length < 2 || allEntries.length > 6) {
       console.log("Lineup must be between 2 and 6 players.");
       return;
     }
 
-    const sameTeam = new Set(allEntries.map(player => player.team_tri_code)).size === 1;
-    if(sameTeam) {
+    const sameTeam =
+      new Set(allEntries.map((player) => player.team_tri_code)).size === 1;
+    if (sameTeam) {
       console.log("Lineup cannot contain players from the same team.");
       return;
     }
 
     const email = localStorage.getItem("currUser");
 
-    if(!email) {
+    if (!email) {
       console.log("User not logged in.");
       return;
     }
@@ -224,55 +225,54 @@ function Dashboard() {
     try {
       const response = await fetch("http://localhost:8000/lineups/submit", {
         method: "POST",
-        headers: { 
-          "Content-Type": "application/json" 
+        headers: {
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ 
-          email, 
+        body: JSON.stringify({
+          email,
           category: activeCategoryTab,
           entry_id: entryId,
           entries: allEntries,
         }),
       });
 
-      if(response.status === 200) {
+      if (response.status === 200) {
         console.log("Lineup submitted successfully.");
 
         // Resets the Lineup State After Submitting Lineup
         setLineup({});
-      }
-      else {
+      } else {
         console.log("Error submitting lineup");
       }
-    }
-    catch (error) {
+    } catch (error) {
       console.error("Error submitting lineup");
     }
-  }
+  };
 
-  // Function to Highlight the Selected Over/Under Buttons Green 
+  // Function to Highlight the Selected Over/Under Buttons Green
   const selectedBetButton = (playerId, pick) => {
-    return currentLineup.some(entry => entry.player_id === playerId && entry.users_pick === pick);
-  }
+    return currentLineup.some(
+      (entry) => entry.player_id === playerId && entry.users_pick === pick
+    );
+  };
 
   // Function to Highlight the Selected Player Card Green
   const selectedSquare = (playerId) => {
-    return currentLineup.some(entry => entry.player_id === playerId);
-  }
+    return currentLineup.some((entry) => entry.player_id === playerId);
+  };
 
   return (
-    
     <Box>
-      
-      <Box className="w-full p-8 text-white"
+      <Box
+        className="w-full p-8 text-white"
         sx={{
           width: "100%",
           maxWidth: "1200px",
           marginLeft: "3.5rem",
           backgroundColor: "rgba(0, 0, 0, 0.3)",
           borderRadius: "1rem",
-        }}>
-
+        }}
+      >
         <Tabs
           value={activeCategoryTab}
           onChange={handleCategoryTabChange}
@@ -287,15 +287,16 @@ function Dashboard() {
                 marginTop: "1rem",
                 textDecorationColor: "white",
               },
-            }
+            },
           }}
-
           sx={{
             marginTop: "1rem",
             textDecorationColor: "white",
           }}
         >
-          <Tab label="NBA" value="NBA"
+          <Tab
+            label="NBA"
+            value="NBA"
             disableRipple
             sx={{
               mx: 5,
@@ -313,8 +314,11 @@ function Dashboard() {
                 outline: "none",
                 color: "white",
               },
-            }} />
-          <Tab label="NFL" value="NFL"
+            }}
+          />
+          <Tab
+            label="NFL"
+            value="NFL"
             disableRipple
             sx={{
               mx: 5,
@@ -327,8 +331,11 @@ function Dashboard() {
                 color: "white",
                 fontWeight: "bold",
               },
-            }} />
-          <Tab label="LoL" value="LoL"
+            }}
+          />
+          <Tab
+            label="LoL"
+            value="LoL"
             disableRipple
             sx={{
               textTransform: "none",
@@ -342,8 +349,11 @@ function Dashboard() {
                 color: "white",
                 fontWeight: "bold",
               },
-            }} />
-          <Tab label="VAL" value="VAL" 
+            }}
+          />
+          <Tab
+            label="VAL"
+            value="VAL"
             disableRipple
             sx={{
               mx: 5,
@@ -356,9 +366,10 @@ function Dashboard() {
                 color: "white",
                 fontWeight: "bold",
               },
-            }} />
+            }}
+          />
         </Tabs>
-        
+
         {activeCategoryTab === "NBA" && (
           <>
             <Typography
@@ -368,16 +379,20 @@ function Dashboard() {
                 width: "20rem",
                 paddingTop: "1rem",
                 marginLeft: "26rem",
-              }}> {nbaLiveGames.gameDate} 
-              </Typography>
+              }}
+            >
+              {" "}
+              {nbaLiveGames.gameDate}
+            </Typography>
 
             {nbaLiveGames.length === 0 ? (
               <Typography> No scheduled games </Typography>
             ) : (
               nbaLiveGames.gameData.map((game, index) => (
-                <Box key={index}
+                <Box
+                  key={index}
                   onClick={() => {
-                    if(game.gameStatus === 3) {
+                    if (game.gameStatus === 3) {
                       setnbaselectedGame(game);
                       setShowBettingLines(true);
                     }
@@ -395,35 +410,49 @@ function Dashboard() {
                     textAlign: "left",
                     paddingLeft: "10rem",
                     gridTemplateColumns: "80px 80px 200px 80px",
-                  }}>
+                  }}
+                >
                   <Box
                     sx={{
                       display: "grid",
                       gridTemplateColumns: "80px 80px 240px 1fr",
                       alignItems: "center",
                     }}
-                    >
-                    <Typography variant="h6"
+                  >
+                    <Typography
+                      variant="h6"
                       sx={{
-                        color: game.gameStatus === 3 && game.awayTeam.score > game.homeTeam.score ? "#10833C" : "white",
-                      }}> {game.awayTeam.teamTriCode} </Typography>
-                    <Typography 
+                        color:
+                          game.gameStatus === 3 &&
+                          game.awayTeam.score > game.homeTeam.score
+                            ? "#10833C"
+                            : "white",
+                      }}
+                    >
+                      {" "}
+                      {game.awayTeam.teamTriCode}{" "}
+                    </Typography>
+                    <Typography
                       sx={{
                         fontWeight: "bold",
                         fontSize: "0.75rem",
-                      }}> {game.awayTeam.wins} - {game.awayTeam.losses} </Typography>
+                      }}
+                    >
+                      {" "}
+                      {game.awayTeam.wins} - {game.awayTeam.losses}{" "}
+                    </Typography>
 
                     <Box className="mt-2">
                       <Box className="grid grid-cols-5 text-white gap-x-8 ml-40">
                         {game.awayTeam.periods.map((period, index) => (
                           <Box key={index} className="text-center">
-                            <Typography 
+                            <Typography
                               sx={{
                                 fontFamily: "monospace",
                                 gridTemplateColumns: "repeat(4, 40px) 60px",
                               }}
-                                className="text-center"
-                              >
+                              className="text-center"
+                            >
                               {period.period}
                             </Typography>
 
@@ -433,17 +462,25 @@ function Dashboard() {
                                 fontSize: "0.75rem",
                               }}
                               className="text-center"
-                              >
+                            >
                               {period.score}
                             </Typography>
-                          </Box>                          
+                          </Box>
                         ))}
                         <Typography
                           sx={{
                             fontFamily: "monospace",
                             fontSize: "1.3rem",
-                            color: game.gameStatus === 3 && game.awayTeam.score > game.homeTeam.score ? "#10833C" : "white",
-                          }}> {game.awayTeam.score} </Typography>
+                            color:
+                              game.gameStatus === 3 &&
+                              game.awayTeam.score > game.homeTeam.score
+                                ? "#10833C"
+                                : "white",
+                          }}
+                        >
+                          {" "}
+                          {game.awayTeam.score}{" "}
+                        </Typography>
                       </Box>
                     </Box>
                   </Box>
@@ -454,52 +491,70 @@ function Dashboard() {
                       gridTemplateColumns: "80px 80px 240px 1fr",
                       alignItems: "center",
                     }}
-                    >
-                    <Typography variant="h6"
+                  >
+                    <Typography
+                      variant="h6"
                       sx={{
-                        color: game.gameStatus === 3 && game.homeTeam.score > game.awayTeam.score ? "#10833C" : "white",
-                      }}> {game.homeTeam.teamTriCode} 
+                        color:
+                          game.gameStatus === 3 &&
+                          game.homeTeam.score > game.awayTeam.score
+                            ? "#10833C"
+                            : "white",
+                      }}
+                    >
+                      {" "}
+                      {game.homeTeam.teamTriCode}
                     </Typography>
 
                     <Typography
                       sx={{
                         fontWeight: "bold",
                         fontSize: "0.75rem",
-                      }}> {game.homeTeam.wins} - {game.homeTeam.losses} 
+                      }}
+                    >
+                      {" "}
+                      {game.homeTeam.wins} - {game.homeTeam.losses}
                     </Typography>
 
                     <Box className="mt-2">
-                        <Box className="grid grid-cols-5 text-white gap-x-8 ml-40">
-                          {game.homeTeam.periods.map((period, index) => (
-                            <Box key={index} className="text-center">
-                              <Typography 
-                                sx={{fontFamily: "monospace"}}
-                                className="text-center"
-                                >
-                                {period.period}
-                              </Typography>
+                      <Box className="grid grid-cols-5 text-white gap-x-8 ml-40">
+                        {game.homeTeam.periods.map((period, index) => (
+                          <Box key={index} className="text-center">
+                            <Typography
+                              sx={{ fontFamily: "monospace" }}
+                              className="text-center"
+                            >
+                              {period.period}
+                            </Typography>
 
-                              <Typography
-                                sx={{
-                                  fontFamily: "monospace",
-                                  fontSize: "0.75rem",
-                                }}
-                                className="text-center"
-                                >
-                                {period.score}
-                              </Typography>
-                            </Box>                          
-                          ))}
-                          <Typography
-                            sx={{
-                              fontFamily: "monospace",
-                              fontSize: "1.3rem",
-                              color: game.gameStatus === 3 && game.homeTeam.score > game.awayTeam.score ? "#10833C" : "white",
-                            }}> {game.homeTeam.score} 
-                          </Typography>
-                        </Box>
+                            <Typography
+                              sx={{
+                                fontFamily: "monospace",
+                                fontSize: "0.75rem",
+                              }}
+                              className="text-center"
+                            >
+                              {period.score}
+                            </Typography>
+                          </Box>
+                        ))}
+                        <Typography
+                          sx={{
+                            fontFamily: "monospace",
+                            fontSize: "1.3rem",
+                            color:
+                              game.gameStatus === 3 &&
+                              game.homeTeam.score > game.awayTeam.score
+                                ? "#10833C"
+                                : "white",
+                          }}
+                        >
+                          {" "}
+                          {game.homeTeam.score}
+                        </Typography>
                       </Box>
                     </Box>
+                  </Box>
 
                   <Box
                     sx={{
@@ -510,7 +565,6 @@ function Dashboard() {
                       gap: "1rem",
                       fontFamily: "monospace",
                       marginTop: "1rem",
-                      
                     }}
                   >
                     <Typography
@@ -522,8 +576,10 @@ function Dashboard() {
                         marginLeft: "30rem",
                         marginTop: "-12rem",
                         textAlign: "right",
-
-                      }}> {game.gameStatusText} 
+                      }}
+                    >
+                      {" "}
+                      {game.gameStatusText}
                     </Typography>
 
                     {game.gameStatus === 2 && (
@@ -534,7 +590,10 @@ function Dashboard() {
                           width: "20rem",
                           marginLeft: "30rem",
                           textAlign: "right",
-                        }}> {gameClockConverter(game.gameClock)} 
+                        }}
+                      >
+                        {" "}
+                        {gameClockConverter(game.gameClock)}
                       </Typography>
                     )}
                   </Box>
@@ -545,468 +604,514 @@ function Dashboard() {
         )}
       </Box>
 
-      {activeCategoryTab === "NBA" && showBettingLines && nbaSelectedGame && (() => {
-        const awayPlayers = playersInGame(nbaSelectedGame).filter(
-          (player) => player.teamTriCode === nbaSelectedGame.awayTeam.teamTriCode
-        );
+      {activeCategoryTab === "NBA" &&
+        showBettingLines &&
+        nbaSelectedGame &&
+        (() => {
+          const awayPlayers = playersInGame(nbaSelectedGame).filter(
+            (player) =>
+              player.teamTriCode === nbaSelectedGame.awayTeam.teamTriCode
+          );
 
-        const homePlayers = playersInGame(nbaSelectedGame).filter(
-          (player) => player.teamTriCode === nbaSelectedGame.homeTeam.teamTriCode
-        );
+          const homePlayers = playersInGame(nbaSelectedGame).filter(
+            (player) =>
+              player.teamTriCode === nbaSelectedGame.homeTeam.teamTriCode
+          );
 
-        return (
-
-          <Box 
-            sx={{
-              position: "fixed",
-              backgroundColor: "rgba(0, 0, 0, 0.8)",
-              justifyContent: "center",
-              fontFamily: "monospace",
-              width: "100%",
-              maxHeight: "100vh",
-              overflowY: "auto",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-
-            }}
-          >
+          return (
             <Box
               sx={{
+                position: "fixed",
                 backgroundColor: "rgba(0, 0, 0, 0.8)",
-                borderRadius: "1rem",
-              }}
-            >
-
-            <Typography variant="h6"
-              sx={{
-                textAlign: "center",
-                paddingTop: "3rem",
-                fontFamily: "monospace",
-              }}> 
-              {nbaSelectedGame.awayTeam.teamTriCode} @ {nbaSelectedGame.homeTeam.teamTriCode} 
-            </Typography>
-
-            <IconButton
-              sx={{
-                position: "absolute",
-                right: "1rem",
-                top: "1rem",
-                "&:hover": {
-                  background: "none",
-                },
-                "&:focus": {
-                  outline: "none",
-                }
-              }}
-              onClick={() => setShowBettingLines(false)}
-            >
-              <CloseIcon />
-            </IconButton>
-              
-      
-            <Box
-              sx={{
-                display: "flex",
                 justifyContent: "center",
-                alignItems: "center",
-                marginTop: "2rem",
-                gap: "2rem",
-              }}
-            >
-              {lineCategoryOptions.map((category) => (
-                <button          
-                  key={category}
-                  onClick={() => {
-                    setViewLineCategory(category)
-                  }}
-                  style={{
-                    fontFamily: "monospace",
-                    backgroundColor: viewLineCategory === category ? "white" : "transparent",
-                    color: viewLineCategory === category ? "black" : "white",
-                    border: "1px solid white",
-                    borderRadius: "5rem",
-                  }}
-                  >
-                  {category}
-                  </button>
-              ))}
-            </Box>
-
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                padding: "2rem 4rem",
+                fontFamily: "monospace",
                 width: "100%",
-                gap: "2rem",
+                maxHeight: "100vh",
+                overflowY: "auto",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
               }}
             >
               <Box
                 sx={{
-                  flex: 1,
-                  paddingBottom: "4rem",
-               
-                }}
-                >
-
-                <Typography variant="h6"
-                  sx={{
-                    textAlign: "center",
-                    width: "40%",
-                    fontFamily: "monospace",
-                    marginBottom: "1rem",
-                  }}
-                >
-                  {nbaSelectedGame.awayTeam.teamTriCode}
-                </Typography>
-
-                {awayPlayers.filter((player) => parseFloat(getStatCategory(player)) !== 0).map((player, index) => (
-                  <Box key={index}
-                    sx={{
-                        border: selectedSquare(player.playerId)
-                        ? "2px solid green": "2px solid gray",
-                        borderRadius: "1rem",
-                        padding: 0,
-                        backgroundColor: "rgba(0, 0, 0, 0.5)",
-                        marginBottom: "1rem",
-                        width: "22rem",
-                        height: "18rem",
-                        overflow: "hidden",
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "space-between",
-
-                    }}>
-                      
-                    <Box
-                      sx={{
-                        padding: "0.5rem",
-                      }}
-                    >
-
-                      <Box
-                        sx={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          marginTop: "0.5rem",
-                          marginBottom: "0.5rem",
-                        }}
-                      >
-                        <img
-                          src={player.playerPicture}
-                          alt={player.playerName}
-                          style={{
-                            width: "6rem",
-                            marginTop: "1rem",
-                            
-                          }}
-                        />
-                      </Box>
-
-                      <Typography
-                        sx={{
-                          fontFamily: "monospace",
-                          fontSize: "0.8rem",
-                          textAlign: "center",
-                        }}> {player.teamTriCode}
-                      </Typography>
-
-                      <Typography
-                        sx={{
-                          fontFamily: "monospace",
-                          textAlign: "center",
-                        }}> {player.playerName} 
-                      </Typography>
-
-                      <Typography
-                        sx={{
-                          fontFamily: "monospace",
-                          textAlign: "center",
-                          fontSize: "0.8rem",
-                        }}>
-                          vs {nbaSelectedGame.homeTeam.teamTriCode}{" "} {nbaSelectedGame.gameStatusText}
-                        </Typography>
-
-                        <Box
-                        sx={{
-                          display: "flex",
-                          justifyContent: "center",
-                        }}
-                      >
-                        <Typography
-                          sx={{
-                            fontFamily: "monospace",
-                            textAlign: "center",
-                            marginTop: "0.5rem",
-                            fontSize: "1.2rem",
-                            fontWeight: "bold",
-                          }}>
-                            {getStatCategory(player)}
-                        </Typography>
-
-                        <Typography
-                          sx={{
-                            display: "flex",
-                            fontFamily: "monospace",
-                            textAlign: "center",
-                            marginTop: "0.9rem",
-                            fontSize: "0.8rem",
-                            justifyContent: "right",
-                            marginLeft: "0.5rem",
-                            
-                          }}>
-                            {viewLineCategory}
-                        </Typography>
-                      </Box>
-                    </Box>
-
-                    <Box
-                      sx={{                    
-                        display: "flex",
-                        borderTop: "1px solid gray",
-                        width: "100%",
-                      }}
-                    >
-                      <button
-                        onClick={() => handleUserLines(player, "Under")}
-                        style={{
-                          flex: 1,
-                          backgroundColor: selectedBetButton(player.playerId, "Under")
-                            ? "green": "transparent",
-                          color: "white",
-                          padding: "0.5rem",
-                          fontFamily: "monospace",
-                          border: "none",
-                          borderRight: "1px solid gray",
-                          cursor: "pointer",
-                          borderRadius: "0 0 0 1rem",
-                        }}
-                      >
-                        ↓ Under
-                      </button>
-
-                      <button
-                        onClick={() => handleUserLines(player, "Over")}
-                        style={{
-                          flex: 1,
-                          backgroundColor: selectedBetButton(player.playerId, "Over")
-                          ? "green": "transparent",
-                          color: "white",
-                          padding: "0.5rem",
-                          fontFamily: "monospace",
-                          border: "none",
-                          cursor: "pointer",
-                          borderRadius: "0 0 1rem 0"
-                        }}
-                      >
-                        ↑ Over
-                      </button>
-                    </Box>
-                  </Box>
-                ))}
-              </Box>
-
-              <Box
-                sx={{
-                  flex: 1,
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-end",
+                  backgroundColor: "rgba(0, 0, 0, 0.8)",
+                  borderRadius: "1rem",
                 }}
               >
-                <Typography variant="h6"
+                <Typography
+                  variant="h6"
                   sx={{
                     textAlign: "center",
-                    width: "40%",
+                    paddingTop: "3rem",
                     fontFamily: "monospace",
-                    marginBottom: "1rem",
                   }}
                 >
+                  {nbaSelectedGame.awayTeam.teamTriCode} @{" "}
                   {nbaSelectedGame.homeTeam.teamTriCode}
                 </Typography>
-                {homePlayers.filter((player) => parseFloat(getStatCategory(player)) !== 0).map((player, index) => (
-                  <Box key={index}
+
+                <IconButton
                   sx={{
-                      border: selectedSquare(player.playerId)
-                      ? "2px solid green": "2px solid gray",
-                      borderRadius: "1rem",
-                      padding: 0,
-                      backgroundColor: "rgba(0, 0, 0, 0.5)",
-                      marginBottom: "1rem",
-                      width: "22rem",
-                      height: "18rem",
-                      overflow: "hidden",
+                    position: "absolute",
+                    right: "1rem",
+                    top: "1rem",
+                    "&:hover": {
+                      background: "none",
+                    },
+                    "&:focus": {
+                      outline: "none",
+                    },
+                  }}
+                  onClick={() => setShowBettingLines(false)}
+                >
+                  <CloseIcon />
+                </IconButton>
+
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: "2rem",
+                    gap: "2rem",
+                  }}
+                >
+                  {lineCategoryOptions.map((category) => (
+                    <button
+                      key={category}
+                      onClick={() => {
+                        setViewLineCategory(category);
+                      }}
+                      style={{
+                        fontFamily: "monospace",
+                        backgroundColor:
+                          viewLineCategory === category
+                            ? "white"
+                            : "transparent",
+                        color:
+                          viewLineCategory === category ? "black" : "white",
+                        border: "1px solid white",
+                        borderRadius: "5rem",
+                      }}
+                    >
+                      {category}
+                    </button>
+                  ))}
+                </Box>
+
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    padding: "2rem 4rem",
+                    width: "100%",
+                    gap: "2rem",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      flex: 1,
+                      paddingBottom: "4rem",
+                    }}
+                  >
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        textAlign: "center",
+                        width: "40%",
+                        fontFamily: "monospace",
+                        marginBottom: "1rem",
+                      }}
+                    >
+                      {nbaSelectedGame.awayTeam.teamTriCode}
+                    </Typography>
+
+                    {awayPlayers
+                      .filter(
+                        (player) => parseFloat(getStatCategory(player)) !== 0
+                      )
+                      .map((player, index) => (
+                        <Box
+                          key={index}
+                          sx={{
+                            border: selectedSquare(player.playerId)
+                              ? "2px solid green"
+                              : "2px solid gray",
+                            borderRadius: "1rem",
+                            padding: 0,
+                            backgroundColor: "rgba(0, 0, 0, 0.5)",
+                            marginBottom: "1rem",
+                            width: "22rem",
+                            height: "18rem",
+                            overflow: "hidden",
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <Box
+                            sx={{
+                              padding: "0.5rem",
+                            }}
+                          >
+                            <Box
+                              sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                marginTop: "0.5rem",
+                                marginBottom: "0.5rem",
+                              }}
+                            >
+                              <img
+                                src={player.playerPicture}
+                                alt={player.playerName}
+                                style={{
+                                  width: "6rem",
+                                  marginTop: "1rem",
+                                }}
+                              />
+                            </Box>
+
+                            <Typography
+                              sx={{
+                                fontFamily: "monospace",
+                                fontSize: "0.8rem",
+                                textAlign: "center",
+                              }}
+                            >
+                              {" "}
+                              {player.teamTriCode}
+                            </Typography>
+
+                            <Typography
+                              sx={{
+                                fontFamily: "monospace",
+                                textAlign: "center",
+                              }}
+                            >
+                              {" "}
+                              {player.playerName}
+                            </Typography>
+
+                            <Typography
+                              sx={{
+                                fontFamily: "monospace",
+                                textAlign: "center",
+                                fontSize: "0.8rem",
+                              }}
+                            >
+                              vs {nbaSelectedGame.homeTeam.teamTriCode}{" "}
+                              {nbaSelectedGame.gameStatusText}
+                            </Typography>
+
+                            <Box
+                              sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                              }}
+                            >
+                              <Typography
+                                sx={{
+                                  fontFamily: "monospace",
+                                  textAlign: "center",
+                                  marginTop: "0.5rem",
+                                  fontSize: "1.2rem",
+                                  fontWeight: "bold",
+                                }}
+                              >
+                                {getStatCategory(player)}
+                              </Typography>
+
+                              <Typography
+                                sx={{
+                                  display: "flex",
+                                  fontFamily: "monospace",
+                                  textAlign: "center",
+                                  marginTop: "0.9rem",
+                                  fontSize: "0.8rem",
+                                  justifyContent: "right",
+                                  marginLeft: "0.5rem",
+                                }}
+                              >
+                                {viewLineCategory}
+                              </Typography>
+                            </Box>
+                          </Box>
+
+                          <Box
+                            sx={{
+                              display: "flex",
+                              borderTop: "1px solid gray",
+                              width: "100%",
+                            }}
+                          >
+                            <button
+                              onClick={() => handleUserLines(player, "Under")}
+                              style={{
+                                flex: 1,
+                                backgroundColor: selectedBetButton(
+                                  player.playerId,
+                                  "Under"
+                                )
+                                  ? "green"
+                                  : "transparent",
+                                color: "white",
+                                padding: "0.5rem",
+                                fontFamily: "monospace",
+                                border: "none",
+                                borderRight: "1px solid gray",
+                                cursor: "pointer",
+                                borderRadius: "0 0 0 1rem",
+                              }}
+                            >
+                              ↓ Under
+                            </button>
+
+                            <button
+                              onClick={() => handleUserLines(player, "Over")}
+                              style={{
+                                flex: 1,
+                                backgroundColor: selectedBetButton(
+                                  player.playerId,
+                                  "Over"
+                                )
+                                  ? "green"
+                                  : "transparent",
+                                color: "white",
+                                padding: "0.5rem",
+                                fontFamily: "monospace",
+                                border: "none",
+                                cursor: "pointer",
+                                borderRadius: "0 0 1rem 0",
+                              }}
+                            >
+                              ↑ Over
+                            </button>
+                          </Box>
+                        </Box>
+                      ))}
+                  </Box>
+
+                  <Box
+                    sx={{
+                      flex: 1,
                       display: "flex",
                       flexDirection: "column",
-                      justifyContent: "space-between",
-
-                  }}>
-                    
-                  <Box
-                    sx={{
-                      padding: "0.5rem",
+                      alignItems: "flex-end",
                     }}
                   >
-
-                    <Box
+                    <Typography
+                      variant="h6"
                       sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        marginTop: "0.5rem",
-                        marginBottom: "0.5rem",
+                        textAlign: "center",
+                        width: "40%",
+                        fontFamily: "monospace",
+                        marginBottom: "1rem",
                       }}
                     >
-                      <img
-                        src={player.playerPicture}
-                        alt={player.playerName}
-                        style={{
-                          width: "6rem",
-                          marginTop: "1rem",
-                        }}
-                      />
-                    </Box>
-
-                    <Typography
-                      sx={{
-                        fontFamily: "monospace",
-                        fontSize: "0.8rem",
-                        textAlign: "center",
-                      }}> {player.teamTriCode}
+                      {nbaSelectedGame.homeTeam.teamTriCode}
                     </Typography>
+                    {homePlayers
+                      .filter(
+                        (player) => parseFloat(getStatCategory(player)) !== 0
+                      )
+                      .map((player, index) => (
+                        <Box
+                          key={index}
+                          sx={{
+                            border: selectedSquare(player.playerId)
+                              ? "2px solid green"
+                              : "2px solid gray",
+                            borderRadius: "1rem",
+                            padding: 0,
+                            backgroundColor: "rgba(0, 0, 0, 0.5)",
+                            marginBottom: "1rem",
+                            width: "22rem",
+                            height: "18rem",
+                            overflow: "hidden",
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <Box
+                            sx={{
+                              padding: "0.5rem",
+                            }}
+                          >
+                            <Box
+                              sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                marginTop: "0.5rem",
+                                marginBottom: "0.5rem",
+                              }}
+                            >
+                              <img
+                                src={player.playerPicture}
+                                alt={player.playerName}
+                                style={{
+                                  width: "6rem",
+                                  marginTop: "1rem",
+                                }}
+                              />
+                            </Box>
 
-                    <Typography
-                      sx={{
-                        fontFamily: "monospace",
-                        textAlign: "center",
-                      }}> {player.playerName} 
-                    </Typography>
+                            <Typography
+                              sx={{
+                                fontFamily: "monospace",
+                                fontSize: "0.8rem",
+                                textAlign: "center",
+                              }}
+                            >
+                              {" "}
+                              {player.teamTriCode}
+                            </Typography>
 
-                    <Typography
-                      sx={{
-                        fontFamily: "monospace",
-                        textAlign: "center",
-                        fontSize: "0.8rem",
-                      }}>
-                        vs {nbaSelectedGame.awayTeam.teamTriCode}{" "} {nbaSelectedGame.gameStatusText}
-                      </Typography>
+                            <Typography
+                              sx={{
+                                fontFamily: "monospace",
+                                textAlign: "center",
+                              }}
+                            >
+                              {" "}
+                              {player.playerName}
+                            </Typography>
 
-                      <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <Typography
-                        sx={{
-                          fontFamily: "monospace",
-                          textAlign: "center",
-                          marginTop: "0.5rem",
-                          fontSize: "1.2rem",
-                          fontWeight: "bold",
-                        }}>
-                          {getStatCategory(player)}
-                      </Typography>
+                            <Typography
+                              sx={{
+                                fontFamily: "monospace",
+                                textAlign: "center",
+                                fontSize: "0.8rem",
+                              }}
+                            >
+                              vs {nbaSelectedGame.awayTeam.teamTriCode}{" "}
+                              {nbaSelectedGame.gameStatusText}
+                            </Typography>
 
-                      <Typography
-                        sx={{
-                          display: "flex",
-                          fontFamily: "monospace",
-                          textAlign: "center",
-                          marginTop: "0.9rem",
-                          fontSize: "0.8rem",
-                          justifyContent: "right",
-                          marginLeft: "0.5rem",
-                          
-                        }}>
-                          {viewLineCategory}
-                      </Typography>
-                    </Box>
+                            <Box
+                              sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                              }}
+                            >
+                              <Typography
+                                sx={{
+                                  fontFamily: "monospace",
+                                  textAlign: "center",
+                                  marginTop: "0.5rem",
+                                  fontSize: "1.2rem",
+                                  fontWeight: "bold",
+                                }}
+                              >
+                                {getStatCategory(player)}
+                              </Typography>
+
+                              <Typography
+                                sx={{
+                                  display: "flex",
+                                  fontFamily: "monospace",
+                                  textAlign: "center",
+                                  marginTop: "0.9rem",
+                                  fontSize: "0.8rem",
+                                  justifyContent: "right",
+                                  marginLeft: "0.5rem",
+                                }}
+                              >
+                                {viewLineCategory}
+                              </Typography>
+                            </Box>
+                          </Box>
+
+                          <Box
+                            sx={{
+                              display: "flex",
+                              borderTop: "1px solid gray",
+                              width: "100%",
+                            }}
+                          >
+                            <button
+                              onClick={() => handleUserLines(player, "Under")}
+                              style={{
+                                flex: 1,
+                                backgroundColor: selectedBetButton(
+                                  player.playerId,
+                                  "Under"
+                                )
+                                  ? "green"
+                                  : "transparent",
+                                color: "white",
+                                padding: "0.5rem",
+                                fontFamily: "monospace",
+                                border: "none",
+                                borderRight: "1px solid gray",
+                                cursor: "pointer",
+                                borderRadius: "0 0 0 1rem",
+                              }}
+                            >
+                              ↓ Under
+                            </button>
+                            <button
+                              onClick={() => handleUserLines(player, "Over")}
+                              style={{
+                                flex: 1,
+                                backgroundColor: selectedBetButton(
+                                  player.playerId,
+                                  "Over"
+                                )
+                                  ? "green"
+                                  : "transparent",
+                                padding: "0.5rem",
+                                fontFamily: "monospace",
+                                border: "none",
+                                cursor: "pointer",
+                                borderRadius: "0 0 1rem 0",
+                              }}
+                            >
+                              ↑ Over
+                            </button>
+                          </Box>
+
+                          <Box
+                            sx={{
+                              position: "fixed",
+                              bottom: "2rem",
+                              left: "50%",
+                              transform: "translateX(-50%)",
+                              zIndex: 2000,
+                            }}
+                          >
+                            <button
+                              onClick={submitLineup}
+                              style={{
+                                backgroundColor: "rgba(0, 0, 0, 0.3)",
+                                color: "white",
+                                outline: "1px solid white",
+                                fontFamily: "monospace",
+                                fontSize: "1rem",
+                                padding: "0.75rem 2rem",
+                                borderRadius: "2rem",
+                                border: "none",
+                                cursor: "pointer",
+                              }}
+                            >
+                              Submit Lineup
+                            </button>
+                          </Box>
+                        </Box>
+                      ))}
                   </Box>
-
-                  <Box
-                    sx={{                    
-                      display: "flex",
-                      borderTop: "1px solid gray",
-                      width: "100%",
-                    }}
-                  >
-                    <button
-                      onClick={() => handleUserLines(player, "Under")}
-                      style={{
-                        flex: 1,
-                        backgroundColor: selectedBetButton(player.playerId, "Under")
-                        ? "green": "transparent",
-                        color: "white",
-                        padding: "0.5rem",
-                        fontFamily: "monospace",
-                        border: "none",
-                        borderRight: "1px solid gray",
-                        cursor: "pointer",
-                        borderRadius: "0 0 0 1rem",
-                      }}
-                    >
-                      ↓ Under
-                    </button>
-                    <button
-                      onClick={() => handleUserLines(player, "Over")}
-                      style={{
-                        flex: 1,
-                        backgroundColor: selectedBetButton(player.playerId, "Over")
-                        ? "green": "transparent",
-                        padding: "0.5rem",
-                        fontFamily: "monospace",
-                        border: "none",
-                        cursor: "pointer",
-                        borderRadius: "0 0 1rem 0"
-                      }}
-                    >
-                      ↑ Over
-                    </button>
-                  </Box>
-
-                  <Box
-                    sx={{
-                      position: "fixed",
-                      bottom: "2rem",
-                      left: "50%",
-                      transform: "translateX(-50%)",
-                      zIndex: 2000,
-                    }}
-                  >
-                    <button
-                      onClick={submitLineup}
-                      style={{
-                        backgroundColor: "rgba(0, 0, 0, 0.3)",
-                        color: "white",
-                        outline: "1px solid white",
-                        fontFamily: "monospace",
-                        fontSize: "1rem",
-                        padding: "0.75rem 2rem",
-                        borderRadius: "2rem",
-                        border: "none",
-                        cursor: "pointer",
-                     
-                      }}
-                    >
-                      Submit Lineup
-                    </button>
-                  </Box>
-
                 </Box>
-                ))}
+              </Box>
             </Box>
-          </Box>
-        </Box>
-      </Box>
-    );
-  })()}
-</Box>
+          );
+        })()}
+    </Box>
   );
 }
-
 
 export default Dashboard;
