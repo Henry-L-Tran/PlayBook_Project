@@ -8,13 +8,19 @@ const Header = ({ onNavigate }) => {
   // Navigation items
   const navItems = ["Dashboard", "Lineups", "Promos", "Social", "Funds"];
 
+  const handleUserLogout = () => {
+    localStorage.removeItem("currUser");
+    console.log("User Sucessfully Logged Out");
+    navigator("/login");
+  };
+
   return (
-    <div className=" w-full py-6 px-12">
-      <div className="flex justify-between items-center w-full flex-wrap">
+    <div className=" w-full sm:py-6 sm:px-12">
+      <div className="flex flex-col sm:flex-row justify-between items-center w-full flex-wrap">
         {/* Logo and Brand Name */}
         <div
           className="flex items-center gap-4 min-w-1/4"
-          onClick={() => navigate("/dashboard")}
+          onClick={() => navigate("/home")}
         >
           <img
             src="/images/logo.png"
@@ -34,7 +40,7 @@ const Header = ({ onNavigate }) => {
         </div>
 
         {/* Navigation Links */}
-        <div className="flex items-center gap-16 min-w/3/4">
+        <div className="flex items-center gap-4 sm:gap-16 min-w/3/4 flex-col sm:flex-row">
           {navItems.map((item, index) => (
             <Button
               key={index}
@@ -62,6 +68,13 @@ const Header = ({ onNavigate }) => {
               {item}
             </Button>
           ))}
+          {/* Logout Button */}
+          <button
+            className=" px-4 py-2 mb-4 sm:mb-0"
+            onClick={handleUserLogout}
+          >
+            Logout
+          </button>
         </div>
       </div>
       <Divider />
