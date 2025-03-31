@@ -11,7 +11,7 @@ const Header = ({ onNavigate }) => {
   const handleUserLogout = () => {
     localStorage.removeItem("currUser");
     console.log("User Sucessfully Logged Out");
-    navigator("/login");
+    navigate("/login");
   };
 
   return (

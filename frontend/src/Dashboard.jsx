@@ -357,16 +357,21 @@ function Dashboard() {
             value="LoL"
             disableRipple
             sx={{
-              textTransform: "none",
-              mx: 5,
-              fontSize: "1.5rem",
+              mx: { xs: 0.5, sm: 1, md: 3 },
+              px: { xs: 1, sm: 2, md: 2 },
+              fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
               fontFamily: "monospace",
-              textColor: "inherit",
               color: "white",
+              minWidth: "fit-content",
+              outline: "none",
+              "&.Mui-selected": {
+                color: "white",
+                fontWeight: "bold",
+                outline: "none",
+              },
               "&:focus": {
                 outline: "none",
                 color: "white",
-                fontWeight: "bold",
               },
             }}
           />
