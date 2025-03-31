@@ -197,15 +197,15 @@ function Funds() {
           )}
 
           {currTab === "deposit" && user?.payment_info?.card_number && (
-            <div>
-              <h2 className="text-3xl font-mono pb-10">Deposit Funds</h2>
+            <div className="flex w-full flex-col items-center justify-center">
+              <h2 className="text-3xl font-mono  pb-10">Deposit Funds</h2>
 
-              <div className="relative w-64 mt-5 ml-25">
+              <div className="relative w-full sm:w-4/5 flex items-center">
                 <span className="absolute inset-y-8 left-4 flex text-gray-400 font-mono font-bold">
                   $
                 </span>
                 <input
-                  className="pl-9 w-200 p-3 rounded bg-gray-900 text-white border border-gray-600 mt-5 font-mono"
+                  className="pl-9 w-full p-3 rounded bg-gray-900 text-white border border-gray-600 mt-5 font-mono"
                   type="number"
                   placeholder="Amount"
                   value={amount}
@@ -213,13 +213,13 @@ function Funds() {
                 />
               </div>
 
-              <div className="flex justify-center mt-5 gap-5 font-mono">
+              <div className="flex justify-center w-4/5 mt-5 sm:gap-5 font-mono">
                 {[10, 25, 50, 100, 250].map((amt) => (
                   <button
                     key={amt}
                     type="button"
                     onClick={() => setAmount(amt)}
-                    className={`w-36 px-4 py-2 rounded-md border ${
+                    className={`w-full  py-2 rounded-md border ${
                       parseInt(amount) === amt
                         ? "bg-white text-white font-bold"
                         : "bg-gray-700 text-white"
@@ -230,9 +230,9 @@ function Funds() {
                 ))}
               </div>
 
-              <div className="flex flex-row justify-center items-center gap-5 mt-5 font-mono">
+              <div className="flex w-4/5 flex-row justify-center items-center gap-5 mt-5 font-mono">
                 <select
-                  className="w-98 h-12 px-3 py-3 rounded-md bg-gray-900"
+                  className="w-1/2 h-12 px-3 py-3 rounded-md bg-gray-900"
                   value={card}
                   onChange={(e) => setCard(e.target.value)}
                 >
@@ -244,7 +244,7 @@ function Funds() {
                 </select>
 
                 <input
-                  className="w-98 h-12 px-3 py-3 rounded-md bg-gray-900 text-white border-gray-600 font-mono"
+                  className="w-1/2 h-12 px-3 py-3 rounded-md bg-gray-900 text-white border-gray-600 font-mono"
                   type="text"
                   name="cvv"
                   placeholder="CVV"
@@ -254,14 +254,12 @@ function Funds() {
                 />
               </div>
 
-              <div>
-                <button
-                  onClick={() => userTransactions("deposit")}
-                  className="w-200 px-4 py-3 rounded-md bg--600 text-white mt-10"
-                >
-                  Confirm
-                </button>
-              </div>
+              <button
+                onClick={() => userTransactions("deposit")}
+                className="w-4/5 px-4 py-3 rounded-md bg--600 text-white mt-8"
+              >
+                Confirm
+              </button>
             </div>
           )}
 
