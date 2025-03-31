@@ -125,14 +125,7 @@ function Funds() {
 
     return (
         <>
-            <Box
-                className="w-screen h-screen flex flex-col bg-cover bg-no-repeat"
-                    sx={{
-                        backgroundImage:
-                        "linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('/images/playbook_background2.png')",
-                }}>
-
-                <Header/>
+            <Box>
 
                 <div className="font-mono">
                     {/* Logout Button */}
