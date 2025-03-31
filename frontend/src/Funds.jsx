@@ -126,11 +126,6 @@ function Funds() {
     return (
         <>
                 <div className="font-mono mb-80">
-                    {/* Logout Button */}
-                    <button className="absolute top-30 right-12 px-4 py-2"
-                        onClick={handleUserLogout}>Logout
-                    </button> 
-
                     <h1 className="flex items-center flex-col justify-center font-mono">Funds</h1>
 
                         <p className="flex items-center flex-col justify-center mt-10 text-2xl font-mono font-bold">Balance: ${user?.balance || 0}</p>
