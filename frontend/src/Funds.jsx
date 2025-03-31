@@ -133,7 +133,7 @@ function Funds() {
 
                     <h1 className="flex items-center flex-col justify-center font-mono">Funds</h1>
 
-                        <p className="flex items-center flex-col justify-center mt-10 text-2xl font-mono">Balance: ${user?.balance || 0}</p>
+                        <p className="flex items-center flex-col justify-center mt-10 text-2xl font-mono font-bold">Balance: ${user?.balance || 0}</p>
 
                         <div className="flex flex-wrap justify-center mt-5 gap-3 font-mono">
                             <button onClick={() => setCurrTab("card-info")} className="w-98">Card Information</button>
@@ -257,9 +257,9 @@ function Funds() {
                         {currTab === "withdraw" && user?.payment_info?.card_number && (
                             <div>
                                 <h2 className="text-3xl font-mono pb-10">Withdraw Funds</h2>
-                                    <div>
-                                        <span className="text-gray-400 font-mono">$</span>
-                                        <input className="w-200 p-3 rounded bg-gray-900 text-white border border-gray-600 mt-5 font-mono"
+                                    <div className="relative w-64 mt-5 ml-25">
+                                        <span className="absolute inset-y-8 left-4 flex text-gray-400 font-mono font-bold">$</span>
+                                        <input className="pl-9 w-200 p-3 rounded bg-gray-900 text-white border border-gray-600 mt-5 font-mono"
                                             type="number" 
                                             placeholder="Amount" 
                                             value={amount} 
@@ -285,6 +285,8 @@ function Funds() {
                     </Box>
 
                 </div>
+    
+            
 
         </>
     )
