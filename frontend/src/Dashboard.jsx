@@ -274,7 +274,7 @@ function Dashboard() {
         <Tabs
           value={activeCategoryTab}
           onChange={handleCategoryTabChange}
-          variant="scrollable"
+          variant="fullWidth"
           scrollButtons="auto"
           allowScrollButtonsMobile
           textColor="inherit"
