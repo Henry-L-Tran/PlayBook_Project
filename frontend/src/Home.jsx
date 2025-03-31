@@ -34,7 +34,7 @@ function Home() {
 
   return (
     <Box
-      className="w-screen min-h-screen flex flex-col bg-cover bg-no-repeat"
+      className="w-screen h-screen flex flex-col items-center bg-cover bg-no-repeat"
       sx={{
         backgroundImage:
           "linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('/images/playbook_background2.png')",
@@ -44,12 +44,11 @@ function Home() {
       <Header onNavigate={handleNavigation} />
 
       {/* Dynamic content area */}
-      <div className="flex-1 flex items-center justify-center p-8">
+      <div className="flex-1 flex items-start justify-center p-8  overflow-auto w-fit h-fit">
         {renderComponent()}
       </div>
     </Box>
   );
 }
-
 
 export default Home;

@@ -245,7 +245,7 @@ function Dashboard() {
         console.log("Error submitting lineup");
       }
     } catch (error) {
-      console.error("Error submitting lineup");
+      console.error("Error submitting lineup", error);
     }
   };
 
@@ -262,11 +262,10 @@ function Dashboard() {
   };
 
   return (
-    <Box className="flex justify-center items-center ">
+    <Box className="flex w-full h-full overflow-hidden justify-center items-center">
       <Box
-        className="w-full p-8 text-white overflow-auto"
+        className="w-full max-w-full p-2 md:p-8 text-white overflow-hidden"
         sx={{
-          width: "100%",
           maxWidth: "1200px",
           backgroundColor: "rgba(0, 0, 0, 0.3)",
           borderRadius: "1rem",
@@ -275,7 +274,9 @@ function Dashboard() {
         <Tabs
           value={activeCategoryTab}
           onChange={handleCategoryTabChange}
-          centered
+          variant="scrollable"
+          scrollButtons="auto"
+          allowScrollButtonsMobile
           textColor="inherit"
           slotProps={{
             indicator: {
@@ -284,13 +285,25 @@ function Dashboard() {
                 height: "0.25rem",
                 borderRadius: "1rem",
                 marginTop: "1rem",
-                textDecorationColor: "white",
+              },
+            },
+            scrollButtons: {
+              sx: {
+                color: "white",
               },
             },
           }}
           sx={{
             marginTop: "1rem",
-            textDecorationColor: "white",
+            width: "100%",
+            maxWidth: "100%",
+            "& .MuiTabs-flexContainer": {
+              justifyContent: { xs: "flex-start", md: "center" },
+            },
+            "& .MuiTabs-scroller": {
+              width: "100%",
+              overflowX: "auto",
+            },
           }}
         >
           <Tab
@@ -298,11 +311,12 @@ function Dashboard() {
             value="NBA"
             disableRipple
             sx={{
-              mx: 5,
-              fontSize: "1.5rem",
+              mx: { xs: 0.5, sm: 1, md: 3 },
+              px: { xs: 1, sm: 2, md: 2 },
+              fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
               fontFamily: "monospace",
-              textColor: "inherit",
               color: "white",
+              minWidth: "fit-content",
               outline: "none",
               "&.Mui-selected": {
                 color: "white",
@@ -320,15 +334,21 @@ function Dashboard() {
             value="NFL"
             disableRipple
             sx={{
-              mx: 5,
-              fontSize: "1.5rem",
+              mx: { xs: 0.5, sm: 1, md: 3 },
+              px: { xs: 1, sm: 2, md: 2 },
+              fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
               fontFamily: "monospace",
-              textColor: "inherit",
               color: "white",
+              minWidth: "fit-content",
+              outline: "none",
+              "&.Mui-selected": {
+                color: "white",
+                fontWeight: "bold",
+                outline: "none",
+              },
               "&:focus": {
                 outline: "none",
                 color: "white",
-                fontWeight: "bold",
               },
             }}
           />
@@ -355,21 +375,27 @@ function Dashboard() {
             value="VAL"
             disableRipple
             sx={{
-              mx: 5,
-              fontSize: "1.5rem",
+              mx: { xs: 0.5, sm: 1, md: 3 },
+              px: { xs: 1, sm: 2, md: 2 },
+              fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
               fontFamily: "monospace",
-              textColor: "inherit",
               color: "white",
+              minWidth: "fit-content",
+              outline: "none",
+              "&.Mui-selected": {
+                color: "white",
+                fontWeight: "bold",
+                outline: "none",
+              },
               "&:focus": {
                 outline: "none",
                 color: "white",
-                fontWeight: "bold",
               },
             }}
           />
         </Tabs>
 
-        {activeCategoryTab === "NBA" && (
+        {/* {activeCategoryTab === "NBA" && (
           <>
             <Typography
               sx={{
@@ -600,10 +626,10 @@ function Dashboard() {
               ))
             )}
           </>
-        )}
+        )} */}
       </Box>
 
-      {activeCategoryTab === "NBA" &&
+      {/* {activeCategoryTab === "NBA" &&
         showBettingLines &&
         nbaSelectedGame &&
         (() => {
@@ -1108,7 +1134,7 @@ function Dashboard() {
               </Box>
             </Box>
           );
-        })()}
+        })()} */}
     </Box>
   );
 }
