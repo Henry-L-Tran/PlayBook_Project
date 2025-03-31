@@ -21,6 +21,7 @@ const Header = ({ onNavigate }) => {
         <div
           className="flex items-center gap-4 min-w-1/4"
           onClick={() => navigate("/home")}
+          onClick={() => navigate("/home")}
         >
           <img
             src="/images/logo.png"
@@ -40,6 +41,7 @@ const Header = ({ onNavigate }) => {
         </div>
 
         {/* Navigation Links */}
+        <div className="flex items-center gap-4 sm:gap-16 min-w/3/4 flex-col sm:flex-row">
         <div className="flex items-center gap-4 sm:gap-16 min-w/3/4 flex-col sm:flex-row">
           {navItems.map((item, index) => (
             <Button
