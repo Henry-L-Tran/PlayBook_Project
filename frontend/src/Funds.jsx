@@ -1,14 +1,11 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
-import { Box, Typography } from "@mui/material";
-import Header from "./Header";
+import { Box } from "@mui/material";
 
 function Funds() {
   const [user, setUser] = useState(null);
   const [currTab, setCurrTab] = useState("card-info");
   const [amount, setAmount] = useState("");
   const [card, setCard] = useState("");
-  const navigator = useNavigate();
 
   useEffect(() => {
     getUserData();
@@ -107,15 +104,9 @@ function Funds() {
     }
   };
 
-  const handleUserLogout = () => {
-    localStorage.removeItem("currUser");
-    console.log("User Sucessfully Logged Out");
-    navigator("/login");
-  };
-
   return (
     <>
-      <div className="font-mono mb-80">
+      <div className="font-mono">
         <h1 className="flex items-center flex-col justify-center font-mono">
           Funds
         </h1>
@@ -124,14 +115,23 @@ function Funds() {
           Balance: ${user?.balance || 0}
         </p>
 
-        <div className="flex flex-col items-center mx-16 sm:mx-0 sm:flex-row  flex-wrap justify-center mt-5 gap-3 font-mono">
-          <button onClick={() => setCurrTab("card-info")} className="w-98">
+        <div className="flex flex-col items-center px-4 sm:px-0 sm:flex-row  flex-wrap justify-center mt-5 gap-3 font-mono">
+          <button
+            onClick={() => setCurrTab("card-info")}
+            className="w-fit sm:w-98"
+          >
             Card Information
           </button>
-          <button onClick={() => setCurrTab("deposit")} className="w-98">
+          <button
+            onClick={() => setCurrTab("deposit")}
+            className="w-fit sm:w-98"
+          >
             Deposit
           </button>
-          <button onClick={() => setCurrTab("withdraw")} className="w-98">
+          <button
+            onClick={() => setCurrTab("withdraw")}
+            className="w-fit sm:w-98"
+          >
             Withdraw
           </button>
         </div>
@@ -150,9 +150,9 @@ function Funds() {
           {currTab === "card-info" && (
             <div>
               <h2 className="text-3xl font-mono pb-10">Payment Information</h2>
-              <div className="flex flex-wrap justify-center gap-3 p-5">
+              <div className="flex flex-col items-center sm:flex-row flex-wrap justify-center gap-3 p-5">
                 <input
-                  className="w-50 p-3 rounded-md bg-gray-900 text-white border border-gray-600 font-mono"
+                  className="w-50 md:w-1/5 p-3 rounded-md bg-gray-900 text-white border border-gray-600 font-mono"
                   type="text"
                   name="card_type"
                   placeholder="Card Name"
@@ -161,7 +161,7 @@ function Funds() {
                 />
 
                 <input
-                  className="w-50 p-3 rounded-md bg-gray-900 text-white border border-gray-600 font-mono"
+                  className="w-50 md:w-1/5 p-3 rounded-md bg-gray-900 text-white border border-gray-600 font-mono"
                   type="text"
                   name="card_number"
                   placeholder="Card Number"
@@ -170,7 +170,7 @@ function Funds() {
                 />
 
                 <input
-                  className="w-50 p-3 rounded-md bg-gray-900 text-white border border-gray-600 font-mono"
+                  className="w-50 md:w-1/5 p-3 rounded-md bg-gray-900 text-white border border-gray-600 font-mono"
                   type="text"
                   name="expiration_date"
                   placeholder="Expiration Date"
@@ -179,7 +179,7 @@ function Funds() {
                 />
 
                 <input
-                  className="w-50 p-3 rounded-md bg-gray-900 text-white border border-gray-600 font-mono"
+                  className="w-50 md:w-1/5 p-3 rounded-md bg-gray-900 text-white border border-gray-600 font-mono"
                   type="text"
                   name="cvv"
                   placeholder="CVV"
@@ -187,7 +187,10 @@ function Funds() {
                   onChange={handleUserInput}
                 />
               </div>
-              <button onClick={saveCardInfo} className="w-210 mt-10 font-mono">
+              <button
+                onClick={saveCardInfo}
+                className=" sm:w-4/5 mt-10 font-mono"
+              >
                 Save Card
               </button>
             </div>
