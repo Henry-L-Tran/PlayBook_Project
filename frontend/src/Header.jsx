@@ -15,7 +15,7 @@ const Header = ({ onNavigate }) => {
   };
 
   return (
-    <div className=" w-full sm:py-6 sm:px-12">
+    <div className="h-1/4 overflow-scroll sm:overflow-auto sm:h-auto w-full sm:py-6 sm:px-12">
       <div className="flex flex-col sm:flex-row justify-between items-center w-full flex-wrap">
         {/* Logo and Brand Name */}
         <div
