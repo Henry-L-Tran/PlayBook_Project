@@ -198,13 +198,16 @@ function Funds() {
                                 <div>
                                 <h2 className="text-3xl font-mono pb-10">Deposit Funds</h2>
 
-                                <span className="text-gray-400 font-mono">$</span>
-                                <input className="w-200 p-3 rounded bg-gray-900 text-white border border-gray-600 mt-5 font-mono"
-                                    type="number" 
-                                    placeholder="Amount" 
-                                    value={amount} 
-                                    onChange={(e) => setAmount(e.target.value)} 
-                                />
+                                <div className="relative w-64 mt-5 ml-25">
+
+                                    <span className="absolute inset-y-8 left-4 flex text-gray-400 font-mono font-bold">$</span>
+                                    <input className="pl-9 w-200 p-3 rounded bg-gray-900 text-white border border-gray-600 mt-5 font-mono"
+                                        type="number" 
+                                        placeholder="Amount" 
+                                        value={amount} 
+                                        onChange={(e) => setAmount(e.target.value)} 
+                                    />
+                                </div>
 
                                 <div className="flex justify-center mt-5 gap-5 font-mono">
                                     {[10, 25, 50, 100, 250].map((amt) => (
@@ -223,9 +226,9 @@ function Funds() {
                                     ))}
                                 </div>
 
-                                <div className="gap-10 mt-4 font-mono">
+                                <div className="flex flex-row justify-center items-center gap-5 mt-5 font-mono">
                                     <select 
-                                        className="mt-10 px-3 py-3 rounded-md bg-gray-900"
+                                        className="w-98 h-12 px-3 py-3 rounded-md bg-gray-900"
                                         value={card} 
                                         onChange={(e) => setCard(e.target.value)}>
                                         <option value="">Select a Card</option>
@@ -235,7 +238,7 @@ function Funds() {
                                     </select>
 
                                     <input
-                                        className="px-4 py-3 rounded-md bg-gray-900 text-white border-gray-600 font-mono"
+                                        className="w-98 h-12 px-3 py-3 rounded-md bg-gray-900 text-white border-gray-600 font-mono"
                                         type="text"
                                         name="cvv"
                                         placeholder="CVV"
