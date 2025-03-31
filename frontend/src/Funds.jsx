@@ -1,290 +1,310 @@
-import { useState, useEffect } from 'react'
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
-import { Box, Typography } from "@mui/material"
-import Header from './Header'
+import { useState, useEffect } from "react";
+import { Box } from "@mui/material";
 
 function Funds() {
+  const [user, setUser] = useState(null);
+  const [currTab, setCurrTab] = useState("card-info");
+  const [amount, setAmount] = useState("");
+  const [card, setCard] = useState("");
 
-    const [user, setUser] = useState(null)
-    const [currTab, setCurrTab] = useState("card-info")
-    const [amount, setAmount] = useState("")
-    const [card, setCard] = useState("")
-    const navigator = useNavigate()
+  useEffect(() => {
+    getUserData();
+  }, []);
 
+  const getUserData = async () => {
+    const currUser = localStorage.getItem("currUser");
 
-    useEffect(() => {
+    if (!currUser) {
+      console.error("No User Logged In");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `http://localhost:8000/funds/user/${currUser}`
+      );
+      const data = await response.json();
+      setUser(data);
+    } catch (error) {
+      console.error("Error Fetching User Data", error);
+    }
+  };
+
+  const handleUserInput = (e) => {
+    const { name, value } = e.target;
+    setUser((prevUser) => ({
+      ...prevUser,
+      payment_info: { ...prevUser.payment_info, [name]: value },
+    }));
+  };
+
+  const saveCardInfo = async () => {
+    if (!user) {
+      console.error("User Data Not Available");
+      return;
+    }
+
+    const requestInfo = {
+      email: user.email,
+      card_type: user.payment_info.card_type,
+      card_number: user.payment_info.card_number,
+      expiration_date: user.payment_info.expiration_date,
+      cvv: user.payment_info.cvv,
+    };
+
+    try {
+      const response = await fetch(
+        "http://localhost:8000/funds/add_card_info",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(requestInfo),
+        }
+      );
+
+      if (response.status === 200) {
+        alert("Card Information Saved");
         getUserData();
-    }, []);
+      } else {
+        alert("Failed to Save Card Information");
+      }
+    } catch (error) {
+      console.error("Error Adding Card Information:", error);
+    }
+  };
 
-
-    const getUserData = async () => {
-        const currUser = localStorage.getItem("currUser");
-    
-        if (!currUser) {
-            console.error("No User Logged In");
-            return;
-        }
-    
-        try {
-            const response = await fetch(`http://localhost:8000/funds/user/${currUser}`);
-            const data = await response.json();
-            setUser(data);
-        } 
-        
-        catch (error) {
-            console.error("Error Fetching User Data", error);
-        }
+  const userTransactions = async (type) => {
+    if (!user) {
+      console.error("Error Loading User Data");
+      return;
     }
 
-    const handleUserInput = (e) => {
-        const { name, value } = e.target;
-        setUser((prevUser) => ({
-          ...prevUser,
-          payment_info: { ...prevUser.payment_info, [name]: value },
-        }))
+    const requestInfo = {
+      email: user.email,
+      amount: amount,
+      card_number: card,
+    };
+
+    try {
+      const response = await fetch(`http://localhost:8000/funds/${type}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(requestInfo),
+      });
+
+      const data = await response.json();
+      if (response.status == 200) {
+        alert(data.message);
+        getUserData();
+      } else {
+        alert("Transction Failed");
+      }
+    } catch (error) {
+      console.error(`${type} Failed:`, error);
     }
+  };
 
-    const saveCardInfo = async () => {
+  return (
+    <>
+      <div className="font-mono">
+        <h1 className="flex items-center flex-col justify-center font-mono">
+          Funds
+        </h1>
 
-        if(!user) {
-            console.error("User Data Not Available")
-            return;
-        }
+        <p className="flex items-center flex-col justify-center mt-10 text-2xl font-mono font-bold">
+          Balance: ${user?.balance || 0}
+        </p>
 
-        const requestInfo = {
-            email: user.email,
-            card_type: user.payment_info.card_type,
-            card_number: user.payment_info.card_number,
-            expiration_date: user.payment_info.expiration_date,
-            cvv: user.payment_info.cvv
-        }
+        <div className="flex flex-col items-center px-4 sm:px-0 sm:flex-row  flex-wrap justify-center mt-5 gap-3 font-mono">
+          <button
+            onClick={() => setCurrTab("card-info")}
+            className="w-fit sm:w-98"
+          >
+            Card Information
+          </button>
+          <button
+            onClick={() => setCurrTab("deposit")}
+            className="w-fit sm:w-98"
+          >
+            Deposit
+          </button>
+          <button
+            onClick={() => setCurrTab("withdraw")}
+            className="w-fit sm:w-98"
+          >
+            Withdraw
+          </button>
+        </div>
 
-        try {
-            const response = await fetch("http://localhost:8000/funds/add_card_info", {
-                method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(requestInfo),
-            })
-    
-            if(response.status === 200) {
-                alert("Card Information Saved")
-                getUserData()
-            }
-            else {
-                alert("Failed to Save Card Information")
-            }
-        }
-    
-        catch (error) {
-            console.error("Error Adding Card Information:", error)
-        }
-    }
+        <Box
+          className="flex justify-center flex-col mt-10 p-25"
+          sx={{
+            width: "100%",
+            maxWidth: "100%",
+            height: "100%",
+            minHeight: "100%",
+            backgroundColor: "rgba(0, 0, 0, 0.4)",
+            borderRadius: "1rem",
+          }}
+        >
+          {currTab === "card-info" && (
+            <div>
+              <h2 className="text-3xl font-mono pb-10">Payment Information</h2>
+              <div className="flex flex-col items-center sm:flex-row flex-wrap justify-center gap-3 p-5">
+                <input
+                  className="w-50 md:w-1/5 p-3 rounded-md bg-gray-900 text-white border border-gray-600 font-mono"
+                  type="text"
+                  name="card_type"
+                  placeholder="Card Name"
+                  value={user?.payment_info?.card_type || ""}
+                  onChange={handleUserInput}
+                />
 
+                <input
+                  className="w-50 md:w-1/5 p-3 rounded-md bg-gray-900 text-white border border-gray-600 font-mono"
+                  type="text"
+                  name="card_number"
+                  placeholder="Card Number"
+                  value={user?.payment_info?.card_number || ""}
+                  onChange={handleUserInput}
+                />
 
-    const userTransactions = async (type) => {
-        if(!user) {
-            console.error("Error Loading User Data")
-            return
-        }
+                <input
+                  className="w-50 md:w-1/5 p-3 rounded-md bg-gray-900 text-white border border-gray-600 font-mono"
+                  type="text"
+                  name="expiration_date"
+                  placeholder="Expiration Date"
+                  value={user?.payment_info?.expiration_date || ""}
+                  onChange={handleUserInput}
+                />
 
+                <input
+                  className="w-50 md:w-1/5 p-3 rounded-md bg-gray-900 text-white border border-gray-600 font-mono"
+                  type="text"
+                  name="cvv"
+                  placeholder="CVV"
+                  value={user?.payment_info?.cvv || ""}
+                  onChange={handleUserInput}
+                />
+              </div>
+              <button
+                onClick={saveCardInfo}
+                className=" sm:w-4/5 mt-10 font-mono"
+              >
+                Save Card
+              </button>
+            </div>
+          )}
 
-        const requestInfo = {
-            email: user.email,
-            amount: amount,
-            card_number: card
-        }
+          {currTab === "deposit" && user?.payment_info?.card_number && (
+            <div className="flex w-full flex-col items-center justify-center">
+              <h2 className="text-3xl font-mono  pb-10">Deposit Funds</h2>
 
-        try {
-            const response = await fetch(`http://localhost:8000/funds/${type}`, {
-                method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(requestInfo)
+              <div className="relative w-full sm:w-4/5 flex items-center">
+                <span className="absolute inset-y-8 left-4 flex text-gray-400 font-mono font-bold">
+                  $
+                </span>
+                <input
+                  className="pl-9 w-full p-3 rounded bg-gray-900 text-white border border-gray-600 mt-5 font-mono"
+                  type="number"
+                  placeholder="Amount"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                />
+              </div>
 
-            })
+              <div className="flex justify-center w-4/5 mt-5 sm:gap-5 font-mono">
+                {[10, 25, 50, 100, 250].map((amt) => (
+                  <button
+                    key={amt}
+                    type="button"
+                    onClick={() => setAmount(amt)}
+                    className={`w-full  py-2 rounded-md border ${
+                      parseInt(amount) === amt
+                        ? "bg-white text-white font-bold"
+                        : "bg-gray-700 text-white"
+                    } `}
+                  >
+                    ${amt}
+                  </button>
+                ))}
+              </div>
 
-            const data = await response.json()
-            if(response.status == 200) {
-                alert(data.message)
-                getUserData()
-            }
-            else {
-                alert("Transction Failed")
-            }
-        }
+              <div className="flex w-4/5 flex-row justify-center items-center gap-5 mt-5 font-mono">
+                <select
+                  className="w-1/2 h-12 px-3 py-3 rounded-md bg-gray-900"
+                  value={card}
+                  onChange={(e) => setCard(e.target.value)}
+                >
+                  <option value="">Select a Card</option>
+                  <option value={user.payment_info.card_number}>
+                    {user.payment_info.card_type} -{" "}
+                    {user.payment_info.card_number.slice(-4)}
+                  </option>
+                </select>
 
-        catch (error) {
-            console.error(`${type} Failed:`, error)
-        }
-    }
+                <input
+                  className="w-1/2 h-12 px-3 py-3 rounded-md bg-gray-900 text-white border-gray-600 font-mono"
+                  type="text"
+                  name="cvv"
+                  placeholder="CVV"
+                  maxLength="4"
+                  value={user?.payment_info?.cvv || ""}
+                  onChange={handleUserInput}
+                />
+              </div>
 
-    const handleUserLogout = () => {
-        localStorage.removeItem("currUser")
-        console.log("User Sucessfully Logged Out")
-        navigator("/login")
-    }
+              <button
+                onClick={() => userTransactions("deposit")}
+                className="w-4/5 px-4 py-3 rounded-md bg--600 text-white mt-8"
+              >
+                Confirm
+              </button>
+            </div>
+          )}
 
-    return (
-        <>
-                <div className="font-mono mb-80">
-                    <h1 className="flex items-center flex-col justify-center font-mono">Funds</h1>
+          {currTab === "withdraw" && user?.payment_info?.card_number && (
+            <div className="flex w-full flex-col items-center justify-center">
+              <h2 className="text-3xl font-mono pb-10">Withdraw Funds</h2>
+              <div className="relative w-full sm:w-4/5 flex items-center">
+                <span className="absolute inset-y-8 left-4 flex text-gray-400 font-mono font-bold">
+                  $
+                </span>
+                <input
+                  className="pl-9 w-full p-3 rounded bg-gray-900 text-white border border-gray-600 mt-5 font-mono"
+                  type="number"
+                  placeholder="Amount"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                />
+              </div>
 
-                        <p className="flex items-center flex-col justify-center mt-10 text-2xl font-mono font-bold">Balance: ${user?.balance || 0}</p>
+              <div className="flex justify-center gap-5">
+                <select
+                  className="w-fit sm:w-98 mt-10 px-3 py-3 rounded-md bg-gray-900 font-mono"
+                  value={card}
+                  onChange={(e) => setCard(e.target.value)}
+                >
+                  <option value="">Select a Card</option>
+                  <option value={user.payment_info.card_number}>
+                    {user.payment_info.card_type} -{" "}
+                    {user.payment_info.card_number.slice(-4)}
+                  </option>
+                </select>
 
-                        <div className="flex flex-wrap justify-center mt-5 gap-3 font-mono">
-                            <button onClick={() => setCurrTab("card-info")} className="w-98">Card Information</button>
-                            <button onClick={() => setCurrTab("deposit")} className="w-98">Deposit</button>
-                            <button onClick={() => setCurrTab("withdraw")} className="w-98">Withdraw</button>
-                        </div>
-
-                    <Box className="flex justify-center flex-col mt-10 p-25"
-                        sx={{
-                            width: "100%",
-                            maxWidth: "100%",
-                            height: "100%",
-                            minHeight: "100%",
-                            backgroundColor: "rgba(0, 0, 0, 0.4)",
-                            borderRadius: "1rem",
-                        }}>
-
-                        {currTab === "card-info" && (
-                            <div>
-                                <h2 className="text-3xl font-mono pb-10">Payment Information</h2>
-                                <div className="flex flex-wrap justify-center gap-3 p-5">
-                                    <input className="w-50 p-3 rounded-md bg-gray-900 text-white border border-gray-600 font-mono" 
-                                        type="text" 
-                                        name="card_type" 
-                                        placeholder="Card Name" 
-                                        value={user?.payment_info?.card_type || ""} 
-                                        onChange={handleUserInput}
-                                    />
-
-                                    <input  
-                                        className="w-50 p-3 rounded-md bg-gray-900 text-white border border-gray-600 font-mono"
-                                        type="text" 
-                                        name="card_number" 
-                                        placeholder="Card Number" 
-                                        value={user?.payment_info?.card_number || ""} 
-                                        onChange={handleUserInput} 
-                                    />
-
-                                    <input
-                                        className="w-50 p-3 rounded-md bg-gray-900 text-white border border-gray-600 font-mono"
-                                        type="text" 
-                                        name="expiration_date" 
-                                        placeholder="Expiration Date" 
-                                        value={user?.payment_info?.expiration_date || ""} 
-                                        onChange={handleUserInput} 
-                                    />
-
-                                    <input 
-                                        className="w-50 p-3 rounded-md bg-gray-900 text-white border border-gray-600 font-mono"
-                                        type="text" 
-                                        name="cvv" 
-                                        placeholder="CVV" 
-                                        value={user?.payment_info?.cvv || ""} 
-                                        onChange={handleUserInput} 
-                                    />
-                                </div>
-                                <button onClick={saveCardInfo} className="w-210 mt-10 font-mono">Save Card</button>
-                            </div>
-                        )}
-
-                        {currTab === "deposit" && user?.payment_info?.card_number && (
-                                <div>
-                                <h2 className="text-3xl font-mono pb-10">Deposit Funds</h2>
-
-                                <div className="relative w-64 mt-5 ml-25">
-
-                                    <span className="absolute inset-y-8 left-4 flex text-gray-400 font-mono font-bold">$</span>
-                                    <input className="pl-9 w-200 p-3 rounded bg-gray-900 text-white border border-gray-600 mt-5 font-mono"
-                                        type="number" 
-                                        placeholder="Amount" 
-                                        value={amount} 
-                                        onChange={(e) => setAmount(e.target.value)} 
-                                    />
-                                </div>
-
-                                <div className="flex justify-center mt-5 gap-5 font-mono">
-                                    {[10, 25, 50, 100, 250].map((amt) => (
-                                        <button
-                                        key={amt}
-                                        type="button"
-                                        onClick={() => setAmount(amt)}
-                                        className={`w-36 px-4 py-2 rounded-md border ${
-                                            parseInt(amount) === amt
-                                            ? "bg-white text-white font-bold"
-                                            : "bg-gray-700 text-white"
-                                        } `}
-                                        >
-                                        ${amt}
-                                        </button>
-                                    ))}
-                                </div>
-
-                                <div className="flex flex-row justify-center items-center gap-5 mt-5 font-mono">
-                                    <select 
-                                        className="w-98 h-12 px-3 py-3 rounded-md bg-gray-900"
-                                        value={card} 
-                                        onChange={(e) => setCard(e.target.value)}>
-                                        <option value="">Select a Card</option>
-                                        <option value={user.payment_info.card_number}>
-                                            {user.payment_info.card_type} - {user.payment_info.card_number.slice(-4)}
-                                        </option>
-                                    </select>
-
-                                    <input
-                                        className="w-98 h-12 px-3 py-3 rounded-md bg-gray-900 text-white border-gray-600 font-mono"
-                                        type="text"
-                                        name="cvv"
-                                        placeholder="CVV"
-                                        maxLength="4"
-                                        value={user?.payment_info?.cvv ||""}
-                                        onChange={handleUserInput}
-                                    />
-                                </div>
-                                
-                                <div>
-                                    <button onClick={() => userTransactions("deposit")} className="w-200 px-4 py-3 rounded-md bg--600 text-white mt-10">Confirm</button> 
-                                </div>
-                            </div>
-                        )}
-
-                        {currTab === "withdraw" && user?.payment_info?.card_number && (
-                            <div>
-                                <h2 className="text-3xl font-mono pb-10">Withdraw Funds</h2>
-                                    <div className="relative w-64 mt-5 ml-25">
-                                        <span className="absolute inset-y-8 left-4 flex text-gray-400 font-mono font-bold">$</span>
-                                        <input className="pl-9 w-200 p-3 rounded bg-gray-900 text-white border border-gray-600 mt-5 font-mono"
-                                            type="number" 
-                                            placeholder="Amount" 
-                                            value={amount} 
-                                            onChange={(e) => setAmount(e.target.value)} 
-                                        />
-                                    </div>
-
-                                    <div className="flex justify-center gap-5">
-                                        <select 
-                                            className="w-98 mt-10 px-3 py-3 rounded-md bg-gray-900 font-mono"
-                                            value={card} 
-                                            onChange={(e) => setCard(e.target.value)}>
-                                            <option value="">Select a Card</option>
-                                            <option value={user.payment_info.card_number}>
-                                                {user.payment_info.card_type} - {user.payment_info.card_number.slice(-4)}
-                                            </option>
-                                        </select>
-
-                                        <button onClick={() => userTransactions("withdraw")} className="w-98 mt-10 font-mono">Confirm</button>
-                                    </div>
-                            </div>
-                        )} 
-                    </Box>
-
-                </div>
-    
-            
-
-        </>
-    )
+                <button
+                  onClick={() => userTransactions("withdraw")}
+                  className="w-fit sm:w-98 mt-10 font-mono"
+                >
+                  Confirm
+                </button>
+              </div>
+            </div>
+          )}
+        </Box>
+      </div>
+    </>
+  );
 }
 
-export default Funds
+export default Funds;
