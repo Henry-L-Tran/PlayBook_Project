@@ -1,0 +1,28 @@
+[
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "henry.l.tran-1@ou.edu_1743398383466_fcdb14c1-fecb-4160-9772-ca668a41dbb1",
+        "entries": [
+            {
+                "player_id": 1629599,
+                "player_name": "Amir Coffey",
+                "team_tri_code": "LAC",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629599.png",
+                "line_category": "PTS",
+                "projected_line": 10.0,
+                "users_pick": "Over"
+            },
+            {
+                "player_id": 1629636,
+                "player_name": "Darius Garland",
+                "team_tri_code": "CLE",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629636.png",
+                "line_category": "PTS",
+                "projected_line": 20.5,
+                "users_pick": "Under"
+            }
+        ],
+        "time": "2025-03-31T05:19:43.471734"
+    }
+]

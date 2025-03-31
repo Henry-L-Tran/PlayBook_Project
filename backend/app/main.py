@@ -12,9 +12,12 @@ from nba_api.live.nba.endpoints import scoreboard
 from nba_api.stats.endpoints import boxscoretraditionalv2
 from nba_api.stats.static import players
 from nba_api.stats.endpoints import LeagueDashPlayerStats
+from app import lineups
 
 
 app = FastAPI()
+app.include_router(lineups.router)
+
 
 origins = [
     # React Frontend
@@ -34,6 +37,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+##### Models #####
+
 class LoginRequest(BaseModel):
     email: str
     password: str
@@ -51,6 +56,8 @@ class DepositOrWithdraw(BaseModel):
     amount: int
 
 
+##### Methods #####
+
 # Load Users from JSON File
 def loadUsers():
     with open("app/users.json", "r") as file:
@@ -64,7 +71,7 @@ def saveUsers(users):
         json.dump({"users": users}, file, indent = 4)
 
 
-####### ROUTES #######
+##### Routes #####
 
 # Just a Check Route to Ensure Backend is Running
 @app.get("/check")
