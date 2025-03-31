@@ -1,0 +1,34 @@
+.promo_box {
+    position: relative;
+    padding: 5px;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  
+  .promo_box::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: conic-gradient(
+      from 0deg,
+      #00b7ff,
+      #ff30ff,
+      #00b7ff
+    );
+    animation: rotateBorder 10s linear infinite;
+  }
+  
+  .promo_content {
+    position: absolute;
+    inset: 5px;
+    border-radius: 15px;
+    background-color: #07182E;
+    z-index: 1;
+  }
+  
+  @keyframes rotateBorder {
+    to {
+      transform: rotate(0.85turn);
+    }
+  }
+  
