@@ -282,8 +282,6 @@ function Funds() {
                     </Box>
 
                 </div>
-    
-            
 
         </>
     )
