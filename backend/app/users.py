@@ -3,6 +3,9 @@ from typing import Optional
 
 # User Implementation
 
+
+##### Models #####
+
 class PaymentInfo(BaseModel):
     credit_card: bool
     card_type: Optional[str] = None

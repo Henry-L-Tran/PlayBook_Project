@@ -8,20 +8,28 @@ import {
   Typography,
   Box,
 } from "@mui/material";
-// import "./index.css";
 
+
+// Login Component for User Authentication
 function Login() {
+
+  // State to Track User Input for Email and Password
   const [loginData, setLoginData] = useState({ email: "", password: "" });
+  
+  // React Router Navigation
   const navigate = useNavigate();
 
+  // Function to Handle User Input Changes for loginData
   const handleUserInput = (e) => {
     const { name, value } = e.target;
     setLoginData({ ...loginData, [name]: value });
   };
 
+  // Function to Handle User Login on Form Submission 
   const handleLogin = async (e) => {
     e.preventDefault();
 
+    // Checks if Email and Password are Provided 
     try {
       const response = await fetch("http://localhost:8000/login", {
         method: "POST",
@@ -29,20 +37,28 @@ function Login() {
         body: JSON.stringify(loginData),
       });
 
+      // If Response is Sucessful, Store User Email in Local Storage and Redirect to Home Page
       if (response.status === 200) {
         const data = await response.json();
         localStorage.setItem("currUser", data.user.email);
         console.log("Login Successful, User:", data.user.email);
         navigate("/home");
-      } else {
+      } 
+      
+      // If Response is Not Sucessful, Log Error Message
+      else {
         console.log("Login Failed");
       }
-    } catch (error) {
+    } 
+    
+    catch (error) {
       console.error("Login Failed:", error);
     }
   };
 
   return (
+
+    // Main Container for the Login Page (Entire Page) 
     <Box
       className="flex items-center flex-col justify-center min-h-screen"
       sx={{
@@ -53,6 +69,7 @@ function Login() {
         width: "100%",
         minHeight: "100vh",
         display: "flex",
+        // Dark Layer Over Background Image
         backgroundImage:
           "linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('/images/playbook_background2.png')",
         backgroundRepeat: "no-repeat",
@@ -60,6 +77,8 @@ function Login() {
         overflowY: "auto",
       }}
     >
+
+      {/* Logo Image at the Top Left of the Login Page */}
       <img
         src="/images/logo.png"
         alt="PlayBook Logo"
@@ -71,6 +90,7 @@ function Login() {
         }}
       />
 
+      {/* Main Box Container for Login Form */}
       <Card
         className="w-full sm:w-3/5 "
         variant="outlined"
@@ -80,7 +100,11 @@ function Login() {
           marginTop: "-4rem",
         }}
       >
+
+        {/* Entire Box for Login Form */}
         <CardContent className=" border-3 border-white rounded-md">
+
+          {/* PlayBook Text */}
           <Typography
             className="text-center py-8 text-white"
             fontWeight={"600"}
@@ -89,7 +113,11 @@ function Login() {
           >
             PlayBook
           </Typography>
+
+          {/* Login Form with Email and Password Fields */}
           <form onSubmit={handleLogin} className="space-y-4 px-2">
+            
+            {/* Email Input Field */}
             <TextField
               label="Email"
               type="email"
@@ -109,6 +137,7 @@ function Login() {
               }}
             />
 
+            {/* Password Input Field */}
             <TextField
               label="Password"
               type="password"
@@ -127,7 +156,11 @@ function Login() {
                 },
               }}
             />
+
+            {/* Container For Sign In Button and Register Button */}
             <div className="flex flex-col gap-4 mb-4">
+
+              {/* Sign In Button */}
               <Button
                 type="submit"
                 variant="outlined"
@@ -145,6 +178,7 @@ function Login() {
                 Sign In
               </Button>
 
+              {/* Register Button to Redirect to Registration Page */}
               <Button
                 variant="outlined"
                 fullWidth

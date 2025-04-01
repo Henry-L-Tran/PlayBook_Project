@@ -7,6 +7,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import { v4 as uuidv4 } from "uuid";
 
 function Dashboard() {
+
+  // State to Hold the Live Games and Player Stats
   const [nbaLiveGames, setNbaLiveGames] = useState({
     gameDate: "",
     gameData: [],
@@ -19,6 +21,8 @@ function Dashboard() {
   const [lineup, setLineup] = useState({});
   const currentLineup = lineup[viewLineCategory] || [];
 
+
+  // Function to Fetch Live NBA Games (Updates Every 30 Seconds)
   useEffect(() => {
     const fetchNbaLiveGames = async () => {
       try {
@@ -38,22 +42,27 @@ function Dashboard() {
     };
   }, []);
 
+
+  // Function to Convert ISO Time to Game Clock Format (MM:SS)
   const gameClockConverter = (isoTime) => {
     if (!isoTime) return "00:00";
 
     const time = isoTime.match(/PT(\d+)M(\d+(\.\d*)?)S/);
     if (!time) return isoTime;
 
+    // Getting the Minutes and Seconds from the ISO Time
     let minutes = time[1].padStart(2, "0");
     let seconds = Math.floor(parseFloat(time[2])).toString().padStart(2, "0");
 
     return `${minutes}:${seconds}`;
   };
 
+  // Function to Handle the Category Tab Change (NBA, NFL, LoL, VAL)
   const handleCategoryTabChange = (event, newValue) => {
     setActiveCategoryTab(newValue);
   };
 
+  // Function to Fetch Player Season Stats for the Selected Game (Gets the Averages)
   useEffect(() => {
     const fetchnbaPlayerStats = async () => {
       try {
@@ -69,6 +78,7 @@ function Dashboard() {
     fetchnbaPlayerStats();
   }, []);
 
+  // Filters NBA Players Based on the Selected Game
   const playersInGame = (game) => {
     return nbaPlayerStats.filter(
       (player) =>
@@ -77,6 +87,8 @@ function Dashboard() {
     );
   };
 
+
+  // Function to Handle the Scrolling When Betting Lines are Opened
   useEffect(() => {
     if (showBettingLines) {
       document.body.style.overflow = "hidden";
@@ -89,17 +101,23 @@ function Dashboard() {
     };
   }, [showBettingLines]);
 
+
+  // Function to Round the Player's Line
   const lineRounding = (line) => {
     const lineInteger = parseFloat(line);
     const lineDecimal = lineInteger % 1;
 
+    // If the Line is Less Than 0.3, or Greater Than 0.7, Use 0.5 Line
     if (lineDecimal >= 0.3 && lineDecimal <= 0.7) {
       return Math.floor(lineInteger) + 0.5;
     } else {
+      // If Anything Else, Use Flat Line
       return Math.round(lineInteger).toString();
     }
   };
 
+
+  // All the Possible Line Categories for NBA
   const lineCategoryOptions = [
     "PTS",
     "REB",
@@ -113,6 +131,8 @@ function Dashboard() {
     "BLKS + STLS",
   ];
 
+
+  // Determines Which Stat Category to Show
   const getStatCategory = (player) => {
     switch (viewLineCategory) {
       case "PTS":
@@ -140,12 +160,14 @@ function Dashboard() {
     }
   };
 
+  // Handles the Select/Deselect of Players Over/Under
   const handleUserLines = (player, usersPick) => {
     const playerId = player.playerId;
 
     setLineup((prevLines) => {
       const categoryLineup = prevLines[viewLineCategory] || [];
 
+      // Prevents Duplicate Players in the Same Lineup
       const noDuplicatePlayers = Object.values(prevLines).flat();
       const playerAlreadyExists = noDuplicatePlayers.find(
         (entry) => entry.player_id === playerId
@@ -171,6 +193,8 @@ function Dashboard() {
             (entry) => entry.player_id !== playerId
           );
         } else {
+
+          // If Player is Selected but Over/Under is Changed, Update the Existing Entry
           newCategoryLineup = categoryLineup.map((entry) =>
             entry.player_id === playerId
               ? { ...entry, users_pick: usersPick }
@@ -178,6 +202,7 @@ function Dashboard() {
           );
         }
       } else {
+        // If Player is Not Selected, Add the Player to the Lineup
         const newEntry = {
           player_id: player.playerId,
           player_name: player.playerName,
@@ -198,14 +223,17 @@ function Dashboard() {
     });
   };
 
+  // Function to Submit the Users' Lineup to Backend
   const submitLineup = async () => {
     const allEntries = Object.values(lineup).flat();
 
+    // Lineup MUST Be Between 2 and 6 Players
     if (allEntries.length < 2 || allEntries.length > 6) {
       console.log("Lineup must be between 2 and 6 players.");
       return;
     }
 
+    // Lineup Cannot Contain Players from the Same Team
     const sameTeam =
       new Set(allEntries.map((player) => player.team_tri_code)).size === 1;
     if (sameTeam) {
@@ -220,8 +248,10 @@ function Dashboard() {
       return;
     }
 
+    // Generate a Unique Entry ID for the Lineup 
     const entryId = `${email}_${Date.now()}_${uuidv4()}`;
 
+    // Submit the Lineup to the Backend as JSON
     try {
       const response = await fetch("http://localhost:8000/lineups/submit", {
         method: "POST",
@@ -263,6 +293,8 @@ function Dashboard() {
 
   return (
     <Box className="flex w-full  overflow-scroll justify-center items-center">
+      
+      {/* Outer Scoreboard Container */}
       <Box
         className="w-full max-w-full p-2 md:p-8 text-white"
         sx={{
@@ -271,6 +303,7 @@ function Dashboard() {
           borderRadius: "1rem",
         }}
       >
+        {/* Tabs (NBA, NFL, LoL, VAL) */}
         <Tabs
           value={activeCategoryTab}
           onChange={handleCategoryTabChange}
@@ -306,9 +339,13 @@ function Dashboard() {
             },
           }}
         >
+
+          {/*Each Tab (NBA, NFL, LoL, VAL) */}
+          {["NBA", "NFL", "LoL", "VAL"].map((category) => (
           <Tab
-            label="NBA"
-            value="NBA"
+            key={category}
+            label={category}
+            value={category}
             disableRipple
             sx={{
               mx: { xs: 0.5, sm: 1, md: 3 },
@@ -329,79 +366,14 @@ function Dashboard() {
               },
             }}
           />
-          <Tab
-            label="NFL"
-            value="NFL"
-            disableRipple
-            sx={{
-              mx: { xs: 0.5, sm: 1, md: 3 },
-              px: { xs: 1, sm: 2, md: 2 },
-              fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
-              fontFamily: "monospace",
-              color: "white",
-              minWidth: "fit-content",
-              outline: "none",
-              "&.Mui-selected": {
-                color: "white",
-                fontWeight: "bold",
-                outline: "none",
-              },
-              "&:focus": {
-                outline: "none",
-                color: "white",
-              },
-            }}
-          />
-          <Tab
-            label="LoL"
-            value="LoL"
-            disableRipple
-            sx={{
-              mx: { xs: 0.5, sm: 1, md: 3 },
-              px: { xs: 1, sm: 2, md: 2 },
-              fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
-              fontFamily: "monospace",
-              color: "white",
-              minWidth: "fit-content",
-              outline: "none",
-              "&.Mui-selected": {
-                color: "white",
-                fontWeight: "bold",
-                outline: "none",
-              },
-              "&:focus": {
-                outline: "none",
-                color: "white",
-              },
-            }}
-          />
-          <Tab
-            label="VAL"
-            value="VAL"
-            disableRipple
-            sx={{
-              mx: { xs: 0.5, sm: 1, md: 3 },
-              px: { xs: 1, sm: 2, md: 2 },
-              fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
-              fontFamily: "monospace",
-              color: "white",
-              minWidth: "fit-content",
-              outline: "none",
-              "&.Mui-selected": {
-                color: "white",
-                fontWeight: "bold",
-                outline: "none",
-              },
-              "&:focus": {
-                outline: "none",
-                color: "white",
-              },
-            }}
-          />
+          ))}
         </Tabs>
 
+        {/* ------NBA Games Dashboard Display------ */}
         {activeCategoryTab === "NBA" && (
           <Box className="flex flex-col w-full h-full overflow-auto">
+            
+            {/* Display the Date of the NBA Games */}
             <Typography
               sx={{
                 fontSize: "1.2rem",
@@ -421,6 +393,8 @@ function Dashboard() {
               <Typography> No scheduled games </Typography>
             ) : (
               nbaLiveGames.gameData.map((game, index) => (
+
+                // Each Game Box
                 <Box
                   key={index}
                   onClick={() => {
@@ -444,6 +418,7 @@ function Dashboard() {
                     gridTemplateColumns: "80px 80px 200px 80px",
                   }}
                 >
+                  {/* Away Team Box */}
                   <Box
                     sx={{
                       display: "grid",
@@ -451,6 +426,7 @@ function Dashboard() {
                       alignItems: "center",
                     }}
                   >
+                    {/* Away Team Data */}
                     <Typography
                       variant="h6"
                       sx={{
@@ -464,6 +440,7 @@ function Dashboard() {
                       {" "}
                       {game.awayTeam.teamTriCode}{" "}
                     </Typography>
+
                     <Typography
                       sx={{
                         fontWeight: "bold",
@@ -474,6 +451,7 @@ function Dashboard() {
                       {game.awayTeam.wins} - {game.awayTeam.losses}{" "}
                     </Typography>
 
+                    {/* Away Team Periods and Score */}
                     <Box className="mt-2">
                       <Box className="grid grid-cols-5 text-white gap-x-8 ml-40">
                         {game.awayTeam.periods.map((period, index) => (
@@ -499,6 +477,7 @@ function Dashboard() {
                             </Typography>
                           </Box>
                         ))}
+
                         <Typography
                           sx={{
                             fontFamily: "monospace",
@@ -517,6 +496,7 @@ function Dashboard() {
                     </Box>
                   </Box>
 
+                  {/* Home Team Box*/}
                   <Box
                     sx={{
                       display: "grid",
@@ -524,6 +504,7 @@ function Dashboard() {
                       alignItems: "center",
                     }}
                   >
+                    {/* Home Team Data */}
                     <Typography
                       variant="h6"
                       sx={{
@@ -548,6 +529,7 @@ function Dashboard() {
                       {game.homeTeam.wins} - {game.homeTeam.losses}
                     </Typography>
 
+                    {/* Home Team Periods and Score */}
                     <Box className="mt-2">
                       <Box className="grid grid-cols-5 text-white gap-x-8 ml-40">
                         {game.homeTeam.periods.map((period, index) => (
@@ -588,6 +570,7 @@ function Dashboard() {
                     </Box>
                   </Box>
 
+                  {/* Game Status and Clock Box */}
                   <Box
                     sx={{
                       display: "flex",
@@ -599,6 +582,7 @@ function Dashboard() {
                       marginTop: "1rem",
                     }}
                   >
+                    {/* Game Status Text */}
                     <Typography
                       sx={{
                         fontSize: "1.2rem",
@@ -614,6 +598,7 @@ function Dashboard() {
                       {game.gameStatusText}
                     </Typography>
 
+                    {/* Game Clock Display */}
                     {game.gameStatus === 2 && (
                       <Typography
                         sx={{
@@ -636,21 +621,27 @@ function Dashboard() {
         )}
       </Box>
 
+      {/* ------Betting Lines Popup Display------ */}
       {activeCategoryTab === "NBA" &&
         showBettingLines &&
         nbaSelectedGame &&
         (() => {
+
+          // Filters Away Players Based on the Selected Game
           const awayPlayers = playersInGame(nbaSelectedGame).filter(
             (player) =>
               player.teamTriCode === nbaSelectedGame.awayTeam.teamTriCode
           );
 
+          // Filters Home Players Based on the Selected Game
           const homePlayers = playersInGame(nbaSelectedGame).filter(
             (player) =>
               player.teamTriCode === nbaSelectedGame.homeTeam.teamTriCode
           );
 
           return (
+
+            // Full Popup Screen for Betting Lines
             <Box
               sx={{
                 position: "fixed",
@@ -666,12 +657,15 @@ function Dashboard() {
                 bottom: 0,
               }}
             >
+              
+              {/* Header Away Team @ Home Team Box */}
               <Box
                 sx={{
                   backgroundColor: "rgba(0, 0, 0, 0.8)",
                   borderRadius: "1rem",
                 }}
               >
+                {/* Header Text (Away Team @ Home Team) */}
                 <Typography
                   variant="h6"
                   sx={{
@@ -684,6 +678,7 @@ function Dashboard() {
                   {nbaSelectedGame.homeTeam.teamTriCode}
                 </Typography>
 
+                {/* Exit ("X") Button In Top Right Corner*/}
                 <IconButton
                   sx={{
                     position: "absolute",
@@ -701,6 +696,7 @@ function Dashboard() {
                   <CloseIcon />
                 </IconButton>
 
+                {/* Betting Lines Buttons Header/Box */}
                 <Box
                   sx={{
                     display: "flex",
@@ -710,6 +706,7 @@ function Dashboard() {
                     gap: "2rem",
                   }}
                 >
+                  {/* Betting Lines Category Buttons (PTS, REB, AST, etc.) */}
                   {lineCategoryOptions.map((category) => (
                     <button
                       key={category}
@@ -733,6 +730,7 @@ function Dashboard() {
                   ))}
                 </Box>
 
+                {/* All Player Squares Main Box/Section */}
                 <Box
                   sx={{
                     display: "flex",
@@ -742,12 +740,14 @@ function Dashboard() {
                     gap: "2rem",
                   }}
                 >
+                  {/* Away Team Players Squares Column */}
                   <Box
                     sx={{
                       flex: 1,
                       paddingBottom: "4rem",
                     }}
                   >
+                    {/* Away Team Tri-Code Header */}
                     <Typography
                       variant="h6"
                       sx={{
@@ -760,6 +760,7 @@ function Dashboard() {
                       {nbaSelectedGame.awayTeam.teamTriCode}
                     </Typography>
 
+                    {/* Away Team Players Squares Green Selected Highlights */}
                     {awayPlayers
                       .filter(
                         (player) => parseFloat(getStatCategory(player)) !== 0
@@ -783,11 +784,13 @@ function Dashboard() {
                             justifyContent: "space-between",
                           }}
                         >
+                          {/* Player Square Top Header Section */}
                           <Box
                             sx={{
                               padding: "0.5rem",
                             }}
                           >
+                            {/* Player Picture */}
                             <Box
                               sx={{
                                 display: "flex",
@@ -807,6 +810,7 @@ function Dashboard() {
                               />
                             </Box>
 
+                            {/* Player Team Tri-Code */}
                             <Typography
                               sx={{
                                 fontFamily: "monospace",
@@ -818,6 +822,7 @@ function Dashboard() {
                               {player.teamTriCode}
                             </Typography>
 
+                            {/* Player Name */}
                             <Typography
                               sx={{
                                 fontFamily: "monospace",
@@ -828,6 +833,7 @@ function Dashboard() {
                               {player.playerName}
                             </Typography>
 
+                            {/* Player Opponent Team & Game Status */}
                             <Typography
                               sx={{
                                 fontFamily: "monospace",
@@ -839,12 +845,14 @@ function Dashboard() {
                               {nbaSelectedGame.gameStatusText}
                             </Typography>
 
+                            {/* Player Square Lower Line Section */}
                             <Box
                               sx={{
                                 display: "flex",
                                 justifyContent: "center",
                               }}
                             >
+                              {/* Player Projected Line */}
                               <Typography
                                 sx={{
                                   fontFamily: "monospace",
@@ -857,6 +865,7 @@ function Dashboard() {
                                 {getStatCategory(player)}
                               </Typography>
 
+                              {/* Player Line Category (PTS, REB, AST, etc.) */}
                               <Typography
                                 sx={{
                                   display: "flex",
@@ -873,6 +882,7 @@ function Dashboard() {
                             </Box>
                           </Box>
 
+                          {/* Player Square Lower Buttons Section */}
                           <Box
                             sx={{
                               display: "flex",
@@ -880,6 +890,8 @@ function Dashboard() {
                               width: "100%",
                             }}
                           >
+
+                            {/* Player Under Button */}
                             <button
                               onClick={() => handleUserLines(player, "Under")}
                               style={{
@@ -902,6 +914,7 @@ function Dashboard() {
                               ↓ Under
                             </button>
 
+                            {/* Player Over Button */}
                             <button
                               onClick={() => handleUserLines(player, "Over")}
                               style={{
@@ -927,6 +940,7 @@ function Dashboard() {
                       ))}
                   </Box>
 
+                  {/* Home Team Players Squares Column */}
                   <Box
                     sx={{
                       flex: 1,
@@ -935,6 +949,7 @@ function Dashboard() {
                       alignItems: "flex-end",
                     }}
                   >
+                    {/* Home Team Tri-Code Header */}
                     <Typography
                       variant="h6"
                       sx={{
@@ -946,6 +961,8 @@ function Dashboard() {
                     >
                       {nbaSelectedGame.homeTeam.teamTriCode}
                     </Typography>
+
+                    {/* Home Team Players Squares Green Selected Highlights */}
                     {homePlayers
                       .filter(
                         (player) => parseFloat(getStatCategory(player)) !== 0
@@ -969,11 +986,14 @@ function Dashboard() {
                             justifyContent: "space-between",
                           }}
                         >
+                          {/* Player Square Top Header Section */}
                           <Box
                             sx={{
                               padding: "0.5rem",
                             }}
                           >
+
+                            {/* Player Picture */}
                             <Box
                               sx={{
                                 display: "flex",
@@ -993,6 +1013,7 @@ function Dashboard() {
                               />
                             </Box>
 
+                            {/* Player Team Tri-Code */}
                             <Typography
                               sx={{
                                 fontFamily: "monospace",
@@ -1004,6 +1025,7 @@ function Dashboard() {
                               {player.teamTriCode}
                             </Typography>
 
+                            {/* Player Name */}
                             <Typography
                               sx={{
                                 fontFamily: "monospace",
@@ -1014,6 +1036,7 @@ function Dashboard() {
                               {player.playerName}
                             </Typography>
 
+                            {/* Player Opponent Team & Game Status */}
                             <Typography
                               sx={{
                                 fontFamily: "monospace",
@@ -1025,12 +1048,14 @@ function Dashboard() {
                               {nbaSelectedGame.gameStatusText}
                             </Typography>
 
+                            {/* Player Square Lower Line Section */}
                             <Box
                               sx={{
                                 display: "flex",
                                 justifyContent: "center",
                               }}
                             >
+                              {/* Player Projected Line */}
                               <Typography
                                 sx={{
                                   fontFamily: "monospace",
@@ -1043,6 +1068,7 @@ function Dashboard() {
                                 {getStatCategory(player)}
                               </Typography>
 
+                              {/* Player Line Category (PTS, REB, AST, etc.) */}
                               <Typography
                                 sx={{
                                   display: "flex",
@@ -1059,6 +1085,7 @@ function Dashboard() {
                             </Box>
                           </Box>
 
+                          {/* Player Square Lower Buttons Section */}
                           <Box
                             sx={{
                               display: "flex",
@@ -1066,6 +1093,7 @@ function Dashboard() {
                               width: "100%",
                             }}
                           >
+                            {/* Player Under Button */}
                             <button
                               onClick={() => handleUserLines(player, "Under")}
                               style={{
@@ -1087,6 +1115,8 @@ function Dashboard() {
                             >
                               ↓ Under
                             </button>
+
+                            {/* Player Over Button */}
                             <button
                               onClick={() => handleUserLines(player, "Over")}
                               style={{
@@ -1108,6 +1138,7 @@ function Dashboard() {
                             </button>
                           </Box>
 
+                          {/* Bottom Footer Submit Lineup Box */}
                           <Box
                             sx={{
                               position: "fixed",
@@ -1117,6 +1148,7 @@ function Dashboard() {
                               zIndex: 2000,
                             }}
                           >
+                            {/* Submit Lineup Button */}
                             <button
                               onClick={submitLineup}
                               style={{

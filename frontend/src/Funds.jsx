@@ -7,13 +7,16 @@ function Funds() {
   const [amount, setAmount] = useState("");
   const [card, setCard] = useState("");
 
+  // Check if User is Logged In and Fetch User Data
   useEffect(() => {
     getUserData();
   }, []);
 
+  // Fetch User Data from Backend with Local Storage User ID
   const getUserData = async () => {
     const currUser = localStorage.getItem("currUser");
 
+    // If No User is Logged In, Show Error
     if (!currUser) {
       console.error("No User Logged In");
       return;
@@ -30,6 +33,7 @@ function Funds() {
     }
   };
 
+  // Handle User Input for Payment Information
   const handleUserInput = (e) => {
     const { name, value } = e.target;
     setUser((prevUser) => ({
@@ -38,12 +42,14 @@ function Funds() {
     }));
   };
 
+  // Save Card Information to Backend
   const saveCardInfo = async () => {
     if (!user) {
       console.error("User Data Not Available");
       return;
     }
 
+    // Information Parameters to Send to Backend
     const requestInfo = {
       email: user.email,
       card_type: user.payment_info.card_type,
@@ -73,12 +79,14 @@ function Funds() {
     }
   };
 
+  // Handle User Transactions (Deposit/Withdraw)
   const userTransactions = async (type) => {
     if (!user) {
       console.error("Error Loading User Data");
       return;
     }
 
+    // Information Parameters to Send to Backend
     const requestInfo = {
       email: user.email,
       amount: amount,
@@ -106,28 +114,39 @@ function Funds() {
 
   return (
     <>
+      {/* Funds Page Box (Entire Page) */}
       <div className="font-mono">
+
+        {/* Funds Header */}
         <h1 className="flex items-center flex-col justify-center font-mono">
           Funds
         </h1>
 
+        {/* User Balance */}
         <p className="flex items-center flex-col justify-center mt-10 text-2xl font-mono font-bold">
           Balance: ${user?.balance || 0}
         </p>
 
+        {/* Container for Card Information, Deposit, and Withdraw Buttons */}
         <div className="flex flex-col items-center px-4 sm:px-0 sm:flex-row  flex-wrap justify-center mt-5 gap-3 font-mono">
+          
+          {/* Card Information Button */}
           <button
             onClick={() => setCurrTab("card-info")}
             className="w-fit sm:w-98"
           >
             Card Information
           </button>
+
+          {/* Deposit Button */}
           <button
             onClick={() => setCurrTab("deposit")}
             className="w-fit sm:w-98"
           >
             Deposit
           </button>
+
+          {/* Withdraw Button */}
           <button
             onClick={() => setCurrTab("withdraw")}
             className="w-fit sm:w-98"
@@ -136,6 +155,7 @@ function Funds() {
           </button>
         </div>
 
+        {/* Container for All Card Information, Deposit, and Withdraw Content */}
         <Box
           className="flex justify-center flex-col mt-10 p-25"
           sx={{
@@ -148,9 +168,17 @@ function Funds() {
           }}
         >
           {currTab === "card-info" && (
+            
+            // Container for Payment Information
             <div>
+
+              {/* Header for Payment Information */}
               <h2 className="text-3xl font-mono pb-10">Payment Information</h2>
+              
+              {/* Container for Card Information Inputs */}
               <div className="flex flex-col items-center sm:flex-row flex-wrap justify-center gap-3 p-5">
+                
+                {/* Card Type Input */}
                 <input
                   className="w-50 md:w-1/5 p-3 rounded-md bg-gray-900 text-white border border-gray-600 font-mono"
                   type="text"
@@ -160,6 +188,7 @@ function Funds() {
                   onChange={handleUserInput}
                 />
 
+                {/* Card Number Input */}
                 <input
                   className="w-50 md:w-1/5 p-3 rounded-md bg-gray-900 text-white border border-gray-600 font-mono"
                   type="text"
@@ -169,6 +198,7 @@ function Funds() {
                   onChange={handleUserInput}
                 />
 
+                {/* Expiration Date Input */}
                 <input
                   className="w-50 md:w-1/5 p-3 rounded-md bg-gray-900 text-white border border-gray-600 font-mono"
                   type="text"
@@ -178,6 +208,7 @@ function Funds() {
                   onChange={handleUserInput}
                 />
 
+                {/* CVV Input */}
                 <input
                   className="w-50 md:w-1/5 p-3 rounded-md bg-gray-900 text-white border border-gray-600 font-mono"
                   type="text"
@@ -187,6 +218,8 @@ function Funds() {
                   onChange={handleUserInput}
                 />
               </div>
+
+              {/* Save Card Button */}
               <button
                 onClick={saveCardInfo}
                 className=" sm:w-4/5 mt-10 font-mono"
@@ -197,13 +230,22 @@ function Funds() {
           )}
 
           {currTab === "deposit" && user?.payment_info?.card_number && (
+            
+            // Container for Deposit Funds
             <div className="flex w-full flex-col items-center justify-center">
+              
+              {/* Header for Deposit Funds */}
               <h2 className="text-3xl font-mono  pb-10">Deposit Funds</h2>
 
+              {/* Container for Deposit Amount Input */}
               <div className="relative w-full sm:w-4/5 flex items-center">
+                
+                {/* Dollar Sign Placeholder */}
                 <span className="absolute inset-y-8 left-4 flex text-gray-400 font-mono font-bold">
                   $
                 </span>
+
+                {/* Deposit Amount Input */}
                 <input
                   className="pl-9 w-full p-3 rounded bg-gray-900 text-white border border-gray-600 mt-5 font-mono"
                   type="number"
@@ -213,6 +255,7 @@ function Funds() {
                 />
               </div>
 
+              {/* Container for Different Deposit Amount Buttons */}
               <div className="flex justify-center w-4/5 mt-5 sm:gap-5 font-mono">
                 {[10, 25, 50, 100, 250].map((amt) => (
                   <button
@@ -230,19 +273,26 @@ function Funds() {
                 ))}
               </div>
 
+              {/* Container for Card Selection and CVV Input */}
               <div className="flex w-4/5 flex-row justify-center items-center gap-5 mt-5 font-mono">
+                
+                {/* Card Selection Dropdown */}
                 <select
                   className="w-1/2 h-12 px-3 py-3 rounded-md bg-gray-900"
                   value={card}
                   onChange={(e) => setCard(e.target.value)}
                 >
+                  {/* Card Selection Dropdown */}
                   <option value="">Select a Card</option>
+
+                  {/* Card Options */}
                   <option value={user.payment_info.card_number}>
                     {user.payment_info.card_type} -{" "}
                     {user.payment_info.card_number.slice(-4)}
                   </option>
                 </select>
 
+                {/* CVV Input */}
                 <input
                   className="w-1/2 h-12 px-3 py-3 rounded-md bg-gray-900 text-white border-gray-600 font-mono"
                   type="text"
@@ -254,6 +304,7 @@ function Funds() {
                 />
               </div>
 
+              {/* Confirm Deposit Button */}
               <button
                 onClick={() => userTransactions("deposit")}
                 className="w-4/5 px-4 py-3 rounded-md bg--600 text-white mt-8"
@@ -264,12 +315,22 @@ function Funds() {
           )}
 
           {currTab === "withdraw" && user?.payment_info?.card_number && (
+            
+            // Container for Withdraw Funds
             <div className="flex w-full flex-col items-center justify-center">
+              
+              {/* Header for Withdraw Funds */}
               <h2 className="text-3xl font-mono pb-10">Withdraw Funds</h2>
+              
+              {/* Container for Withdraw Amount Input */}
               <div className="relative w-full sm:w-4/5 flex items-center">
+                
+                {/* Dollar Sign Placeholder */}
                 <span className="absolute inset-y-8 left-4 flex text-gray-400 font-mono font-bold">
                   $
                 </span>
+
+                {/* Withdraw Amount Input */}
                 <input
                   className="pl-9 w-full p-3 rounded bg-gray-900 text-white border border-gray-600 mt-5 font-mono"
                   type="number"
@@ -279,19 +340,26 @@ function Funds() {
                 />
               </div>
 
+              {/* Container for Selecting Card and Confirm Button*/}
               <div className="flex justify-center gap-5">
+
+                {/* Card Selection Dropdown */}
                 <select
                   className="w-fit sm:w-98 mt-10 px-3 py-3 rounded-md bg-gray-900 font-mono"
                   value={card}
                   onChange={(e) => setCard(e.target.value)}
                 >
+                  {/* Card Selection Dropdown */}
                   <option value="">Select a Card</option>
+
+                  {/* Card Options */}
                   <option value={user.payment_info.card_number}>
                     {user.payment_info.card_type} -{" "}
                     {user.payment_info.card_number.slice(-4)}
                   </option>
                 </select>
 
+                {/* Confirm Withdraw Button */}
                 <button
                   onClick={() => userTransactions("withdraw")}
                   className="w-fit sm:w-98 mt-10 font-mono"

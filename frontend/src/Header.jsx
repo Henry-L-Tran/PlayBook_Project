@@ -2,31 +2,43 @@ import { Typography, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Divider from "@mui/material/Divider";
 
-// eslint-disable-next-line react/prop-types
+// Handles the Header Component & Routing
 const Header = ({ onNavigate }) => {
+
+  // React Router Navigation
   const navigate = useNavigate();
-  // Navigation items
+
+  // Navigation Options
   const navItems = ["Dashboard", "Lineups", "Promos", "Social", "Funds"];
 
+  // Logs The User Out and Redirects to Login Page
   const handleUserLogout = () => {
+
+    // Removes Local Storage Key for Current User
     localStorage.removeItem("currUser");
     console.log("User Sucessfully Logged Out");
     navigate("/login");
   };
 
   return (
+    // Main Container for Header Component
     <div className="h-1/4 overflow-scroll sm:overflow-auto sm:h-auto w-full sm:py-6 sm:px-12">
+      
+      {/* Header Container with Logo and Navigation Links */}
       <div className="flex flex-col sm:flex-row justify-between items-center w-full flex-wrap">
-        {/* Logo and Brand Name */}
+        {/* Logo and App Name */}
         <div
           className="flex items-center gap-4 min-w-1/4"
           onClick={() => navigate("/home")}
         >
+          {/* Logo Image */}
           <img
             src="/images/logo.png"
             alt="PlayBook Logo"
             className="w-[90px] h-[90px]"
           />
+
+          {/* App Name */}
           <Typography
             fontWeight="600"
             sx={{
@@ -42,6 +54,8 @@ const Header = ({ onNavigate }) => {
         {/* Navigation Links */}
         <div className="flex items-center gap-4 sm:gap-16 min-w/3/4 flex-col sm:flex-row">
           {navItems.map((item, index) => (
+
+            // Navigation Button for Each Link Category
             <Button
               key={index}
               variant="text"
@@ -68,6 +82,7 @@ const Header = ({ onNavigate }) => {
               {item}
             </Button>
           ))}
+          
           {/* Logout Button */}
           <button
             className=" px-4 py-2 mb-4 sm:mb-0"

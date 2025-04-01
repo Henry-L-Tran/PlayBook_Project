@@ -6,15 +6,16 @@ import Dashboard from "./Dashboard";
 import Promos from "./Promos";
 
 function Home() {
-  // State to track which component to display
+  
+  // State to Track Which Main Component is Shown (Dashboard, Lineups, Promos, Social, Funds)
   const [activeComponent, setActiveComponent] = useState("dashboard");
 
-  // Function to change the active component
+  // Function to Update the Active Component
   const handleNavigation = (componentName) => {
     setActiveComponent(componentName.toLowerCase());
   };
 
-  // Render the appropriate component based on state
+  // Renders the Active Component Based on the State
   const renderComponent = () => {
     switch (activeComponent) {
       //   case "lineups":
@@ -31,6 +32,8 @@ function Home() {
   };
 
   return (
+
+    // Main Container for the Home Component with Background Image and Fullscreen Layout
     <Box
       className="w-screen h-screen flex flex-col items-center bg-cover bg-no-repeat"
       sx={{
@@ -38,10 +41,10 @@ function Home() {
           "linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('/images/playbook_background2.png')",
       }}
     >
-      {/* Pass the navigation handler to Header */}
+      {/* Passes the Navigation Handler to Header */}
       <Header onNavigate={handleNavigation} />
 
-      {/* Dynamic content area */}
+      {/* Main Content Container, Shows Selected Page */}
       <div className="flex-1 flex items-start justify-center p-8 overflow-x-hidden overflow-auto w-full h-full">
         {renderComponent()}
       </div>

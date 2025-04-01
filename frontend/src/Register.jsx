@@ -9,7 +9,11 @@ import {
   Box,
 } from "@mui/material";
 
+
+// Register Component for User Registration
 function Register() {
+
+  // State to Track User Input for Registration Form Data
   const [registerData, setRegisterData] = useState({
     first_name: "",
     last_name: "",
@@ -28,8 +32,12 @@ function Register() {
     },
   });
 
+
+  // React Router Navigation
   const navigate = useNavigate();
 
+
+  // Check Backend Connection
   useEffect(() => {
     const backendCheck = async () => {
       try {
@@ -43,14 +51,18 @@ function Register() {
     backendCheck();
   }, []);
 
+
+  // Function to Handle User Input Changes for registerData
   const handleUserInput = (e) => {
     const { name, value } = e.target;
     setRegisterData({ ...registerData, [name]: value });
   };
 
+  // Submit Registration Form Data to Backend w/ Password Validation (Match)
   const handleRegister = async (e) => {
     e.preventDefault();
 
+    // If Password and Confirm Password Don't match, Show Alert
     if (registerData.password !== registerData.confirm_password) {
       alert("Passwords do not match!");
       return;
@@ -74,7 +86,10 @@ function Register() {
     }
   };
 
+
   return (
+
+    // Fullscreen Container For Register Page
     <Box className="flex items-center flex-col justify-center min-h-screen"
       sx={{
         position: "absolute",
@@ -88,6 +103,7 @@ function Register() {
         overflowY: "auto",
       }}>
       
+      {/* Logo Picture at the Top Center of the Page */}
       <img
         src="/images/logo.png"
         alt="PlayBook Logo"
@@ -100,6 +116,7 @@ function Register() {
         }}
       />
 
+      {/* Full Registration Card Container */}
       <Card 
         className="w-full sm:w-3/5" 
         variant="outlined"
@@ -111,7 +128,11 @@ function Register() {
           
         }}
         >
+
+        {/* Register Box Container Upper Header For Title */}
         <CardContent className="border-3 border-white rounded-md">
+
+          {/* PlayBook Text */}
           <Typography
             className="text-center py-8 text-white"
             fontWeight={"600"}
@@ -120,10 +141,14 @@ function Register() {
           >
             PlayBook
           </Typography>
+
+          {/* Registration Form Container */}
           <form
             onSubmit={handleRegister}
             className="space-y-4 px-2 flex flex-col gap-4"
           >
+
+            {/* First Name Container Input */}
             <TextField
               label="First Name"
               name="first_name"
@@ -141,6 +166,8 @@ function Register() {
                },
               }}
             />
+
+            {/* Last Name Container Input */}
             <TextField
               label="Last Name"
               name="last_name"
@@ -158,6 +185,8 @@ function Register() {
                },
               }}
             />
+
+            {/* Email Container Input */}
             <TextField
               label="Email"
               type="email"
@@ -176,6 +205,8 @@ function Register() {
                },
               }}
             />
+
+            {/* Password Container Input */}
             <TextField
               label="Password"
               type="password"
@@ -194,6 +225,8 @@ function Register() {
                },
               }}
             />
+
+            {/* Confirm Password Container Input */}
             <TextField
               label="Confirm Password"
               type="password"
@@ -212,6 +245,8 @@ function Register() {
                },
               }}
             />
+
+            {/* Address Container Input */}
             <TextField
               label="Address"
               name="address"
@@ -229,6 +264,8 @@ function Register() {
                },
               }}
             />
+
+            {/* Date of Birth Container Input */}
             <TextField
               label="Date of Birth"
               type="date"
@@ -248,7 +285,11 @@ function Register() {
                },
               }}
             />
+
+            {/* Register Button and "Back to Login Button" Container */}
             <div className="flex flex-col gap-4 mb-4">
+
+              {/* Register Button */}
               <Button
                 type="submit"
                 variant="outlined"
@@ -266,6 +307,7 @@ function Register() {
                 Register
               </Button>
 
+              {/* Back to Login Button */}
               <Button
                 variant="outlined"
                 fullWidth
