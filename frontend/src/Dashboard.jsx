@@ -416,6 +416,7 @@ function Dashboard() {
                     textAlign: "left",
                     paddingLeft: "10rem",
                     gridTemplateColumns: "80px 80px 200px 80px",
+                    cursor: "pointer",
                   }}
                 >
                   {/* Away Team Box */}
