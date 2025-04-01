@@ -5,6 +5,7 @@ import { Box, Typography } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { v4 as uuidv4 } from "uuid";
+import Lineups from "./Lineups";
 
 function Dashboard() {
 
@@ -20,6 +21,7 @@ function Dashboard() {
   const [viewLineCategory, setViewLineCategory] = useState("PTS");
   const [lineup, setLineup] = useState({});
   const currentLineup = lineup[viewLineCategory] || [];
+  const [showLineupBar, setShowLineupBar] = useState(false);
 
 
   // Function to Fetch Live NBA Games (Updates Every 30 Seconds)
@@ -1175,6 +1177,25 @@ function Dashboard() {
             </Box>
           );
         })()}
+
+      {/* ------Lineups Bar Popup Display------ */}
+      {Object.values(lineup).flat().length >= 1 && 
+      Object.values(lineup).flat().length <= 6 && (
+
+        <Lineups
+          lineup={Object.values(lineup).flat()}
+          expand={() => setShowLineups(true)}
+        />
+      )}
+
+      {showLineupBar && (
+        <Lineups
+          lineup={Object.values(lineup).flat()}
+          onClose={() => setShowLineups(false)}
+          onSubmit={submitLineup}
+          isExpanded={true}
+        />
+      )}
     </Box>
   );
 }
