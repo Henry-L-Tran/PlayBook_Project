@@ -1185,6 +1185,7 @@ function Dashboard() {
         <Lineups
           lineup={Object.values(lineup).flat()}
           expand={() => setShowLineups(true)}
+          onSubmit={submitLineup}
         />
       )}
 
