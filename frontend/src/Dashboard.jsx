@@ -293,6 +293,23 @@ function Dashboard() {
     return currentLineup.some((entry) => entry.player_id === playerId);
   };
 
+// Function to Update the Lineup with the Selected Player's Pick in the Lineup Builder Popup
+const userPickUpdate = (playerId, pick) => {
+  setLineup((prevLines) => {
+    const newPick = {};
+    
+    for(const category in prevLines) {
+      newPick[category] = prevLines[category].map((entry) =>
+        entry.player_id === playerId ? { ...entry, users_pick: pick } : entry
+      );
+    }
+    return newPick;
+  });
+};
+
+
+
+
   return (
     <Box className="flex w-full  overflow-scroll justify-center items-center">
       
@@ -1186,6 +1203,7 @@ function Dashboard() {
           lineup={Object.values(lineup).flat()}
           expand={() => setShowLineups(true)}
           onSubmit={submitLineup}
+          pickUpdate={userPickUpdate}
         />
       )}
 
@@ -1194,7 +1212,8 @@ function Dashboard() {
           lineup={Object.values(lineup).flat()}
           onClose={() => setShowLineups(false)}
           onSubmit={submitLineup}
-          isExpanded={true}
+          isExpanded={showLineupBar}
+          pickUpdate={userPickUpdate}
         />
       )}
     </Box>

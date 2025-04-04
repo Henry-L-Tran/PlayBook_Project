@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 
 // Lineups Component For Lines Page/Popup
-function Lineups({lineup, expand, onSubmit, onClose, isExpanded}) {
+function Lineups({lineup, expand, onSubmit, onClose, isExpanded, pickUpdate}) {
     const [showLineupBuilderPopup, setShowLineupBuilderPopup] = useState(false);
     return (
         <>
@@ -141,7 +141,7 @@ function Lineups({lineup, expand, onSubmit, onClose, isExpanded}) {
                             marginTop: "2rem",
                             display: "flex",
                             flexDirection: "column",
-                            gap: 2,
+                            gap: "0.5rem",
                         }}
                     >
                         {lineup.map((player, index) => (
@@ -188,16 +188,42 @@ function Lineups({lineup, expand, onSubmit, onClose, isExpanded}) {
                                     </Box>
                                 </Box>
 
-                                {/* More/Less Buttons */}
+                                {/* Over/Under Buttons Container */}
                                 <Box
                                     sx={{
-                                        padding: "0.5rem 1rem",
-                                        backgroundColor: player.users_pick === "Over" ? "green" : "#444",
-                                        borderRadius: "999px",
-                                        fontWeight: "bold",
+                                        display: "flex",
+                                        flexDirection: "column",
                                     }}
                                 >
-                                    {player.users_pick}
+                                    {/* Over Button */}
+                                    <Button
+                                        onClick={() => pickUpdate(player.player_id, "Over")}
+                                        sx={{
+                                            backgroundColor: player.users_pick === "Over" ? "green" : "#222",
+                                            color: "white",
+                                            fontFamily: "monospace",
+                                            textTransform: "none",
+                                            padding: "0.5rem",
+                                            border: "1px solid gray",
+                                        }}
+                                    >
+                                        ↑ Over
+                                    </Button>
+
+                                    {/* Under Button */}
+                                    <Button
+                                        onClick={() => pickUpdate(player.player_id, "Under")}
+                                        sx={{
+                                            backgroundColor: player.users_pick === "Under" ? "green" : "#222",
+                                            color: "white",
+                                            fontFamily: "monospace",
+                                            textTransform: "none",
+                                            padding: "0.5rem 1rem",
+                                            border: "1px solid gray",
+                                        }}
+                                    >
+                                        ↓ Under
+                                    </Button>
                                 </Box>
                             </Box>
                         ))}
