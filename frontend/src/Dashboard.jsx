@@ -417,7 +417,7 @@ const userPickUpdate = (playerId, pick) => {
                 <Box
                   key={index}
                   onClick={() => {
-                    if (game.gameStatus === 3) {
+                    if (game.gameStatus === 1) {
                       setnbaselectedGame(game);
                       setShowBettingLines(true);
                     }
