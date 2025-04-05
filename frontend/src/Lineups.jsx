@@ -5,7 +5,84 @@ import { useState } from 'react';
 
 // Lineups Component For Lines Page/Popup
 function Lineups({lineup, expand, onSubmit, onClose, isExpanded, pickUpdate}) {
+    
     const [showLineupBuilderPopup, setShowLineupBuilderPopup] = useState(false);
+    const [entryType, setEntryType] = useState();
+
+    // Function to Determine User Payout Depending On Amount of Legs and Flex or Power Play
+    const calculatePayoutMultiplier = (entryType, totalLegs, correctLegs) => {
+        if(entryType === "Flex") {
+            if(totalLegs === 3) {
+                if(numCorrect === 3) {
+                    return 2.25;
+                }
+                if(numCorrect === 2) {
+                    return 1;
+                }
+            }
+            else if (totalLegs === 4) {
+                if(numCorrect === 4) {
+                    return 5;
+                }
+                if(numCorrect === 3) {
+                    return 1.5;
+                }
+            }
+            else if (totalLegs === 5) {
+                if(numCorrect === 5) {
+                    return 10;
+                }
+                if(numCorrect === 4) {
+                    return 2;
+                }
+                if(numCorrect === 3) {
+                    return 0.4;
+                }
+            }
+            else if (totalLegs === 6) {
+                if(numCorrect === 6) {
+                    return 25;
+                }
+                if(numCorrect === 5) {
+                    return 2;
+                }
+                if(numCorrect === 4) {
+                    return 0.4;
+                }
+            }
+        }
+        else if (entryType === "Power Play") {
+            if(totalLegs === 2) {
+                if(numCorrect === 2) {
+                    return 3;
+                }
+            }
+            else if (totalLegs === 3) {
+                if(numCorrect === 3) {
+                    return 5;
+                }
+            }
+            else if (totalLegs === 4) {
+                if(numCorrect === 4) {
+                    return 10;
+                }
+            }
+            else if (totalLegs === 5) {
+                if(numCorrect === 5) {
+                    return 20;
+                }
+            }
+            else if (totalLegs === 6) {
+                if(numCorrect === 6) {
+                    return 37.5;
+                }
+            }
+        }
+
+        return 1; 
+    };
+    
+
     return (
         <>
             {/* Outer Container for the Lineups Bar */}
@@ -240,6 +317,30 @@ function Lineups({lineup, expand, onSubmit, onClose, isExpanded, pickUpdate}) {
                                             ↓ Under
                                         </Button>
                                     </Box>
+
+                                    {/* Flex/Power Play Buttons Container */}
+                                    <Box
+                                        sx={{
+                                            display: "flex",
+                                            justifyContent: "center",
+                                            mt: "2%",
+                                        }}
+                                    >
+                                        <Button
+                                            variant={entryType === "Flex" ? "contained" : "outlined"}
+                                            onClick={() => setEntryType("Flex")}
+                                        >
+                                            Flex Play
+                                        </Button>
+
+                                        <Button
+                                            variant={entryType === "Power Play" ? "contained" : "outlined"}
+                                            onClick={() => setEntryType("Power Play")}
+                                        >
+                                            Power Play
+                                        </Button>
+                                    </Box>
+
                                 </Box>
                             ))}
                         </Box>
