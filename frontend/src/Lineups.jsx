@@ -7,73 +7,73 @@ import { useState } from 'react';
 function Lineups({lineup, expand, onSubmit, onClose, isExpanded, pickUpdate}) {
     
     const [showLineupBuilderPopup, setShowLineupBuilderPopup] = useState(false);
-    const [entryType, setEntryType] = useState();
+    const [entryType, setEntryType] = useState(" ");
 
     // Function to Determine User Payout Depending On Amount of Legs and Flex or Power Play
     const calculatePayoutMultiplier = (entryType, totalLegs, correctLegs) => {
-        if(entryType === "Flex") {
+        if(entryType === "Flex Play") {
             if(totalLegs === 3) {
-                if(numCorrect === 3) {
+                if(correctLegs === 3) {
                     return 2.25;
                 }
-                if(numCorrect === 2) {
+                if(correctLegs === 2) {
                     return 1;
                 }
             }
             else if (totalLegs === 4) {
-                if(numCorrect === 4) {
+                if(correctLegs === 4) {
                     return 5;
                 }
-                if(numCorrect === 3) {
+                if(correctLegs === 3) {
                     return 1.5;
                 }
             }
             else if (totalLegs === 5) {
-                if(numCorrect === 5) {
+                if(correctLegs === 5) {
                     return 10;
                 }
-                if(numCorrect === 4) {
+                if(correctLegs === 4) {
                     return 2;
                 }
-                if(numCorrect === 3) {
+                if(correctLegs === 3) {
                     return 0.4;
                 }
             }
             else if (totalLegs === 6) {
-                if(numCorrect === 6) {
+                if(correctLegs === 6) {
                     return 25;
                 }
-                if(numCorrect === 5) {
+                if(correctLegs === 5) {
                     return 2;
                 }
-                if(numCorrect === 4) {
+                if(correctLegs === 4) {
                     return 0.4;
                 }
             }
         }
         else if (entryType === "Power Play") {
             if(totalLegs === 2) {
-                if(numCorrect === 2) {
+                if(correctLegs === 2) {
                     return 3;
                 }
             }
             else if (totalLegs === 3) {
-                if(numCorrect === 3) {
+                if(correctLegs === 3) {
                     return 5;
                 }
             }
             else if (totalLegs === 4) {
-                if(numCorrect === 4) {
+                if(correctLegs === 4) {
                     return 10;
                 }
             }
             else if (totalLegs === 5) {
-                if(numCorrect === 5) {
+                if(correctLegs === 5) {
                     return 20;
                 }
             }
             else if (totalLegs === 6) {
-                if(numCorrect === 6) {
+                if(correctLegs === 6) {
                     return 37.5;
                 }
             }
@@ -81,6 +81,29 @@ function Lineups({lineup, expand, onSubmit, onClose, isExpanded, pickUpdate}) {
 
         return 1; 
     };
+
+    const showPayoutMultipliers = (type, totalLegs) => {
+        if(type === "Power Play") {
+            return [totalLegs];
+        }
+        else if(type === "Flex Play") {
+            if(totalLegs === 3) {
+                return [3, 2];
+            }
+            if(totalLegs === 4) {
+                return [4, 3];
+            }
+            if(totalLegs === 5) {
+                return [5, 4, 3];
+            }
+            if(totalLegs === 6) {
+                return [6, 5, 4];
+            }
+        }
+        
+        return [];
+
+    }
     
 
     return (
@@ -317,35 +340,169 @@ function Lineups({lineup, expand, onSubmit, onClose, isExpanded, pickUpdate}) {
                                             ↓ Under
                                         </Button>
                                     </Box>
-
-                                    {/* Flex/Power Play Buttons Container */}
-                                    <Box
-                                        sx={{
-                                            display: "flex",
-                                            justifyContent: "center",
-                                            mt: "2%",
-                                        }}
-                                    >
-                                        <Button
-                                            variant={entryType === "Flex" ? "contained" : "outlined"}
-                                            onClick={() => setEntryType("Flex")}
-                                        >
-                                            Flex Play
-                                        </Button>
-
-                                        <Button
-                                            variant={entryType === "Power Play" ? "contained" : "outlined"}
-                                            onClick={() => setEntryType("Power Play")}
-                                        >
-                                            Power Play
-                                        </Button>
-                                    </Box>
-
                                 </Box>
                             ))}
                         </Box>
-                                
-                        {/* Submit Button */}
+
+                        {/* Payout Multiplier Display */}
+                        {entryType && (
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "space-around",
+                                    textAlign: "center",
+                                    marginTop: "2%",
+                                    width: "90%",
+                                    borderRadius: "1rem",
+                                    padding: "1rem",
+                                }}
+                            >
+                                {/* Flex/Power Play Buttons */}
+                                {lineup.length < 2 ? (
+                                    <Typography
+                                        sx={{
+                                            fontSize: "1.5rem",
+                                            fontWeight: "bold",
+                                            color: "red",
+                                            fontFamily: "monospace",
+                                            textAlign: "center",
+                                        }}
+                                    >
+                                        Must select at least 2 plays to submit an entry
+                                    </Typography>
+                                ) : (
+                                    <Box
+                                        sx={{
+                                            display: "flex",
+                                            justifyContent: "space-around",
+                                            width: "90%",
+                                        }}
+                                    >
+
+                                        {lineup.length === 2 ? (
+                                            // If 2 Legs, Only Show Power Play
+                                            <Button
+                                                onClick={() => setEntryType("Power Play")}
+                                                sx={{
+                                                    backgroundColor: entryType === "Power Play" ? "green" : "#222",
+                                                    color: "white",
+                                                    fontFamily: "monospace",
+                                                    display: "flex",
+                                                    flexDirection: "column",
+                                                    border: entryType === "Power Play" ? "2px solid white" : "1px solid gray",
+                                                    "&:hover": {
+                                                        backgroundColor: entryType === "Power Play" ? "green" : "#333",
+                                                    },
+                                                }}
+                                            >
+
+                                                <Typography
+                                                    sx={{
+                                                        fontWeight: "bold",
+                                                    }}
+                                                >
+                                                    Power Play
+                                                </Typography>
+                                                {[...showPayoutMultipliers("Power Play", lineup.length)].map((correctLegs) => (
+                                                    <Box
+                                                        key={`Power-${correctLegs}`}
+                                                        sx={{
+                                                            display: "flex",
+                                                            justifyContent: "space-between",
+                                                            alignItems: "center",
+                                                            padding: "0.5rem 1rem",
+                                                            borderRadius: "1rem",
+                                                            marginBottom: "1rem",
+                                                        }}
+                                                    >
+                                                        <Typography>
+                                                            {correctLegs} Correct
+                                                        </Typography>
+
+                                                        <Typography
+                                                            sx={{
+                                                                backgroundColor: entryType === "Power Play" ? "#a855f9" : "#555",
+                                                                color: "#fff",
+                                                                fontWeight: "bold",
+                                                                padding: "0.25rem 0.75rem",
+                                                                borderRadius: "1rem",
+                                                                fontSize: "0.875rem"
+                                                            }}
+                                                        >
+                                                            {/* Payout Multiplier for Power Play */}
+                                                            Payout Multiplier: {calculatePayoutMultiplier("Power Play", lineup.length, correctLegs)}
+                                                        </Typography>
+                                                    </Box>
+                                                ))}
+                                            </Button>
+                                        ) : (
+
+                                            // If There's More Than 2 Legs, Show Both Flex and Power Play
+                                            ["Flex Play", "Power Play"].map((type) => (
+                                                <Button
+                                                    key={type}
+                                                    onClick={() => setEntryType(type)}
+                                                    sx={{
+                                                        backgroundColor: entryType === type ? "green" : "#222",
+                                                        color: "white",
+                                                        fontFamily: "monospace",
+                                                        display: "flex",
+                                                        flexDirection: "column",
+                                                        border: entryType === type ? "2px solid white" : "1px solid gray",
+                                                        "&:hover": {
+                                                            backgroundColor: entryType === type ? "green" : "#333",
+                                                        },
+                                                    }}
+                                                >
+                                                    {/* Button Title */}
+                                                    <Typography
+                                                        sx={{
+                                                            fontWeight: "bold",
+                                                        }}
+                                                        >
+                                                        {type}
+                                                    </Typography>
+
+                                                    {/* Flex/Power Payout Tiers */}
+                                                    {showPayoutMultipliers(type, lineup.length).map((correctLegs) => (
+                                                        <Box
+                                                            key={`${type}-${correctLegs}`}
+                                                            sx={{
+                                                                display: "flex",
+                                                                justifyContent: "space-between",
+                                                                alignItems: "center",
+                                                                padding: "0.5rem 1rem",
+                                                                borderRadius: "1rem",
+                                                                marginBottom: "1rem",
+                                                            }}
+                                                        >
+                                                            <Typography>
+                                                                {correctLegs} Correct
+                                                            </Typography>
+
+                                                            <Typography
+                                                                sx={{
+                                                                    backgroundColor: entryType === type ? "#a855f9" : "#555",
+                                                                    color: "#fff",
+                                                                    fontWeight: "bold",
+                                                                    padding: "0.25rem 0.75rem",
+                                                                    borderRadius: "1rem",
+                                                                    fontSize: "0.875rem"
+                                                                }}
+                                                            >
+                                                                Payout Multiplier: {calculatePayoutMultiplier(type, lineup.length, correctLegs)}
+                                                            </Typography>
+                                                        </Box>
+                                                    ))}
+                                                </Button>
+                                            ))
+                                        )}
+                                    </Box>
+                                )}
+                            </Box>
+                        )}
+
+                        {/* Submit Button Container */}
                         <Box
                             sx={{
                                 display: "flex",
