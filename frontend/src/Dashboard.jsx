@@ -295,15 +295,34 @@ function Dashboard() {
 
 // Function to Update the Lineup with the Selected Player's Pick in the Lineup Builder Popup
 const userPickUpdate = (playerId, pick) => {
+
+  if(pick === "Clear All") {
+    setLineup({});
+    return;
+  }
+
   setLineup((prevLines) => {
     const newPick = {};
+  
     
     for(const category in prevLines) {
-      newPick[category] = prevLines[category].map((entry) =>
+      const categoryLineup = prevLines[category];
+
+      if(pick === "Remove") {
+        const filteredLineup = categoryLineup.filter(entry => entry.player_id !== playerId);
+        if(filteredLineup.length > 0) {
+          newPick[category] = filteredLineup;
+        }
+      }
+
+      else {
+        newPick[category] = prevLines[category].map((entry) =>
         entry.player_id === playerId ? { ...entry, users_pick: pick } : entry
-      );
+        );
+      }
     }
     return newPick;
+
   });
 };
 

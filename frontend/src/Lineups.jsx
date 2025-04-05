@@ -1,6 +1,8 @@
 import { Box, Typography } from '@mui/material';
 import { Button } from '@mui/material';
 import { useState } from 'react';
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 
 
 // Lineups Component For Lines Page/Popup
@@ -248,6 +250,23 @@ function Lineups({lineup, expand, onSubmit, onClose, isExpanded, pickUpdate}) {
                             >
                                 Close
                             </Button>
+
+                            <Button
+                                onClick={() => pickUpdate(null, "Clear All")}
+                                sx = {{
+                                    color: "white",
+                                    fontSize: "1.5rem",
+                                    fontFamily: "monospace",
+                                    textTransform: "none",
+                                    "&:hover": {
+                                        backgroundColor: "transparent",
+                                        textDecoration: "underline",
+                                    },
+                                
+                                }}
+                            >
+                                Clear All
+                            </Button>
                         </Box>
     
                         {/* Player Square Lines */}
@@ -339,6 +358,21 @@ function Lineups({lineup, expand, onSubmit, onClose, isExpanded, pickUpdate}) {
                                         >
                                             ↓ Under
                                         </Button>
+
+                                        <IconButton
+                                            onClick={() => pickUpdate(player.player_id, "Remove")}
+                                                sx={{
+                                                    color: "white",
+                                                    fontSize: "1.2rem",
+                                                    "&:hover": {
+                                                        backgroundColor: "transparent",
+                                                        textDecoration: "#ff4d4d",
+                                                    },
+                                                }}
+                                        >
+                                            <CloseIcon />
+                                        </IconButton>
+                                            
                                     </Box>
                                 </Box>
                             ))}
