@@ -2,82 +2,6 @@
     "gameDate": "2025-04-05",
     "gameData": [
         {
-            "gameId": "0022401131",
-            "gameStatus": 2,
-            "gameStatusText": "OT :32.3",
-            "gameClock": "PT00M32.30S",
-            "homeTeam": {
-                "teamId": 1610612748,
-                "teamName": "Heat",
-                "teamTriCode": "MIA",
-                "wins": 35,
-                "losses": 42,
-                "score": 115,
-                "periods": [
-                    {
-                        "period": 1,
-                        "periodType": "REGULAR",
-                        "score": 30
-                    },
-                    {
-                        "period": 2,
-                        "periodType": "REGULAR",
-                        "score": 27
-                    },
-                    {
-                        "period": 3,
-                        "periodType": "REGULAR",
-                        "score": 31
-                    },
-                    {
-                        "period": 4,
-                        "periodType": "REGULAR",
-                        "score": 23
-                    },
-                    {
-                        "period": 5,
-                        "periodType": "OVERTIME",
-                        "score": 4
-                    }
-                ]
-            },
-            "awayTeam": {
-                "teamId": 1610612749,
-                "teamName": "Bucks",
-                "teamTriCode": "MIL",
-                "wins": 42,
-                "losses": 34,
-                "score": 117,
-                "periods": [
-                    {
-                        "period": 1,
-                        "periodType": "REGULAR",
-                        "score": 22
-                    },
-                    {
-                        "period": 2,
-                        "periodType": "REGULAR",
-                        "score": 35
-                    },
-                    {
-                        "period": 3,
-                        "periodType": "REGULAR",
-                        "score": 24
-                    },
-                    {
-                        "period": 4,
-                        "periodType": "REGULAR",
-                        "score": 30
-                    },
-                    {
-                        "period": 5,
-                        "periodType": "OVERTIME",
-                        "score": 6
-                    }
-                ]
-            }
-        },
-        {
             "gameId": "0022401128",
             "gameStatus": 3,
             "gameStatusText": "Final",
@@ -276,37 +200,113 @@
             }
         },
         {
+            "gameId": "0022401131",
+            "gameStatus": 3,
+            "gameStatusText": "Final/OT",
+            "gameClock": "",
+            "homeTeam": {
+                "teamId": 1610612748,
+                "teamName": "Heat",
+                "teamTriCode": "MIA",
+                "wins": 35,
+                "losses": 43,
+                "score": 115,
+                "periods": [
+                    {
+                        "period": 1,
+                        "periodType": "REGULAR",
+                        "score": 30
+                    },
+                    {
+                        "period": 2,
+                        "periodType": "REGULAR",
+                        "score": 27
+                    },
+                    {
+                        "period": 3,
+                        "periodType": "REGULAR",
+                        "score": 31
+                    },
+                    {
+                        "period": 4,
+                        "periodType": "REGULAR",
+                        "score": 23
+                    },
+                    {
+                        "period": 5,
+                        "periodType": "OVERTIME",
+                        "score": 4
+                    }
+                ]
+            },
+            "awayTeam": {
+                "teamId": 1610612749,
+                "teamName": "Bucks",
+                "teamTriCode": "MIL",
+                "wins": 43,
+                "losses": 34,
+                "score": 121,
+                "periods": [
+                    {
+                        "period": 1,
+                        "periodType": "REGULAR",
+                        "score": 22
+                    },
+                    {
+                        "period": 2,
+                        "periodType": "REGULAR",
+                        "score": 35
+                    },
+                    {
+                        "period": 3,
+                        "periodType": "REGULAR",
+                        "score": 24
+                    },
+                    {
+                        "period": 4,
+                        "periodType": "REGULAR",
+                        "score": 30
+                    },
+                    {
+                        "period": 5,
+                        "periodType": "OVERTIME",
+                        "score": 10
+                    }
+                ]
+            }
+        },
+        {
             "gameId": "0022401132",
-            "gameStatus": 1,
-            "gameStatusText": "10:30 pm ET",
+            "gameStatus": 3,
+            "gameStatusText": "Final",
             "gameClock": "",
             "homeTeam": {
                 "teamId": 1610612746,
                 "teamName": "Clippers",
                 "teamTriCode": "LAC",
-                "wins": 45,
+                "wins": 46,
                 "losses": 32,
-                "score": 0,
+                "score": 135,
                 "periods": [
                     {
                         "period": 1,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 33
                     },
                     {
                         "period": 2,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 28
                     },
                     {
                         "period": 3,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 44
                     },
                     {
                         "period": 4,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 30
                     }
                 ]
             },
@@ -315,28 +315,28 @@
                 "teamName": "Mavericks",
                 "teamTriCode": "DAL",
                 "wins": 38,
-                "losses": 40,
-                "score": 0,
+                "losses": 41,
+                "score": 104,
                 "periods": [
                     {
                         "period": 1,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 21
                     },
                     {
                         "period": 2,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 31
                     },
                     {
                         "period": 3,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 30
                     },
                     {
                         "period": 4,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 22
                     }
                 ]
             }

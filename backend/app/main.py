@@ -292,6 +292,9 @@ def fetch_player_live_stats():
         try:
             games = scoreboard.ScoreBoard().get_dict()["scoreboard"]["games"]
 
+            # Grabbing the Game Status for Each Game Here
+            game_status = {game["gameId"]: game["gameStatus"] for game in games}
+
             # Trying to Fetch Game IDs for Games that are In Progress or Completed
             game_ids = [game["gameId"] for game in games if game["gameStatus"] in (2, 3)]
 
@@ -307,6 +310,7 @@ def fetch_player_live_stats():
                     for player in playerStats:
                         filtered_player_stats.append({
                             "gameId": game_id,
+                            "gameStatus": game_status.get(game_id, 1),
                             "playerId": player["PLAYER_ID"],
                             "playerName": player["PLAYER_NAME"],
                             "playerPosition": player["START_POSITION"],

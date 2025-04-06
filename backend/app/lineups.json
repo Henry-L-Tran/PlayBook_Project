@@ -2,56 +2,56 @@
     {
         "email": "henry.l.tran-1@ou.edu",
         "category": "NBA",
-        "entry_id": "henry.l.tran-1@ou.edu_1743906849553_87ab4600-c385-4494-8ee7-72a3927a30c6",
-        "entry_type": "Flex Play",
+        "entry_id": "henry.l.tran-1@ou.edu_1743918749876_4a0c6f72-2345-41b0-a1d7-771cba5daff8",
+        "entry_type": "Power Play",
         "entry_amount": 5.0,
-        "potential_payout": 125.0,
+        "potential_payout": 25.0,
         "entries": [
             {
-                "player_id": 203083,
-                "player_name": "Andre Drummond",
+                "player_id": 1630162,
+                "player_name": "Anthony Edwards",
+                "team_tri_code": "MIN",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630162.png",
+                "line_category": "PTS",
+                "projected_line": 27.5,
+                "users_pick": "Over",
+                "live_value": 37,
+                "status": "hit"
+            },
+            {
+                "player_id": 1641737,
+                "player_name": "Adem Bona",
                 "team_tri_code": "PHI",
-                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/203083.png",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1641737.png",
                 "line_category": "PTS",
-                "projected_line": 7.0,
-                "users_pick": "Over"
+                "projected_line": 5.0,
+                "users_pick": "Under",
+                "live_value": 4,
+                "status": "hit"
             },
             {
-                "player_id": 1628978,
-                "player_name": "Donte DiVincenzo",
+                "player_id": 203497,
+                "player_name": "Rudy Gobert",
                 "team_tri_code": "MIN",
-                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1628978.png",
-                "line_category": "PTS",
-                "projected_line": 11.5,
-                "users_pick": "Over"
-            },
-            {
-                "player_id": 201569,
-                "player_name": "Eric Gordon",
-                "team_tri_code": "PHI",
-                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/201569.png",
-                "line_category": "PTS",
-                "projected_line": 7.0,
-                "users_pick": "Over"
-            },
-            {
-                "player_id": 1630183,
-                "player_name": "Jaden McDaniels",
-                "team_tri_code": "MIN",
-                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630183.png",
-                "line_category": "PTS",
-                "projected_line": 12.5,
-                "users_pick": "Over"
-            },
-            {
-                "player_id": 1641740,
-                "player_name": "Jaylen Clark",
-                "team_tri_code": "MIN",
-                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1641740.png",
-                "line_category": "PTS",
-                "projected_line": 4.0,
-                "users_pick": "Over"
-            },
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/203497.png",
+                "line_category": "REB",
+                "projected_line": 11.0,
+                "users_pick": "Over",
+                "live_value": 19,
+                "status": "hit"
+            }
+        ],
+        "time": "2025-04-06T05:52:30.198604",
+        "result": "WON"
+    },
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "henry.l.tran-1@ou.edu_1743919372981_04a9e011-1410-456e-a4d0-22c1c814f344",
+        "entry_type": "Power Play",
+        "entry_amount": 25.0,
+        "potential_payout": 75.0,
+        "entries": [
             {
                 "player_id": 1627824,
                 "player_name": "Guerschon Yabusele",
@@ -59,9 +59,23 @@
                 "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1627824.png",
                 "line_category": "PTS",
                 "projected_line": 11.0,
-                "users_pick": "Over"
+                "users_pick": "Over",
+                "live_value": 19,
+                "status": "hit"
+            },
+            {
+                "player_id": 1630162,
+                "player_name": "Anthony Edwards",
+                "team_tri_code": "MIN",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630162.png",
+                "line_category": "PTS",
+                "projected_line": 27.5,
+                "users_pick": "Over",
+                "live_value": 37,
+                "status": "hit"
             }
         ],
-        "time": "2025-04-06T02:34:09.860080"
+        "time": "2025-04-06T06:02:52.994295",
+        "result": "WON"
     }
 ]
