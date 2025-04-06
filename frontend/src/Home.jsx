@@ -4,6 +4,7 @@ import Funds from "./Funds";
 import { useState } from "react";
 import Dashboard from "./Dashboard";
 import Promos from "./Promos";
+import LineupsPage from "./LineupsPage";
 
 function Home() {
   
@@ -15,11 +16,16 @@ function Home() {
     setActiveComponent(componentName.toLowerCase());
   };
 
+
+  // Gets the Current User from Local Storage for Lineups Page
+  const currentUser = localStorage.getItem("currUser")
+
+
   // Renders the Active Component Based on the State
   const renderComponent = () => {
     switch (activeComponent) {
-      //   case "lineups":
-      //     return <Lineups />;
+      case "lineups":
+        return <LineupsPage userEmail={currentUser} />;
       case "promos":
         return <Promos />;
       //   case "social":

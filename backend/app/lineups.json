@@ -2,80 +2,35 @@
     {
         "email": "henry.l.tran-1@ou.edu",
         "category": "NBA",
-        "entry_id": "henry.l.tran-1@ou.edu_1743918749876_4a0c6f72-2345-41b0-a1d7-771cba5daff8",
+        "entry_id": "henry.l.tran-1@ou.edu_1743973262122_bdfca928-6fe9-4b11-85e8-ec24ea10b8b3",
         "entry_type": "Power Play",
         "entry_amount": 5.0,
-        "potential_payout": 25.0,
+        "potential_payout": 15.0,
         "entries": [
             {
-                "player_id": 1630162,
-                "player_name": "Anthony Edwards",
-                "team_tri_code": "MIN",
-                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630162.png",
+                "player_id": 1629632,
+                "player_name": "Coby White",
+                "team_tri_code": "CHI",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629632.png",
                 "line_category": "PTS",
-                "projected_line": 27.5,
+                "projected_line": 20.5,
                 "users_pick": "Over",
                 "live_value": 37,
                 "status": "hit"
             },
             {
-                "player_id": 1641737,
-                "player_name": "Adem Bona",
-                "team_tri_code": "PHI",
-                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1641737.png",
+                "player_id": 1631109,
+                "player_name": "Mark Williams",
+                "team_tri_code": "CHA",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1631109.png",
                 "line_category": "PTS",
-                "projected_line": 5.0,
-                "users_pick": "Under",
-                "live_value": 4,
-                "status": "hit"
-            },
-            {
-                "player_id": 203497,
-                "player_name": "Rudy Gobert",
-                "team_tri_code": "MIN",
-                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/203497.png",
-                "line_category": "REB",
-                "projected_line": 11.0,
+                "projected_line": 15.5,
                 "users_pick": "Over",
-                "live_value": 19,
+                "live_value": 22,
                 "status": "hit"
             }
         ],
-        "time": "2025-04-06T05:52:30.198604",
-        "result": "WON"
-    },
-    {
-        "email": "henry.l.tran-1@ou.edu",
-        "category": "NBA",
-        "entry_id": "henry.l.tran-1@ou.edu_1743919372981_04a9e011-1410-456e-a4d0-22c1c814f344",
-        "entry_type": "Power Play",
-        "entry_amount": 25.0,
-        "potential_payout": 75.0,
-        "entries": [
-            {
-                "player_id": 1627824,
-                "player_name": "Guerschon Yabusele",
-                "team_tri_code": "PHI",
-                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1627824.png",
-                "line_category": "PTS",
-                "projected_line": 11.0,
-                "users_pick": "Over",
-                "live_value": 19,
-                "status": "hit"
-            },
-            {
-                "player_id": 1630162,
-                "player_name": "Anthony Edwards",
-                "team_tri_code": "MIN",
-                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630162.png",
-                "line_category": "PTS",
-                "projected_line": 27.5,
-                "users_pick": "Over",
-                "live_value": 37,
-                "status": "hit"
-            }
-        ],
-        "time": "2025-04-06T06:02:52.994295",
+        "time": "2025-04-06T21:01:02.438223",
         "result": "WON"
     }
 ]
