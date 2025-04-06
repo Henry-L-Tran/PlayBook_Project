@@ -24,6 +24,9 @@ class SubmitLineup(BaseModel):
     email: str
     category: str
     entry_id: str
+    entry_type: str
+    entry_amount: float
+    potential_payout: float
     entries: List[LineupEntry]
 
 
@@ -63,6 +66,9 @@ def submit_lineup(lineup_data: SubmitLineup):
         "email": lineup_data.email,
         "category": lineup_data.category,
         "entry_id": lineup_data.entry_id,
+        "entry_type": lineup_data.entry_type,
+        "entry_amount": lineup_data.entry_amount,
+        "potential_payout": lineup_data.potential_payout,
         "entries": [entry.dict() for entry in lineup_data.entries],
         "time": datetime.utcnow().isoformat()
     }

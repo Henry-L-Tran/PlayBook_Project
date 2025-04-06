@@ -2,27 +2,66 @@
     {
         "email": "henry.l.tran-1@ou.edu",
         "category": "NBA",
-        "entry_id": "henry.l.tran-1@ou.edu_1743398383466_fcdb14c1-fecb-4160-9772-ca668a41dbb1",
+        "entry_id": "henry.l.tran-1@ou.edu_1743906849553_87ab4600-c385-4494-8ee7-72a3927a30c6",
+        "entry_type": "Flex Play",
+        "entry_amount": 5.0,
+        "potential_payout": 125.0,
         "entries": [
             {
-                "player_id": 1629599,
-                "player_name": "Amir Coffey",
-                "team_tri_code": "LAC",
-                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629599.png",
+                "player_id": 203083,
+                "player_name": "Andre Drummond",
+                "team_tri_code": "PHI",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/203083.png",
                 "line_category": "PTS",
-                "projected_line": 10.0,
+                "projected_line": 7.0,
                 "users_pick": "Over"
             },
             {
-                "player_id": 1629636,
-                "player_name": "Darius Garland",
-                "team_tri_code": "CLE",
-                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629636.png",
+                "player_id": 1628978,
+                "player_name": "Donte DiVincenzo",
+                "team_tri_code": "MIN",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1628978.png",
                 "line_category": "PTS",
-                "projected_line": 20.5,
-                "users_pick": "Under"
+                "projected_line": 11.5,
+                "users_pick": "Over"
+            },
+            {
+                "player_id": 201569,
+                "player_name": "Eric Gordon",
+                "team_tri_code": "PHI",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/201569.png",
+                "line_category": "PTS",
+                "projected_line": 7.0,
+                "users_pick": "Over"
+            },
+            {
+                "player_id": 1630183,
+                "player_name": "Jaden McDaniels",
+                "team_tri_code": "MIN",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630183.png",
+                "line_category": "PTS",
+                "projected_line": 12.5,
+                "users_pick": "Over"
+            },
+            {
+                "player_id": 1641740,
+                "player_name": "Jaylen Clark",
+                "team_tri_code": "MIN",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1641740.png",
+                "line_category": "PTS",
+                "projected_line": 4.0,
+                "users_pick": "Over"
+            },
+            {
+                "player_id": 1627824,
+                "player_name": "Guerschon Yabusele",
+                "team_tri_code": "PHI",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1627824.png",
+                "line_category": "PTS",
+                "projected_line": 11.0,
+                "users_pick": "Over"
             }
         ],
-        "time": "2025-03-31T05:19:43.471734"
+        "time": "2025-04-06T02:34:09.860080"
     }
 ]

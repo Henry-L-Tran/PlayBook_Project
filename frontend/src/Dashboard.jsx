@@ -6,6 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { v4 as uuidv4 } from "uuid";
 import Lineups from "./Lineups";
+import { calculatePayoutMultiplier } from "./payoutMultiplier";
 
 function Dashboard() {
 
@@ -22,6 +23,8 @@ function Dashboard() {
   const [lineup, setLineup] = useState({});
   const currentLineup = lineup[viewLineCategory] || [];
   const [showLineupBar, setShowLineupBar] = useState(false);
+  const [entryType, setEntryType] = useState("");
+  const [entryAmount, setEntryAmount] = useState("");
 
 
   // Function to Fetch Live NBA Games (Updates Every 30 Seconds)
@@ -253,6 +256,14 @@ function Dashboard() {
     // Generate a Unique Entry ID for the Lineup 
     const entryId = `${email}_${Date.now()}_${uuidv4()}`;
 
+
+    if(!entryType || !entryAmount || entryAmount <= 0) {
+      console.log("Select a valid entry type and/or input a valid entry amount.");
+      return;
+    }
+
+    const calculatePayout = calculatePayoutMultiplier(entryType, allEntries.length, allEntries.length);
+
     // Submit the Lineup to the Backend as JSON
     try {
       const response = await fetch("http://localhost:8000/lineups/submit", {
@@ -264,6 +275,9 @@ function Dashboard() {
           email,
           category: activeCategoryTab,
           entry_id: entryId,
+          entry_type: entryType,
+          entry_amount: Number(entryAmount),
+          potential_payout: entryAmount * calculatePayout,
           entries: allEntries,
         }),
       });
@@ -1176,35 +1190,6 @@ const userPickUpdate = (playerId, pick) => {
                               ↑ Over
                             </button>
                           </Box>
-
-                          {/* Bottom Footer Submit Lineup Box */}
-                          <Box
-                            sx={{
-                              position: "fixed",
-                              bottom: "2rem",
-                              left: "50%",
-                              transform: "translateX(-50%)",
-                              zIndex: 2000,
-                            }}
-                          >
-                            {/* Submit Lineup Button */}
-                            <button
-                              onClick={submitLineup}
-                              style={{
-                                backgroundColor: "rgba(0, 0, 0, 0.3)",
-                                color: "white",
-                                outline: "1px solid white",
-                                fontFamily: "monospace",
-                                fontSize: "1rem",
-                                padding: "0.75rem 2rem",
-                                borderRadius: "2rem",
-                                border: "none",
-                                cursor: "pointer",
-                              }}
-                            >
-                              Submit Lineup
-                            </button>
-                          </Box>
                         </Box>
                       ))}
                   </Box>
@@ -1223,6 +1208,10 @@ const userPickUpdate = (playerId, pick) => {
           expand={() => setShowLineups(true)}
           onSubmit={submitLineup}
           pickUpdate={userPickUpdate}
+          entryType={entryType}
+          setEntryType={setEntryType}
+          entryAmount={entryAmount}
+          setEntryAmount={setEntryAmount}
         />
       )}
 
