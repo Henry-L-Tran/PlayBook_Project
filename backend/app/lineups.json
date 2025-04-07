@@ -66,5 +66,150 @@
         ],
         "time": "2025-04-07T03:33:27.429118",
         "result": "LOST"
+    },
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "henry.l.tran-1@ou.edu_1744009047360_75c66f50-dd7d-433b-ba65-1cb1278b7653",
+        "entry_type": "Flex Play",
+        "entry_amount": 100.0,
+        "potential_payout": 2500.0,
+        "entries": [
+            {
+                "player_id": 1630559,
+                "player_name": "Austin Reaves",
+                "team_tri_code": "LAL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630559.png",
+                "line_category": "PTS",
+                "projected_line": 20.0,
+                "users_pick": "Over",
+                "live_value": 20,
+                "status": "miss"
+            },
+            {
+                "player_id": 1627936,
+                "player_name": "Alex Caruso",
+                "team_tri_code": "OKC",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1627936.png",
+                "line_category": "PTS",
+                "projected_line": 7.0,
+                "users_pick": "Over",
+                "live_value": 7,
+                "status": "miss"
+            },
+            {
+                "player_id": 1631096,
+                "player_name": "Chet Holmgren",
+                "team_tri_code": "OKC",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1631096.png",
+                "line_category": "PTS",
+                "projected_line": 15.0,
+                "users_pick": "Over",
+                "live_value": 10,
+                "status": "miss"
+            },
+            {
+                "player_id": 1628983,
+                "player_name": "Shai Gilgeous-Alexander",
+                "team_tri_code": "OKC",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1628983.png",
+                "line_category": "PTS",
+                "projected_line": 32.5,
+                "users_pick": "Under",
+                "live_value": 26,
+                "status": "hit"
+            },
+            {
+                "player_id": 1629029,
+                "player_name": "Luka Don\u010di\u0107",
+                "team_tri_code": "LAL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629029.png",
+                "line_category": "PTS",
+                "projected_line": 27.5,
+                "users_pick": "Over",
+                "live_value": 30,
+                "status": "hit"
+            },
+            {
+                "player_id": 2544,
+                "player_name": "LeBron James",
+                "team_tri_code": "LAL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png",
+                "line_category": "PTS",
+                "projected_line": 24.5,
+                "users_pick": "Over",
+                "live_value": 19,
+                "status": "miss"
+            }
+        ],
+        "time": "2025-04-07T06:57:27.372689",
+        "result": "WON (2 of 6)"
+    },
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "henry.l.tran-1@ou.edu_1744011124759_c671a62d-409f-42c7-ac0c-1c12154678e8",
+        "entry_type": "Flex Play",
+        "entry_amount": 10.0,
+        "potential_payout": 100.0,
+        "entries": [
+            {
+                "player_id": 1629012,
+                "player_name": "Collin Sexton",
+                "team_tri_code": "UTA",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629012.png",
+                "line_category": "PTS",
+                "projected_line": 18.5,
+                "users_pick": "Over",
+                "live_value": 27,
+                "status": "hit"
+            },
+            {
+                "player_id": 1630700,
+                "player_name": "Dyson Daniels",
+                "team_tri_code": "ATL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630700.png",
+                "line_category": "PTS",
+                "projected_line": 14.0,
+                "users_pick": "Under",
+                "live_value": 19,
+                "status": "miss"
+            },
+            {
+                "player_id": 1629027,
+                "player_name": "Trae Young",
+                "team_tri_code": "ATL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629027.png",
+                "line_category": "AST",
+                "projected_line": 11.5,
+                "users_pick": "Over",
+                "live_value": 15,
+                "status": "hit"
+            },
+            {
+                "player_id": 201942,
+                "player_name": "DeMar DeRozan",
+                "team_tri_code": "SAC",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/201942.png",
+                "line_category": "AST",
+                "projected_line": 4.5,
+                "users_pick": "Over",
+                "live_value": 7,
+                "status": "hit"
+            },
+            {
+                "player_id": 1629636,
+                "player_name": "Darius Garland",
+                "team_tri_code": "CLE",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629636.png",
+                "line_category": "AST",
+                "projected_line": 7.0,
+                "users_pick": "Under",
+                "live_value": 7,
+                "status": "miss"
+            }
+        ],
+        "time": "2025-04-07T07:32:04.763475",
+        "result": "WON (3 of 5)"
     }
 ]

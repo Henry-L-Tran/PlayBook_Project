@@ -28,61 +28,97 @@ const LineupsPage = ({ user, setActiveComponent }) => {
 
 
     return (
-        <>
+        // Main Container for the Entire Lineups Page
+        <Box className="lineups-page"
+            sx={{
+                alignItems: "center",
+                justifyContent: "center",
+                width: "100%",
+                height: "100%",
+            }}
+        >
+ 
+            {/* Funds Header */}
+            <h1 className="flex items-center flex-col justify-center font-mono">
+                Lineups
+            </h1>
 
-            {/* User Info Box Container */}
-            <Box className="user-info-box"
+            {/* Lineups Page Content Container */}
+            <Box className="lineups-page-content-container"
                 sx={{
                     display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
+                    flexDirection: "row",
                     justifyContent: "center",
-                    backgroundColor: "black",
-                    width: "20%",
-                    padding: 2,
-                    borderRadius: "1rem",
+                    marginTop: "3%",
+                    height: "100%",
                 }}
             >
-                <Typography
+                {/* User Info Box Container */}
+                <Box className="user-info-box"
                     sx={{
-                        fontFamily: "monospace",
-                        fontWeight: "bold",
-                        color: "gray",
-                        textAlign: "center",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        backgroundColor: "rgba(0, 0, 0, 0.5)",
+                        width: "30%",
+                        height: "38%",
+                        padding: 2,
+                        borderRadius: "1rem",
+                        border: "1px solid white",
                     }}
                 >
-                    {user.first_name} {user.last_name}
-                </Typography>
+                    {/* User's First and Last Name w/ Lineups Header Container */}
+                    <Box className="user-info-name"
+                        sx={{
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                            marginBottom: "10%",
+                        }}
+                    >
+                        {/* User's First and Last Name */}
+                        <Typography
+                            sx={{
+                                fontFamily: "monospace",
+                                fontWeight: "bold",
+                                color: "white",
+                                textAlign: "center",
+                                fontSize: "1.5rem",
+                            }}
+                        >
+                            {user.first_name} {user.last_name}
+                        </Typography>
+                    </Box>
 
-                <button
-                onClick={() => setActiveComponent("funds")}
-                    style={{
-                        fontFamily: "monospace",
-                        fontWeight: "bold",
-                        color: "white",
-                        textAlign: "center",
-                    }}
-                >
-                    Deposit
-                </button>
-            </Box>
+                    {/* Deposit Button */}
+                    <button
+                    onClick={() => setActiveComponent("funds")}
+                        style={{
+                            fontFamily: "monospace",
+                            fontWeight: "bold",
+                            color: "white",
+                            textAlign: "center",
+                        }}
+                    >
+                        Deposit
+                    </button>
+                </Box>
 
-            {/* Lineups Section Container */}
-            <Box className="lineups-section"
-                sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    width: "100%",
-                    gap: 2,
-                    backgroundColor: "gray",
-                }}>
-                {userLineups.map((lineup, idx) => (
-                    <LineupBox key={idx} lineup={lineup} />
-                ))}
+                {/* Lineups Section Container */}
+                <Box className="lineups-section"
+                    sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        width: "60%",
+                        gap: 2,
+                        marginLeft: "3%",
+                    }}>
+                    {userLineups.map((lineup, idx) => (
+                        <LineupBox key={idx} lineup={lineup} />
+                    ))}
+                </Box>
             </Box>
-        </>
+        </Box>
     );
 }
 
@@ -98,20 +134,26 @@ const LineupBox = ({ lineup }) => {
             sx={{
                 borderRadius: "1rem",
                 cursor: "pointer",
-                backgroundColor: "black",
-                width: "40%",
+                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                width: "80%",
+                border: "1px solid white",
             }}
         >
 
             {/* Lineup Entry Header */}
-            <Box className="lineup-header">
+            <Box className="lineup-header"
+                sx={{
+                    paddingTop: "4%",
+                    paddingBottom: "2%",
+                }}
+            >
 
                 {/* Lineup Entry Type and Amount */}
                 <Typography
                     sx={{
                         fontFamily: "monospace",
                         fontWeight: "bold",
-                        color: "gray",
+                        color: "white",
                         textAlign: "center",
                     }}>
                         {lineup.entries.length}-Pick ${lineup.potential_payout.toFixed(2)}
@@ -121,50 +163,82 @@ const LineupBox = ({ lineup }) => {
                 <Typography
                     sx={{
                         fontFamily: "monospace",
-                        color: "gray",
+                        color: "white",
+                        marginBottom: "4%",
                     }}
                 >
-                    {lineup.entry_type}
+                    ${lineup.entry_amount} {lineup.entry_type}
                 </Typography>
 
+                {/* Divider Line */}
+                <Box
+                    sx={{
+                        borderBottom: "1px solid white",
+                        width: "100%",
+                        margin: "0.5rem auto",
+                    }}
+                />
+            </Box>
+            
+            {/* Player Pictures and Entry Status Container */}
+            <Box className="player-pictures-entry-status"
+                sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    marginBottom: "3%",
+                    width: "100%",
+                    flexWrap: "nowrap",
+                }}
+            >
+
+                {/* Lineup Player Pictures Container */}
+                <Box className="lineup-pictures"
+                    sx={{
+                        display: "flex",
+                        overflowX: "auto",
+                        gap: 1,
+                        paddingLeft: "1rem",
+                    }}
+                >
+                    {lineup.entries.map((entry, idx) => (
+
+                        // Player Pictures
+                        <img
+                            key={idx}
+                            src={entry.player_picture}
+                            alt={entry.player_name}
+                            style={{
+                                display: "flex",
+                                flexWrap: "wrap",
+                                width: "5rem",
+                                border: `2px solid ${entry.status === 'hit' ? 'green' : entry.status === 'miss' ? 'red' : 'gray'}`,
+                                borderRadius: "10rem",
+                                objectFit: "cover",
+                                imageRendering: "auto",
+                            }}
+                        />
+                    ))}
+                </Box>
+
                 {/* Lineup Entry Status Container */}
-                <Box>
+                <Box
+                    sx={{
+                        alignItems: "center",
+                        justifyContent: "center",
+                        paddingRight: "5%",
+                    }}>
                     <Typography
                         sx={{
                             fontFamily: "monospace",
                             fontWeight: "bold",
                             color: gameStatusColor,
+                            fontSize: "1.3rem",
                         }}
                     >
                         {lineup.result || "Live"}
                     </Typography>
                 </Box>
-            </Box>
-
-            {/* Lineup Player Pictures Container */}
-            <Box className="lineup-pictures"
-                sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                }}
-            >
-                {lineup.entries.map((entry, idx) => (
-
-                    // Player Pictures
-                    <img
-                        key={idx}
-                        src={entry.player_picture}
-                        alt={entry.player_name}
-                        style={{
-                            width: "5rem",
-                            border: `2px solid ${entry.status === 'hit' ? 'green' : entry.status === 'miss' ? 'red' : 'gray'}`,
-                            borderRadius: "10rem",
-                            objectFit: "cover",
-                            imageRendering: "auto",
-                        }}
-                    />
-                ))}
             </Box>
 
             {/* Lineup Details Container When Expanded */}
@@ -175,12 +249,11 @@ const LineupBox = ({ lineup }) => {
                         flexDirection: "column",
                         alignItems: "center",
                         justifyContent: "center",
-                        backgroundColor: "gray",
                     }}
                 >
                     {lineup.entries.map((entry, idx) => (
                         <UserLineup
-                        key={idx}
+                            key={idx}
                             entry={entry}
                         />
                     ))}
@@ -192,7 +265,7 @@ const LineupBox = ({ lineup }) => {
 
 
 const UserLineup = ({ entry }) => {
-    const { player_name, line_category, projected_line, live_value, user_pick, status } = entry;
+    const { player_name, line_category, projected_line, live_value, users_pick, status } = entry;
     const percent = Math.min((live_value / projected_line) * 100, 100);
     const barColor = status === "hit" ? "green" : status === "miss" ? "red" : "gray";
 
@@ -212,7 +285,7 @@ const UserLineup = ({ entry }) => {
                     color: "white",
                     textAlign: "center",
                 }}>
-               {player_name} • {line_category} • {user_pick} {projected_line}
+                {player_name} • {line_category} • {users_pick} • {projected_line}
             </Typography>
 
             {/* Progress Bar Container */}
