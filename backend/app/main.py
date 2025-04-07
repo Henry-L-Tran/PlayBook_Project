@@ -13,7 +13,7 @@ from nba_api.stats.endpoints import boxscoretraditionalv2
 from nba_api.stats.static import players
 from nba_api.stats.endpoints import LeagueDashPlayerStats
 from app import lineups
-
+from vlrggapi.api.scrape import Vlr
 
 app = FastAPI()
 app.include_router(lineups.router)
@@ -406,6 +406,28 @@ threading.Thread(target=fetch_player_season_stats, daemon=True).start()
 # NBA Players' Pictures for Player Props
 def fetch_player_pictures(player_id):
     return f"https://cdn.nba.com/headshots/nba/latest/1040x760/{player_id}.png"
+
+# NBA Live Scores Route
+@app.get("/nba/scores")
+def nba_scores():
+    try:
+        with open("app/nba_data/live_nba_scores.json", "r") as file:
+            data = json.load(file)
+            return data
+        
+    except FileNotFoundError:
+        return {"message": "No Scores Found"}
+
+@app.get("/nba/scores")
+def val_upcoming_matches():
+    try:
+        # Retrieve upcoming matches using the aggregated function.
+        upcoming_matches = Vlr.vlr_upcoming_matches()
+        # Convert the result (a Python dictionary) to a JSON formatted string.
+        with open("backend/app/valorant_data/val_upcoming_matches.json", "w") as file:
+                json.dump(upcoming_matches, file, indent=4)
+    except Exception as e:
+        print("Error retrieving upcoming matches:", e)
 
 
 
