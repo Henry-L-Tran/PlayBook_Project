@@ -15,8 +15,8 @@
                 "line_category": "PTS",
                 "projected_line": 20.5,
                 "users_pick": "Over",
-                "live_value": "N/A",
-                "status": "pending"
+                "live_value": 37,
+                "status": "hit"
             },
             {
                 "player_id": 1631109,
@@ -26,11 +26,45 @@
                 "line_category": "PTS",
                 "projected_line": 15.5,
                 "users_pick": "Over",
-                "live_value": "N/A",
-                "status": "pending"
+                "live_value": 22,
+                "status": "hit"
             }
         ],
         "time": "2025-04-06T21:01:02.438223",
         "result": "WON"
+    },
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "henry.l.tran-1@ou.edu_1743996807122_f5e11474-84a9-4375-9986-c3adda6ecb68",
+        "entry_type": "Power Play",
+        "entry_amount": 10.0,
+        "potential_payout": 30.0,
+        "entries": [
+            {
+                "player_id": 2544,
+                "player_name": "LeBron James",
+                "team_tri_code": "LAL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png",
+                "line_category": "PTS",
+                "projected_line": 24.5,
+                "users_pick": "Under",
+                "live_value": 19,
+                "status": "hit"
+            },
+            {
+                "player_id": 1628983,
+                "player_name": "Shai Gilgeous-Alexander",
+                "team_tri_code": "OKC",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1628983.png",
+                "line_category": "PTS",
+                "projected_line": 32.5,
+                "users_pick": "Over",
+                "live_value": 26,
+                "status": "miss"
+            }
+        ],
+        "time": "2025-04-07T03:33:27.429118",
+        "result": "LOST"
     }
 ]

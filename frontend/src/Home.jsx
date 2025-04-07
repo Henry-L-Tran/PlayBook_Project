@@ -25,7 +25,7 @@ function Home() {
   const renderComponent = () => {
     switch (activeComponent) {
       case "lineups":
-        return <LineupsPage userEmail={currentUser.email} />;
+        return <LineupsPage user={currentUser}/>;
       case "promos":
         return <Promos />;
       //   case "social":

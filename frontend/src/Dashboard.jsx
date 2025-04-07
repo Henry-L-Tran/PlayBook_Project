@@ -246,15 +246,17 @@ function Dashboard() {
       return;
     }
 
-    const email = localStorage.getItem("currUser");
 
-    if (!email) {
+    // Gets the Current User's Info from Local Storage
+    const currUser = JSON.parse(localStorage.getItem("currUser"));
+
+    if (!currUser || !currUser.email) {
       console.log("User not logged in.");
       return;
     }
 
     // Generate a Unique Entry ID for the Lineup 
-    const entryId = `${email}_${Date.now()}_${uuidv4()}`;
+    const entryId = `${currUser.email}_${Date.now()}_${uuidv4()}`;
 
 
     if(!entryType || !entryAmount || entryAmount <= 0) {
@@ -272,7 +274,7 @@ function Dashboard() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email,
+          email: currUser.email,
           category: activeCategoryTab,
           entry_id: entryId,
           entry_type: entryType,

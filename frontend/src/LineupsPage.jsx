@@ -4,16 +4,13 @@ import axios from 'axios';
 
 
 // Fetches and Displays the User's Lineups
-const LineupsPage = ({ userEmail}) => {
+const LineupsPage = ({ user }) => {
     const [userLineups, setUserLineups] = useState([]);
-
-    // Gets the User's Info from Local Storage
-    const currentUser = JSON.parse(localStorage.getItem("currUser"));
 
     useEffect(() => {
         const fetchUserLineups = async () => {
             try {
-                const response = await axios.get(`http://localhost:8000/lineups/user/${userEmail}`);
+                const response = await axios.get(`http://localhost:8000/lineups/user/${user.email}`);
                 // The Newest Lineups Will Be At the Top
                 setUserLineups(response.data.lineups.reverse());
             }
@@ -27,7 +24,7 @@ const LineupsPage = ({ userEmail}) => {
         // Refreshes User's Lineups Every 20 Seconds
         const refreshTimer = setInterval(fetchUserLineups, 20000);
         return () => clearInterval(refreshTimer);
-    }, [userEmail]);
+    }, [user.email]);
 
 
     return (
@@ -54,7 +51,7 @@ const LineupsPage = ({ userEmail}) => {
                         textAlign: "center",
                     }}
                 >
-                    {currentUser.first_name} {currentUser.last_name}
+                    {user.first_name} {user.last_name}
                 </Typography>
             </Box>
 
