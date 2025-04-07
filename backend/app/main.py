@@ -418,17 +418,41 @@ def nba_scores():
     except FileNotFoundError:
         return {"message": "No Scores Found"}
 
-@app.get("/nba/scores")
-def val_upcoming_matches():
+# Get VALORANT upcoming matches from API
+def fetch_val_upcoming_matches():
     try:
-        # Retrieve upcoming matches using the aggregated function.
+        # Retrieve upcoming matches
         upcoming_matches = Vlr.vlr_upcoming_matches()
-        # Convert the result (a Python dictionary) to a JSON formatted string.
+        # Convert the result (a Python dictionary) to a JSON formatted string
         with open("backend/app/valorant_data/val_upcoming_matches.json", "w") as file:
                 json.dump(upcoming_matches, file, indent=4)
     except Exception as e:
         print("Error retrieving upcoming matches:", e)
 
+# Get VALORANT current live matches from API
+def fetch_val_live_matches():
+    try:
+        # Retrieve live matches
+        live_Scores = Vlr.vlr_live_score()
+        # Write the result (a Python dictionary) to a JSON file
+        with open("backend/app/valorant_data/val_live_scores.json", "w") as file:
+            json.dump(live_Scores, file, indent=4)
+    except Exception as e:
+        print("Error retrieving live matches:", e)
+
+    # Update the score every 30 seconds
+    time.sleep(30)
+
+# Get VALORANT player stats from given region from past 14 days from API
+def fetch_val_recent_player_stats(region: str):
+    try:
+        # Retrieve player stats from given region from past 14 days
+        stats = Vlr.vlr_stats(region, "14")
+        # Write the result (a Python dictionary) to a JSON file
+        with open("backend/app/valorant_data/val_recent_player_stats.json", "w") as file:
+            json.dump(stats, file, indent=4)
+    except Exception as e:
+        print("Error retrieving player stats:", e)
 
 
 
