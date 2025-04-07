@@ -454,5 +454,39 @@ def fetch_val_recent_player_stats(region: str):
     except Exception as e:
         print("Error retrieving player stats:", e)
 
+# VALORANT Live Scores Route
+@app.get("/VALROANT/matches")
+def val_matches():
+    try:
+        with open("backend/app/valorant_data/val_upcoming_matches.json", "r") as file:
+            data = json.load(file)
+            return data
+        
+    except FileNotFoundError:
+        return {"message": "No Scores Found"}
+
+# VALORANT Live Scores Route
+@app.get("/VALROANT/scores")
+def val_live_scores():
+    try:
+        with open("backend/app/valorant_data/val_live_scores.json", "r") as file:
+            data = json.load(file)
+            return data
+        
+    except FileNotFoundError:
+        return {"message": "No Scores Found"}
+    
+# VALORANT Player Stats Route
+@app.get("/VALROANT/player_stats")
+def val_player_stats():
+    try:
+        with open("backend/app/valorant_data/val_recent_player_stats.json", "r") as file:
+            data = json.load(file)
+            return data
+        
+    except FileNotFoundError:
+        return {"message": "No Scores Found"}
+
+
 
 
