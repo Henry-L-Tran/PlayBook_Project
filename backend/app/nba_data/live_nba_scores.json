@@ -69,16 +69,16 @@
         },
         {
             "gameId": "0022401134",
-            "gameStatus": 2,
-            "gameStatusText": "Halftime            ",
-            "gameClock": "PT00M00.00S",
+            "gameStatus": 3,
+            "gameStatusText": "Final",
+            "gameClock": "",
             "homeTeam": {
                 "teamId": 1610612751,
                 "teamName": "Nets",
                 "teamTriCode": "BKN",
                 "wins": 25,
-                "losses": 52,
-                "score": 46,
+                "losses": 53,
+                "score": 109,
                 "periods": [
                     {
                         "period": 1,
@@ -93,12 +93,12 @@
                     {
                         "period": 3,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 26
                     },
                     {
                         "period": 4,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 37
                     }
                 ]
             },
@@ -106,9 +106,9 @@
                 "teamId": 1610612761,
                 "teamName": "Raptors",
                 "teamTriCode": "TOR",
-                "wins": 28,
+                "wins": 29,
                 "losses": 50,
-                "score": 61,
+                "score": 120,
                 "periods": [
                     {
                         "period": 1,
@@ -123,28 +123,28 @@
                     {
                         "period": 3,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 21
                     },
                     {
                         "period": 4,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 38
                     }
                 ]
             }
         },
         {
             "gameId": "0022401135",
-            "gameStatus": 2,
-            "gameStatusText": "Halftime            ",
-            "gameClock": "PT00M00.00S",
+            "gameStatus": 3,
+            "gameStatusText": "Final",
+            "gameClock": "",
             "homeTeam": {
                 "teamId": 1610612760,
                 "teamName": "Thunder",
                 "teamTriCode": "OKC",
                 "wins": 64,
-                "losses": 13,
-                "score": 56,
+                "losses": 14,
+                "score": 99,
                 "periods": [
                     {
                         "period": 1,
@@ -159,12 +159,12 @@
                     {
                         "period": 3,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 21
                     },
                     {
                         "period": 4,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 22
                     }
                 ]
             },
@@ -172,9 +172,9 @@
                 "teamId": 1610612747,
                 "teamName": "Lakers",
                 "teamTriCode": "LAL",
-                "wins": 47,
+                "wins": 48,
                 "losses": 30,
-                "score": 78,
+                "score": 126,
                 "periods": [
                     {
                         "period": 1,
@@ -189,48 +189,48 @@
                     {
                         "period": 3,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 25
                     },
                     {
                         "period": 4,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 23
                     }
                 ]
             }
         },
         {
             "gameId": "0022401136",
-            "gameStatus": 1,
-            "gameStatusText": "6:00 pm ET",
+            "gameStatus": 3,
+            "gameStatusText": "Final",
             "gameClock": "",
             "homeTeam": {
                 "teamId": 1610612737,
                 "teamName": "Hawks",
                 "teamTriCode": "ATL",
-                "wins": 36,
+                "wins": 37,
                 "losses": 41,
-                "score": 0,
+                "score": 147,
                 "periods": [
                     {
                         "period": 1,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 41
                     },
                     {
                         "period": 2,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 40
                     },
                     {
                         "period": 3,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 38
                     },
                     {
                         "period": 4,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 28
                     }
                 ]
             },
@@ -239,64 +239,64 @@
                 "teamName": "Jazz",
                 "teamTriCode": "UTA",
                 "wins": 16,
-                "losses": 62,
-                "score": 0,
+                "losses": 63,
+                "score": 134,
                 "periods": [
                     {
                         "period": 1,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 28
                     },
                     {
                         "period": 2,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 36
                     },
                     {
                         "period": 3,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 43
                     },
                     {
                         "period": 4,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 27
                     }
                 ]
             }
         },
         {
             "gameId": "0022401137",
-            "gameStatus": 1,
-            "gameStatusText": "6:00 pm ET",
+            "gameStatus": 3,
+            "gameStatusText": "Final",
             "gameClock": "",
             "homeTeam": {
                 "teamId": 1610612738,
                 "teamName": "Celtics",
                 "teamTriCode": "BOS",
-                "wins": 57,
+                "wins": 58,
                 "losses": 20,
-                "score": 0,
+                "score": 124,
                 "periods": [
                     {
                         "period": 1,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 34
                     },
                     {
                         "period": 2,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 26
                     },
                     {
                         "period": 3,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 40
                     },
                     {
                         "period": 4,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 24
                     }
                 ]
             },
@@ -305,64 +305,64 @@
                 "teamName": "Wizards",
                 "teamTriCode": "WAS",
                 "wins": 17,
-                "losses": 60,
-                "score": 0,
+                "losses": 61,
+                "score": 90,
                 "periods": [
                     {
                         "period": 1,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 18
                     },
                     {
                         "period": 2,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 21
                     },
                     {
                         "period": 3,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 29
                     },
                     {
                         "period": 4,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 22
                     }
                 ]
             }
         },
         {
             "gameId": "0022401138",
-            "gameStatus": 1,
-            "gameStatusText": "6:00 pm ET",
+            "gameStatus": 3,
+            "gameStatusText": "Final",
             "gameClock": "",
             "homeTeam": {
                 "teamId": 1610612739,
                 "teamName": "Cavaliers",
                 "teamTriCode": "CLE",
                 "wins": 62,
-                "losses": 15,
-                "score": 0,
+                "losses": 16,
+                "score": 113,
                 "periods": [
                     {
                         "period": 1,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 27
                     },
                     {
                         "period": 2,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 30
                     },
                     {
                         "period": 3,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 22
                     },
                     {
                         "period": 4,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 34
                     }
                 ]
             },
@@ -370,65 +370,65 @@
                 "teamId": 1610612758,
                 "teamName": "Kings",
                 "teamTriCode": "SAC",
-                "wins": 37,
+                "wins": 38,
                 "losses": 40,
-                "score": 0,
+                "score": 120,
                 "periods": [
                     {
                         "period": 1,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 31
                     },
                     {
                         "period": 2,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 25
                     },
                     {
                         "period": 3,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 35
                     },
                     {
                         "period": 4,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 29
                     }
                 ]
             }
         },
         {
             "gameId": "0022401139",
-            "gameStatus": 1,
-            "gameStatusText": "6:00 pm ET",
+            "gameStatus": 3,
+            "gameStatusText": "Final",
             "gameClock": "",
             "homeTeam": {
                 "teamId": 1610612757,
                 "teamName": "Trail Blazers",
                 "teamTriCode": "POR",
-                "wins": 34,
+                "wins": 35,
                 "losses": 44,
-                "score": 0,
+                "score": 120,
                 "periods": [
                     {
                         "period": 1,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 33
                     },
                     {
                         "period": 2,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 21
                     },
                     {
                         "period": 3,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 32
                     },
                     {
                         "period": 4,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 34
                     }
                 ]
             },
@@ -437,64 +437,64 @@
                 "teamName": "Spurs",
                 "teamTriCode": "SAS",
                 "wins": 32,
-                "losses": 45,
-                "score": 0,
+                "losses": 46,
+                "score": 109,
                 "periods": [
                     {
                         "period": 1,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 18
                     },
                     {
                         "period": 2,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 27
                     },
                     {
                         "period": 3,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 30
                     },
                     {
                         "period": 4,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 34
                     }
                 ]
             }
         },
         {
             "gameId": "0022401140",
-            "gameStatus": 1,
-            "gameStatusText": "7:00 pm ET",
+            "gameStatus": 3,
+            "gameStatusText": "Final",
             "gameClock": "",
             "homeTeam": {
                 "teamId": 1610612752,
                 "teamName": "Knicks",
                 "teamTriCode": "NYK",
-                "wins": 49,
+                "wins": 50,
                 "losses": 28,
-                "score": 0,
+                "score": 112,
                 "periods": [
                     {
                         "period": 1,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 27
                     },
                     {
                         "period": 2,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 26
                     },
                     {
                         "period": 3,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 34
                     },
                     {
                         "period": 4,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 25
                     }
                 ]
             },
@@ -503,64 +503,64 @@
                 "teamName": "Suns",
                 "teamTriCode": "PHX",
                 "wins": 35,
-                "losses": 42,
-                "score": 0,
+                "losses": 43,
+                "score": 98,
                 "periods": [
                     {
                         "period": 1,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 23
                     },
                     {
                         "period": 2,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 20
                     },
                     {
                         "period": 3,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 27
                     },
                     {
                         "period": 4,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 28
                     }
                 ]
             }
         },
         {
             "gameId": "0022401142",
-            "gameStatus": 1,
-            "gameStatusText": "8:00 pm ET",
-            "gameClock": "",
+            "gameStatus": 2,
+            "gameStatusText": "4th Qtr             ",
+            "gameClock": "PT01M15.00S",
             "homeTeam": {
                 "teamId": 1610612743,
                 "teamName": "Nuggets",
                 "teamTriCode": "DEN",
                 "wins": 47,
                 "losses": 31,
-                "score": 0,
+                "score": 118,
                 "periods": [
                     {
                         "period": 1,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 33
                     },
                     {
                         "period": 2,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 33
                     },
                     {
                         "period": 3,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 31
                     },
                     {
                         "period": 4,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 21
                     }
                 ]
             },
@@ -570,63 +570,63 @@
                 "teamTriCode": "IND",
                 "wins": 46,
                 "losses": 31,
-                "score": 0,
+                "score": 122,
                 "periods": [
                     {
                         "period": 1,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 24
                     },
                     {
                         "period": 2,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 37
                     },
                     {
                         "period": 3,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 37
                     },
                     {
                         "period": 4,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 24
                     }
                 ]
             }
         },
         {
             "gameId": "0022400617",
-            "gameStatus": 1,
-            "gameStatusText": "8:30 pm ET",
-            "gameClock": "",
+            "gameStatus": 2,
+            "gameStatusText": "4th Qtr             ",
+            "gameClock": "PT08M005.00S",
             "homeTeam": {
                 "teamId": 1610612740,
                 "teamName": "Pelicans",
                 "teamTriCode": "NOP",
                 "wins": 21,
                 "losses": 56,
-                "score": 0,
+                "score": 91,
                 "periods": [
                     {
                         "period": 1,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 31
                     },
                     {
                         "period": 2,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 22
                     },
                     {
                         "period": 3,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 25
                     },
                     {
                         "period": 4,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 13
                     }
                 ]
             },
@@ -636,58 +636,58 @@
                 "teamTriCode": "MIL",
                 "wins": 43,
                 "losses": 34,
-                "score": 0,
+                "score": 88,
                 "periods": [
                     {
                         "period": 1,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 28
                     },
                     {
                         "period": 2,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 30
                     },
                     {
                         "period": 3,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 23
                     },
                     {
                         "period": 4,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 7
                     }
                 ]
             }
         },
         {
             "gameId": "0022401143",
-            "gameStatus": 1,
-            "gameStatusText": "8:30 pm ET",
-            "gameClock": "",
+            "gameStatus": 2,
+            "gameStatusText": "3rd Qtr             ",
+            "gameClock": "PT03M007.00S",
             "homeTeam": {
                 "teamId": 1610612744,
                 "teamName": "Warriors",
                 "teamTriCode": "GSW",
                 "wins": 46,
                 "losses": 31,
-                "score": 0,
+                "score": 68,
                 "periods": [
                     {
                         "period": 1,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 24
                     },
                     {
                         "period": 2,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 26
                     },
                     {
                         "period": 3,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 18
                     },
                     {
                         "period": 4,
@@ -702,22 +702,22 @@
                 "teamTriCode": "HOU",
                 "wins": 51,
                 "losses": 27,
-                "score": 0,
+                "score": 73,
                 "periods": [
                     {
                         "period": 1,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 18
                     },
                     {
                         "period": 2,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 33
                     },
                     {
                         "period": 3,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 22
                     },
                     {
                         "period": 4,

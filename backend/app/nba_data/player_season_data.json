@@ -5,15 +5,15 @@
             "playerName": "A.J. Lawson",
             "teamTriCode": "TOR",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630639.png",
-            "points": 8.3,
-            "rebounds": 3.1,
+            "points": 8.5,
+            "rebounds": 3.0,
             "assists": 1.0,
             "3ptMade": 1.3,
-            "steals": 0.4,
+            "steals": 0.5,
             "blocks": 0.3,
-            "turnovers": 0.5,
-            "minutes": 17.4,
-            "gamesPlayed": 22
+            "turnovers": 0.6,
+            "minutes": 17.6,
+            "gamesPlayed": 23
         },
         {
             "playerId": 1631260,
@@ -35,15 +35,15 @@
             "playerName": "AJ Johnson",
             "teamTriCode": "WAS",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642358.png",
-            "points": 7.1,
-            "rebounds": 2.1,
-            "assists": 2.5,
+            "points": 7.3,
+            "rebounds": 2.0,
+            "assists": 2.6,
             "3ptMade": 0.8,
             "steals": 0.4,
             "blocks": 0.1,
             "turnovers": 1.2,
-            "minutes": 19.3,
-            "gamesPlayed": 24
+            "minutes": 19.8,
+            "gamesPlayed": 25
         },
         {
             "playerId": 203932,
@@ -95,15 +95,15 @@
             "playerName": "Aaron Wiggins",
             "teamTriCode": "OKC",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630598.png",
-            "points": 11.6,
+            "points": 11.5,
             "rebounds": 3.8,
             "assists": 1.7,
             "3ptMade": 1.7,
             "steals": 0.8,
-            "blocks": 0.3,
+            "blocks": 0.2,
             "turnovers": 0.8,
             "minutes": 22.6,
-            "gamesPlayed": 71
+            "gamesPlayed": 72
         },
         {
             "playerId": 1641745,
@@ -156,14 +156,14 @@
             "teamTriCode": "BOS",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/201143.png",
             "points": 8.9,
-            "rebounds": 6.0,
-            "assists": 2.1,
+            "rebounds": 6.1,
+            "assists": 2.2,
             "3ptMade": 1.9,
             "steals": 0.6,
-            "blocks": 0.9,
+            "blocks": 0.8,
             "turnovers": 0.7,
             "minutes": 27.6,
-            "gamesPlayed": 58
+            "gamesPlayed": 59
         },
         {
             "playerId": 202692,
@@ -192,8 +192,8 @@
             "steals": 1.5,
             "blocks": 0.6,
             "turnovers": 0.7,
-            "minutes": 19.2,
-            "gamesPlayed": 51
+            "minutes": 19.1,
+            "gamesPlayed": 52
         },
         {
             "playerId": 203458,
@@ -222,8 +222,8 @@
             "steals": 0.7,
             "blocks": 1.5,
             "turnovers": 1.7,
-            "minutes": 27.1,
-            "gamesPlayed": 62
+            "minutes": 27.2,
+            "gamesPlayed": 63
         },
         {
             "playerId": 1630578,
@@ -395,15 +395,15 @@
             "playerName": "Anthony Gill",
             "teamTriCode": "WAS",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630264.png",
-            "points": 2.5,
+            "points": 2.6,
             "rebounds": 1.2,
             "assists": 0.3,
             "3ptMade": 0.2,
             "steals": 0.2,
             "blocks": 0.0,
             "turnovers": 0.2,
-            "minutes": 7.5,
-            "gamesPlayed": 49
+            "minutes": 7.8,
+            "gamesPlayed": 50
         },
         {
             "playerId": 1641810,
@@ -463,7 +463,7 @@
             "blocks": 0.3,
             "turnovers": 2.4,
             "minutes": 34.9,
-            "gamesPlayed": 69
+            "gamesPlayed": 70
         },
         {
             "playerId": 1630245,
@@ -500,15 +500,15 @@
             "playerName": "Baylor Scheierman",
             "teamTriCode": "BOS",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1631248.png",
-            "points": 3.0,
-            "rebounds": 1.7,
+            "points": 3.1,
+            "rebounds": 1.8,
             "assists": 0.9,
-            "3ptMade": 0.7,
+            "3ptMade": 0.8,
             "steals": 0.4,
             "blocks": 0.1,
-            "turnovers": 0.2,
-            "minutes": 10.4,
-            "gamesPlayed": 27
+            "turnovers": 0.3,
+            "minutes": 10.8,
+            "gamesPlayed": 28
         },
         {
             "playerId": 1641767,
@@ -575,30 +575,30 @@
             "playerName": "Bismack Biyombo",
             "teamTriCode": "SAS",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/202687.png",
-            "points": 5.2,
-            "rebounds": 5.5,
+            "points": 5.4,
+            "rebounds": 5.4,
             "assists": 1.2,
             "3ptMade": 0.0,
-            "steals": 0.7,
+            "steals": 0.6,
             "blocks": 1.0,
             "turnovers": 0.8,
-            "minutes": 19.1,
-            "gamesPlayed": 23
+            "minutes": 19.2,
+            "gamesPlayed": 24
         },
         {
             "playerId": 1631104,
             "playerName": "Blake Wesley",
             "teamTriCode": "SAS",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1631104.png",
-            "points": 3.6,
+            "points": 3.5,
             "rebounds": 1.0,
             "assists": 1.8,
             "3ptMade": 0.3,
             "steals": 0.6,
             "blocks": 0.1,
             "turnovers": 0.9,
-            "minutes": 11.0,
-            "gamesPlayed": 53
+            "minutes": 10.9,
+            "gamesPlayed": 54
         },
         {
             "playerId": 1626171,
@@ -771,14 +771,14 @@
             "teamTriCode": "UTA",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1641729.png",
             "points": 10.3,
-            "rebounds": 2.8,
+            "rebounds": 2.9,
             "assists": 1.4,
-            "3ptMade": 2.0,
+            "3ptMade": 2.1,
             "steals": 0.6,
             "blocks": 0.1,
             "turnovers": 1.4,
-            "minutes": 19.3,
-            "gamesPlayed": 67
+            "minutes": 19.5,
+            "gamesPlayed": 68
         },
         {
             "playerId": 1642355,
@@ -792,8 +792,8 @@
             "steals": 0.2,
             "blocks": 0.1,
             "turnovers": 0.4,
-            "minutes": 5.9,
-            "gamesPlayed": 23
+            "minutes": 5.7,
+            "gamesPlayed": 24
         },
         {
             "playerId": 201572,
@@ -830,15 +830,15 @@
             "playerName": "Bub Carrington",
             "teamTriCode": "WAS",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642267.png",
-            "points": 9.5,
+            "points": 9.6,
             "rebounds": 4.1,
             "assists": 4.3,
             "3ptMade": 1.7,
             "steals": 0.7,
             "blocks": 0.2,
             "turnovers": 1.7,
-            "minutes": 29.5,
-            "gamesPlayed": 77
+            "minutes": 29.6,
+            "gamesPlayed": 78
         },
         {
             "playerId": 1627741,
@@ -1010,15 +1010,15 @@
             "playerName": "Caris LeVert",
             "teamTriCode": "ATL",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1627747.png",
-            "points": 11.8,
+            "points": 11.9,
             "rebounds": 3.1,
-            "assists": 3.3,
+            "assists": 3.4,
             "3ptMade": 1.6,
             "steals": 0.9,
             "blocks": 0.5,
             "turnovers": 1.2,
-            "minutes": 24.8,
-            "gamesPlayed": 60
+            "minutes": 24.9,
+            "gamesPlayed": 61
         },
         {
             "playerId": 1641717,
@@ -1033,7 +1033,7 @@
             "blocks": 0.5,
             "turnovers": 0.9,
             "minutes": 27.6,
-            "gamesPlayed": 66
+            "gamesPlayed": 67
         },
         {
             "playerId": 1629646,
@@ -1055,15 +1055,15 @@
             "playerName": "Chet Holmgren",
             "teamTriCode": "OKC",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1631096.png",
-            "points": 14.9,
-            "rebounds": 8.3,
+            "points": 14.8,
+            "rebounds": 8.1,
             "assists": 1.9,
             "3ptMade": 1.4,
-            "steals": 0.8,
+            "steals": 0.7,
             "blocks": 2.3,
-            "turnovers": 1.9,
-            "minutes": 27.5,
-            "gamesPlayed": 29
+            "turnovers": 1.8,
+            "minutes": 27.4,
+            "gamesPlayed": 30
         },
         {
             "playerId": 1628449,
@@ -1091,9 +1091,9 @@
             "3ptMade": 1.7,
             "steals": 1.3,
             "blocks": 0.3,
-            "turnovers": 1.5,
+            "turnovers": 1.6,
             "minutes": 28.1,
-            "gamesPlayed": 77
+            "gamesPlayed": 78
         },
         {
             "playerId": 1631128,
@@ -1115,15 +1115,15 @@
             "playerName": "Christian Koloko",
             "teamTriCode": "LAL",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1631132.png",
-            "points": 2.5,
+            "points": 2.4,
             "rebounds": 2.4,
             "assists": 0.5,
             "3ptMade": 0.0,
             "steals": 0.2,
             "blocks": 0.3,
-            "turnovers": 0.4,
-            "minutes": 9.4,
-            "gamesPlayed": 34
+            "turnovers": 0.3,
+            "minutes": 9.2,
+            "gamesPlayed": 35
         },
         {
             "playerId": 203991,
@@ -1190,15 +1190,15 @@
             "playerName": "Colby Jones",
             "teamTriCode": "WAS",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1641732.png",
-            "points": 3.2,
-            "rebounds": 1.6,
+            "points": 3.4,
+            "rebounds": 1.7,
             "assists": 0.8,
             "3ptMade": 0.4,
             "steals": 0.6,
             "blocks": 0.3,
-            "turnovers": 0.4,
-            "minutes": 10.3,
-            "gamesPlayed": 34
+            "turnovers": 0.5,
+            "minutes": 10.8,
+            "gamesPlayed": 35
         },
         {
             "playerId": 1630175,
@@ -1250,15 +1250,15 @@
             "playerName": "Collin Sexton",
             "teamTriCode": "UTA",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629012.png",
-            "points": 18.3,
-            "rebounds": 2.7,
-            "assists": 4.1,
+            "points": 18.5,
+            "rebounds": 2.8,
+            "assists": 4.2,
             "3ptMade": 1.8,
             "steals": 0.7,
             "blocks": 0.1,
-            "turnovers": 2.6,
-            "minutes": 27.9,
-            "gamesPlayed": 61
+            "turnovers": 2.5,
+            "minutes": 28.0,
+            "gamesPlayed": 62
         },
         {
             "playerId": 1630557,
@@ -1340,15 +1340,15 @@
             "playerName": "Dalano Banton",
             "teamTriCode": "POR",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630625.png",
-            "points": 8.0,
+            "points": 8.2,
             "rebounds": 1.9,
             "assists": 2.2,
-            "3ptMade": 1.0,
+            "3ptMade": 1.1,
             "steals": 0.6,
             "blocks": 0.5,
             "turnovers": 1.2,
-            "minutes": 15.7,
-            "gamesPlayed": 63
+            "minutes": 15.9,
+            "gamesPlayed": 64
         },
         {
             "playerId": 1631207,
@@ -1370,15 +1370,15 @@
             "playerName": "Dalton Knecht",
             "teamTriCode": "LAL",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642261.png",
-            "points": 9.1,
+            "points": 9.0,
             "rebounds": 2.8,
             "assists": 0.9,
             "3ptMade": 1.6,
             "steals": 0.3,
             "blocks": 0.1,
             "turnovers": 0.5,
-            "minutes": 19.6,
-            "gamesPlayed": 73
+            "minutes": 19.4,
+            "gamesPlayed": 74
         },
         {
             "playerId": 203081,
@@ -1445,7 +1445,7 @@
             "playerName": "Darius Garland",
             "teamTriCode": "CLE",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629636.png",
-            "points": 20.6,
+            "points": 20.4,
             "rebounds": 2.9,
             "assists": 6.7,
             "3ptMade": 2.8,
@@ -1453,7 +1453,7 @@
             "blocks": 0.2,
             "turnovers": 2.5,
             "minutes": 30.7,
-            "gamesPlayed": 72
+            "gamesPlayed": 73
         },
         {
             "playerId": 1631223,
@@ -1520,15 +1520,15 @@
             "playerName": "De'Andre Hunter",
             "teamTriCode": "CLE",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629631.png",
-            "points": 17.0,
-            "rebounds": 4.0,
+            "points": 16.9,
+            "rebounds": 3.9,
             "assists": 1.4,
-            "3ptMade": 2.4,
+            "3ptMade": 2.5,
             "steals": 0.7,
             "blocks": 0.2,
             "turnovers": 1.3,
-            "minutes": 27.2,
-            "gamesPlayed": 61
+            "minutes": 27.1,
+            "gamesPlayed": 62
         },
         {
             "playerId": 201599,
@@ -1550,15 +1550,15 @@
             "playerName": "DeMar DeRozan",
             "teamTriCode": "SAC",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/201942.png",
-            "points": 22.2,
+            "points": 22.3,
             "rebounds": 3.9,
             "assists": 4.4,
             "3ptMade": 1.1,
-            "steals": 0.9,
+            "steals": 0.8,
             "blocks": 0.4,
             "turnovers": 1.4,
             "minutes": 35.9,
-            "gamesPlayed": 72
+            "gamesPlayed": 73
         },
         {
             "playerId": 1629731,
@@ -1566,14 +1566,14 @@
             "teamTriCode": "CLE",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629731.png",
             "points": 5.4,
-            "rebounds": 4.4,
+            "rebounds": 4.3,
             "assists": 1.3,
             "3ptMade": 1.3,
             "steals": 0.7,
             "blocks": 0.4,
             "turnovers": 0.4,
-            "minutes": 21.3,
-            "gamesPlayed": 55
+            "minutes": 21.0,
+            "gamesPlayed": 56
         },
         {
             "playerId": 1629028,
@@ -1692,8 +1692,8 @@
             "steals": 0.9,
             "blocks": 1.0,
             "turnovers": 1.7,
-            "minutes": 33.8,
-            "gamesPlayed": 73
+            "minutes": 33.7,
+            "gamesPlayed": 74
         },
         {
             "playerId": 1630217,
@@ -1730,22 +1730,22 @@
             "playerName": "Devin Carter",
             "teamTriCode": "SAC",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642269.png",
-            "points": 3.7,
+            "points": 3.6,
             "rebounds": 2.0,
             "assists": 1.1,
-            "3ptMade": 0.5,
+            "3ptMade": 0.4,
             "steals": 0.5,
             "blocks": 0.1,
             "turnovers": 0.5,
-            "minutes": 10.0,
-            "gamesPlayed": 31
+            "minutes": 9.9,
+            "gamesPlayed": 32
         },
         {
             "playerId": 1630170,
             "playerName": "Devin Vassell",
             "teamTriCode": "SAS",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630170.png",
-            "points": 16.4,
+            "points": 16.5,
             "rebounds": 4.0,
             "assists": 2.9,
             "3ptMade": 2.5,
@@ -1753,7 +1753,7 @@
             "blocks": 0.5,
             "turnovers": 1.3,
             "minutes": 31.1,
-            "gamesPlayed": 61
+            "gamesPlayed": 62
         },
         {
             "playerId": 1628415,
@@ -1775,30 +1775,30 @@
             "playerName": "Dillon Jones",
             "teamTriCode": "OKC",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1641794.png",
-            "points": 2.3,
+            "points": 2.2,
             "rebounds": 2.0,
             "assists": 1.1,
             "3ptMade": 0.3,
             "steals": 0.3,
             "blocks": 0.1,
             "turnovers": 0.4,
-            "minutes": 9.3,
-            "gamesPlayed": 49
+            "minutes": 9.2,
+            "gamesPlayed": 50
         },
         {
             "playerId": 1627734,
             "playerName": "Domantas Sabonis",
             "teamTriCode": "SAC",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1627734.png",
-            "points": 19.1,
-            "rebounds": 14.0,
-            "assists": 6.0,
+            "points": 19.2,
+            "rebounds": 13.9,
+            "assists": 6.1,
             "3ptMade": 0.9,
-            "steals": 0.6,
+            "steals": 0.7,
             "blocks": 0.4,
             "turnovers": 2.9,
-            "minutes": 34.6,
-            "gamesPlayed": 65
+            "minutes": 34.7,
+            "gamesPlayed": 66
         },
         {
             "playerId": 1631230,
@@ -1827,8 +1827,8 @@
             "steals": 0.5,
             "blocks": 1.6,
             "turnovers": 1.1,
-            "minutes": 19.3,
-            "gamesPlayed": 63
+            "minutes": 19.5,
+            "gamesPlayed": 64
         },
         {
             "playerId": 1628378,
@@ -1843,7 +1843,7 @@
             "blocks": 0.2,
             "turnovers": 2.1,
             "minutes": 31.4,
-            "gamesPlayed": 70
+            "gamesPlayed": 71
         },
         {
             "playerId": 1628978,
@@ -1865,15 +1865,15 @@
             "playerName": "Dorian Finney-Smith",
             "teamTriCode": "LAL",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1627827.png",
-            "points": 8.5,
-            "rebounds": 3.9,
+            "points": 8.6,
+            "rebounds": 4.0,
             "assists": 1.4,
-            "3ptMade": 1.9,
+            "3ptMade": 2.0,
             "steals": 0.9,
             "blocks": 0.4,
             "turnovers": 0.9,
             "minutes": 28.7,
-            "gamesPlayed": 59
+            "gamesPlayed": 60
         },
         {
             "playerId": 203926,
@@ -1992,8 +1992,8 @@
             "steals": 3.0,
             "blocks": 0.7,
             "turnovers": 2.0,
-            "minutes": 33.8,
-            "gamesPlayed": 72
+            "minutes": 33.9,
+            "gamesPlayed": 73
         },
         {
             "playerId": 201569,
@@ -2015,15 +2015,15 @@
             "playerName": "Evan Mobley",
             "teamTriCode": "CLE",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630596.png",
-            "points": 18.6,
+            "points": 18.5,
             "rebounds": 9.2,
             "assists": 3.1,
             "3ptMade": 1.2,
             "steals": 0.8,
             "blocks": 1.6,
             "turnovers": 2.0,
-            "minutes": 30.4,
-            "gamesPlayed": 68
+            "minutes": 30.5,
+            "gamesPlayed": 69
         },
         {
             "playerId": 1630532,
@@ -2075,15 +2075,15 @@
             "playerName": "Gabe Vincent",
             "teamTriCode": "LAL",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629216.png",
-            "points": 6.5,
+            "points": 6.6,
             "rebounds": 1.3,
             "assists": 1.4,
-            "3ptMade": 1.5,
+            "3ptMade": 1.6,
             "steals": 0.7,
             "blocks": 0.2,
             "turnovers": 0.6,
-            "minutes": 21.1,
-            "gamesPlayed": 68
+            "minutes": 21.2,
+            "gamesPlayed": 69
         },
         {
             "playerId": 202066,
@@ -2165,15 +2165,15 @@
             "playerName": "Georges Niang",
             "teamTriCode": "ATL",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1627777.png",
-            "points": 9.9,
-            "rebounds": 3.6,
+            "points": 9.8,
+            "rebounds": 3.5,
             "assists": 1.4,
             "3ptMade": 2.1,
             "steals": 0.4,
             "blocks": 0.2,
             "turnovers": 1.0,
             "minutes": 21.6,
-            "gamesPlayed": 75
+            "gamesPlayed": 76
         },
         {
             "playerId": 203507,
@@ -2277,8 +2277,8 @@
             "steals": 0.4,
             "blocks": 0.2,
             "turnovers": 0.6,
-            "minutes": 27.0,
-            "gamesPlayed": 77
+            "minutes": 27.1,
+            "gamesPlayed": 78
         },
         {
             "playerId": 1629312,
@@ -2330,15 +2330,15 @@
             "playerName": "Isaac Jones",
             "teamTriCode": "SAC",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642403.png",
-            "points": 3.6,
+            "points": 3.5,
             "rebounds": 1.4,
             "assists": 0.3,
             "3ptMade": 0.1,
             "steals": 0.1,
             "blocks": 0.2,
             "turnovers": 0.4,
-            "minutes": 7.8,
-            "gamesPlayed": 36
+            "minutes": 7.7,
+            "gamesPlayed": 37
         },
         {
             "playerId": 1630171,
@@ -2347,43 +2347,43 @@
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630171.png",
             "points": 5.9,
             "rebounds": 2.3,
-            "assists": 1.3,
+            "assists": 1.2,
             "3ptMade": 1.0,
             "steals": 0.6,
             "blocks": 0.3,
             "turnovers": 0.4,
-            "minutes": 18.8,
-            "gamesPlayed": 51
+            "minutes": 18.7,
+            "gamesPlayed": 52
         },
         {
             "playerId": 1642268,
             "playerName": "Isaiah Collier",
             "teamTriCode": "UTA",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642268.png",
-            "points": 8.5,
+            "points": 8.7,
             "rebounds": 3.3,
-            "assists": 6.2,
+            "assists": 6.3,
             "3ptMade": 0.6,
             "steals": 0.9,
             "blocks": 0.2,
             "turnovers": 2.9,
-            "minutes": 25.8,
-            "gamesPlayed": 70
+            "minutes": 25.9,
+            "gamesPlayed": 71
         },
         {
             "playerId": 1628392,
             "playerName": "Isaiah Hartenstein",
             "teamTriCode": "OKC",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1628392.png",
-            "points": 11.3,
-            "rebounds": 10.7,
-            "assists": 3.9,
+            "points": 11.2,
+            "rebounds": 10.6,
+            "assists": 3.8,
             "3ptMade": 0.0,
             "steals": 0.8,
             "blocks": 1.1,
             "turnovers": 1.7,
             "minutes": 27.9,
-            "gamesPlayed": 55
+            "gamesPlayed": 56
         },
         {
             "playerId": 1630198,
@@ -2393,12 +2393,12 @@
             "points": 10.0,
             "rebounds": 2.6,
             "assists": 1.5,
-            "3ptMade": 2.6,
+            "3ptMade": 2.5,
             "steals": 0.6,
             "blocks": 0.1,
             "turnovers": 0.5,
             "minutes": 21.3,
-            "gamesPlayed": 69
+            "gamesPlayed": 70
         },
         {
             "playerId": 1630191,
@@ -2451,14 +2451,14 @@
             "teamTriCode": "TOR",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642266.png",
             "points": 8.6,
-            "rebounds": 3.0,
-            "assists": 1.5,
+            "rebounds": 3.1,
+            "assists": 1.6,
             "3ptMade": 1.2,
             "steals": 0.8,
             "blocks": 0.2,
-            "turnovers": 0.9,
-            "minutes": 21.3,
-            "gamesPlayed": 51
+            "turnovers": 1.0,
+            "minutes": 21.2,
+            "gamesPlayed": 52
         },
         {
             "playerId": 1631095,
@@ -2480,15 +2480,15 @@
             "playerName": "Jabari Walker",
             "teamTriCode": "POR",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1631133.png",
-            "points": 4.6,
+            "points": 4.7,
             "rebounds": 3.4,
             "assists": 0.6,
-            "3ptMade": 0.4,
+            "3ptMade": 0.5,
             "steals": 0.5,
             "blocks": 0.1,
             "turnovers": 0.5,
-            "minutes": 11.6,
-            "gamesPlayed": 56
+            "minutes": 11.8,
+            "gamesPlayed": 57
         },
         {
             "playerId": 1630702,
@@ -2540,15 +2540,15 @@
             "playerName": "Jaden Springer",
             "teamTriCode": "UTA",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630531.png",
-            "points": 2.3,
+            "points": 2.5,
             "rebounds": 1.1,
             "assists": 0.7,
             "3ptMade": 0.3,
-            "steals": 0.5,
+            "steals": 0.6,
             "blocks": 0.1,
             "turnovers": 0.3,
-            "minutes": 7.1,
-            "gamesPlayed": 39
+            "minutes": 7.3,
+            "gamesPlayed": 40
         },
         {
             "playerId": 1630256,
@@ -2727,8 +2727,8 @@
             "steals": 1.6,
             "blocks": 0.7,
             "turnovers": 2.2,
-            "minutes": 32.4,
-            "gamesPlayed": 66
+            "minutes": 32.3,
+            "gamesPlayed": 67
         },
         {
             "playerId": 1630592,
@@ -2782,13 +2782,13 @@
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642347.png",
             "points": 7.0,
             "rebounds": 1.5,
-            "assists": 4.0,
+            "assists": 4.1,
             "3ptMade": 0.9,
-            "steals": 0.7,
+            "steals": 0.8,
             "blocks": 0.1,
             "turnovers": 1.5,
-            "minutes": 19.0,
-            "gamesPlayed": 72
+            "minutes": 19.1,
+            "gamesPlayed": 73
         },
         {
             "playerId": 201935,
@@ -2810,15 +2810,15 @@
             "playerName": "Jamison Battle",
             "teamTriCode": "TOR",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642419.png",
-            "points": 6.6,
+            "points": 6.7,
             "rebounds": 2.5,
-            "assists": 0.9,
+            "assists": 0.8,
             "3ptMade": 1.7,
             "steals": 0.2,
             "blocks": 0.2,
             "turnovers": 0.4,
-            "minutes": 16.6,
-            "gamesPlayed": 55
+            "minutes": 16.7,
+            "gamesPlayed": 56
         },
         {
             "playerId": 1641716,
@@ -2886,14 +2886,14 @@
             "teamTriCode": "LAL",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629020.png",
             "points": 3.9,
-            "rebounds": 5.0,
+            "rebounds": 4.9,
             "assists": 1.2,
             "3ptMade": 0.3,
             "steals": 0.9,
             "blocks": 0.2,
-            "turnovers": 0.7,
-            "minutes": 16.1,
-            "gamesPlayed": 32
+            "turnovers": 0.8,
+            "minutes": 16.0,
+            "gamesPlayed": 33
         },
         {
             "playerId": 1628386,
@@ -2901,14 +2901,14 @@
             "teamTriCode": "CLE",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1628386.png",
             "points": 13.8,
-            "rebounds": 9.9,
+            "rebounds": 9.8,
             "assists": 1.9,
             "3ptMade": 0.0,
             "steals": 0.9,
             "blocks": 0.9,
             "turnovers": 1.2,
             "minutes": 28.4,
-            "gamesPlayed": 77
+            "gamesPlayed": 78
         },
         {
             "playerId": 1629750,
@@ -2934,11 +2934,11 @@
             "rebounds": 4.8,
             "assists": 1.1,
             "3ptMade": 0.0,
-            "steals": 0.6,
+            "steals": 0.5,
             "blocks": 0.9,
             "turnovers": 0.8,
-            "minutes": 19.8,
-            "gamesPlayed": 52
+            "minutes": 19.6,
+            "gamesPlayed": 53
         },
         {
             "playerId": 1630643,
@@ -2960,15 +2960,15 @@
             "playerName": "Jaylen Brown",
             "teamTriCode": "BOS",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1627759.png",
-            "points": 22.6,
+            "points": 22.5,
             "rebounds": 5.9,
             "assists": 4.6,
             "3ptMade": 1.9,
             "steals": 1.2,
             "blocks": 0.3,
             "turnovers": 2.6,
-            "minutes": 34.7,
-            "gamesPlayed": 61
+            "minutes": 34.5,
+            "gamesPlayed": 62
         },
         {
             "playerId": 1641740,
@@ -3260,30 +3260,30 @@
             "playerName": "Johnny Juzang",
             "teamTriCode": "UTA",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630548.png",
-            "points": 8.5,
+            "points": 8.6,
             "rebounds": 2.8,
             "assists": 1.0,
-            "3ptMade": 1.7,
-            "steals": 0.5,
+            "3ptMade": 1.8,
+            "steals": 0.6,
             "blocks": 0.1,
             "turnovers": 0.5,
-            "minutes": 19.0,
-            "gamesPlayed": 60
+            "minutes": 19.3,
+            "gamesPlayed": 61
         },
         {
             "playerId": 202685,
             "playerName": "Jonas Valan\u010di\u016bnas",
             "teamTriCode": "SAC",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/202685.png",
-            "points": 10.5,
-            "rebounds": 7.9,
+            "points": 10.4,
+            "rebounds": 7.8,
             "assists": 2.1,
             "3ptMade": 0.1,
             "steals": 0.5,
             "blocks": 0.6,
             "turnovers": 1.5,
-            "minutes": 19.3,
-            "gamesPlayed": 76
+            "minutes": 19.1,
+            "gamesPlayed": 77
         },
         {
             "playerId": 1628371,
@@ -3320,15 +3320,15 @@
             "playerName": "Jonathan Mogbo",
             "teamTriCode": "TOR",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642367.png",
-            "points": 5.7,
-            "rebounds": 4.5,
+            "points": 5.9,
+            "rebounds": 4.7,
             "assists": 1.9,
             "3ptMade": 0.3,
             "steals": 0.8,
             "blocks": 0.5,
             "turnovers": 1.0,
-            "minutes": 19.4,
-            "gamesPlayed": 59
+            "minutes": 19.6,
+            "gamesPlayed": 60
         },
         {
             "playerId": 203903,
@@ -3350,15 +3350,15 @@
             "playerName": "Jordan Goodwin",
             "teamTriCode": "LAL",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630692.png",
-            "points": 5.7,
+            "points": 5.6,
             "rebounds": 3.7,
-            "assists": 1.3,
-            "3ptMade": 0.9,
-            "steals": 1.1,
-            "blocks": 0.5,
+            "assists": 1.4,
+            "3ptMade": 0.8,
+            "steals": 1.0,
+            "blocks": 0.4,
             "turnovers": 0.8,
-            "minutes": 19.1,
-            "gamesPlayed": 24
+            "minutes": 18.7,
+            "gamesPlayed": 25
         },
         {
             "playerId": 1641722,
@@ -3380,15 +3380,15 @@
             "playerName": "Jordan McLaughlin",
             "teamTriCode": "SAS",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629162.png",
-            "points": 2.0,
+            "points": 2.1,
             "rebounds": 0.6,
             "assists": 1.0,
             "3ptMade": 0.4,
             "steals": 0.3,
             "blocks": 0.0,
             "turnovers": 0.3,
-            "minutes": 6.5,
-            "gamesPlayed": 42
+            "minutes": 6.6,
+            "gamesPlayed": 43
         },
         {
             "playerId": 1641757,
@@ -3410,7 +3410,7 @@
             "playerName": "Jordan Poole",
             "teamTriCode": "WAS",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629673.png",
-            "points": 20.6,
+            "points": 20.5,
             "rebounds": 3.0,
             "assists": 4.5,
             "3ptMade": 3.5,
@@ -3418,7 +3418,7 @@
             "blocks": 0.4,
             "turnovers": 3.0,
             "minutes": 29.6,
-            "gamesPlayed": 66
+            "gamesPlayed": 67
         },
         {
             "playerId": 1641775,
@@ -3427,13 +3427,13 @@
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1641775.png",
             "points": 1.5,
             "rebounds": 1.2,
-            "assists": 0.4,
+            "assists": 0.3,
             "3ptMade": 0.3,
             "steals": 0.2,
             "blocks": 0.2,
             "turnovers": 0.3,
             "minutes": 7.6,
-            "gamesPlayed": 48
+            "gamesPlayed": 49
         },
         {
             "playerId": 1630631,
@@ -3532,28 +3532,28 @@
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/201950.png",
             "points": 11.1,
             "rebounds": 4.3,
-            "assists": 3.8,
-            "3ptMade": 1.7,
+            "assists": 3.9,
+            "3ptMade": 1.8,
             "steals": 1.1,
             "blocks": 0.5,
-            "turnovers": 1.3,
+            "turnovers": 1.2,
             "minutes": 30.6,
-            "gamesPlayed": 59
+            "gamesPlayed": 60
         },
         {
             "playerId": 1630577,
             "playerName": "Julian Champagnie",
             "teamTriCode": "SAS",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630577.png",
-            "points": 9.8,
-            "rebounds": 3.9,
-            "assists": 1.4,
+            "points": 9.7,
+            "rebounds": 3.8,
+            "assists": 1.3,
             "3ptMade": 2.1,
             "steals": 0.8,
             "blocks": 0.4,
             "turnovers": 0.9,
             "minutes": 23.3,
-            "gamesPlayed": 77
+            "gamesPlayed": 78
         },
         {
             "playerId": 1641763,
@@ -3605,15 +3605,15 @@
             "playerName": "Justin Champagnie",
             "teamTriCode": "WAS",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630551.png",
-            "points": 7.8,
-            "rebounds": 5.2,
+            "points": 7.9,
+            "rebounds": 5.3,
             "assists": 1.0,
-            "3ptMade": 1.0,
+            "3ptMade": 1.1,
             "steals": 1.0,
             "blocks": 0.6,
             "turnovers": 0.8,
-            "minutes": 20.2,
-            "gamesPlayed": 57
+            "minutes": 20.5,
+            "gamesPlayed": 58
         },
         {
             "playerId": 1642348,
@@ -3785,15 +3785,15 @@
             "playerName": "Keldon Johnson",
             "teamTriCode": "SAS",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629640.png",
-            "points": 12.6,
+            "points": 12.5,
             "rebounds": 4.7,
             "assists": 1.6,
-            "3ptMade": 1.2,
-            "steals": 0.7,
-            "blocks": 0.2,
+            "3ptMade": 1.1,
+            "steals": 0.6,
+            "blocks": 0.3,
             "turnovers": 1.0,
             "minutes": 23.8,
-            "gamesPlayed": 73
+            "gamesPlayed": 74
         },
         {
             "playerId": 203482,
@@ -3831,14 +3831,14 @@
             "teamTriCode": "OKC",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629026.png",
             "points": 5.9,
-            "rebounds": 3.4,
+            "rebounds": 3.3,
             "assists": 1.3,
             "3ptMade": 1.0,
-            "steals": 0.5,
+            "steals": 0.6,
             "blocks": 0.1,
             "turnovers": 0.5,
             "minutes": 15.8,
-            "gamesPlayed": 64
+            "gamesPlayed": 65
         },
         {
             "playerId": 203484,
@@ -3865,25 +3865,25 @@
             "assists": 1.5,
             "3ptMade": 1.7,
             "steals": 1.5,
-            "blocks": 0.7,
+            "blocks": 0.8,
             "turnovers": 0.9,
-            "minutes": 23.7,
-            "gamesPlayed": 75
+            "minutes": 23.9,
+            "gamesPlayed": 76
         },
         {
             "playerId": 1630553,
             "playerName": "Keon Johnson",
             "teamTriCode": "BKN",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630553.png",
-            "points": 10.4,
-            "rebounds": 3.6,
+            "points": 10.5,
+            "rebounds": 3.7,
             "assists": 2.1,
             "3ptMade": 1.6,
             "steals": 1.1,
             "blocks": 0.4,
             "turnovers": 1.4,
-            "minutes": 24.4,
-            "gamesPlayed": 75
+            "minutes": 24.3,
+            "gamesPlayed": 76
         },
         {
             "playerId": 1630556,
@@ -3980,15 +3980,15 @@
             "playerName": "Keyonte George",
             "teamTriCode": "UTA",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1641718.png",
-            "points": 16.6,
+            "points": 16.9,
             "rebounds": 3.8,
             "assists": 5.6,
             "3ptMade": 2.6,
             "steals": 0.7,
             "blocks": 0.1,
             "turnovers": 2.6,
-            "minutes": 31.1,
-            "gamesPlayed": 63
+            "minutes": 31.2,
+            "gamesPlayed": 64
         },
         {
             "playerId": 203114,
@@ -4055,15 +4055,15 @@
             "playerName": "Kris Murray",
             "teamTriCode": "POR",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1631200.png",
-            "points": 3.8,
-            "rebounds": 2.4,
-            "assists": 0.8,
+            "points": 4.0,
+            "rebounds": 2.5,
+            "assists": 0.9,
             "3ptMade": 0.4,
             "steals": 0.5,
             "blocks": 0.2,
             "turnovers": 0.6,
-            "minutes": 14.1,
-            "gamesPlayed": 65
+            "minutes": 14.4,
+            "gamesPlayed": 66
         },
         {
             "playerId": 204001,
@@ -4101,14 +4101,14 @@
             "teamTriCode": "UTA",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642271.png",
             "points": 9.1,
-            "rebounds": 5.8,
+            "rebounds": 5.9,
             "assists": 1.9,
-            "3ptMade": 1.1,
+            "3ptMade": 1.0,
             "steals": 0.6,
             "blocks": 0.2,
             "turnovers": 1.4,
-            "minutes": 20.6,
-            "gamesPlayed": 68
+            "minutes": 20.7,
+            "gamesPlayed": 69
         },
         {
             "playerId": 1628398,
@@ -4235,15 +4235,15 @@
             "playerName": "LeBron James",
             "teamTriCode": "LAL",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png",
-            "points": 24.6,
-            "rebounds": 8.0,
+            "points": 24.5,
+            "rebounds": 7.9,
             "assists": 8.4,
             "3ptMade": 2.2,
             "steals": 1.0,
             "blocks": 0.6,
-            "turnovers": 3.8,
+            "turnovers": 3.7,
             "minutes": 35.1,
-            "gamesPlayed": 66
+            "gamesPlayed": 67
         },
         {
             "playerId": 1630322,
@@ -4281,21 +4281,21 @@
             "teamTriCode": "OKC",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629652.png",
             "points": 10.0,
-            "rebounds": 4.2,
+            "rebounds": 4.1,
             "assists": 1.6,
-            "3ptMade": 2.3,
+            "3ptMade": 2.4,
             "steals": 1.1,
             "blocks": 0.6,
             "turnovers": 0.7,
             "minutes": 29.2,
-            "gamesPlayed": 69
+            "gamesPlayed": 70
         },
         {
             "playerId": 1629029,
             "playerName": "Luka Don\u010di\u0107",
             "teamTriCode": "LAL",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629029.png",
-            "points": 27.6,
+            "points": 27.7,
             "rebounds": 8.3,
             "assists": 7.8,
             "3ptMade": 3.4,
@@ -4303,7 +4303,7 @@
             "blocks": 0.4,
             "turnovers": 3.6,
             "minutes": 35.5,
-            "gamesPlayed": 46
+            "gamesPlayed": 47
         },
         {
             "playerId": 1630568,
@@ -4340,30 +4340,30 @@
             "playerName": "Luke Kornet",
             "teamTriCode": "BOS",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1628436.png",
-            "points": 5.8,
-            "rebounds": 5.2,
+            "points": 5.9,
+            "rebounds": 5.4,
             "assists": 1.6,
             "3ptMade": 0.0,
             "steals": 0.5,
-            "blocks": 1.0,
+            "blocks": 0.9,
             "turnovers": 0.4,
-            "minutes": 18.3,
-            "gamesPlayed": 68
+            "minutes": 18.4,
+            "gamesPlayed": 69
         },
         {
             "playerId": 1631103,
             "playerName": "Malaki Branham",
             "teamTriCode": "SAS",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1631103.png",
-            "points": 4.3,
+            "points": 4.5,
             "rebounds": 1.0,
             "assists": 0.8,
-            "3ptMade": 0.6,
+            "3ptMade": 0.7,
             "steals": 0.2,
             "blocks": 0.0,
-            "turnovers": 0.7,
-            "minutes": 8.4,
-            "gamesPlayed": 43
+            "turnovers": 0.8,
+            "minutes": 8.7,
+            "gamesPlayed": 44
         },
         {
             "playerId": 1627763,
@@ -4400,15 +4400,15 @@
             "playerName": "Malik Monk",
             "teamTriCode": "SAC",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1628370.png",
-            "points": 17.6,
+            "points": 17.4,
             "rebounds": 3.8,
-            "assists": 5.7,
+            "assists": 5.6,
             "3ptMade": 2.2,
             "steals": 1.0,
             "blocks": 0.6,
-            "turnovers": 2.4,
-            "minutes": 32.2,
-            "gamesPlayed": 63
+            "turnovers": 2.5,
+            "minutes": 32.0,
+            "gamesPlayed": 64
         },
         {
             "playerId": 1630699,
@@ -4539,11 +4539,11 @@
             "rebounds": 4.3,
             "assists": 3.1,
             "3ptMade": 2.2,
-            "steals": 0.6,
+            "steals": 0.5,
             "blocks": 0.2,
             "turnovers": 1.0,
-            "minutes": 25.2,
-            "gamesPlayed": 47
+            "minutes": 25.3,
+            "gamesPlayed": 48
         },
         {
             "playerId": 1628467,
@@ -4565,30 +4565,30 @@
             "playerName": "Maxwell Lewis",
             "teamTriCode": "BKN",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1641721.png",
-            "points": 3.7,
+            "points": 4.0,
             "rebounds": 1.8,
             "assists": 0.6,
             "3ptMade": 0.7,
             "steals": 0.3,
             "blocks": 0.2,
             "turnovers": 0.4,
-            "minutes": 10.7,
-            "gamesPlayed": 24
+            "minutes": 11.3,
+            "gamesPlayed": 25
         },
         {
             "playerId": 1630695,
             "playerName": "Micah Potter",
             "teamTriCode": "UTA",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630695.png",
-            "points": 4.4,
+            "points": 4.2,
             "rebounds": 4.2,
             "assists": 0.8,
             "3ptMade": 0.9,
-            "steals": 0.4,
+            "steals": 0.3,
             "blocks": 0.3,
             "turnovers": 0.8,
-            "minutes": 17.9,
-            "gamesPlayed": 34
+            "minutes": 17.6,
+            "gamesPlayed": 35
         },
         {
             "playerId": 1629008,
@@ -4730,15 +4730,15 @@
             "playerName": "Mouhamed Gueye",
             "teamTriCode": "ATL",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1631243.png",
-            "points": 5.9,
-            "rebounds": 3.5,
+            "points": 6.0,
+            "rebounds": 3.4,
             "assists": 0.8,
             "3ptMade": 0.6,
             "steals": 0.8,
             "blocks": 1.0,
             "turnovers": 0.4,
-            "minutes": 15.8,
-            "gamesPlayed": 28
+            "minutes": 15.6,
+            "gamesPlayed": 29
         },
         {
             "playerId": 1631217,
@@ -4812,8 +4812,8 @@
             "steals": 0.3,
             "blocks": 0.6,
             "turnovers": 0.6,
-            "minutes": 13.7,
-            "gamesPlayed": 58
+            "minutes": 13.6,
+            "gamesPlayed": 59
         },
         {
             "playerId": 1629651,
@@ -5006,9 +5006,9 @@
             "3ptMade": 1.5,
             "steals": 0.8,
             "blocks": 0.5,
-            "turnovers": 0.8,
-            "minutes": 26.8,
-            "gamesPlayed": 61
+            "turnovers": 0.9,
+            "minutes": 26.9,
+            "gamesPlayed": 62
         },
         {
             "playerId": 1641765,
@@ -5030,30 +5030,30 @@
             "playerName": "Onyeka Okongwu",
             "teamTriCode": "ATL",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630168.png",
-            "points": 13.0,
-            "rebounds": 8.7,
+            "points": 13.2,
+            "rebounds": 8.8,
             "assists": 2.3,
             "3ptMade": 0.6,
             "steals": 0.9,
             "blocks": 0.9,
-            "turnovers": 1.1,
-            "minutes": 27.5,
-            "gamesPlayed": 70
+            "turnovers": 1.2,
+            "minutes": 27.6,
+            "gamesPlayed": 71
         },
         {
             "playerId": 1631115,
             "playerName": "Orlando Robinson",
             "teamTriCode": "TOR",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1631115.png",
-            "points": 6.7,
+            "points": 6.8,
             "rebounds": 4.8,
             "assists": 1.7,
             "3ptMade": 0.4,
             "steals": 0.4,
             "blocks": 0.4,
             "turnovers": 1.1,
-            "minutes": 17.0,
-            "gamesPlayed": 42
+            "minutes": 17.1,
+            "gamesPlayed": 43
         },
         {
             "playerId": 1642345,
@@ -5240,15 +5240,15 @@
             "playerName": "Payton Pritchard",
             "teamTriCode": "BOS",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630202.png",
-            "points": 13.9,
+            "points": 14.0,
             "rebounds": 3.8,
-            "assists": 3.3,
+            "assists": 3.4,
             "3ptMade": 3.2,
             "steals": 0.9,
             "blocks": 0.2,
             "turnovers": 1.0,
             "minutes": 28.2,
-            "gamesPlayed": 75
+            "gamesPlayed": 76
         },
         {
             "playerId": 1641796,
@@ -5345,45 +5345,45 @@
             "playerName": "RJ Barrett",
             "teamTriCode": "TOR",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629628.png",
-            "points": 21.4,
+            "points": 21.3,
             "rebounds": 6.4,
             "assists": 5.5,
-            "3ptMade": 1.9,
+            "3ptMade": 1.8,
             "steals": 0.8,
             "blocks": 0.3,
             "turnovers": 2.9,
-            "minutes": 32.6,
-            "gamesPlayed": 56
+            "minutes": 32.5,
+            "gamesPlayed": 57
         },
         {
             "playerId": 1641712,
             "playerName": "Rayan Rupert",
             "teamTriCode": "POR",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1641712.png",
-            "points": 2.1,
+            "points": 2.2,
             "rebounds": 1.1,
             "assists": 0.4,
             "3ptMade": 0.2,
-            "steals": 0.2,
+            "steals": 0.3,
             "blocks": 0.1,
             "turnovers": 0.5,
-            "minutes": 7.3,
-            "gamesPlayed": 48
+            "minutes": 7.6,
+            "gamesPlayed": 49
         },
         {
             "playerId": 1641736,
             "playerName": "Reece Beekman",
             "teamTriCode": "BKN",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1641736.png",
-            "points": 2.1,
-            "rebounds": 0.9,
-            "assists": 1.3,
+            "points": 2.5,
+            "rebounds": 1.0,
+            "assists": 1.4,
             "3ptMade": 0.2,
-            "steals": 0.7,
+            "steals": 0.8,
             "blocks": 0.1,
-            "turnovers": 0.5,
-            "minutes": 11.2,
-            "gamesPlayed": 32
+            "turnovers": 0.6,
+            "minutes": 11.9,
+            "gamesPlayed": 33
         },
         {
             "playerId": 1642263,
@@ -5511,14 +5511,14 @@
             "teamTriCode": "LAL",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629060.png",
             "points": 13.1,
-            "rebounds": 5.0,
+            "rebounds": 5.1,
             "assists": 1.4,
             "3ptMade": 1.7,
             "steals": 0.8,
-            "blocks": 0.4,
+            "blocks": 0.5,
             "turnovers": 0.8,
             "minutes": 31.6,
-            "gamesPlayed": 56
+            "gamesPlayed": 57
         },
         {
             "playerId": 201566,
@@ -5570,22 +5570,22 @@
             "playerName": "Sam Hauser",
             "teamTriCode": "BOS",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630573.png",
-            "points": 8.1,
-            "rebounds": 3.1,
+            "points": 8.3,
+            "rebounds": 3.2,
             "assists": 0.9,
             "3ptMade": 2.3,
             "steals": 0.6,
             "blocks": 0.2,
             "turnovers": 0.3,
             "minutes": 21.4,
-            "gamesPlayed": 66
+            "gamesPlayed": 67
         },
         {
             "playerId": 1630241,
             "playerName": "Sam Merrill",
             "teamTriCode": "CLE",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630241.png",
-            "points": 7.1,
+            "points": 7.0,
             "rebounds": 2.2,
             "assists": 1.5,
             "3ptMade": 1.9,
@@ -5593,22 +5593,22 @@
             "blocks": 0.2,
             "turnovers": 0.5,
             "minutes": 19.6,
-            "gamesPlayed": 68
+            "gamesPlayed": 69
         },
         {
             "playerId": 1630572,
             "playerName": "Sandro Mamukelashvili",
             "teamTriCode": "SAS",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630572.png",
-            "points": 6.0,
+            "points": 5.9,
             "rebounds": 2.9,
             "assists": 0.7,
             "3ptMade": 1.0,
             "steals": 0.3,
             "blocks": 0.3,
             "turnovers": 0.4,
-            "minutes": 10.3,
-            "gamesPlayed": 56
+            "minutes": 10.4,
+            "gamesPlayed": 57
         },
         {
             "playerId": 1630583,
@@ -5690,15 +5690,15 @@
             "playerName": "Shaedon Sharpe",
             "teamTriCode": "POR",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1631101.png",
-            "points": 18.2,
-            "rebounds": 4.4,
+            "points": 18.3,
+            "rebounds": 4.5,
             "assists": 2.7,
             "3ptMade": 2.0,
             "steals": 0.8,
             "blocks": 0.2,
             "turnovers": 2.0,
             "minutes": 31.2,
-            "gamesPlayed": 70
+            "gamesPlayed": 71
         },
         {
             "playerId": 1628983,
@@ -5709,11 +5709,11 @@
             "rebounds": 5.0,
             "assists": 6.4,
             "3ptMade": 2.1,
-            "steals": 1.8,
+            "steals": 1.7,
             "blocks": 1.0,
             "turnovers": 2.4,
-            "minutes": 34.2,
-            "gamesPlayed": 74
+            "minutes": 34.1,
+            "gamesPlayed": 75
         },
         {
             "playerId": 1629003,
@@ -5780,7 +5780,7 @@
             "playerName": "Stephon Castle",
             "teamTriCode": "SAS",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642264.png",
-            "points": 14.4,
+            "points": 14.5,
             "rebounds": 3.6,
             "assists": 3.9,
             "3ptMade": 1.2,
@@ -5788,7 +5788,7 @@
             "blocks": 0.2,
             "turnovers": 2.1,
             "minutes": 26.3,
-            "gamesPlayed": 76
+            "gamesPlayed": 77
         },
         {
             "playerId": 203500,
@@ -5813,12 +5813,12 @@
             "points": 8.2,
             "rebounds": 2.3,
             "assists": 1.9,
-            "3ptMade": 1.8,
+            "3ptMade": 1.7,
             "steals": 0.5,
             "blocks": 0.2,
             "turnovers": 1.4,
             "minutes": 19.1,
-            "gamesPlayed": 34
+            "gamesPlayed": 35
         },
         {
             "playerId": 204456,
@@ -5901,14 +5901,14 @@
             "teamTriCode": "ATL",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629611.png",
             "points": 7.6,
-            "rebounds": 2.9,
+            "rebounds": 3.0,
             "assists": 1.8,
             "3ptMade": 0.9,
             "steals": 0.7,
             "blocks": 0.2,
             "turnovers": 0.7,
-            "minutes": 20.7,
-            "gamesPlayed": 62
+            "minutes": 20.8,
+            "gamesPlayed": 63
         },
         {
             "playerId": 1630545,
@@ -6005,45 +6005,45 @@
             "playerName": "Torrey Craig",
             "teamTriCode": "BOS",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1628470.png",
-            "points": 4.7,
-            "rebounds": 2.3,
-            "assists": 0.4,
+            "points": 4.6,
+            "rebounds": 2.5,
+            "assists": 0.5,
             "3ptMade": 1.0,
             "steals": 0.2,
-            "blocks": 0.3,
+            "blocks": 0.4,
             "turnovers": 0.1,
-            "minutes": 10.8,
-            "gamesPlayed": 22
+            "minutes": 11.1,
+            "gamesPlayed": 23
         },
         {
             "playerId": 1641787,
             "playerName": "Tosan Evbuomwan",
             "teamTriCode": "BKN",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1641787.png",
-            "points": 9.3,
-            "rebounds": 4.2,
-            "assists": 1.7,
+            "points": 9.5,
+            "rebounds": 4.3,
+            "assists": 1.8,
             "3ptMade": 0.8,
-            "steals": 0.7,
+            "steals": 0.8,
             "blocks": 0.3,
             "turnovers": 1.4,
-            "minutes": 23.7,
-            "gamesPlayed": 23
+            "minutes": 23.8,
+            "gamesPlayed": 24
         },
         {
             "playerId": 1641739,
             "playerName": "Toumani Camara",
             "teamTriCode": "POR",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1641739.png",
-            "points": 11.1,
-            "rebounds": 5.7,
+            "points": 11.2,
+            "rebounds": 5.8,
             "assists": 2.2,
             "3ptMade": 1.7,
             "steals": 1.5,
-            "blocks": 0.6,
+            "blocks": 0.7,
             "turnovers": 1.4,
             "minutes": 32.8,
-            "gamesPlayed": 74
+            "gamesPlayed": 75
         },
         {
             "playerId": 1629027,
@@ -6051,14 +6051,14 @@
             "teamTriCode": "ATL",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629027.png",
             "points": 24.0,
-            "rebounds": 3.1,
+            "rebounds": 3.2,
             "assists": 11.6,
             "3ptMade": 2.8,
             "steals": 1.2,
             "blocks": 0.2,
-            "turnovers": 4.8,
+            "turnovers": 4.7,
             "minutes": 36.1,
-            "gamesPlayed": 72
+            "gamesPlayed": 73
         },
         {
             "playerId": 1631218,
@@ -6095,15 +6095,15 @@
             "playerName": "Trendon Watford",
             "teamTriCode": "BKN",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630570.png",
-            "points": 9.5,
+            "points": 9.6,
             "rebounds": 3.4,
-            "assists": 2.4,
+            "assists": 2.5,
             "3ptMade": 0.6,
             "steals": 0.6,
             "blocks": 0.3,
             "turnovers": 1.8,
             "minutes": 20.1,
-            "gamesPlayed": 39
+            "gamesPlayed": 40
         },
         {
             "playerId": 1630243,
@@ -6155,15 +6155,15 @@
             "playerName": "Trey Lyles",
             "teamTriCode": "SAC",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1626168.png",
-            "points": 6.2,
-            "rebounds": 4.4,
+            "points": 6.3,
+            "rebounds": 4.5,
             "assists": 1.2,
             "3ptMade": 1.2,
             "steals": 0.6,
             "blocks": 0.3,
             "turnovers": 0.5,
-            "minutes": 18.4,
-            "gamesPlayed": 64
+            "minutes": 18.8,
+            "gamesPlayed": 65
         },
         {
             "playerId": 1630530,
@@ -6230,15 +6230,15 @@
             "playerName": "Ty Jerome",
             "teamTriCode": "CLE",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629660.png",
-            "points": 12.2,
+            "points": 12.3,
             "rebounds": 2.5,
             "assists": 3.3,
             "3ptMade": 1.5,
             "steals": 1.1,
             "blocks": 0.0,
             "turnovers": 1.3,
-            "minutes": 19.7,
-            "gamesPlayed": 67
+            "minutes": 19.8,
+            "gamesPlayed": 68
         },
         {
             "playerId": 1629639,
@@ -6395,15 +6395,15 @@
             "playerName": "V\u00edt Krej\u010d\u00ed",
             "teamTriCode": "ATL",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630249.png",
-            "points": 7.1,
+            "points": 7.3,
             "rebounds": 2.7,
-            "assists": 2.5,
+            "assists": 2.6,
             "3ptMade": 1.6,
             "steals": 0.6,
             "blocks": 0.5,
             "turnovers": 0.8,
-            "minutes": 20.3,
-            "gamesPlayed": 52
+            "minutes": 20.4,
+            "gamesPlayed": 53
         },
         {
             "playerId": 1631117,
@@ -6456,14 +6456,14 @@
             "teamTriCode": "BOS",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630214.png",
             "points": 1.0,
-            "rebounds": 1.4,
+            "rebounds": 1.3,
             "assists": 0.2,
             "3ptMade": 0.2,
             "steals": 0.3,
             "blocks": 0.2,
             "turnovers": 0.4,
             "minutes": 7.0,
-            "gamesPlayed": 31
+            "gamesPlayed": 32
         },
         {
             "playerId": 1642274,
@@ -6485,15 +6485,15 @@
             "playerName": "Zaccharie Risacher",
             "teamTriCode": "ATL",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642258.png",
-            "points": 12.3,
-            "rebounds": 3.7,
-            "assists": 1.2,
+            "points": 12.4,
+            "rebounds": 3.6,
+            "assists": 1.3,
             "3ptMade": 1.6,
             "steals": 0.7,
             "blocks": 0.5,
-            "turnovers": 1.3,
+            "turnovers": 1.2,
             "minutes": 24.8,
-            "gamesPlayed": 70
+            "gamesPlayed": 71
         },
         {
             "playerId": 1628380,
@@ -6530,15 +6530,15 @@
             "playerName": "Zach LaVine",
             "teamTriCode": "SAC",
             "playerPicture": "https://cdn.nba.com/headshots/nba/latest/1040x760/203897.png",
-            "points": 22.8,
+            "points": 23.0,
             "rebounds": 4.4,
-            "assists": 4.2,
+            "assists": 4.1,
             "3ptMade": 3.1,
             "steals": 0.8,
             "blocks": 0.2,
             "turnovers": 2.9,
-            "minutes": 34.8,
-            "gamesPlayed": 69
+            "minutes": 35.0,
+            "gamesPlayed": 70
         },
         {
             "playerId": 1630192,
@@ -6566,9 +6566,9 @@
             "3ptMade": 1.6,
             "steals": 1.0,
             "blocks": 0.4,
-            "turnovers": 1.0,
-            "minutes": 24.8,
-            "gamesPlayed": 60
+            "turnovers": 1.1,
+            "minutes": 24.7,
+            "gamesPlayed": 61
         },
         {
             "playerId": 1629627,

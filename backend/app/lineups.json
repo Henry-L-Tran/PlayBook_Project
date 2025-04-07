@@ -15,8 +15,8 @@
                 "line_category": "PTS",
                 "projected_line": 20.5,
                 "users_pick": "Over",
-                "live_value": 37,
-                "status": "hit"
+                "live_value": "N/A",
+                "status": "pending"
             },
             {
                 "player_id": 1631109,
@@ -26,8 +26,8 @@
                 "line_category": "PTS",
                 "projected_line": 15.5,
                 "users_pick": "Over",
-                "live_value": 22,
-                "status": "hit"
+                "live_value": "N/A",
+                "status": "pending"
             }
         ],
         "time": "2025-04-06T21:01:02.438223",

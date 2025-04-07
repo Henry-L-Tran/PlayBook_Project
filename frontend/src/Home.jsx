@@ -18,14 +18,14 @@ function Home() {
 
 
   // Gets the Current User from Local Storage for Lineups Page
-  const currentUser = localStorage.getItem("currUser")
+  const currentUser = JSON.parse(localStorage.getItem("currUser"));
 
 
   // Renders the Active Component Based on the State
   const renderComponent = () => {
     switch (activeComponent) {
       case "lineups":
-        return <LineupsPage userEmail={currentUser} />;
+        return <LineupsPage userEmail={currentUser.email} />;
       case "promos":
         return <Promos />;
       //   case "social":

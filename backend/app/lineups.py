@@ -218,7 +218,7 @@ def fetch_user_live_lineup_data():
                             lineup["result"] = "LOST"
                     elif lineup["entry_type"] == "Flex Play":
                         if hitLines >= 2:
-                            lineup["result"] = f"WON ({hitLines} of {len(lineup["entries"])})"
+                            lineup["result"] = f"WON ({hitLines} of {len(lineup['entries'])})"
                             user_payout(lineup["email"], lineup["potential_payout"])
                         else:
                             lineup["result"] = "LOST"
