@@ -4,7 +4,7 @@ import axios from 'axios';
 
 
 // Fetches and Displays the User's Lineups
-const LineupsPage = ({ user }) => {
+const LineupsPage = ({ user, setActiveComponent }) => {
     const [userLineups, setUserLineups] = useState([]);
 
     useEffect(() => {
@@ -53,6 +53,18 @@ const LineupsPage = ({ user }) => {
                 >
                     {user.first_name} {user.last_name}
                 </Typography>
+
+                <button
+                onClick={() => setActiveComponent("funds")}
+                    style={{
+                        fontFamily: "monospace",
+                        fontWeight: "bold",
+                        color: "white",
+                        textAlign: "center",
+                    }}
+                >
+                    Deposit
+                </button>
             </Box>
 
             {/* Lineups Section Container */}
@@ -80,7 +92,7 @@ const LineupBox = ({ lineup }) => {
 
     return (
 
-        // LineupBox Container
+        // Lineup Box Container
         <Box className="lineup-box"
             onClick={() => setLineupExpanded(!lineupExpanded)}
             sx={{
