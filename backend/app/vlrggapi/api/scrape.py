@@ -1,4 +1,4 @@
-from api.scrapers import (
+from vlrggapi.api.scrapers import (
     check_health,
     vlr_live_score,
     vlr_match_results,

@@ -3,7 +3,7 @@ import re
 import requests
 from selectolax.parser import HTMLParser
 
-from utils.utils import headers, region
+from vlrggapi.utils.utils import headers, region
 
 
 def vlr_rankings(region_key):

@@ -1,7 +1,7 @@
 import requests
 from selectolax.parser import HTMLParser
 
-from utils.utils import headers
+from vlrggapi.utils.utils import headers
 
 
 def vlr_news():
