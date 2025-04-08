@@ -202,7 +202,7 @@ const LineupsPage = ({ user, setActiveComponent }) => {
 
 const LineupBox = ({ lineup }) => {
     const [lineupExpanded, setLineupExpanded] = useState(false);
-    const gameStatusColor = lineup.result === "WON" ? "green" : lineup.result === "LOST" ? "red" : "gray";
+    const gameStatusColor = lineup.result === "WON" ? "green" : lineup.result === "LOST" ? "red" : "white";
 
     return (
         // Lineup Date and Box Container
@@ -344,7 +344,6 @@ const LineupBox = ({ lineup }) => {
                                 fontWeight: "bold",
                                 color: gameStatusColor,
                                 fontSize: "1.3rem",
-                                color: lineup.result === "WON" ? "green" : lineup.result === "LOST" ? "red" : "white",
                             }}
                         >
                             {lineup.result || "Live"}

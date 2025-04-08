@@ -433,19 +433,19 @@ const userPickUpdate = (playerId, pick) => {
               sx={{
                 fontSize: "1.2rem",
                 fontFamily: "monospace",
-                // width: "20rem",
                 paddingTop: "1rem",
                 paddingBottom: "1rem",
                 textAlign: "center",
-                // marginLeft: "26rem",
+                fontWeight: "bold",
               }}
             >
-              {" "}
-              {nbaLiveGames.gameDate ? format(new Date(nbaLiveGames.gameDate), "MMMM d, yyyy") : "No Games Scheduled"}
+              {nbaLiveGames.gameDate && nbaLiveGames.gameDate !== "N/A" ?
+              format(new Date(`${nbaLiveGames.gameDate}T00:00:00`), "MMMM d, yyyy") :
+              "No Scheduled Games"}
             </Typography>
 
-            {nbaLiveGames.length === 0 ? (
-              <Typography> No scheduled games </Typography>
+            {nbaLiveGames.gameData.length === 0 ? (
+              <Typography> No Scheduled Games </Typography>
             ) : (
               nbaLiveGames.gameData.map((game, index) => (
 
