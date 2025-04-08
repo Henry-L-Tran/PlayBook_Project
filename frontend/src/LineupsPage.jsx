@@ -59,6 +59,7 @@ const LineupsPage = ({ user, setActiveComponent }) => {
                     justifyContent: "center",
                     marginTop: "3%",
                     height: "100%",
+                    gap: 3,
                 }}
             >
                 {/* User Info Box Container */}
@@ -117,18 +118,18 @@ const LineupsPage = ({ user, setActiveComponent }) => {
                     sx={{
                         display: "flex",
                         flexDirection: "column",
-                        width: "60%",
+                        width: "50%",
                         gap: 2,
                         marginLeft: "3%",
                     }}>
 
-                    {/* Lineups Tabs Container */}
+                    {/* Lineups Open/Past Tabs Container */}
                     <Box
                         sx={{
                             display: "flex",
                             justifyContent: "center",
                             gap: 1,
-                            width: "80%",
+                            width: "100%",
                             marginBottom: "3%",
                         }}
                     >
@@ -141,7 +142,7 @@ const LineupsPage = ({ user, setActiveComponent }) => {
                                 cursor: "pointer",
                                 borderRadius: "2rem",
                                 width: "100%",
-                                border: "1px solid white",
+                                border: activeLineupTabs === "Open" ? "3.5px solid white" : "1px solid white",
                             }}
                             onClick={() => setActiveLineupTabs("Open")} className={activeLineupTabs === "Open" ? "active-tab" : ""}>
                             Open
@@ -156,17 +157,48 @@ const LineupsPage = ({ user, setActiveComponent }) => {
                                 cursor: "pointer",
                                 borderRadius: "2rem",
                                 width: "100%",
-                                border: "1px solid white",
+                                border: activeLineupTabs === "Past" ? "3.5px solid white" : "1px solid white",
                             }}
                             onClick={() => setActiveLineupTabs("Past")} className={activeLineupTabs === "Past" ? "active-tab" : ""}>
                             Past
                         </button>
                     </Box>
                     
-            
-                    {filteredLineups.map((lineup, idx) => (
-                        <LineupBox key={idx} lineup={lineup} />
-                    ))}
+                    {/* Shows Filtered Lineups Based on the Selected Tab */}
+                    <Box className="filtered-lineups"
+                        sx={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            gap: 2,
+                            width: "100%",
+                        }}
+                    >
+                        {(() => {
+                            const filteredLineups = userLineups.filter(lineup => {
+                                const entryFinal = lineup.evaluated === true || lineup.result === "WON" || lineup.result === "LOST";
+                                return activeLineupTabs === "Open" ? !entryFinal : entryFinal;
+                        });
+                    
+                            return filteredLineups.length === 0 ? (
+                                <Typography
+                                    sx={{
+                                        fontFamily: "monospace",
+                                        fontWeight: "bold",
+                                        color: "white",
+                                        textAlign: "center",
+                                    }}
+                                >
+                                    {activeLineupTabs === "Open" ? "Currently No Open Lineups!" : "Currently No Past Lineups!"}
+                                </Typography>
+                            ) : (
+                                filteredLineups.map((lineup, idx) => (
+                                    <LineupBox key={idx} lineup={lineup} />
+                                ))
+                            );
+                        })()}
+                    </Box>
                 </Box>
             </Box>
         </Box>
@@ -186,7 +218,7 @@ const LineupBox = ({ lineup }) => {
                 borderRadius: "1rem",
                 cursor: "pointer",
                 backgroundColor: "rgba(0, 0, 0, 0.5)",
-                width: "80%",
+                width: "100%",
                 border: "1px solid white",
             }}
         >
