@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import axios from 'axios';
 import { format } from 'date-fns';
+import LineupDetails from "./LineupDetails";
+
 
 
 // Fetches and Displays the User's Lineups
 const LineupsPage = ({ user, setActiveComponent }) => {
     const [userLineups, setUserLineups] = useState([]);
     const [activeLineupTabs, setActiveLineupTabs] = useState("Open");
+    const [expandLineupDetails, setExpandLineupDetails] = useState(null);
 
     useEffect(() => {
         const fetchUserLineups = async () => {
@@ -30,183 +33,197 @@ const LineupsPage = ({ user, setActiveComponent }) => {
 
 
     return (
-        // Main Container for the Entire Lineups Page
-        <Box className="lineups-page"
-            sx={{
-                alignItems: "center",
-                justifyContent: "center",
-                width: "100%",
-                height: "100%",
-                overflowY: "auto",
-            }}
-        >
- 
-            {/* Funds Header */}
-            <h1 className="flex items-center flex-col justify-center font-mono">
-                Lineups
-            </h1>
-
-            {/* Lineups Page Content Container */}
-            <Box className="lineups-page-content-container"
+        <>
+            {/* Main Container for the Entire Lineups Page */}
+            <Box className="lineups-page"
                 sx={{
-                    display: "flex",
-                    flexDirection: "row",
+                    alignItems: "center",
                     justifyContent: "center",
-                    marginTop: "3%",
+                    width: "100%",
                     height: "100%",
-                    gap: 3,
+                    overflowY: "auto",
                 }}
             >
-                {/* User Info Box Container */}
-                <Box className="user-info-box"
+    
+                {/* Funds Header */}
+                <h1 className="flex items-center flex-col justify-center font-mono">
+                    Lineups
+                </h1>
+
+                {/* Lineups Page Content Container */}
+                <Box className="lineups-page-content-container"
                     sx={{
                         display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        backgroundColor: "rgba(0, 0, 0, 0.5)",
-                        width: "30%",
-                        height: "38%",
-                        padding: 2,
-                        borderRadius: "1rem",
-                        border: "1px solid white",
+                        flexDirection: "row",
+                        justifyContent: "center",
+                        marginTop: "3%",
+                        height: "100%",
+                        gap: 3,
                     }}
                 >
-                    {/* User's First and Last Name w/ Lineups Header Container */}
-                    <Box className="user-info-name"
-                        sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "center",
-                            marginBottom: "10%",
-                        }}
-                    >
-                        {/* User's First and Last Name */}
-                        <Typography
-                            sx={{
-                                fontFamily: "monospace",
-                                fontWeight: "bold",
-                                color: "white",
-                                textAlign: "center",
-                                fontSize: "1.5rem",
-                            }}
-                        >
-                            {user.first_name} {user.last_name}
-                        </Typography>
-                    </Box>
-
-                    {/* Deposit Button */}
-                    <button
-                    onClick={() => setActiveComponent("funds")}
-                        style={{
-                            fontFamily: "monospace",
-                            fontWeight: "bold",
-                            color: "white",
-                            textAlign: "center",
-                        }}
-                    >
-                        Deposit
-                    </button>
-                </Box>
-
-                {/* Lineups Section Container */}
-                <Box className="lineups-section"
-                    sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        width: "50%",
-                        gap: 2,
-                        marginLeft: "3%",
-                    }}>
-
-                    {/* Lineups Open/Past Tabs Container */}
-                    <Box
-                        sx={{
-                            display: "flex",
-                            justifyContent: "center",
-                            gap: 1,
-                            width: "100%",
-                            marginBottom: "3%",
-                        }}
-                    >
-                        <button
-                            style={{
-                                fontFamily: "monospace",
-                                fontWeight: "bold",
-                                color: "white",
-                                textAlign: "center",
-                                cursor: "pointer",
-                                borderRadius: "2rem",
-                                width: "100%",
-                                border: activeLineupTabs === "Open" ? "3.5px solid white" : "1px solid white",
-                            }}
-                            onClick={() => setActiveLineupTabs("Open")} className={activeLineupTabs === "Open" ? "active-tab" : ""}>
-                            Open
-                        </button>
-
-                        <button
-                            style={{
-                                fontFamily: "monospace",
-                                fontWeight: "bold",
-                                color: "white",
-                                textAlign: "center",
-                                cursor: "pointer",
-                                borderRadius: "2rem",
-                                width: "100%",
-                                border: activeLineupTabs === "Past" ? "3.5px solid white" : "1px solid white",
-                            }}
-                            onClick={() => setActiveLineupTabs("Past")} className={activeLineupTabs === "Past" ? "active-tab" : ""}>
-                            Past
-                        </button>
-                    </Box>
-                    
-                    {/* Shows Filtered Lineups Based on the Selected Tab */}
-                    <Box className="filtered-lineups"
+                    {/* User Info Box Container */}
+                    <Box className="user-info-box"
                         sx={{
                             display: "flex",
                             flexDirection: "column",
                             alignItems: "center",
-                            justifyContent: "center",
-                            gap: 5,
-                            width: "100%",
+                            backgroundColor: "rgba(0, 0, 0, 0.5)",
+                            width: "30%",
+                            height: "38%",
+                            padding: 2,
+                            borderRadius: "1rem",
+                            border: "1px solid white",
                         }}
                     >
-                        {(() => {
-                            const filteredLineups = userLineups.filter(lineup => {
-                                const entryFinal = lineup.evaluated === true || lineup.result === "WON" || lineup.result === "LOST";
-                                return activeLineupTabs === "Open" ? !entryFinal : entryFinal;
-                        });
-                    
-                            return filteredLineups.length === 0 ? (
-                                <Typography
-                                    sx={{
-                                        fontFamily: "monospace",
-                                        fontWeight: "bold",
-                                        color: "white",
-                                        textAlign: "center",
-                                    }}
-                                >
-                                    {activeLineupTabs === "Open" ? "Currently No Open Lineups!" : "Currently No Past Lineups!"}
-                                </Typography>
-                            ) : (
-                                filteredLineups.map((lineup, idx) => (
-                                    <LineupBox key={idx} lineup={lineup} />
-                                ))
-                            );
-                        })()}
+                        {/* User's First and Last Name w/ Lineups Header Container */}
+                        <Box className="user-info-name"
+                            sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "center",
+                                marginBottom: "10%",
+                            }}
+                        >
+                            {/* User's First and Last Name */}
+                            <Typography
+                                sx={{
+                                    fontFamily: "monospace",
+                                    fontWeight: "bold",
+                                    color: "white",
+                                    textAlign: "center",
+                                    fontSize: "1.5rem",
+                                }}
+                            >
+                                {user.first_name} {user.last_name}
+                            </Typography>
+                        </Box>
+
+                        {/* Deposit Button */}
+                        <button
+                        onClick={() => setActiveComponent("funds")}
+                            style={{
+                                fontFamily: "monospace",
+                                fontWeight: "bold",
+                                color: "white",
+                                textAlign: "center",
+                            }}
+                        >
+                            Deposit
+                        </button>
+                    </Box>
+
+                    {/* Lineups Section Container */}
+                    <Box className="lineups-section"
+                        sx={{
+                            display: "flex",
+                            flexDirection: "column",
+                            width: "50%",
+                            gap: 2,
+                            marginLeft: "3%",
+                        }}>
+
+                        {/* Lineups Open/Past Tabs Container */}
+                        <Box
+                            sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                                gap: 1,
+                                width: "100%",
+                                marginBottom: "3%",
+                            }}
+                        >
+                            <button
+                                style={{
+                                    fontFamily: "monospace",
+                                    fontWeight: "bold",
+                                    color: "white",
+                                    textAlign: "center",
+                                    cursor: "pointer",
+                                    borderRadius: "2rem",
+                                    width: "100%",
+                                    border: activeLineupTabs === "Open" ? "3.5px solid white" : "1px solid white",
+                                }}
+                                onClick={() => setActiveLineupTabs("Open")} className={activeLineupTabs === "Open" ? "active-tab" : ""}>
+                                Open
+                            </button>
+
+                            <button
+                                style={{
+                                    fontFamily: "monospace",
+                                    fontWeight: "bold",
+                                    color: "white",
+                                    textAlign: "center",
+                                    cursor: "pointer",
+                                    borderRadius: "2rem",
+                                    width: "100%",
+                                    border: activeLineupTabs === "Past" ? "3.5px solid white" : "1px solid white",
+                                }}
+                                onClick={() => setActiveLineupTabs("Past")} className={activeLineupTabs === "Past" ? "active-tab" : ""}>
+                                Past
+                            </button>
+                        </Box>
+                        
+                        {/* Shows Filtered Lineups Based on the Selected Tab */}
+                        <Box className="filtered-lineups"
+                            sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                gap: 5,
+                                width: "100%",
+                            }}
+                        >
+                            {(() => {
+                                const filteredLineups = userLineups.filter(lineup => {
+                                    const entryFinal = lineup.evaluated === true || lineup.result === "WON" || lineup.result === "LOST";
+                                    return activeLineupTabs === "Open" ? !entryFinal : entryFinal;
+                            });
+                        
+                                return filteredLineups.length === 0 ? (
+                                    <Typography
+                                        sx={{
+                                            fontFamily: "monospace",
+                                            fontWeight: "bold",
+                                            color: "white",
+                                            textAlign: "center",
+                                        }}
+                                    >
+                                        {activeLineupTabs === "Open" ? "Currently No Open Lineups!" : "Currently No Past Lineups!"}
+                                    </Typography>
+                                ) : (
+                                    filteredLineups.map((lineup, idx) => (
+                                        <LineupBox 
+                                            key={idx} 
+                                            lineup={lineup} 
+                                            onClick={() => setExpandLineupDetails(lineup)} 
+                                        />
+                                    ))
+                                );
+                            })()}
+                        </Box>
                     </Box>
                 </Box>
             </Box>
-        </Box>
+
+            {/* Lineup Details Popup */}
+            {expandLineupDetails && (
+                <LineupDetails
+                    lineup={expandLineupDetails}
+                    onClose={() => setExpandLineupDetails(null)}
+                />
+            )}
+        </>
     );
 }
 
-const LineupBox = ({ lineup }) => {
-    const [lineupExpanded, setLineupExpanded] = useState(false);
+const LineupBox = ({ lineup, onClick }) => {
     const gameStatusColor = lineup.result === "WON" ? "green" : lineup.result === "LOST" ? "red" : "white";
 
     return (
         // Lineup Date and Box Container
         <Box className="lineup-content-container"
+            onClick={onClick}
             sx={{
                 display: "flex",
                 flexDirection: "column",
@@ -240,7 +257,7 @@ const LineupBox = ({ lineup }) => {
 
             {/* Lineup Box Container */}
             <Box className="lineup-box"
-                onClick={() => setLineupExpanded(!lineupExpanded)}
+                onClick={onClick}
                 sx={{
                     borderRadius: "1rem",
                     cursor: "pointer",
@@ -350,25 +367,6 @@ const LineupBox = ({ lineup }) => {
                         </Typography>
                     </Box>
                 </Box>
-
-                {/* Lineup Details Container When Expanded */}
-                {lineupExpanded && (
-                    <Box className="lineup-details"
-                        sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
-                            justifyContent: "center",
-                        }}
-                    >
-                        {lineup.entries.map((entry, idx) => (
-                            <UserLineup
-                                key={idx}
-                                entry={entry}
-                            />
-                        ))}
-                    </Box>
-                )}
             </Box>
         </Box>
     )
