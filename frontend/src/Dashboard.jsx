@@ -452,7 +452,9 @@ const userPickUpdate = (playerId, pick) => {
                 <Box
                   key={index}
                   onClick={() => {
-                    if (game.gameStatus === 3) {
+
+                    // If the Game Hasn't Started, Show the Betting Lines Popup
+                    if (game.gameStatus === 1) {
                       setnbaselectedGame(game);
                       setShowBettingLines(true);
                     }

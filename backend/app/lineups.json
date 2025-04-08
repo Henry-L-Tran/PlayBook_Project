@@ -90,5 +90,49 @@
         "time": "2025-04-08T15:28:54.072181",
         "result": "WON",
         "evaluated": true
+    },
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "henry.l.tran-1@ou.edu_1744131256441_1e7183a6-5d87-4546-848a-af2aef9adf73",
+        "entry_type": "Flex Play",
+        "entry_amount": 10.0,
+        "potential_payout": 25.0,
+        "entries": [
+            {
+                "player_id": 1628983,
+                "player_name": "Shai Gilgeous-Alexander",
+                "team_tri_code": "OKC",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1628983.png",
+                "line_category": "PTS",
+                "projected_line": 32.5,
+                "users_pick": "Over",
+                "live_value": "N/A",
+                "status": "pending"
+            },
+            {
+                "player_id": 2544,
+                "player_name": "LeBron James",
+                "team_tri_code": "LAL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png",
+                "line_category": "PTS",
+                "projected_line": 24.5,
+                "users_pick": "Over",
+                "live_value": "N/A",
+                "status": "pending"
+            },
+            {
+                "player_id": 1629029,
+                "player_name": "Luka Don\u010di\u0107",
+                "team_tri_code": "LAL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629029.png",
+                "line_category": "REB",
+                "projected_line": 8.5,
+                "users_pick": "Under",
+                "live_value": "N/A",
+                "status": "pending"
+            }
+        ],
+        "time": "2025-04-08T16:54:16.458367"
     }
 ]

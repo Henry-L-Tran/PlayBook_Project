@@ -295,7 +295,7 @@ const LineupBox = ({ lineup }) => {
                                 display: "flex",
                                 flexWrap: "wrap",
                                 width: "5rem",
-                                border: `2px solid ${entry.status === 'hit' ? 'green' : entry.status === 'miss' ? 'red' : 'gray'}`,
+                                border: `2px solid ${entry.status === 'hit' ? 'green' : entry.status === 'miss' ? 'red' : 'white'}`,
                                 borderRadius: "10rem",
                                 objectFit: "cover",
                                 imageRendering: "auto",
@@ -317,6 +317,7 @@ const LineupBox = ({ lineup }) => {
                             fontWeight: "bold",
                             color: gameStatusColor,
                             fontSize: "1.3rem",
+                            color: lineup.result === "WON" ? "green" : lineup.result === "LOST" ? "red" : "white",
                         }}
                     >
                         {lineup.result || "Live"}
