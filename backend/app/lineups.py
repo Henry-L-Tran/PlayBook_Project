@@ -67,6 +67,54 @@ def save_lineups(lineups):
         json.dump(lineups, file, indent=4)
 
 
+
+# Payout Multiplier Function
+def payout_multiplier(entry_type: str, total_legs: int, hit_legs: int) -> float:
+    
+    # Power Play Payouts
+    if entry_type == "Power Play":
+        if hit_legs == total_legs:
+            if total_legs == 2:
+                return 3
+            elif total_legs == 3:
+                return 5
+            elif total_legs == 4:
+                return 10
+            elif total_legs == 5:
+                return 20
+            elif total_legs == 6:
+                return 37.5
+            
+    # Flex Play Payouts
+    elif entry_type == "Flex Play":
+        if total_legs == 3:
+            if hit_legs == 3:
+                return 2.5
+            elif hit_legs == 2:
+                return 1
+        elif total_legs == 4:
+            if hit_legs == 4:
+                return 5
+            elif hit_legs == 3:
+                return 1.5
+        elif total_legs == 5:
+            if hit_legs == 5:
+                return 10
+            elif hit_legs == 4:
+                return 2
+            elif hit_legs == 3:
+                return 0.4
+        elif total_legs == 6:
+            if hit_legs == 6:
+                return 25
+            elif hit_legs == 5:
+                return 2
+            elif hit_legs == 4:
+                return 0.4
+            
+    return 0
+        
+
 # User Payout Function
 def user_payout(email: str, payout: float):
     users = loadUsers()
@@ -143,13 +191,17 @@ def fetch_user_live_lineup_data():
         except Exception as e:
             print("Error fetching game status:", e)
             
-
+        # Updates the User's Lineups
         updated_lineups = []
         for lineup in lineups:
+            if lineup.get("evaluated") is True:
+                updated_lineups.append(lineup)
+                continue
+                
             games_final = True
 
-            # The User's Number of Lines That They Hit
-            hitLines = 0
+            # The User's Number of Legs That They Hit
+            hit_legs = 0
 
             # Checks if the User's Lineup is Still Active or Not
             for entry in lineup["entries"]:
@@ -158,6 +210,7 @@ def fetch_user_live_lineup_data():
                 category = entry["line_category"]
                 pick = entry["users_pick"]
 
+                # If No Live Stats For the Player, Set Status to Pending, and Live Value to N/A
                 live_player = live_stats.get(player_id)
                 if not live_player:
                     entry["live_value"] = "N/A"
@@ -197,33 +250,38 @@ def fetch_user_live_lineup_data():
 
                 entry["live_value"] = value
 
+
+                # If No Live Stats For the Player, Set Status to Pending, and Games Final to False
+                if value is None:
+                    entry["status"] = "pending"
+                    games_final = False
+                    continue
+
                 # Checks if the User's Line Hits or Not
                 if pick == "Over" and value > line:
                     entry["status"] = "hit"
-                    hitLines += 1
+                    hit_legs += 1
                 elif pick == "Under" and value < line:
                     entry["status"] = "hit"
-                    hitLines += 1
+                    hit_legs += 1
                 else:
                     entry["status"] = "miss"
 
             # Determines the Lineup Result
             if games_final:
                 if lineup.get("result") is None or lineup["result"] == "IN PROGRESS":
-                    if lineup["entry_type"] == "Power Play":
-                        if hitLines == len(lineup["entries"]):
-                            lineup["result"] = "WON"
-                            user_payout(lineup["email"], lineup["potential_payout"])
-                        else:
-                            lineup["result"] = "LOST"
-                    elif lineup["entry_type"] == "Flex Play":
-                        if hitLines >= 2:
-                            lineup["result"] = f"WON ({hitLines} of {len(lineup['entries'])})"
-                            user_payout(lineup["email"], lineup["potential_payout"])
-                        else:
-                            lineup["result"] = "LOST"
+                    total_legs = len(lineup["entries"])
+                    multiplier = payout_multiplier(lineup["entry_type"], total_legs, hit_legs)
+
+                    if multiplier > 0:
+                        payout = round(lineup["entry_amount"] * multiplier, 2)
+                        lineup["result"] = "WON"
+                        user_payout(lineup["email"], payout)
                     else:
                         lineup["result"] = "LOST"
+
+                # The Lineup Is Finalized, and The Live Data is Saved/Frozen
+                lineup["evaluated"] = True
 
             updated_lineups.append(lineup)
             print("Game Status:", game_status)
