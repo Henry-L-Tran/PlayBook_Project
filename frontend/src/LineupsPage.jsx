@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import axios from 'axios';
+import { format } from 'date-fns';
 
 
 // Fetches and Displays the User's Lineups
 const LineupsPage = ({ user, setActiveComponent }) => {
     const [userLineups, setUserLineups] = useState([]);
     const [activeLineupTabs, setActiveLineupTabs] = useState("Open");
-
-    const filteredLineups = userLineups.filter(lineup =>
-        activeLineupTabs === "Open"
-            ? !lineup.evaluated
-            : lineup.evaluated
-    );
 
     useEffect(() => {
         const fetchUserLineups = async () => {
@@ -171,7 +166,7 @@ const LineupsPage = ({ user, setActiveComponent }) => {
                             flexDirection: "column",
                             alignItems: "center",
                             justifyContent: "center",
-                            gap: 2,
+                            gap: 5,
                             width: "100%",
                         }}
                     >
@@ -210,139 +205,172 @@ const LineupBox = ({ lineup }) => {
     const gameStatusColor = lineup.result === "WON" ? "green" : lineup.result === "LOST" ? "red" : "gray";
 
     return (
-
-        // Lineup Box Container
-        <Box className="lineup-box"
-            onClick={() => setLineupExpanded(!lineupExpanded)}
+        // Lineup Date and Box Container
+        <Box className="lineup-content-container"
             sx={{
-                borderRadius: "1rem",
-                cursor: "pointer",
-                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
                 width: "100%",
-                border: "1px solid white",
             }}
         >
-
-            {/* Lineup Entry Header */}
-            <Box className="lineup-header"
+            {/* Lineup Date Container */}
+            <Box className="lineup-date"
                 sx={{
-                    paddingTop: "4%",
-                    paddingBottom: "2%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginBottom: "1%",
                 }}
             >
-
-                {/* Lineup Entry Type and Amount */}
+                {/* Lineup Date */}
                 <Typography
                     sx={{
                         fontFamily: "monospace",
                         fontWeight: "bold",
                         color: "white",
                         textAlign: "center",
-                    }}>
-                        {lineup.entries.length}-Pick ${lineup.potential_payout.toFixed(2)}
-                </Typography>
-
-                {/* Lineup Entry Type */}
-                <Typography
-                    sx={{
-                        fontFamily: "monospace",
-                        color: "white",
-                        marginBottom: "4%",
                     }}
                 >
-                    ${lineup.entry_amount} {lineup.entry_type}
+                    {lineup.time ? `${format(new Date(lineup.time), "MMMM d, yyyy")}` : "Lineup Date"}
                 </Typography>
-
-                {/* Divider Line */}
-                <Box
-                    sx={{
-                        borderBottom: "1px solid white",
-                        width: "100%",
-                        margin: "0.5rem auto",
-                    }}
-                />
             </Box>
-            
-            {/* Player Pictures and Entry Status Container */}
-            <Box className="player-pictures-entry-status"
+
+
+            {/* Lineup Box Container */}
+            <Box className="lineup-box"
+                onClick={() => setLineupExpanded(!lineupExpanded)}
                 sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    marginBottom: "3%",
+                    borderRadius: "1rem",
+                    cursor: "pointer",
+                    backgroundColor: "rgba(0, 0, 0, 0.5)",
                     width: "100%",
-                    flexWrap: "nowrap",
+                    border: "1px solid white",
                 }}
             >
 
-                {/* Lineup Player Pictures Container */}
-                <Box className="lineup-pictures"
+                {/* Lineup Entry Header */}
+                <Box className="lineup-header"
                     sx={{
-                        display: "flex",
-                        overflowX: "auto",
-                        gap: 1,
-                        paddingLeft: "1rem",
+                        paddingTop: "4%",
+                        paddingBottom: "2%",
                     }}
                 >
-                    {lineup.entries.map((entry, idx) => (
 
-                        // Player Pictures
-                        <img
-                            key={idx}
-                            src={entry.player_picture}
-                            alt={entry.player_name}
-                            style={{
-                                display: "flex",
-                                flexWrap: "wrap",
-                                width: "5rem",
-                                border: `2px solid ${entry.status === 'hit' ? 'green' : entry.status === 'miss' ? 'red' : 'white'}`,
-                                borderRadius: "10rem",
-                                objectFit: "cover",
-                                imageRendering: "auto",
-                            }}
-                        />
-                    ))}
-                </Box>
-
-                {/* Lineup Entry Status Container */}
-                <Box
-                    sx={{
-                        alignItems: "center",
-                        justifyContent: "center",
-                        paddingRight: "5%",
-                    }}>
+                    {/* Lineup Entry Type and Amount */}
                     <Typography
                         sx={{
                             fontFamily: "monospace",
                             fontWeight: "bold",
-                            color: gameStatusColor,
-                            fontSize: "1.3rem",
-                            color: lineup.result === "WON" ? "green" : lineup.result === "LOST" ? "red" : "white",
+                            color: "white",
+                            textAlign: "center",
+                        }}>
+                            {lineup.entries.length}-Pick ${lineup.potential_payout.toFixed(2)}
+                    </Typography>
+
+                    {/* Lineup Entry Type */}
+                    <Typography
+                        sx={{
+                            fontFamily: "monospace",
+                            color: "white",
+                            marginBottom: "4%",
                         }}
                     >
-                        {lineup.result || "Live"}
+                        ${lineup.entry_amount} {lineup.entry_type}
                     </Typography>
-                </Box>
-            </Box>
 
-            {/* Lineup Details Container When Expanded */}
-            {lineupExpanded && (
-                <Box className="lineup-details"
+                    {/* Divider Line */}
+                    <Box
+                        sx={{
+                            borderBottom: "1px solid white",
+                            width: "100%",
+                            margin: "0.5rem auto",
+                        }}
+                    />
+                </Box>
+                
+                {/* Player Pictures and Entry Status Container */}
+                <Box className="player-pictures-entry-status"
                     sx={{
                         display: "flex",
-                        flexDirection: "column",
+                        justifyContent: "space-between",
                         alignItems: "center",
-                        justifyContent: "center",
+                        marginBottom: "3%",
+                        width: "100%",
+                        flexWrap: "nowrap",
                     }}
                 >
-                    {lineup.entries.map((entry, idx) => (
-                        <UserLineup
-                            key={idx}
-                            entry={entry}
-                        />
-                    ))}
+
+                    {/* Lineup Player Pictures Container */}
+                    <Box className="lineup-pictures"
+                        sx={{
+                            display: "flex",
+                            overflowX: "auto",
+                            gap: 1,
+                            paddingLeft: "1rem",
+                        }}
+                    >
+                        {lineup.entries.map((entry, idx) => (
+
+                            // Player Pictures
+                            <img
+                                key={idx}
+                                src={entry.player_picture}
+                                alt={entry.player_name}
+                                style={{
+                                    display: "flex",
+                                    flexWrap: "wrap",
+                                    width: "5rem",
+                                    border: `2px solid ${entry.status === 'hit' ? 'green' : entry.status === 'miss' ? 'red' : 'white'}`,
+                                    borderRadius: "10rem",
+                                    objectFit: "cover",
+                                    imageRendering: "auto",
+                                }}
+                            />
+                        ))}
+                    </Box>
+
+                    {/* Lineup Entry Status Container */}
+                    <Box
+                        sx={{
+                            alignItems: "center",
+                            justifyContent: "center",
+                            paddingRight: "5%",
+                        }}>
+                        <Typography
+                            sx={{
+                                fontFamily: "monospace",
+                                fontWeight: "bold",
+                                color: gameStatusColor,
+                                fontSize: "1.3rem",
+                                color: lineup.result === "WON" ? "green" : lineup.result === "LOST" ? "red" : "white",
+                            }}
+                        >
+                            {lineup.result || "Live"}
+                        </Typography>
+                    </Box>
                 </Box>
-            )}
+
+                {/* Lineup Details Container When Expanded */}
+                {lineupExpanded && (
+                    <Box className="lineup-details"
+                        sx={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            justifyContent: "center",
+                        }}
+                    >
+                        {lineup.entries.map((entry, idx) => (
+                            <UserLineup
+                                key={idx}
+                                entry={entry}
+                            />
+                        ))}
+                    </Box>
+                )}
+            </Box>
         </Box>
     )
 }

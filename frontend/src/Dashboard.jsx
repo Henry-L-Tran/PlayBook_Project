@@ -7,6 +7,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { v4 as uuidv4 } from "uuid";
 import Lineups from "./Lineups";
 import { calculatePayoutMultiplier } from "./payoutMultiplier";
+import { format } from "date-fns";
 
 function Dashboard() {
 
@@ -440,7 +441,7 @@ const userPickUpdate = (playerId, pick) => {
               }}
             >
               {" "}
-              {nbaLiveGames.gameDate}
+              {nbaLiveGames.gameDate ? format(new Date(nbaLiveGames.gameDate), "MMMM d, yyyy") : "No Games Scheduled"}
             </Typography>
 
             {nbaLiveGames.length === 0 ? (
