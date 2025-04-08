@@ -6,6 +6,13 @@ import axios from 'axios';
 // Fetches and Displays the User's Lineups
 const LineupsPage = ({ user, setActiveComponent }) => {
     const [userLineups, setUserLineups] = useState([]);
+    const [activeLineupTabs, setActiveLineupTabs] = useState("Open");
+
+    const filteredLineups = userLineups.filter(lineup =>
+        activeLineupTabs === "Open"
+            ? !lineup.evaluated
+            : lineup.evaluated
+    );
 
     useEffect(() => {
         const fetchUserLineups = async () => {
@@ -114,7 +121,50 @@ const LineupsPage = ({ user, setActiveComponent }) => {
                         gap: 2,
                         marginLeft: "3%",
                     }}>
-                    {userLineups.map((lineup, idx) => (
+
+                    {/* Lineups Tabs Container */}
+                    <Box
+                        sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                            gap: 1,
+                            width: "80%",
+                            marginBottom: "3%",
+                        }}
+                    >
+                        <button
+                            style={{
+                                fontFamily: "monospace",
+                                fontWeight: "bold",
+                                color: "white",
+                                textAlign: "center",
+                                cursor: "pointer",
+                                borderRadius: "2rem",
+                                width: "100%",
+                                border: "1px solid white",
+                            }}
+                            onClick={() => setActiveLineupTabs("Open")} className={activeLineupTabs === "Open" ? "active-tab" : ""}>
+                            Open
+                        </button>
+
+                        <button
+                            style={{
+                                fontFamily: "monospace",
+                                fontWeight: "bold",
+                                color: "white",
+                                textAlign: "center",
+                                cursor: "pointer",
+                                borderRadius: "2rem",
+                                width: "100%",
+                                border: "1px solid white",
+                            }}
+                            onClick={() => setActiveLineupTabs("Past")} className={activeLineupTabs === "Past" ? "active-tab" : ""}>
+                            Past
+                        </button>
+                    </Box>
+                    
+            
+                    {filteredLineups.map((lineup, idx) => (
                         <LineupBox key={idx} lineup={lineup} />
                     ))}
                 </Box>
