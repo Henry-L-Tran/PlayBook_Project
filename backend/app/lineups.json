@@ -107,6 +107,7 @@
                 "line_category": "PTS",
                 "projected_line": 32.5,
                 "users_pick": "Over",
+                "matchup": "LAL @ OKC",
                 "live_value": 42,
                 "status": "hit"
             },
@@ -118,6 +119,7 @@
                 "line_category": "PTS",
                 "projected_line": 24.5,
                 "users_pick": "Over",
+                "matchup": "LAL @ OKC",
                 "live_value": 28,
                 "status": "hit"
             },
@@ -129,12 +131,50 @@
                 "line_category": "REB",
                 "projected_line": 8.5,
                 "users_pick": "Under",
+                "matchup": "LAL @ OKC",
                 "live_value": 3,
                 "status": "hit"
             }
         ],
         "time": "2025-04-08T16:54:16.458367",
         "result": "WON",
+        "evaluated": true
+    },
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "henry.l.tran-1@ou.edu_1744179523274_777e61f5-cae0-4a24-90c2-b1ba41d15dd0",
+        "entry_type": "Power Play",
+        "entry_amount": 5.0,
+        "potential_payout": 15.0,
+        "entries": [
+            {
+                "player_id": 1630162,
+                "player_name": "Anthony Edwards",
+                "team_tri_code": "MIN",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630162.png",
+                "line_category": "PTS",
+                "projected_line": 27.5,
+                "users_pick": "Over",
+                "matchup": "MIN @ MIL",
+                "live_value": 25,
+                "status": "miss"
+            },
+            {
+                "player_id": 203507,
+                "player_name": "Giannis Antetokounmpo",
+                "team_tri_code": "MIL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/203507.png",
+                "line_category": "PTS",
+                "projected_line": 30.5,
+                "users_pick": "Over",
+                "matchup": "MIN @ MIL",
+                "live_value": 23,
+                "status": "miss"
+            }
+        ],
+        "time": "2025-04-09T06:18:43.281667",
+        "result": "LOST",
         "evaluated": true
     }
 ]

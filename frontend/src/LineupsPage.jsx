@@ -32,6 +32,26 @@ const LineupsPage = ({ user, setActiveComponent }) => {
     }, [user.email]);
 
 
+    // ***Taking This Function From Dashboard.jsx and Using it Here For LineupDetails.jsx***
+    const [nbaLiveGames, setNbaLiveGames] = useState({ gameData: [] });
+
+    useEffect(() => {
+    const fetchNbaLiveGames = async () => {
+        try {
+        const response = await fetch("http://localhost:8000/nba/scores");
+        const data = await response.json();
+        setNbaLiveGames(data);
+        } catch (error) {
+        console.error("Error fetching NBA live games:", error);
+        }
+    };
+
+  fetchNbaLiveGames();
+  const interval = setInterval(fetchNbaLiveGames, 30000);
+  return () => clearInterval(interval);
+}, []);
+
+
     return (
         <>
             {/* Main Container for the Entire Lineups Page */}
@@ -211,6 +231,7 @@ const LineupsPage = ({ user, setActiveComponent }) => {
                 <LineupDetails
                     lineup={expandLineupDetails}
                     onClose={() => setExpandLineupDetails(null)}
+                    liveGames={nbaLiveGames}
                 />
             )}
         </>

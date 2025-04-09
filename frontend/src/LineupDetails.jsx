@@ -2,8 +2,25 @@ import React from "react";
 import { Box, Typography, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
-const LineupDetails = ({ lineup, onClose }) => {
+const LineupDetails = ({ lineup, onClose, liveGames }) => {
     const gameStatusColor = lineup.result === "WON" ? "green" : lineup.result === "LOSS" ? "red" : "white";
+
+    // Function to Get the Team Matchup for a Player Line
+    const getMatchup = (player, liveGames) => {
+        if(!liveGames || !liveGames.gameData) {
+            return "N/A";
+        }
+
+        for (const game of liveGames.gameData) {
+            const homeTeam = game.homeTeam.teamTriCode === player.team_tri_code;
+            const awayTeam = game.awayTeam.teamTriCode === player.team_tri_code;
+
+            if (homeTeam || awayTeam) {
+                return `${game.awayTeam.teamTriCode} @ ${game.homeTeam.teamTriCode}`;
+            }
+        }
+        return "N/A";
+    };
 
 
     return (
@@ -65,6 +82,7 @@ const LineupDetails = ({ lineup, onClose }) => {
                         border: "1px solid white",
                         color: gameStatusColor,
                         fontFamily: "monospace",
+                        padding: "0.5rem 1rem",
                     }}
                 >
                         {lineup.result || "In Progress"}
@@ -150,7 +168,7 @@ const LineupDetails = ({ lineup, onClose }) => {
                                     }}
                                 />
 
-                                {/* Player Information */}
+                                {/* Player Information Container */}
                                 <Box
                                     sx={{
                                         display: "flex",
@@ -158,15 +176,37 @@ const LineupDetails = ({ lineup, onClose }) => {
                                         width: "100%",
                                     }}
                                 >
-                                    <Typography
+                                    {/* Player Name, Team Tri Code, w/ Game Matchup Container */}
+                                    <Box
                                         sx={{
                                             display: "flex",
-                                            fontFamily: "monospace",
-                                            color: "white",
+                                            flexDirection: "column",
                                         }}
                                     >
-                                        {entry.player_name} - {entry.team_tri_code}
-                                    </Typography>
+                                        {/* Player Name and Team Tri Code */}
+                                        <Typography
+                                            sx={{
+                                                display: "flex",
+                                                fontFamily: "monospace",
+                                                color: "white",
+                                            }}
+                                        >
+                                            {entry.player_name} - {entry.team_tri_code}
+                                        </Typography>
+
+                                        {/* Game Matchup */}
+                                        <Typography
+                                            sx={{
+                                                display: "flex",
+                                                fontFamily: "monospace",
+                                                color: "white",
+                                                fontSize: "0.7rem",
+                                                fontWeight: "bold",
+                                            }}
+                                        >
+                                            {getMatchup(entry, liveGames)}
+                                        </Typography>
+                                    </Box>
 
 
                                     {/* Progress Bar Container */}
@@ -275,6 +315,9 @@ const LineupDetails = ({ lineup, onClose }) => {
                     })}
                 </Box>
             </Box>
+
+            {/* Show Details Container */}
+
         </Box>
     )
 }

@@ -22,6 +22,7 @@ class LineupEntry(BaseModel):
     line_category: str
     projected_line: float
     users_pick: str
+    matchup: str = "N/A"
 
 class SubmitLineup(BaseModel):
     email: str

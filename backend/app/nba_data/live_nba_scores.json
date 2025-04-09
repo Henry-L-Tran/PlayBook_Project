@@ -2,138 +2,6 @@
     "gameDate": "2025-04-08",
     "gameData": [
         {
-            "gameId": "0022401154",
-            "gameStatus": 2,
-            "gameStatusText": "Q4 4:20",
-            "gameClock": "PT04M20.00S",
-            "homeTeam": {
-                "teamId": 1610612756,
-                "teamName": "Suns",
-                "teamTriCode": "PHX",
-                "wins": 35,
-                "losses": 43,
-                "score": 82,
-                "periods": [
-                    {
-                        "period": 1,
-                        "periodType": "REGULAR",
-                        "score": 24
-                    },
-                    {
-                        "period": 2,
-                        "periodType": "REGULAR",
-                        "score": 19
-                    },
-                    {
-                        "period": 3,
-                        "periodType": "REGULAR",
-                        "score": 18
-                    },
-                    {
-                        "period": 4,
-                        "periodType": "REGULAR",
-                        "score": 21
-                    }
-                ]
-            },
-            "awayTeam": {
-                "teamId": 1610612744,
-                "teamName": "Warriors",
-                "teamTriCode": "GSW",
-                "wins": 46,
-                "losses": 32,
-                "score": 116,
-                "periods": [
-                    {
-                        "period": 1,
-                        "periodType": "REGULAR",
-                        "score": 37
-                    },
-                    {
-                        "period": 2,
-                        "periodType": "REGULAR",
-                        "score": 32
-                    },
-                    {
-                        "period": 3,
-                        "periodType": "REGULAR",
-                        "score": 26
-                    },
-                    {
-                        "period": 4,
-                        "periodType": "REGULAR",
-                        "score": 21
-                    }
-                ]
-            }
-        },
-        {
-            "gameId": "0022401155",
-            "gameStatus": 2,
-            "gameStatusText": "Q3 6:06",
-            "gameClock": "PT06M06.00S",
-            "homeTeam": {
-                "teamId": 1610612746,
-                "teamName": "Clippers",
-                "teamTriCode": "LAC",
-                "wins": 46,
-                "losses": 32,
-                "score": 74,
-                "periods": [
-                    {
-                        "period": 1,
-                        "periodType": "REGULAR",
-                        "score": 28
-                    },
-                    {
-                        "period": 2,
-                        "periodType": "REGULAR",
-                        "score": 26
-                    },
-                    {
-                        "period": 3,
-                        "periodType": "REGULAR",
-                        "score": 20
-                    },
-                    {
-                        "period": 4,
-                        "periodType": "REGULAR",
-                        "score": 0
-                    }
-                ]
-            },
-            "awayTeam": {
-                "teamId": 1610612759,
-                "teamName": "Spurs",
-                "teamTriCode": "SAS",
-                "wins": 32,
-                "losses": 46,
-                "score": 61,
-                "periods": [
-                    {
-                        "period": 1,
-                        "periodType": "REGULAR",
-                        "score": 26
-                    },
-                    {
-                        "period": 2,
-                        "periodType": "REGULAR",
-                        "score": 26
-                    },
-                    {
-                        "period": 3,
-                        "periodType": "REGULAR",
-                        "score": 9
-                    },
-                    {
-                        "period": 4,
-                        "periodType": "REGULAR",
-                        "score": 0
-                    }
-                ]
-            }
-        },
-        {
             "gameId": "0022401146",
             "gameStatus": 3,
             "gameStatusText": "Final",
@@ -667,6 +535,138 @@
                         "period": 4,
                         "periodType": "REGULAR",
                         "score": 22
+                    }
+                ]
+            }
+        },
+        {
+            "gameId": "0022401154",
+            "gameStatus": 3,
+            "gameStatusText": "Final",
+            "gameClock": "",
+            "homeTeam": {
+                "teamId": 1610612756,
+                "teamName": "Suns",
+                "teamTriCode": "PHX",
+                "wins": 35,
+                "losses": 44,
+                "score": 95,
+                "periods": [
+                    {
+                        "period": 1,
+                        "periodType": "REGULAR",
+                        "score": 24
+                    },
+                    {
+                        "period": 2,
+                        "periodType": "REGULAR",
+                        "score": 19
+                    },
+                    {
+                        "period": 3,
+                        "periodType": "REGULAR",
+                        "score": 18
+                    },
+                    {
+                        "period": 4,
+                        "periodType": "REGULAR",
+                        "score": 34
+                    }
+                ]
+            },
+            "awayTeam": {
+                "teamId": 1610612744,
+                "teamName": "Warriors",
+                "teamTriCode": "GSW",
+                "wins": 47,
+                "losses": 32,
+                "score": 133,
+                "periods": [
+                    {
+                        "period": 1,
+                        "periodType": "REGULAR",
+                        "score": 37
+                    },
+                    {
+                        "period": 2,
+                        "periodType": "REGULAR",
+                        "score": 32
+                    },
+                    {
+                        "period": 3,
+                        "periodType": "REGULAR",
+                        "score": 26
+                    },
+                    {
+                        "period": 4,
+                        "periodType": "REGULAR",
+                        "score": 38
+                    }
+                ]
+            }
+        },
+        {
+            "gameId": "0022401155",
+            "gameStatus": 3,
+            "gameStatusText": "Final",
+            "gameClock": "",
+            "homeTeam": {
+                "teamId": 1610612746,
+                "teamName": "Clippers",
+                "teamTriCode": "LAC",
+                "wins": 47,
+                "losses": 32,
+                "score": 122,
+                "periods": [
+                    {
+                        "period": 1,
+                        "periodType": "REGULAR",
+                        "score": 28
+                    },
+                    {
+                        "period": 2,
+                        "periodType": "REGULAR",
+                        "score": 26
+                    },
+                    {
+                        "period": 3,
+                        "periodType": "REGULAR",
+                        "score": 37
+                    },
+                    {
+                        "period": 4,
+                        "periodType": "REGULAR",
+                        "score": 31
+                    }
+                ]
+            },
+            "awayTeam": {
+                "teamId": 1610612759,
+                "teamName": "Spurs",
+                "teamTriCode": "SAS",
+                "wins": 32,
+                "losses": 47,
+                "score": 117,
+                "periods": [
+                    {
+                        "period": 1,
+                        "periodType": "REGULAR",
+                        "score": 26
+                    },
+                    {
+                        "period": 2,
+                        "periodType": "REGULAR",
+                        "score": 26
+                    },
+                    {
+                        "period": 3,
+                        "periodType": "REGULAR",
+                        "score": 26
+                    },
+                    {
+                        "period": 4,
+                        "periodType": "REGULAR",
+                        "score": 39
                     }
                 ]
             }

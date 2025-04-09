@@ -217,6 +217,7 @@ function Dashboard() {
           line_category: viewLineCategory,
           projected_line: parseFloat(getStatCategory(player)),
           users_pick: usersPick,
+          matchup: `${nbaSelectedGame.awayTeam.teamTriCode} @ ${nbaSelectedGame.homeTeam.teamTriCode}`,
         };
 
         newCategoryLineup = [...categoryLineup, newEntry];
@@ -455,7 +456,7 @@ const userPickUpdate = (playerId, pick) => {
                   onClick={() => {
 
                     // If the Game Hasn't Started, Show the Betting Lines Popup
-                    if (game.gameStatus === 1) {
+                    if (game.gameStatus === 3) {
                       setnbaselectedGame(game);
                       setShowBettingLines(true);
                     }
