@@ -1,9 +1,12 @@
-import React from "react";
-import { Box, Typography, IconButton } from "@mui/material";
+import React, { useState } from "react";
+import { Box, Typography, IconButton, Button } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
 const LineupDetails = ({ lineup, onClose, liveGames }) => {
     const gameStatusColor = lineup.result === "WON" ? "green" : lineup.result === "LOST" ? "red" : "white";
+    
+    // Toggles the Payout Multiplier Display
+    const [showPayoutDetails, setShowPayoutDetails] = useState(false);
 
     // Function to Get the Team Matchup for a Player Line
     const getMatchup = (player, liveGames) => {
@@ -125,8 +128,81 @@ const LineupDetails = ({ lineup, onClose, liveGames }) => {
                     sx={{
                         borderBottom: "1px solid white",
                         width: "100%",
+                        display: "flex",
+                        position: "relative",
+                        justifyContent: "center",
+                        alignItems: "center",
                     }}
-                />
+                >
+                    {/* Payout Details Component Button For Divider */}
+                    <Typography
+                        component="button"
+                        onClick={() => setShowPayoutDetails(prev => !prev)}
+                        sx={{
+                        position: "absolute",
+                        top: "50%",
+                        transform: "translateY(-50%)",
+                        backgroundColor: "black",
+                        color: "white",
+                        fontFamily: "monospace",
+                        fontWeight: "bold",
+                        padding: "0 1rem",
+                        border: "1px solid white",
+                        borderRadius: "5rem",
+                        cursor: "pointer",
+                        }}
+                    >
+                        {showPayoutDetails ? "Hide Details" : "Show Details"}
+                    </Typography>
+                </Box>
+
+                {/* Payout Details Section */}
+                {showPayoutDetails && (
+                    <Box
+                        sx={{
+                            display: "flex",
+                            justifuyContent: "space-around",
+                            backgroundColor: "black",
+                            borderRadius: "1rem",
+                            border: "1px solid white",
+                            width: "100%",
+                            marginBottom: "2%",
+                        }}
+                    >
+                        {lineup.entry_type === "Power Play" ? (
+                            <Box
+                                sx={{
+                                    color: "white",
+                                }}
+                            >
+                                <Typography
+                                    sx={{
+                                        fontFamily: "monospace",
+                                    }}
+                                >
+                                    Testing
+                                </Typography>
+                            </Box>
+                        ) : (
+                            <>
+                                <Box
+                                    sx={{
+                                        textAlign: "center",
+                                    }}
+                                >
+                                    <Typography
+                                        sx={{
+                                            color: "white",
+                                            fontFamily: "monospace",
+                                        }}
+                                    >
+                                        {lineup.entries.length} of {lineup.entries.length}
+                                    </Typography>
+                                </Box>
+                            </> 
+                        )}
+                    </Box>
+                )}              
 
                 {/* Lineup Details Entries Section */}
                 <Box
@@ -135,6 +211,7 @@ const LineupDetails = ({ lineup, onClose, liveGames }) => {
                         flexDirection: "column",
                         padding: "1rem",
                         overflowY: "auto",
+                        marginTop: "3%",
                         gap: 2.5,
                     }}
                 >
@@ -315,9 +392,6 @@ const LineupDetails = ({ lineup, onClose, liveGames }) => {
                     })}
                 </Box>
             </Box>
-
-            {/* Show Details Container */}
-
         </Box>
     )
 }
