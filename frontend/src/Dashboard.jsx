@@ -1186,6 +1186,7 @@ function Dashboard() {
             ? "sticky top-0"
             : "hidden"
         }`}
+        sx={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}
       >
         {/* Earnings */}
         <div className="bg-gray-800 text-white rounded-t-lg p-4 flex flex-col items-center justify-center h-1/3">
@@ -1241,17 +1242,44 @@ function Dashboard() {
         {/* Top Picks */}
         <div className="bg-gray-800 text-white rounded-b-lg p-4 h-1/3">
           <h2 className="text-xl font-bold mb-4">Top Picks</h2>
-          <div className="flex justify-between items-center bg-gray-700 rounded p-2 mb-2">
+          <div className="flex justify-between items-center bg-gray-700 rounded p-2 pl-6 mb-2">
             <span>NYK vs LAL</span>
-            <button className="px-3 py-1 rounded text-sm">View</button>
+            <button
+              className="px-3 py-1 rounded text-sm"
+              onClick={() =>
+                window.open(
+                  "https://www.google.com/search?q=nyk+vs+lal&rlz=1C5CHFA_enUS944US952&oq=nyk+vs+lal&gs_lcrp=EgZjaHJvbWUyCQgAEEUYORiABDIHCAEQABiABDIHCAIQABiABDIHCAMQABiABDIHCAQQABiABDIHCAUQABiABDIHCAYQABiABDIHCAcQABiABDIHCAgQABiABDIHCAkQABiABNIBCDM1MjZqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8#sie=m;/g/11lmmffyw8;3;/m/05jvx;dt;fp;1;;;"
+                )
+              }
+            >
+              View
+            </button>
           </div>
-          <div className="flex justify-between items-center bg-gray-700 rounded p-2 mb-2">
+          <div className="flex justify-between items-center bg-gray-700 rounded p-2 pl-6 mb-2">
             <span>DAL vs MIA</span>
-            <button className="px-3 py-1 rounded text-sm">View</button>
+            <button
+              className="px-3 py-1 rounded text-sm"
+              onClick={() => {
+                window.open(
+                  "https://www.google.com/search?q=DAL+vs+MIA&sca_esv=7efe9108e6e32fec&rlz=1C5CHFA_enUS944US952&sxsrf=AHTn8zrEaDDdmDcZVD7guyebStxennkvvg%3A1744237313029&ei=AfP2Z5q3AankwN4PidblqQE&ved=0ahUKEwjau8mr_suMAxUpMtAFHQlrORUQ4dUDCBA&uact=5&oq=DAL+vs+MIA&gs_lp=Egxnd3Mtd2l6LXNlcnAiCkRBTCB2cyBNSUEyCxAAGIAEGJECGIoFMgcQLhiABBgKMgUQABiABDIHEAAYgAQYCjIFEAAYgAQyBxAuGIAEGAoyBxAAGIAEGAoyBxAAGIAEGAoyBxAAGIAEGAoyBxAAGIAEGApIjBxQAFj4GHABeACQAQGYAcYBoAHSCaoBAzkuNLgBA8gBAPgBAZgCDaACygjCAgQQIxgnwgIKECMYgAQYJxiKBcICEBAuGIAEGLEDGEMYgwEYigXCAgoQABiABBhDGIoFwgIKEC4YgAQYQxiKBcICDRAuGIAEGLEDGEMYigXCAggQLhiABBixA8ICEBAAGIAEGLEDGEMYgwEYigXCAgsQABiABBixAxiDAcICDhAAGIAEGLEDGIMBGIoFwgILEC4YgAQYsQMYgwGYAwCSBwQxMC4zoAeddLIHAzkuM7gHxQg&sclient=gws-wiz-serp#sie=m;/g/11wb07yms0;3;/m/05jvx;dt;fp;1;;;"
+                );
+              }}
+            >
+              View
+            </button>
           </div>
-          <div className="flex justify-between items-center bg-gray-700 rounded p-2">
+          <div className="flex justify-between items-center bg-gray-700 rounded p-2 pl-6">
             <span>BOS vs CHI</span>
-            <button className="px-3 py-1 rounded text-sm">View</button>
+            <button
+              className="px-3 py-1 rounded text-sm"
+              onClick={() => {
+                window.open(
+                  "https://www.google.com/search?q=BOS+vs+CHI&sca_esv=7efe9108e6e32fec&rlz=1C5CHFA_enUS944US952&sxsrf=AHTn8zqL60bwJFzCTIqYLTaAXKRm4f8Uxw%3A1744237434740&ei=evP2Z6_qLM7jwN4PytnF4Qw&ved=0ahUKEwivj87l_suMAxXOMdAFHcpsMcwQ4dUDCBA&uact=5&oq=BOS+vs+CHI&gs_lp=Egxnd3Mtd2l6LXNlcnAiCkJPUyB2cyBDSEkyCxAAGIAEGJECGIoFMgsQABiABBiRAhiKBTILEAAYgAQYkQIYigUyBRAAGIAEMgUQABiABDIFEAAYgAQyBxAAGIAEGAoyBRAAGIAEMgcQABiABBgKMgcQABiABBgKSO8OUABY5ApwAHgBkAEAmAGdAaAB1QeqAQM2LjS4AQPIAQD4AQGYAgqgAvkHwgIKECMYgAQYJxiKBcICBBAjGCfCAgoQABiABBhDGIoFwgIKEC4YgAQYQxiKBcICEBAuGIAEGLEDGEMYgwEYigXCAg4QABiABBixAxiDARiKBcICCxAAGIAEGLEDGIMBwgILEC4YgAQYsQMYgwHCAhAQABiABBixAxhDGIMBGIoFwgIQEAAYgAQYsQMYgwEYFBiHAsICChAAGIAEGBQYhwLCAgQQABgDwgIKEAAYgAQYsQMYCpgDAJIHAzYuNKAHzUiyBwM2LjS4B_kH&sclient=gws-wiz-serp#sie=m;/g/11wb08gz73;3;/m/05jvx;dt;fp;1;;;"
+                );
+              }}
+            >
+              View
+            </button>
           </div>
         </div>
       </Box>
