@@ -107,8 +107,8 @@
                 "line_category": "PTS",
                 "projected_line": 32.5,
                 "users_pick": "Over",
-                "live_value": "N/A",
-                "status": "pending"
+                "live_value": 42,
+                "status": "hit"
             },
             {
                 "player_id": 2544,
@@ -118,8 +118,8 @@
                 "line_category": "PTS",
                 "projected_line": 24.5,
                 "users_pick": "Over",
-                "live_value": "N/A",
-                "status": "pending"
+                "live_value": 28,
+                "status": "hit"
             },
             {
                 "player_id": 1629029,
@@ -129,10 +129,12 @@
                 "line_category": "REB",
                 "projected_line": 8.5,
                 "users_pick": "Under",
-                "live_value": "N/A",
-                "status": "pending"
+                "live_value": 3,
+                "status": "hit"
             }
         ],
-        "time": "2025-04-08T16:54:16.458367"
+        "time": "2025-04-08T16:54:16.458367",
+        "result": "WON",
+        "evaluated": true
     }
 ]

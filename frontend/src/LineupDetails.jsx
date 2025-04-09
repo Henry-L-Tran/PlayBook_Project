@@ -23,50 +23,256 @@ const LineupDetails = ({ lineup, onClose }) => {
         >
                 
             {/* Lineup Details Box Container */}    
-            <Box className="lineup-close-button-container"
+            <Box className="lineup-details-container"
                 sx={{
+                    position: "relative",
                     display: "flex",
                     backgroundColor: "black",
                     borderRadius: "1rem",
                     width: "40%",
                     height: "80%",
                     flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
                     border: "1px solid white",
-                    overflowY: "auto",
                 }}
                 
             >
-                <Typography>
-                    Testing
-                </Typography>
+                {/* Lineup Details Close Button */}
+                <IconButton
+                    className="lineup-close-button"
+                    onClick={onClose}
+                    sx={{
+                        position: "absolute",
+                        top: "1rem",
+                        right: "1rem",
+                        color: "white",
+                    }}
+                >
+                    <CloseIcon />
+                </IconButton>
 
+                {/* Lineup Details Result Tag Container */}
+                <Box
+                    sx={{
+                        fontWeight: "bold",
+                        position: "absolute",
+                        top: "1rem",
+                        marginTop: "2%",
+                        right: "15%",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        backgroundColor: "black",
+                        borderRadius: "1rem",
+                        border: "1px solid white",
+                        color: gameStatusColor,
+                        fontFamily: "monospace",
+                    }}
+                >
+                        {lineup.result || "In Progress"}
+                </Box>
+                
+                {/* Lineup Details Header */}
+                <Box 
+                    sx={{
+                        marginTop: "2%",
+                        marginLeft: "10%", 
+                        width: "100%",
+                        padding: "1rem",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                    }}
+                >
+                    <Typography
+                        sx={{
+                            fontFamily: "monospace",
+                            color: "white",
+                            marginBottom: "1rem",
+                        }}>
+                            {lineup.entries.length}-Pick • ${lineup.entry_amount} {lineup.entry_type}
+                    </Typography>
+
+                    <Typography
+                        sx={{
+                            fontFamily: "monospace",
+                            color: "white",
+                            marginBottom: "1rem",
+                            fontWeight: "bold",
+                        }}>
+                            ${lineup.entry_amount} to Win ${lineup.potential_payout}
+                    </Typography>
+                </Box> 
+
+                {/* Divider Line */}
+                <Box
+                    sx={{
+                        borderBottom: "1px solid white",
+                        width: "100%",
+                    }}
+                />
+
+                {/* Lineup Details Entries Section */}
                 <Box
                     sx={{
                         display: "flex",
                         flexDirection: "column",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        padding: "2rem",
-                        backgroundColor: "black",
-                        borderRadius: "1rem",
+                        padding: "1rem",
+                        overflowY: "auto",
+                        gap: 2.5,
                     }}
                 >
+                    {lineup.entries.map((entry, index) => {
+                        const percent = Math.min((entry.live_value / entry.projected_line) * 100, 100);
+                        const barColor = entry.status === "hit" ? "green" : entry.status === "miss" ? "red" : "white";
 
-                    {/* Lineup Details Close Button */}
-                    <IconButton
-                        className="lineup-close-button"
-                        onClick={onClose}
-                        sx={{
-                            position: "absolute",
-                            top: "1rem",
-                            right: "1rem",
-                            color: "white",
-                        }}
-                    >
-                        <CloseIcon />
-                    </IconButton>
+                        return (
+                            // Progress Bar Container
+                            <Box
+                                key={index}
+                                sx={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    backgroundColor: "black",
+                                    borderRadius: "1rem",
+                                    padding: "0.5rem",
+                                    border: "white",
+                                    width: "100%",
+                                }}
+                            >
+                                {/* Player Picture */}
+                                <img
+                                    src={entry.player_picture}
+                                    alt={entry.player_name}
+                                    style={{
+                                        width: "6rem",
+                                        borderRadius: "1rem",
+                                        marginRight: "1rem",
+                                        border: `1px solid ${barColor}`,
+                                    }}
+                                />
+
+                                {/* Player Information */}
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        width: "100%",
+                                    }}
+                                >
+                                    <Typography
+                                        sx={{
+                                            display: "flex",
+                                            fontFamily: "monospace",
+                                            color: "white",
+                                        }}
+                                    >
+                                        {entry.player_name} - {entry.team_tri_code}
+                                    </Typography>
+
+
+                                    {/* Progress Bar Container */}
+                                    <Box
+                                        sx={{
+                                            position: "relative",
+                                            backgroundColor: "rgba(0, 0, 0, 0.85)",
+                                            height: "1rem",
+                                            borderRadius: "5rem",
+                                            overflow: "hidden",
+                                            marginTop: "0.5rem",
+                                            border: "1px solid white",
+                                        }}
+                                    >
+                                        {/* Progress Bar w/ Filled Stat */}
+                                        <Box
+                                            sx={{
+                                                width: `${percent}%`,
+                                                height: "100%",
+                                                backgroundColor: barColor,
+                                            }}
+                                        />
+                                    </Box>
+
+                                    {/* Player Projection & User's Pick Arrow, w/ Stat Category Container */}
+                                    <Box
+                                        sx={{
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            alignItems: "flex-end",
+                                            justifyContent: "center",
+                                            marginTop: "-4rem",
+                                        }}
+                                    >
+                                        {/* Player Projection and User's Pick Arrow */}
+                                        <Box
+                                            sx={{
+                                                display: "flex",
+                                                flexDirection: "row",
+                                                gap: "0.5rem",
+                                            }}
+                                        >
+                                            {/* Player Name and Team Tri Code */}
+                                            <Typography
+                                                sx={{
+                                                    fontFamily: "monospace",
+                                                    fontWeight: "bold",
+                                                }}>
+                                                    {entry.users_pick === "Over" ? "↑" : entry.users_pick === "Under" ? "↓" : ""}
+                                            </Typography>
+
+                                            {/* Player Projected Line */}
+                                            <Typography
+                                                sx={{
+                                                    fontFamily: "monospace",
+                                                    fontWeight: "bold",
+                                                }}>
+                                                    {entry.projected_line ?? "-"}
+                                            </Typography>
+                                        </Box>
+
+                                        {/* Player Stat Category Container */}
+                                        <Box
+                                            sx={{
+                                                display: "flex",
+                                                marginBottom: "0.5rem",
+                                            }}
+                                        >
+                                            <Typography
+                                                sx={{
+                                                    fontFamily: "monospace",
+                                                    color: "white",
+                                                    fontSize: "0.7rem",
+                                                    fontWeight: "bold",
+                                                }}
+                                            >
+                                                {entry.line_category}
+                                            </Typography>
+                                        </Box>
+                                    </Box>
+
+                                    {/* Player Live Stat Container */}
+                                    <Box
+                                        sx={{
+                                            position: "relative",
+                                            width: "100%",
+                                            paddingTop: "1rem",
+                                        }}
+                                    >
+                                        {/* Player Live Stat */}
+                                        <Typography
+                                                sx={{
+                                                    position: "absolute",
+                                                    fontFamily: "monospace",
+                                                    left: `${percent}%`,
+                                                    transform: "translateX(-90%)",
+                                                    color: barColor,
+                                                    fontWeight: "bold",
+                                                }}>
+                                                    {entry.live_value ?? "-"}
+                                        </Typography>
+                                    </Box>
+                                </Box>
+                            </Box>
+                        )
+                    })}
                 </Box>
             </Box>
         </Box>
