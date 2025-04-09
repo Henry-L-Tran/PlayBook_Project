@@ -442,11 +442,18 @@ const userPickUpdate = (playerId, pick) => {
             >
               {nbaLiveGames.gameDate && nbaLiveGames.gameDate !== "N/A" ?
               format(new Date(`${nbaLiveGames.gameDate}T00:00:00`), "MMMM d, yyyy") :
-              "No Scheduled Games"}
+              ""}
             </Typography>
 
             {nbaLiveGames.gameData.length === 0 ? (
-              <Typography> No Scheduled Games </Typography>
+              <Typography
+                sx={{
+                  fontSize: "1.5rem",
+                  fontFamily: "monospace",
+                }}
+              > 
+                No Scheduled Games 
+              </Typography>
             ) : (
               nbaLiveGames.gameData.map((game, index) => (
 

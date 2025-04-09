@@ -176,5 +176,54 @@
         "time": "2025-04-09T06:18:43.281667",
         "result": "LOST",
         "evaluated": true
+    },
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "henry.l.tran-1@ou.edu_1744180030442_424f1e13-1adc-4428-865f-dc8c271be882",
+        "entry_type": "Power Play",
+        "entry_amount": 1000.0,
+        "potential_payout": 5000.0,
+        "entries": [
+            {
+                "player_id": 1628983,
+                "player_name": "Shai Gilgeous-Alexander",
+                "team_tri_code": "OKC",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1628983.png",
+                "line_category": "PTS",
+                "projected_line": 33.0,
+                "users_pick": "Over",
+                "matchup": "LAL @ OKC",
+                "live_value": 42,
+                "status": "hit"
+            },
+            {
+                "player_id": 1629029,
+                "player_name": "Luka Don\u010di\u0107",
+                "team_tri_code": "LAL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629029.png",
+                "line_category": "PTS",
+                "projected_line": 27.5,
+                "users_pick": "Under",
+                "matchup": "LAL @ OKC",
+                "live_value": 23,
+                "status": "hit"
+            },
+            {
+                "player_id": 2544,
+                "player_name": "LeBron James",
+                "team_tri_code": "LAL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png",
+                "line_category": "PTS",
+                "projected_line": 24.5,
+                "users_pick": "Over",
+                "matchup": "LAL @ OKC",
+                "live_value": 28,
+                "status": "hit"
+            }
+        ],
+        "time": "2025-04-09T06:27:10.749398",
+        "result": "WON",
+        "evaluated": true
     }
 ]

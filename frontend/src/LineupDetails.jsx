@@ -3,7 +3,7 @@ import { Box, Typography, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
 const LineupDetails = ({ lineup, onClose, liveGames }) => {
-    const gameStatusColor = lineup.result === "WON" ? "green" : lineup.result === "LOSS" ? "red" : "white";
+    const gameStatusColor = lineup.result === "WON" ? "green" : lineup.result === "LOST" ? "red" : "white";
 
     // Function to Get the Team Matchup for a Player Line
     const getMatchup = (player, liveGames) => {
@@ -162,7 +162,7 @@ const LineupDetails = ({ lineup, onClose, liveGames }) => {
                                     alt={entry.player_name}
                                     style={{
                                         width: "6rem",
-                                        borderRadius: "1rem",
+                                        borderRadius: "5rem",
                                         marginRight: "1rem",
                                         border: `1px solid ${barColor}`,
                                     }}
