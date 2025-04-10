@@ -168,7 +168,6 @@ const LineupDetails = ({ lineup, onClose, liveGames }) => {
                             backgroundColor: "black",
                             alignItems: "center",
                             gap: 2,
-                            border: "1px solid white",
                             width: "100%",
                             minHeight: "7em",
                             marginTop: "4%",
@@ -302,7 +301,7 @@ const LineupDetails = ({ lineup, onClose, liveGames }) => {
                                         width: "6rem",
                                         borderRadius: "5rem",
                                         marginRight: "1rem",
-                                        border: `1px solid ${barColor}`,
+                                        border: `2px solid ${barColor}`,
                                     }}
                                 />
 
