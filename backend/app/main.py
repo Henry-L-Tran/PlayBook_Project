@@ -473,12 +473,38 @@ def fetch_val_recent_player_stats(region: str):
     try:
         # Retrieve player stats from given region from past 14 days
         stats = Vlr.vlr_stats(region, "14")
-        filtered_stats = val_filter_players_teams(stats)
         # Write the result (a Python dictionary) to a JSON file
         with open("backend/app/valorant_data/val_recent_player_stats.json", "w") as file:
-            json.dump(filtered_stats, file, indent=4)
+            json.dump(stats, file, indent=4)
     except Exception as e:
         print("Error retrieving player stats:", e)
+
+def fetch_team_logos():
+    try:
+        with open("backend/app/valorant_data/val_live_scores.json", "r") as file:
+            data = json.load(file)
+            logos = []
+
+            get_segments = data.get("data", {}).get("segments", [])
+
+            for game in get_segments:
+                logos.append(
+                    {
+                        "team 1": game["team1"],
+                        "team 2": game["team2"],
+                        "team1_logo": game["team1_logo"],
+                        "team2_logo": game["team2_logo"]
+                    }
+                )
+            
+            segments = {"segments": logos}
+            data = {"data": segments}
+
+            with open("backend/app/valorant_data/val_live_game_logos.json", "w") as file:
+                json.dump(data, file, indent=4)
+        
+    except FileNotFoundError:
+        return {"message": "No Scores Found"}
     
 # VALORANT Live Scores Route
 @app.get("/VALROANT/matches")
