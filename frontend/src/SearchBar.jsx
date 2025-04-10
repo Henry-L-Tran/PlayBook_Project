@@ -29,7 +29,10 @@ const SearchBar = ({ playersPlayingToday, playerSelected }) => {
         }
         else {
             const filtered = playersPlayingToday.filter(player => {
-                return player.name.toLowerCase().startsWith(searchTerm.toLowerCase());
+                return (
+                    player.name &&
+                    player.name.toLowerCase().startsWith(searchTerm.toLowerCase())
+                );
             });
             setFilteredPlayers(filtered);
         }
@@ -49,7 +52,7 @@ const SearchBar = ({ playersPlayingToday, playerSelected }) => {
         <Box
             sx={{
                 position: "relative",
-                width: expanded ? "100%" : "3rem", transition: "width 0.3s ease" 
+                width: expanded ? "100%" : "3rem", transition: "width 1s ease" 
             }}
         >
             {/* Search Icon & User Input Bar Container */}
@@ -83,7 +86,64 @@ const SearchBar = ({ playersPlayingToday, playerSelected }) => {
                     />
                 )}
             </Box>
+
+            {/* Results Dropdown Container */}
+            {filteredPlayers.length > 0 && (
+                <Box
+                    sx={{
+                        position: "absolute",
+                        top: "100%",
+                        left: 0,
+                        right: 0,
+                        backgroundColor: "black",
+                        maxHeight: "20%",
+                        overflowY: "auto",
+                    }}
+                >
+                    {/* Maps Through Filtered Players and Displays the Searched Content */}
+                    {filteredPlayers.map((player => (
+                        <Box
+                            key={player.id}
+                            onClick={() => handlePlayerSelect(player)}
+                            sx={{
+                                display: "flex",
+                                alignItems: "center",
+                                padding: "0.5rem 1rem",
+                                borderBottom: "1px solid white",
+                                cursor: "pointer",
+                                "&:hover": {
+                                    backgroundColor: "rgba(255, 255, 255, 0.1)",
+                                },
+                            }}
+                        >
+                            {/* Player Picture */}
+                            <img
+                                src={entry.player_picture}
+                                alt={entry.player_name}
+                                style={{
+                                    width: "6rem",
+                                    borderRadius: "5rem",
+                                    marginRight: "1rem",
+                                    border: `2px solid ${barColor}`,
+                                }}
+                            />
+
+                            {/* Player Name and Team Tricode */}
+                            <Typography
+                                sx={{
+                                    fontFamily: "monospace",
+                                }}
+                            >
+                                {player.name} ({player.teamTricode})
+                            </Typography>
+                        </Box>
+                    )))}
+                </Box>
+            )}
         </Box>
     )
 }
+
+
+export default SearchBar;
 

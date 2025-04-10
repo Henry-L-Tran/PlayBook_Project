@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 import Lineups from "./Lineups";
 import { calculatePayoutMultiplier } from "./payoutMultiplier";
 import { format } from "date-fns";
+import SearchBar from "./SearchBar";
 
 function Dashboard() {
 
@@ -311,38 +312,43 @@ function Dashboard() {
     return currentLineup.some((entry) => entry.player_id === playerId);
   };
 
-// Function to Update the Lineup with the Selected Player's Pick in the Lineup Builder Popup
-const userPickUpdate = (playerId, pick) => {
+  // Function to Update the Lineup with the Selected Player's Pick in the Lineup Builder Popup
+  const userPickUpdate = (playerId, pick) => {
 
-  if(pick === "Clear All") {
-    setLineup({});
-    return;
-  }
+    if(pick === "Clear All") {
+      setLineup({});
+      return;
+    }
 
-  setLineup((prevLines) => {
-    const newPick = {};
-  
+    setLineup((prevLines) => {
+      const newPick = {};
     
-    for(const category in prevLines) {
-      const categoryLineup = prevLines[category];
+      
+      for(const category in prevLines) {
+        const categoryLineup = prevLines[category];
 
-      if(pick === "Remove") {
-        const filteredLineup = categoryLineup.filter(entry => entry.player_id !== playerId);
-        if(filteredLineup.length > 0) {
-          newPick[category] = filteredLineup;
+        if(pick === "Remove") {
+          const filteredLineup = categoryLineup.filter(entry => entry.player_id !== playerId);
+          if(filteredLineup.length > 0) {
+            newPick[category] = filteredLineup;
+          }
+        }
+
+        else {
+          newPick[category] = prevLines[category].map((entry) =>
+          entry.player_id === playerId ? { ...entry, users_pick: pick } : entry
+          );
         }
       }
+      return newPick;
 
-      else {
-        newPick[category] = prevLines[category].map((entry) =>
-        entry.player_id === playerId ? { ...entry, users_pick: pick } : entry
-        );
-      }
-    }
-    return newPick;
+    });
+  };
 
-  });
-};
+  // Function to Handle Player Selection in the Search Bar
+  const handlePlayerClick = (player) => {
+    console.log("Selected Player: ", player);
+  };
 
 
 
@@ -444,6 +450,12 @@ const userPickUpdate = (playerId, pick) => {
               format(new Date(`${nbaLiveGames.gameDate}T00:00:00`), "MMMM d, yyyy") :
               ""}
             </Typography>
+
+            {/* TESTING SEARCH BAR COMPONENT TEMPORARILY HERE */}
+            <SearchBar 
+              playersPlayingToday={nbaPlayerStats} 
+              playerSelected={handlePlayerClick} 
+            />
 
             {nbaLiveGames.gameData.length === 0 ? (
               <Typography
