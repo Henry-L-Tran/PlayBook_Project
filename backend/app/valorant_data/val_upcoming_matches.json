@@ -1,205 +1,24 @@
-{
-    "data": {
-        "status": 200,
-        "segments": [
-            {
-                "team1": "DRX",
-                "team2": "Global Esports",
-                "flag1": "flag_kr",
-                "flag2": "flag_in",
-                "time_until_match": "41m from now",
-                "match_series": "Group Stage: Week 3",
-                "match_event": "Champions Tour 2025: Pacific Stage 1",
-                "unix_timestamp": "2025-04-07 08:00:00",
-                "match_page": "https://www.vlr.gg/458821/drx-vs-global-esports-champions-tour-2025-pacific-stage-1-w3"
-            },
-            {
-                "team1": "T1",
-                "team2": "Team Secret",
-                "flag1": "flag_kr",
-                "flag2": "flag_ph",
-                "time_until_match": "2h 41m from now",
-                "match_series": "Group Stage: Week 3",
-                "match_event": "Champions Tour 2025: Pacific Stage 1",
-                "unix_timestamp": "2025-04-07 10:00:00",
-                "match_page": "https://www.vlr.gg/458822/t1-vs-team-secret-champions-tour-2025-pacific-stage-1-w3"
-            },
-            {
-                "team1": "Galakticos",
-                "team2": "Eternal Fire",
-                "flag1": "flag_tr",
-                "flag2": "flag_tr",
-                "time_until_match": "6h 11m from now",
-                "match_series": "League Phase: Week 3",
-                "match_event": "Challengers League 2025 T\u00fcrkiye Birlik: Split 2",
-                "unix_timestamp": "2025-04-07 13:30:00",
-                "match_page": "https://www.vlr.gg/461285/galakticos-vs-eternal-fire-challengers-league-2025-t-rkiye-birlik-split-2-w3"
-            },
-            {
-                "team1": "ULF Esports",
-                "team2": "Fenerbah\u00e7e Esports",
-                "flag1": "flag_tr",
-                "flag2": "flag_tr",
-                "time_until_match": "7h 11m from now",
-                "match_series": "League Phase: Week 3",
-                "match_event": "Challengers League 2025 T\u00fcrkiye Birlik: Split 2",
-                "unix_timestamp": "2025-04-07 14:30:00",
-                "match_page": "https://www.vlr.gg/461286/ulf-esports-vs-fenerbah-e-esports-challengers-league-2025-t-rkiye-birlik-split-2-w3"
-            },
-            {
-                "team1": "Ramboot Club",
-                "team2": "Falke Esports",
-                "flag1": "flag_es",
-                "flag2": "flag_pt",
-                "time_until_match": "7h 41m from now",
-                "match_series": "Regular Season: Week 3",
-                "match_event": "Challengers League 2025 Spain Rising: Split 2",
-                "unix_timestamp": "2025-04-07 15:00:00",
-                "match_page": "https://www.vlr.gg/469857/ramboot-club-vs-falke-esports-challengers-league-2025-spain-rising-split-2-w3"
-            },
-            {
-                "team1": "KPI Gaming",
-                "team2": "UCAM Esports Club",
-                "flag1": "flag_eu",
-                "flag2": "flag_eu",
-                "time_until_match": "7h 41m from now",
-                "match_series": "Regular Season: Week 3",
-                "match_event": "Challengers League 2025 Spain Rising: Split 2",
-                "unix_timestamp": "2025-04-07 15:00:00",
-                "match_page": "https://www.vlr.gg/469858/kpi-gaming-vs-ucam-esports-club-challengers-league-2025-spain-rising-split-2-w3"
-            },
-            {
-                "team1": "Fire Flux Esports",
-                "team2": "S2G Esports",
-                "flag1": "flag_tr",
-                "flag2": "flag_tr",
-                "time_until_match": "8h 11m from now",
-                "match_series": "League Phase: Week 3",
-                "match_event": "Challengers League 2025 T\u00fcrkiye Birlik: Split 2",
-                "unix_timestamp": "2025-04-07 15:30:00",
-                "match_page": "https://www.vlr.gg/461287/fire-flux-esports-vs-s2g-esports-challengers-league-2025-t-rkiye-birlik-split-2-w3"
-            },
-            {
-                "team1": "Galatasaray Esports",
-                "team2": "BBL PCIFIC",
-                "flag1": "flag_tr",
-                "flag2": "flag_tr",
-                "time_until_match": "9h 11m from now",
-                "match_series": "League Phase: Week 3",
-                "match_event": "Challengers League 2025 T\u00fcrkiye Birlik: Split 2",
-                "unix_timestamp": "2025-04-07 16:30:00",
-                "match_page": "https://www.vlr.gg/461288/galatasaray-esports-vs-bbl-pcific-challengers-league-2025-t-rkiye-birlik-split-2-w3"
-            },
-            {
-                "team1": "Bar\u00e7a eSports",
-                "team2": "HGE Esport",
-                "flag1": "flag_es",
-                "flag2": "flag_it",
-                "time_until_match": "9h 41m from now",
-                "match_series": "Regular Season: Week 3",
-                "match_event": "Challengers League 2025 Spain Rising: Split 2",
-                "unix_timestamp": "2025-04-07 17:00:00",
-                "match_page": "https://www.vlr.gg/469859/bar-a-esports-vs-hge-esport-challengers-league-2025-spain-rising-split-2-w3"
-            },
-            {
-                "team1": "ZETA Gaming",
-                "team2": "NOVO Esports",
-                "flag1": "flag_es",
-                "flag2": "flag_it",
-                "time_until_match": "9h 41m from now",
-                "match_series": "Regular Season: Week 3",
-                "match_event": "Challengers League 2025 Spain Rising: Split 2",
-                "unix_timestamp": "2025-04-07 17:00:00",
-                "match_page": "https://www.vlr.gg/469860/zeta-gaming-vs-novo-esports-challengers-league-2025-spain-rising-split-2-w3"
-            },
-            {
-                "team1": "ULF Esports",
-                "team2": "Papara SuperMassive",
-                "flag1": "flag_tr",
-                "flag2": "flag_tr",
-                "time_until_match": "10h 11m from now",
-                "match_series": "League Phase: Week 3",
-                "match_event": "Challengers League 2025 T\u00fcrkiye Birlik: Split 2",
-                "unix_timestamp": "2025-04-07 17:30:00",
-                "match_page": "https://www.vlr.gg/461289/ulf-esports-vs-papara-supermassive-challengers-league-2025-t-rkiye-birlik-split-2-w3"
-            },
-            {
-                "team1": "Galatasaray Esports",
-                "team2": "Fire Flux Esports",
-                "flag1": "flag_tr",
-                "flag2": "flag_tr",
-                "time_until_match": "11h 11m from now",
-                "match_series": "League Phase: Week 3",
-                "match_event": "Challengers League 2025 T\u00fcrkiye Birlik: Split 2",
-                "unix_timestamp": "2025-04-07 18:30:00",
-                "match_page": "https://www.vlr.gg/461290/galatasaray-esports-vs-fire-flux-esports-challengers-league-2025-t-rkiye-birlik-split-2-w3"
-            },
-            {
-                "team1": "KOI F\u00e9nix",
-                "team2": "DNSTY",
-                "flag1": "flag_eu",
-                "flag2": "flag_it",
-                "time_until_match": "11h 41m from now",
-                "match_series": "Regular Season: Week 3",
-                "match_event": "Challengers League 2025 Spain Rising: Split 2",
-                "unix_timestamp": "2025-04-07 19:00:00",
-                "match_page": "https://www.vlr.gg/469861/koi-f-nix-vs-dnsty-challengers-league-2025-spain-rising-split-2-w3"
-            },
-            {
-                "team1": "La Masia",
-                "team2": "CICADAS Gaming",
-                "flag1": "flag_fr",
-                "flag2": "flag_fr",
-                "time_until_match": "1d 7h from now",
-                "match_series": "Seeding: Up and Down",
-                "match_event": "Challengers League 2025 France Revolution: Split 2",
-                "unix_timestamp": "2025-04-08 15:00:00",
-                "match_page": "https://www.vlr.gg/467586/la-masia-vs-cicadas-gaming-challengers-league-2025-france-revolution-split-2-up-and-down"
-            },
-            {
-                "team1": "Siko Esports",
-                "team2": "Team Valiant",
-                "flag1": "flag_nl",
-                "flag2": "flag_fr",
-                "time_until_match": "1d 8h from now",
-                "match_series": "Seeding: Playoffs",
-                "match_event": "Challengers League 2025 France Revolution: Split 2",
-                "unix_timestamp": "2025-04-08 16:00:00",
-                "match_page": "https://www.vlr.gg/467583/siko-esports-vs-team-valiant-challengers-league-2025-france-revolution-split-2-playoffs"
-            },
-            {
-                "team1": "DVM Esport",
-                "team2": "Joblife",
-                "flag1": "flag_fr",
-                "flag2": "flag_eu",
-                "time_until_match": "1d 9h from now",
-                "match_series": "Seeding: Playoffs",
-                "match_event": "Challengers League 2025 France Revolution: Split 2",
-                "unix_timestamp": "2025-04-08 17:00:00",
-                "match_page": "https://www.vlr.gg/467584/dvm-esport-vs-joblife-challengers-league-2025-france-revolution-split-2-playoffs"
-            },
-            {
-                "team1": "Mandatory",
-                "team2": "KCORP Blue Stars",
-                "flag1": "flag_fr",
-                "flag2": "flag_fr",
-                "time_until_match": "1d 10h from now",
-                "match_series": "Seeding: Playoffs",
-                "match_event": "Challengers League 2025 France Revolution: Split 2",
-                "unix_timestamp": "2025-04-08 18:00:00",
-                "match_page": "https://www.vlr.gg/467585/mandatory-vs-kcorp-blue-stars-challengers-league-2025-france-revolution-split-2-playoffs"
-            },
-            {
-                "team1": "2Game Academy",
-                "team2": "Los Grandes",
-                "flag1": "flag_br",
-                "flag2": "flag_br",
-                "time_until_match": "1d 12h from now",
-                "match_series": "Playoffs: Upper Round 1",
-                "match_event": "Gamers Club Challengers League 2025 Brazil: Split 1",
-                "unix_timestamp": "2025-04-08 20:00:00",
-                "match_page": "https://www.vlr.gg/454561/2game-academy-vs-los-grandes-gamers-club-challengers-league-2025-brazil-split-1-ur1"
-            }
-        ]
+[
+    {
+        "team1": "Team Liquid",
+        "team2": "FUT Esports",
+        "flag1": "flag_eu",
+        "flag2": "flag_tr",
+        "time_until_match": "12h 23m from now",
+        "match_series": "Group Stage: Week 3",
+        "match_event": "Champions Tour 2025: EMEA Stage 1",
+        "unix_timestamp": "2025-04-10 15:00:00",
+        "match_page": "https://www.vlr.gg/459841/team-liquid-vs-fut-esports-champions-tour-2025-emea-stage-1-w3"
+    },
+    {
+        "team1": "Team Vitality",
+        "team2": "Team Heretics",
+        "flag1": "flag_eu",
+        "flag2": "flag_eu",
+        "time_until_match": "15h 23m from now",
+        "match_series": "Group Stage: Week 3",
+        "match_event": "Champions Tour 2025: EMEA Stage 1",
+        "unix_timestamp": "2025-04-10 18:00:00",
+        "match_page": "https://www.vlr.gg/459842/team-vitality-vs-team-heretics-champions-tour-2025-emea-stage-1-w3"
     }
-}
+]
