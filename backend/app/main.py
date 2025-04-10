@@ -479,6 +479,7 @@ def fetch_val_recent_player_stats(region: str):
     except Exception as e:
         print("Error retrieving player stats:", e)
 
+# Fetch team names and logos from live matches
 def fetch_team_logos():
     try:
         with open("backend/app/valorant_data/val_live_scores.json", "r") as file:
