@@ -13,7 +13,7 @@ from nba_api.stats.endpoints import boxscoretraditionalv2
 from nba_api.stats.static import players
 from nba_api.stats.endpoints import LeagueDashPlayerStats
 from app import lineups
-
+from vlrggapi.api.scrape import Vlr
 
 app = FastAPI()
 app.include_router(lineups.router)
@@ -406,6 +406,139 @@ threading.Thread(target=fetch_player_season_stats, daemon=True).start()
 # NBA Players' Pictures for Player Props
 def fetch_player_pictures(player_id):
     return f"https://cdn.nba.com/headshots/nba/latest/1040x760/{player_id}.png"
+
+# NBA Live Scores Route
+@app.get("/nba/scores")
+def nba_scores():
+    try:
+        with open("app/nba_data/live_nba_scores.json", "r") as file:
+            data = json.load(file)
+            return data
+        
+    except FileNotFoundError:
+        return {"message": "No Scores Found"}
+
+# Get VALORANT upcoming matches from API
+def fetch_val_upcoming_matches():
+    try:
+        # Retrieve upcoming matches
+        upcoming_matches = Vlr.vlr_upcoming_matches()
+        filtered_matches = val_filter_matches(upcoming_matches)
+        # Convert the result (a Python dictionary) to a JSON formatted string
+        with open("backend/app/valorant_data/val_upcoming_matches.json", "w") as file:
+                json.dump(filtered_matches, file, indent=4)
+    except Exception as e:
+        print("Error retrieving upcoming matches:", e)
+
+# Get VALORANT current live matches from API
+def fetch_val_live_matches():
+    try:
+        # Retrieve live matches
+        live_Scores = Vlr.vlr_live_score()
+        filtered_matches = val_filter_matches(live_Scores)
+        # Write the result (a Python dictionary) to a JSON file
+        with open("backend/app/valorant_data/val_live_scores.json", "w") as file:
+            json.dump(filtered_matches, file, indent=4)
+    except Exception as e:
+        print("Error retrieving live matches:", e)
+
+    # Update the score every 30 seconds
+    time.sleep(30)
+
+# Filter only tier 1 (Riot Partnered) teams matches
+def val_filter_matches(matches: dict):
+    t1_teams = ["100 Thieves", "Cloud9", "Evil Geniuses", "FURIA", "KRÜ Esports", "Leviatán", "LOUD", "MIBR", "NRG Esports", "Sentinels", "G2 Esports", "2Game Esports",
+                "BBL Esports", "FNATIC", "FUT Esports", "GIANTX", "Karmine Corp", "KOI", "Natus Vincere", "Team Heretics", "Team Liquid", "Team Vitality", "Gentle Mates", "Apeks",
+                "DetonatioN FocusMe", "DRX", "Gen.G", "Global Esports", "Paper Rex", "Rex Regum Qeon", "T1", "TALON", "Team Secret", "ZETA DIVISION", "Nongshim RedForce", "BOOM Esports"
+                "Xi Lai Gaming", "Bilibili Gaming", "Trace Esports", "All Gamers", "Dragon Ranger Gaming", "Nova Esports", "TYLOO", "EDward Gaming", "JDG Esports", "Wolves Esports", "FunPlus Phoenix", "Titan Esports Club"]
+    
+    filtered_matches = []
+    segments = matches.get("data", {}).get("segments", [])
+
+    for game in segments:
+        team1 = game["team1"].lower()
+        team2 = game["team2"].lower()
+
+        for team in t1_teams:
+            lower_team = team.lower()
+
+            if (team1 == lower_team or team2 == lower_team):
+                 filtered_matches.append(game)
+                 break
+
+    return filtered_matches
+
+# Get VALORANT player stats from given region from past 14 days from API
+def fetch_val_recent_player_stats(region: str):
+    try:
+        # Retrieve player stats from given region from past 14 days
+        stats = Vlr.vlr_stats(region, "14")
+        # Write the result (a Python dictionary) to a JSON file
+        with open("backend/app/valorant_data/val_recent_player_stats.json", "w") as file:
+            json.dump(stats, file, indent=4)
+    except Exception as e:
+        print("Error retrieving player stats:", e)
+
+# Fetch team names and logos from live matches
+def fetch_team_logos():
+    try:
+        with open("backend/app/valorant_data/val_live_scores.json", "r") as file:
+            data = json.load(file)
+            logos = []
+
+            get_segments = data.get("data", {}).get("segments", [])
+
+            for game in get_segments:
+                logos.append(
+                    {
+                        "team 1": game["team1"],
+                        "team 2": game["team2"],
+                        "team1_logo": game["team1_logo"],
+                        "team2_logo": game["team2_logo"]
+                    }
+                )
+            
+            segments = {"segments": logos}
+            data = {"data": segments}
+
+            with open("backend/app/valorant_data/val_live_game_logos.json", "w") as file:
+                json.dump(data, file, indent=4)
+        
+    except FileNotFoundError:
+        return {"message": "No Scores Found"}
+    
+# VALORANT Live Scores Route
+@app.get("/VALROANT/matches")
+def val_matches():
+    try:
+        with open("backend/app/valorant_data/val_upcoming_matches.json", "r") as file:
+            data = json.load(file)
+            return data
+        
+    except FileNotFoundError:
+        return {"message": "No Macthes Found"}
+
+# VALORANT Live Scores Route
+@app.get("/VALROANT/scores")
+def val_live_scores():
+    try:
+        with open("backend/app/valorant_data/val_live_scores.json", "r") as file:
+            data = json.load(file)
+            return data
+        
+    except FileNotFoundError:
+        return {"message": "No Scores Found"}
+    
+# VALORANT Player Stats Route
+@app.get("/VALROANT/player_stats")
+def val_player_stats():
+    try:
+        with open("backend/app/valorant_data/val_recent_player_stats.json", "r") as file:
+            data = json.load(file)
+            return data
+        
+    except FileNotFoundError:
+        return {"message": "No Stats Found"}
 
 
 
