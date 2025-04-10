@@ -94,13 +94,14 @@ const SearchBar = ({ playersPlayingToday, playerSelected }) => {
             {filteredPlayers.length > 0 && (
                 <Box
                     sx={{
-                        position: "absolute",
+                        position: "relative",
                         top: "100%",
                         left: 0,
                         right: 0,
                         backgroundColor: "black",
                         maxHeight: "20%",
                         overflowY: "auto",
+                        
                     }}
                 >
                     {/* Maps Through Filtered Players and Displays the Searched Content */}

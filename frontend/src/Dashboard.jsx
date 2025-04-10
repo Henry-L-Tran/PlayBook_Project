@@ -455,8 +455,13 @@ function Dashboard() {
 
         {/* ------NBA Games Dashboard Display------ */}
         {activeCategoryTab === "NBA" && (
-          <Box className="flex flex-col w-full h-full overflow-auto">
-            
+          <Box className="flex flex-col w-full h-full"
+            sx={{
+              overflow: "visible",
+              position: "relative",
+              minHeight: "100vh",
+            }}
+          > 
             {/* Display the Date of the NBA Games */}
             <Typography
               sx={{
@@ -474,10 +479,18 @@ function Dashboard() {
             </Typography>
 
             {/* TESTING SEARCH BAR COMPONENT TEMPORARILY HERE */}
-            <SearchBar 
-              playersPlayingToday={nbaPlayerStats} 
-              playerSelected={handlePlayerClick} 
-            />
+            <Box
+              sx={{
+                position: "relative",
+                overflow: "visible",
+                minHeight: "6rem",
+              }}
+            >
+              <SearchBar 
+                playersPlayingToday={nbaPlayerStats} 
+                playerSelected={handlePlayerClick} 
+              />
+            </Box>
 
             {nbaLiveGames.gameData.length === 0 ? (
               <Typography
