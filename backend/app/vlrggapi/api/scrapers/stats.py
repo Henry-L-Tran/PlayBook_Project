@@ -5,7 +5,7 @@ from vlrggapi.utils.utils import headers
 
 
 def vlr_stats(region: str, timespan: str):
-    base_url = f"https://www.vlr.gg/stats/?event_group_id=all&event_id=all&region={region}&country=all&min_rounds=200&min_rating=1550&agent=all&map_id=all"
+    base_url = f"https://www.vlr.gg/stats/?event_group_id=74&event_id=all&region={region}&min_rounds=&min_rating=&agent=all&map_id=all&timespan=all"
     url = (
         f"{base_url}&timespan=all"
         if timespan.lower() == "all"
