@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Box, Typography, IconButton, Button } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { calculatePayoutMultiplier, showPayoutMultipliers } from "./payoutMultiplier";
 
 const LineupDetails = ({ lineup, onClose, liveGames }) => {
     const gameStatusColor = lineup.result === "WON" ? "green" : lineup.result === "LOST" ? "red" : "white";
@@ -50,7 +51,8 @@ const LineupDetails = ({ lineup, onClose, liveGames }) => {
                     backgroundColor: "black",
                     borderRadius: "1rem",
                     width: "40%",
-                    height: "80%",
+                    maxHeight: "90vh",          
+                    overflowY: "auto",
                     flexDirection: "column",
                     border: "1px solid white",
                 }}
@@ -107,7 +109,8 @@ const LineupDetails = ({ lineup, onClose, liveGames }) => {
                         sx={{
                             fontFamily: "monospace",
                             color: "white",
-                            marginBottom: "1rem",
+                            marginBottom: "0.5rem",
+                            fontSize: "1.2rem",
                         }}>
                             {lineup.entries.length}-Pick • ${lineup.entry_amount} {lineup.entry_type}
                     </Typography>
@@ -149,57 +152,114 @@ const LineupDetails = ({ lineup, onClose, liveGames }) => {
                         padding: "0 1rem",
                         border: "1px solid white",
                         borderRadius: "5rem",
-                        cursor: "pointer",
+                        cursor: "pointer",      
                         }}
                     >
                         {showPayoutDetails ? "Hide Details" : "Show Details"}
                     </Typography>
                 </Box>
 
-                {/* Payout Details Section */}
+                {/* Payout Details Section Container */}
                 {showPayoutDetails && (
                     <Box
                         sx={{
                             display: "flex",
-                            justifuyContent: "space-around",
+                            justifyContent: "center",
                             backgroundColor: "black",
-                            borderRadius: "1rem",
+                            alignItems: "center",
+                            gap: 2,
                             border: "1px solid white",
                             width: "100%",
-                            marginBottom: "2%",
+                            minHeight: "7em",
+                            marginTop: "4%",
                         }}
                     >
+                        {/* Payout Multiplier for Power Play Entries Container */}
                         {lineup.entry_type === "Power Play" ? (
                             <Box
                                 sx={{
-                                    color: "white",
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    alignItems: "center",
+                                    backgroundColor: "black",
+                                    borderRadius: "1rem",
+                                    border: "1px solid white",
+                                    width: "25%",
+                                    padding: "1.5rem",
+                                    justifyContent: "center",
+
                                 }}
                             >
                                 <Typography
                                     sx={{
+                                        color: "limegreen",
+                                        fontFamily: "monospace",
+                                        fontWeight: "bold",
+                                        fontSize: "1.3rem",
+                                    }}
+                                >
+                                    ${parseFloat(lineup.potential_payout).toFixed(2)}
+                                </Typography>
+
+                                <Typography
+                                    sx={{
+                                        color: "white",
                                         fontFamily: "monospace",
                                     }}
                                 >
-                                    Testing
+                                    {lineup.entries.length} of {lineup.entries.length} • {`${(lineup.potential_payout / lineup.entry_amount).toFixed(1)}x`}
                                 </Typography>
                             </Box>
                         ) : (
-                            <>
-                                <Box
-                                    sx={{
-                                        textAlign: "center",
-                                    }}
-                                >
-                                    <Typography
+
+                            // Payout Multiplier for Flex Play Entries Container
+                            showPayoutMultipliers(lineup.entry_type, lineup.entries.length).map((correctLegs, index) => {
+                                const multiplier = calculatePayoutMultiplier(lineup.entry_type, lineup.entries.length, correctLegs);
+                                if(multiplier === 0) {
+                                    return null;
+                                }
+                                return (
+                                    // Payout Multiplier Box for Each Correct Leg (Since Flex Play)
+                                    <Box
+                                        key={index}
                                         sx={{
-                                            color: "white",
-                                            fontFamily: "monospace",
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            alignItems: "center",
+                                            backgroundColor: "black",
+                                            borderRadius: "1rem",
+                                            border: "1px solid white",
+                                            width: "25%",
+                                            height: "80%",
+                                            justifyContent: "center",
+                                            padding: "1.5rem",
                                         }}
                                     >
-                                        {lineup.entries.length} of {lineup.entries.length}
-                                    </Typography>
-                                </Box>
-                            </> 
+                                        {/* Payout Multiplier for Each Correct Leg Display */}
+                                        <Typography
+                                            sx={{
+                                                color: "limegreen",
+                                                fontFamily: "monospace",
+                                                fontWeight: "bold",
+                                                fontSize: "1.3rem",
+                                            }}
+                                        >
+                                            ${parseFloat(multiplier * lineup.entry_amount).toFixed(2)}
+                                        </Typography>
+
+                                        {/* Correct Legs and Multiplier Display */}
+                                        <Typography
+                                            sx={{
+                                                color: "white",
+                                                fontFamily: "monospace",
+                                                fontWeight: "bold",
+                                            }}
+                                        >
+                                            {correctLegs} of {lineup.entries.length} • {`${multiplier.toFixed(1)}x`}
+                                        </Typography>
+                                    </Box>
+                                );
+                            })
                         )}
                     </Box>
                 )}              
@@ -213,6 +273,7 @@ const LineupDetails = ({ lineup, onClose, liveGames }) => {
                         overflowY: "auto",
                         marginTop: "3%",
                         gap: 2.5,
+                        marginBottom: "5%",
                     }}
                 >
                     {lineup.entries.map((entry, index) => {

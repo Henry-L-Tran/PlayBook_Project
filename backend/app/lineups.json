@@ -225,5 +225,139 @@
         "time": "2025-04-09T06:27:10.749398",
         "result": "WON",
         "evaluated": true
+    },
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "henry.l.tran-1@ou.edu_1744243488774_ee404914-bfc4-4df3-b183-12b78b799593",
+        "entry_type": "Flex Play",
+        "entry_amount": 50.0,
+        "potential_payout": 125.0,
+        "entries": [
+            {
+                "player_id": 1629029,
+                "player_name": "Luka Don\u010di\u0107",
+                "team_tri_code": "LAL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629029.png",
+                "line_category": "PTS",
+                "projected_line": 27.5,
+                "users_pick": "Over",
+                "matchup": "LAL @ DAL",
+                "live_value": 45,
+                "status": "hit"
+            },
+            {
+                "player_id": 2544,
+                "player_name": "LeBron James",
+                "team_tri_code": "LAL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png",
+                "line_category": "PTS",
+                "projected_line": 24.5,
+                "users_pick": "Over",
+                "matchup": "LAL @ DAL",
+                "live_value": 27,
+                "status": "hit"
+            },
+            {
+                "player_id": 203076,
+                "player_name": "Anthony Davis",
+                "team_tri_code": "DAL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/203076.png",
+                "line_category": "PTS",
+                "projected_line": 25.0,
+                "users_pick": "Under",
+                "matchup": "LAL @ DAL",
+                "live_value": 13,
+                "status": "hit"
+            }
+        ],
+        "time": "2025-04-10T00:04:48.779055",
+        "result": "WON",
+        "evaluated": true
+    },
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "henry.l.tran-1@ou.edu_1744251763429_41b4dc2d-43b1-46ba-aae2-24e6987e6d33",
+        "entry_type": "Flex Play",
+        "entry_amount": 10.0,
+        "potential_payout": 250.0,
+        "entries": [
+            {
+                "player_id": 1630193,
+                "player_name": "Immanuel Quickley",
+                "team_tri_code": "TOR",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630193.png",
+                "line_category": "PTS",
+                "projected_line": 17.5,
+                "users_pick": "Over",
+                "matchup": "CHA @ TOR",
+                "live_value": 8,
+                "status": "miss"
+            },
+            {
+                "player_id": 1630567,
+                "player_name": "Scottie Barnes",
+                "team_tri_code": "TOR",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630567.png",
+                "line_category": "PTS",
+                "projected_line": 19.0,
+                "users_pick": "Under",
+                "matchup": "CHA @ TOR",
+                "live_value": 17,
+                "status": "hit"
+            },
+            {
+                "player_id": 203994,
+                "player_name": "Jusuf Nurki\u0107",
+                "team_tri_code": "CHA",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/203994.png",
+                "line_category": "PTS",
+                "projected_line": 8.5,
+                "users_pick": "Over",
+                "matchup": "CHA @ TOR",
+                "live_value": 26,
+                "status": "hit"
+            },
+            {
+                "player_id": 1629610,
+                "player_name": "DaQuan Jeffries",
+                "team_tri_code": "CHA",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629610.png",
+                "line_category": "PTS",
+                "projected_line": 6.5,
+                "users_pick": "Over",
+                "matchup": "CHA @ TOR",
+                "live_value": 7,
+                "status": "hit"
+            },
+            {
+                "player_id": 1641737,
+                "player_name": "Adem Bona",
+                "team_tri_code": "PHI",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1641737.png",
+                "line_category": "PTS",
+                "projected_line": 5.0,
+                "users_pick": "Over",
+                "matchup": "PHI @ WAS",
+                "live_value": 17,
+                "status": "hit"
+            },
+            {
+                "player_id": 1642259,
+                "player_name": "Alex Sarr",
+                "team_tri_code": "WAS",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642259.png",
+                "line_category": "PTS",
+                "projected_line": 13.0,
+                "users_pick": "Under",
+                "matchup": "PHI @ WAS",
+                "live_value": 12,
+                "status": "hit"
+            }
+        ],
+        "time": "2025-04-10T02:22:43.435609",
+        "result": "WON",
+        "evaluated": true
     }
 ]
