@@ -1,10 +1,21 @@
 [
     {
+        "team1": "JDG Esports",
+        "team2": "Xi Lai Gaming",
+        "flag1": "flag_cn",
+        "flag2": "flag_cn",
+        "time_until_match": "8h 3m from now",
+        "match_series": "Group Stage: Week 5",
+        "match_event": "Champions Tour 2025: China Stage 1",
+        "unix_timestamp": "2025-04-10 11:00:00",
+        "match_page": "https://www.vlr.gg/450071/jdg-esports-vs-xi-lai-gaming-champions-tour-2025-china-stage-1-w5"
+    },
+    {
         "team1": "Team Liquid",
         "team2": "FUT Esports",
         "flag1": "flag_eu",
         "flag2": "flag_tr",
-        "time_until_match": "12h 23m from now",
+        "time_until_match": "12h 3m from now",
         "match_series": "Group Stage: Week 3",
         "match_event": "Champions Tour 2025: EMEA Stage 1",
         "unix_timestamp": "2025-04-10 15:00:00",
@@ -15,10 +26,21 @@
         "team2": "Team Heretics",
         "flag1": "flag_eu",
         "flag2": "flag_eu",
-        "time_until_match": "15h 23m from now",
+        "time_until_match": "15h 3m from now",
         "match_series": "Group Stage: Week 3",
         "match_event": "Champions Tour 2025: EMEA Stage 1",
         "unix_timestamp": "2025-04-10 18:00:00",
         "match_page": "https://www.vlr.gg/459842/team-vitality-vs-team-heretics-champions-tour-2025-emea-stage-1-w3"
+    },
+    {
+        "team1": "Dragon Ranger Gaming",
+        "team2": "TYLOO",
+        "flag1": "flag_cn",
+        "flag2": "flag_cn",
+        "time_until_match": "1d 8h from now",
+        "match_series": "Group Stage: Week 5",
+        "match_event": "Champions Tour 2025: China Stage 1",
+        "unix_timestamp": "2025-04-11 11:00:00",
+        "match_page": "https://www.vlr.gg/450072/dragon-ranger-gaming-vs-tyloo-champions-tour-2025-china-stage-1-w5"
     }
 ]
