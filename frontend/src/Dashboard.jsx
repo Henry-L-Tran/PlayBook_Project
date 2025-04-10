@@ -306,14 +306,13 @@ function Dashboard() {
 
   return (
     <Box className="flex w-full flex-col md:flex-row ">
-      <Box className="flex w-full basis-3/4  overflow-scroll justify-center items-center">
+      <Box className="flex w-full basis-3/4  overflow-scroll justify-center items-center md:mr-8">
         {/* Outer Scoreboard Container */}
         <Box
-          className="w-full max-w-full p-2 md:p-8 text-white"
+          className="w-full max-w-full border-white border-2 rounded-2xl p-2 md:p-8 text-white"
           sx={{
             maxWidth: "1200px",
             backgroundColor: "rgba(0, 0, 0, 0.3)",
-            borderRadius: "1rem",
           }}
         >
           {/* Tabs (NBA, NFL, LoL, VAL) */}
@@ -1181,7 +1180,7 @@ function Dashboard() {
           })()}
       </Box>
       <Box
-        className={`flex flex-col basis-1/4 h-full ${
+        className={`flex flex-col basis-1/4 h-full border-2 border-white rounded-2xl ${
           !(activeCategoryTab === "NBA" && showBettingLines && nbaSelectedGame)
             ? "sticky top-0"
             : "hidden"
@@ -1189,7 +1188,7 @@ function Dashboard() {
         sx={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}
       >
         {/* Earnings */}
-        <div className="bg-gray-800 text-white rounded-t-lg p-4 flex flex-col items-center justify-center h-1/3">
+        <div className=" text-white rounded-t-lg p-4 flex flex-col items-center justify-center h-1/3">
           <h2 className="text-xl font-bold mb-2">Earnings</h2>
           <div className="w-24 h-24 rounded-full border-8 border-gray-700 flex items-center justify-center mb-2">
             {/* Placeholder value for earnings */}
@@ -1206,7 +1205,7 @@ function Dashboard() {
         />
 
         {/* Monthly Progress */}
-        <div className="bg-gray-800 h-1/3 p-4">
+        <div className=" h-1/3 p-4">
           <h2 className="text-xl font-bold text-center mb-2">
             Monthly Progress
           </h2>
@@ -1240,9 +1239,9 @@ function Dashboard() {
         />
 
         {/* Top Picks */}
-        <div className="bg-gray-800 text-white rounded-b-lg p-4 h-1/3">
+        <div className=" text-white rounded-b-lg p-4 h-1/3">
           <h2 className="text-xl font-bold mb-4">Top Picks</h2>
-          <div className="flex justify-between items-center bg-gray-700 rounded p-2 pl-6 mb-2">
+          <div className="flex justify-between items-center  rounded p-2 pl-6 mb-2">
             <span>NYK vs LAL</span>
             <button
               className="px-3 py-1 rounded text-sm"
@@ -1255,7 +1254,7 @@ function Dashboard() {
               View
             </button>
           </div>
-          <div className="flex justify-between items-center bg-gray-700 rounded p-2 pl-6 mb-2">
+          <div className="flex justify-between items-center  rounded p-2 pl-6 mb-2">
             <span>DAL vs MIA</span>
             <button
               className="px-3 py-1 rounded text-sm"
@@ -1268,7 +1267,7 @@ function Dashboard() {
               View
             </button>
           </div>
-          <div className="flex justify-between items-center bg-gray-700 rounded p-2 pl-6">
+          <div className="flex justify-between items-center  rounded p-2 pl-6">
             <span>BOS vs CHI</span>
             <button
               className="px-3 py-1 rounded text-sm"
