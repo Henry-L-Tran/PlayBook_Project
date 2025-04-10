@@ -10,7 +10,7 @@ const SearchBar = ({ playersPlayingToday, playerSelected }) => {
     const [searchTerm, setSearchTerm] = useState("");
 
     // Filtered Players Based on Search Term
-    const [filteredPlayers, setFilteredPlayers] = useState(playersPlayingToday);
+    const [filteredPlayers, setFilteredPlayers] = useState([]);
 
     // Focuses the Input Field When It's Expanded
     const inputRef = useRef();
@@ -30,8 +30,8 @@ const SearchBar = ({ playersPlayingToday, playerSelected }) => {
         else {
             const filtered = playersPlayingToday.filter(player => {
                 return (
-                    player.name &&
-                    player.name.toLowerCase().startsWith(searchTerm.toLowerCase())
+                    player.playerName &&
+                    player.playerName.toLowerCase().startsWith(searchTerm.toLowerCase())
                 );
             });
             setFilteredPlayers(filtered);
@@ -52,7 +52,7 @@ const SearchBar = ({ playersPlayingToday, playerSelected }) => {
         <Box
             sx={{
                 position: "relative",
-                width: expanded ? "100%" : "3rem", transition: "width 1s ease" 
+                width: expanded ? "100%" : "3rem", transition: "width 1s ease",
             }}
         >
             {/* Search Icon & User Input Bar Container */}
@@ -63,6 +63,7 @@ const SearchBar = ({ playersPlayingToday, playerSelected }) => {
                     backgroundColor: "black",
                     borderRadius: "5rem",
                     padding: expanded ? "0.5rem 1rem" : "0.5rem",
+                    border: "2px solid white",
                 }}
             >
                 {/* Search Icon Button */}
@@ -82,6 +83,8 @@ const SearchBar = ({ playersPlayingToday, playerSelected }) => {
                         sx={{
                             flex: 1,
                             marginLeft: "1rem",
+                            color: "white",
+                            fontFamily: "monospace",
                         }}
                     />
                 )}
@@ -101,9 +104,9 @@ const SearchBar = ({ playersPlayingToday, playerSelected }) => {
                     }}
                 >
                     {/* Maps Through Filtered Players and Displays the Searched Content */}
-                    {filteredPlayers.map((player => (
+                    {filteredPlayers.map((player, index) => (
                         <Box
-                            key={player.id}
+                            key={`${player.playerId || player.playerName}-${index}`}
                             onClick={() => handlePlayerSelect(player)}
                             sx={{
                                 display: "flex",
@@ -118,13 +121,13 @@ const SearchBar = ({ playersPlayingToday, playerSelected }) => {
                         >
                             {/* Player Picture */}
                             <img
-                                src={entry.player_picture}
-                                alt={entry.player_name}
+                                src={player.playerPicture}
+                                alt={player.playerName}
                                 style={{
                                     width: "6rem",
                                     borderRadius: "5rem",
                                     marginRight: "1rem",
-                                    border: `2px solid ${barColor}`,
+                                    border: `2px solid white`,
                                 }}
                             />
 
@@ -134,10 +137,10 @@ const SearchBar = ({ playersPlayingToday, playerSelected }) => {
                                     fontFamily: "monospace",
                                 }}
                             >
-                                {player.name} ({player.teamTricode})
+                                {player.playerName} ({player.teamTricode})
                             </Typography>
                         </Box>
-                    )))}
+                    ))}
                 </Box>
             )}
         </Box>

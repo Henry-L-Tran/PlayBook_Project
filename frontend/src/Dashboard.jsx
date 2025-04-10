@@ -347,10 +347,32 @@ function Dashboard() {
 
   // Function to Handle Player Selection in the Search Bar
   const handlePlayerClick = (player) => {
+    const playerGame = nbaLiveGames.gameData.find(
+      (game) =>
+        game.awayTeam.teamTriCode === player.teamTriCode ||
+        game.homeTeam.teamTriCode === player.teamTriCode
+    );
+
+    // If the Player is Playing Today, Show the Betting Lines Popup They Are In
+    if (playerGame) {
+      setnbaselectedGame(playerGame);
+      setShowBettingLines(true);
+
+      setTimeout(() => {
+        const findPlayerSquare = document.getElementById(`player-${player.playerId}`);
+        
+        // Finding the Player Square 
+        if (findPlayerSquare) {
+          findPlayerSquare.add();
+          setTimeout(() => {
+            findPlayerSquare.remove();
+          }, 1000);
+        }
+      }, 500);
+
     console.log("Selected Player: ", player);
-  };
-
-
+    };
+  }
 
 
   return (
@@ -846,6 +868,7 @@ function Dashboard() {
                       .map((player, index) => (
                         <Box
                           key={index}
+                          id={`player-${player.playerId}`}
                           sx={{
                             border: selectedSquare(player.playerId)
                               ? "2px solid green"
@@ -1048,6 +1071,7 @@ function Dashboard() {
                       .map((player, index) => (
                         <Box
                           key={index}
+                          id={`player-${player.playerId}`}
                           sx={{
                             border: selectedSquare(player.playerId)
                               ? "2px solid green"
