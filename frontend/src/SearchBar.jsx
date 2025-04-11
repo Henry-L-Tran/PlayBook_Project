@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Box, Typography, IconButton, InputBase } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
+import { Box, Typography, Button } from '@mui/material';
+import "./SearchBar.css";
 
 
 const SearchBar = ({ playersPlayingToday, playerSelected }) => {
@@ -48,81 +48,88 @@ const SearchBar = ({ playersPlayingToday, playerSelected }) => {
     };
 
     return (
-        // Search Bar Component Container
-        <Box
-            sx={{
-                position: "relative",
-                width: expanded ? "100%" : "3rem", 
-                transition: "width 1s ease",
-                marginLeft: "auto",   
+
+        // Main Search Bar Container
+        <Box className="search-container" 
+            sx={{ 
+                display: "flex",
+                alignItems: "flex-end", 
+                flexDirection: "column",
+                width: "100%",       
+                maxWidth: "100%",      
             }}
         >
-            {/* Search Icon & User Input Bar Container */}
+            {/* Search Form w/ Animated Icon */}
             <Box
+                component="form"
+                className={`search-form ${expanded || searchTerm ? "active" : ""}`}
                 sx={{
+                    position: "relative",
+                    width: expanded ? "100%" : "2em",
+                    transition: "all 0.6s ease",
                     display: "flex",
                     alignItems: "center",
-                    backgroundColor: "transparent",
-                    borderRadius: "5rem",
-                    padding: expanded ? "0.5rem 1rem" : "0.5rem",
-                    border: "2px solid white",
                 }}
             >
-                {/* Search Icon Button */}
-                <IconButton
-                    onClick={() => setExpanded(!expanded)}
-                    disableRipple
-                    sx={{
-                        "&:focus": {
-                            outline: "none",
-                            backgroundColor: "transparent",
-                          },
-                          "&:active": {
-                            outline: "none",
-                            backgroundColor: "transparent",
-                          },
-                          "&:hover": {
-                            outline: "none",
-                            backgroundColor: "transparent",
-                        },
-                    }}
-                >
-                    <SearchIcon />
-                </IconButton>
+                {/* Input Container For User Input */}
+                <input
+                    type="text"
+                    ref={inputRef}
+                    className="search-input"
+                    placeholder={expanded ? "Search for players..." : ""}
+                    value={searchTerm}
+                    onFocus={() => setExpanded(true)}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
 
+                {/* Search Icon */}
+                <Box 
+                    className="caret">         
+                </Box>
 
-                {/* Search Input Bar */}
+                {/* Cancel Button (Only Shows When Search Bar is Expanded) */}
                 {expanded && (
-                    <InputBase
-                        inputRef={inputRef}
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        placeholder="Search for players..."
-                        sx={{
-                            flex: 1,
-                            marginLeft: "1rem",
-                            color: "white",
-                            fontFamily: "monospace",
+                    <Button
+                        className="cancel-button-inside"
+                        onClick={() => {
+                            setSearchTerm("");
+                            setExpanded(false);
+                            setFilteredPlayers([]);
                         }}
-                    />
+                        sx={{
+                            position: "absolute",
+                            right: "2%",
+                            fontSize: "0.75rem",
+                            backgroundColor: "transparent",
+                            color: "white",
+                            "&:hover": {
+                                backgroundColor: "transparent",
+                                outline: "none"
+                            },
+                            "&:focus": {
+                                outline: "none",
+                                backgroundColor: "transparent",
+                            },
+                        }}
+                    >
+                        Cancel
+                    </Button>
                 )}
             </Box>
-
-            {/* Results Dropdown Container */}
+      
+            {/* Player Search Results Dropdown Container */}
             {filteredPlayers.length > 0 && (
                 <Box
                     sx={{
-                        position: "relative",
-                        top: "100%",
-                        left: 0,
-                        right: 0,
+                        position: "relative",   
+                        top: "2%",            
+                        width: "100%",          
                         backgroundColor: "transparent",
-                        maxHeight: "20%",
-                        overflowY: "auto",
-                        
+                        overflowY: "auto",        
+                        marginBottom: "5%",    
                     }}
                 >
-                    {/* Maps Through Filtered Players and Displays the Searched Content */}
+                    {/* Player Search Results Individual Row Container */}
                     {filteredPlayers.map((player, index) => (
                         <Box
                             key={`${player.playerId || player.playerName}-${index}`}
@@ -130,11 +137,12 @@ const SearchBar = ({ playersPlayingToday, playerSelected }) => {
                             sx={{
                                 display: "flex",
                                 alignItems: "center",
-                                padding: "0.5rem 1rem",
+                                padding: "1rem 1rem",
                                 borderBottom: "1px solid white",
                                 cursor: "pointer",
+                                backgroundColor: "transparent",
                                 "&:hover": {
-                                    backgroundColor: "rgba(255, 255, 255, 0.1)",
+                                backgroundColor: "rgba(255, 255, 255, 0.1)",
                                 },
                             }}
                         >
@@ -143,17 +151,18 @@ const SearchBar = ({ playersPlayingToday, playerSelected }) => {
                                 src={player.playerPicture}
                                 alt={player.playerName}
                                 style={{
-                                    width: "6rem",
-                                    borderRadius: "5rem",
-                                    marginRight: "1rem",
-                                    border: `2px solid white`,
+                                width: "6rem",
+                                borderRadius: "5rem",
+                                marginRight: "2%",
+                                border: "2px solid white",
                                 }}
                             />
 
-                            {/* Player Name and Team Tricode */}
-                            <Typography
-                                sx={{
-                                    fontFamily: "monospace",
+                            {/* Player Name and Team Tri Code */}
+                            <Typography 
+                                sx={{ 
+                                    fontFamily: "monospace", 
+                                    color: "white" 
                                 }}
                             >
                                 {player.playerName} - {player.teamTriCode}
@@ -163,7 +172,7 @@ const SearchBar = ({ playersPlayingToday, playerSelected }) => {
                 </Box>
             )}
         </Box>
-    )
+    );
 }
 
 

@@ -9,7 +9,7 @@ import Lineups from "./Lineups";
 import { calculatePayoutMultiplier } from "./payoutMultiplier";
 import { format } from "date-fns";
 import SearchBar from "./SearchBar";
-import './Dashboard.css';
+import "./Dashboard.css";
 
 function Dashboard() {
 
@@ -363,7 +363,7 @@ function Dashboard() {
       setTimeout(() => {
         const findPlayerSquare = document.getElementById(`player-${player.playerId}`);
         
-        // Finding the Player Square 
+        // Finding the Player Square, Scrolling to It Then Highlighting It 
         if (findPlayerSquare) {
           findPlayerSquare.scrollIntoView({
             behavior: "smooth",
@@ -383,7 +383,30 @@ function Dashboard() {
 
 
   return (
-    <Box className="flex w-full  overflow-scroll justify-center items-center">
+    
+    // Main Dashboard Container 
+    <Box className="flex w-full  overflow-scroll justify-center items-center"
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+      }}>
+
+      {/* Display the Date of the NBA Games */}
+      <Typography
+        sx={{
+          fontSize: "1.5rem",
+          fontFamily: "monospace",
+          paddingTop: "1rem",
+          paddingBottom: "1rem",
+          textAlign: "center",
+          fontWeight: "bold",
+        }}
+      >
+        {nbaLiveGames.gameDate && nbaLiveGames.gameDate !== "N/A" ?
+        format(new Date(`${nbaLiveGames.gameDate}T00:00:00`), "MMMM d, yyyy") :
+        ""}
+      </Typography>
       
       {/* Outer Scoreboard Container */}
       <Box
@@ -468,23 +491,7 @@ function Dashboard() {
               position: "relative",
               minHeight: "100vh",
             }}
-          > 
-            {/* Display the Date of the NBA Games */}
-            <Typography
-              sx={{
-                fontSize: "1.2rem",
-                fontFamily: "monospace",
-                paddingTop: "1rem",
-                paddingBottom: "1rem",
-                textAlign: "center",
-                fontWeight: "bold",
-              }}
-            >
-              {nbaLiveGames.gameDate && nbaLiveGames.gameDate !== "N/A" ?
-              format(new Date(`${nbaLiveGames.gameDate}T00:00:00`), "MMMM d, yyyy") :
-              ""}
-            </Typography>
-
+          >
             {/* TESTING SEARCH BAR COMPONENT TEMPORARILY HERE */}
             <Box
               sx={{
