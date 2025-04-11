@@ -9,6 +9,7 @@ import Lineups from "./Lineups";
 import { calculatePayoutMultiplier } from "./payoutMultiplier";
 import { format } from "date-fns";
 import SearchBar from "./SearchBar";
+import './Dashboard.css';
 
 function Dashboard() {
 
@@ -358,17 +359,23 @@ function Dashboard() {
       setnbaselectedGame(playerGame);
       setShowBettingLines(true);
 
+      // Quick Delay to Allow for the Animation & Players to Load
       setTimeout(() => {
         const findPlayerSquare = document.getElementById(`player-${player.playerId}`);
         
         // Finding the Player Square 
         if (findPlayerSquare) {
-          findPlayerSquare.add();
-          setTimeout(() => {
-            findPlayerSquare.remove();
-          }, 1000);
+          findPlayerSquare.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          })
+          
+          findPlayerSquare.classList.add("card-highlight");
+          // setTimeout(() => {
+          //   findPlayerSquare.remove("card-highlight");
+          // }, 1000);
         }
-      }, 500);
+      }, 600);
 
     console.log("Selected Player: ", player);
     };
