@@ -9,24 +9,6 @@ const LineupDetails = ({ lineup, onClose, liveGames }) => {
     // Toggles the Payout Multiplier Display
     const [showPayoutDetails, setShowPayoutDetails] = useState(false);
 
-    // Function to Get the Team Matchup for a Player Line
-    const getMatchup = (player, liveGames) => {
-        if(!liveGames || !liveGames.gameData) {
-            return "N/A";
-        }
-
-        for (const game of liveGames.gameData) {
-            const homeTeam = game.homeTeam.teamTriCode === player.team_tri_code;
-            const awayTeam = game.awayTeam.teamTriCode === player.team_tri_code;
-
-            if (homeTeam || awayTeam) {
-                return `${game.awayTeam.teamTriCode} @ ${game.homeTeam.teamTriCode}`;
-            }
-        }
-        return "N/A";
-    };
-
-
     return (
 
         // Main Fullscreen Container for the Lineup Details Popup
@@ -331,7 +313,7 @@ const LineupDetails = ({ lineup, onClose, liveGames }) => {
                                             {entry.player_name} - {entry.team_tri_code}
                                         </Typography>
 
-                                        {/* Game Matchup */}
+                                        {/* Frozen Game Matchup */}
                                         <Typography
                                             sx={{
                                                 display: "flex",
@@ -340,8 +322,8 @@ const LineupDetails = ({ lineup, onClose, liveGames }) => {
                                                 fontSize: "0.7rem",
                                                 fontWeight: "bold",
                                             }}
-                                        >
-                                            {getMatchup(entry, liveGames)}
+                                        >   
+                                            {entry.matchup}
                                         </Typography>
                                     </Box>
 

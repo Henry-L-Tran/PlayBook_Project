@@ -142,6 +142,27 @@ def submit_lineup(lineup_data: SubmitLineup):
     if len(team) == 1:
         raise HTTPException(status_code=400, detail="Lineups cannnot just contain players from the same team")
 
+
+    try:
+        with open("app/nba_data/live_nba_scores.json", "r") as file:
+            live_scores = json.load(file)
+    except:
+        live_scores = {"gameData": []}
+
+    # Freezing the Lineup Matchup Data When Parlay is Placed
+    def freeze_matchups_data(team_tri_code):
+        for game in live_scores.get("gameData", []):
+            if game["homeTeam"]["teamTriCode"] == team_tri_code or game["awayTeam"]["teamTricode"] == team_tri_code:
+                 return f'{game["awayTeam"]["teamTriCode"]} @ {game["homeTeam"]["teamTriCode"]}'
+        return "N/A"
+    
+    frozen_entries = []
+
+    for entry in lineup_data.entries:
+        entry_dict = entry.dict()
+        entry_dict["matchup"] = freeze_matchups_data(entry.team_tri_code)
+        frozen_entries.append(entry_dict)
+
     # Builds the New Lineup 
     new_lineup = {
         "email": lineup_data.email,
@@ -150,7 +171,7 @@ def submit_lineup(lineup_data: SubmitLineup):
         "entry_type": lineup_data.entry_type,
         "entry_amount": lineup_data.entry_amount,
         "potential_payout": lineup_data.potential_payout,
-        "entries": [entry.dict() for entry in lineup_data.entries],
+        "entries": frozen_entries,
         "time": datetime.utcnow().isoformat()
     }
 

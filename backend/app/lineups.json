@@ -15,6 +15,7 @@
                 "line_category": "PTS",
                 "projected_line": 22.5,
                 "users_pick": "Over",
+                "matchup": "SAC @ DET",
                 "live_value": 37,
                 "status": "hit"
             },
@@ -26,6 +27,7 @@
                 "line_category": "PTS",
                 "projected_line": 26.0,
                 "users_pick": "Over",
+                "matchup": "SAC @ DET",
                 "live_value": 35,
                 "status": "hit"
             },
@@ -37,6 +39,7 @@
                 "line_category": "PTS",
                 "projected_line": 13.0,
                 "users_pick": "Under",
+                "matchup": "SAC @ DET",
                 "live_value": 5,
                 "status": "hit"
             }
@@ -61,6 +64,7 @@
                 "line_category": "PTS",
                 "projected_line": 23.5,
                 "users_pick": "Over",
+                "matchup": "SAC @ DET",
                 "live_value": 43,
                 "status": "hit"
             },
@@ -72,6 +76,7 @@
                 "line_category": "PTS",
                 "projected_line": 16.0,
                 "users_pick": "Under",
+                "matchup": "SAC @ DET",
                 "live_value": 14,
                 "status": "hit"
             },
@@ -83,6 +88,7 @@
                 "line_category": "PTS",
                 "projected_line": 12.0,
                 "users_pick": "Over",
+                "matchup": "SAC @ DET",
                 "live_value": 6,
                 "status": "miss"
             }

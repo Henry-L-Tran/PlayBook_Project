@@ -22,6 +22,8 @@
     width: 100%;
   }
   
+
+   /* Search Icon Circle */
   .search-input {
     background: transparent;
     border-radius: 50%;
@@ -32,20 +34,24 @@
     appearance: none;
     transition: all 0.6s ease;
     font-family: monospace;
+    cursor: pointer;
   }
 
   .search-input::placeholder {
     font-family: monospace;
   }
   
+  /* Search Icon Circle Expanded */
   .search-form.active .search-input {
     width: 100%;
     border-radius: 0.25em;
     padding: 0.75em 1em;
     box-shadow: none;
     border: 2px solid white;
+    cursor: text;
   }
   
+  /* Search Icon Caret */
   .caret {
     position: absolute;
     background: white;
@@ -56,6 +62,7 @@
     transform: translate(0, -1em) rotate(-45deg) translate(0, 0.875em);
     transform-origin: 50% 0;
     transition: all 0.6s ease;
+    cursor: pointer;
   }
   
   .search-form.active .caret {
