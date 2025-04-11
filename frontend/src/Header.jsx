@@ -1,6 +1,7 @@
-import { Typography, Button, Box, Link } from "@mui/material";
+import { Typography, Button, Box, Link, IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Divider from "@mui/material/Divider";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
 // Handles the Header Component & Routing
 // eslint-disable-next-line react/prop-types
@@ -112,6 +113,18 @@ const Header = ({ onNavigate }) => {
           >
             Logout
           </button>
+
+          {/* Help Icon Button at the very end */}
+          <IconButton
+            color="inherit"
+            onClick={() => console.log("Help Icon Clicked")}
+            sx={{
+              marginLeft: "auto", // Push it to the end
+              fontSize: "2rem", // Adjust the size of the icon here
+            }}
+          >
+            <HelpOutlineIcon sx={{ fontSize: "inherit" }} />
+          </IconButton>
         </div>
       </div>
       <Divider />
