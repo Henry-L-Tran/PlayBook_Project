@@ -52,7 +52,9 @@ const SearchBar = ({ playersPlayingToday, playerSelected }) => {
         <Box
             sx={{
                 position: "relative",
-                width: expanded ? "100%" : "3rem", transition: "width 1s ease",
+                width: expanded ? "100%" : "3rem", 
+                transition: "width 1s ease",
+                marginLeft: "auto",   
             }}
         >
             {/* Search Icon & User Input Bar Container */}
@@ -69,9 +71,25 @@ const SearchBar = ({ playersPlayingToday, playerSelected }) => {
                 {/* Search Icon Button */}
                 <IconButton
                     onClick={() => setExpanded(!expanded)}
+                    disableRipple
+                    sx={{
+                        "&:focus": {
+                            outline: "none",
+                            backgroundColor: "transparent",
+                          },
+                          "&:active": {
+                            outline: "none",
+                            backgroundColor: "transparent",
+                          },
+                          "&:hover": {
+                            outline: "none",
+                            backgroundColor: "transparent",
+                        },
+                    }}
                 >
                     <SearchIcon />
                 </IconButton>
+
 
                 {/* Search Input Bar */}
                 {expanded && (
