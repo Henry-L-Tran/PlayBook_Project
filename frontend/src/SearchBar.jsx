@@ -60,7 +60,7 @@ const SearchBar = ({ playersPlayingToday, playerSelected }) => {
                 sx={{
                     display: "flex",
                     alignItems: "center",
-                    backgroundColor: "black",
+                    backgroundColor: "transparent",
                     borderRadius: "5rem",
                     padding: expanded ? "0.5rem 1rem" : "0.5rem",
                     border: "2px solid white",
@@ -98,7 +98,7 @@ const SearchBar = ({ playersPlayingToday, playerSelected }) => {
                         top: "100%",
                         left: 0,
                         right: 0,
-                        backgroundColor: "black",
+                        backgroundColor: "transparent",
                         maxHeight: "20%",
                         overflowY: "auto",
                         
@@ -138,7 +138,7 @@ const SearchBar = ({ playersPlayingToday, playerSelected }) => {
                                     fontFamily: "monospace",
                                 }}
                             >
-                                {player.playerName} ({player.teamTricode})
+                                {player.playerName} - {player.teamTriCode}
                             </Typography>
                         </Box>
                     ))}

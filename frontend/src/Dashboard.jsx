@@ -486,9 +486,17 @@ function Dashboard() {
                 minHeight: "6rem",
               }}
             >
+              {/* Search Bar Component to Show Players Playing Today */}
               <SearchBar 
-                playersPlayingToday={nbaPlayerStats} 
-                playerSelected={handlePlayerClick} 
+                playersPlayingToday={nbaPlayerStats.filter((player) =>
+                  nbaLiveGames.gameData.some(
+                    (game) =>
+                      player.teamTriCode === game.awayTeam.teamTriCode ||
+                      player.teamTriCode === game.homeTeam.teamTriCode
+                  )
+                )}
+                // Brings the User to the Player's Betting Lines Popup
+                playerSelected={handlePlayerClick}
               />
             </Box>
 
@@ -510,7 +518,7 @@ function Dashboard() {
                   onClick={() => {
 
                     // If the Game Hasn't Started, Show the Betting Lines Popup
-                    if (game.gameStatus === 3) {
+                    if (game.gameStatus === 2) {
                       setnbaselectedGame(game);
                       setShowBettingLines(true);
                     }
