@@ -14,17 +14,17 @@ function Funds() {
 
   // Fetch User Data from Backend with Local Storage User ID
   const getUserData = async () => {
-    const currUser = localStorage.getItem("currUser");
+    const currUser = JSON.parse(localStorage.getItem("currUser"));
 
     // If No User is Logged In, Show Error
-    if (!currUser) {
+    if (!currUser || !currUser.email) {
       console.error("No User Logged In");
       return;
     }
 
     try {
       const response = await fetch(
-        `http://localhost:8000/funds/user/${currUser}`
+        `http://localhost:8000/funds/user/${currUser.email}`,
       );
       const data = await response.json();
       setUser(data);

@@ -18,7 +18,7 @@ const promotions = [
     image:
       "https://cdn.pixabay.com/photo/2021/10/07/05/06/money-6687387_1280.png",
     description:
-      "Enjoy an exclusive free play on us! Redeem using the promo code provided.",
+      "Enjoy an exclusive free play on us! Click the button below to claim.",
     code: "PR-SPCLBN1",
     learnMoreMessage:
       "Discover how you can enjoy an exclusive free play and boost your gaming experience.",
@@ -28,7 +28,7 @@ const promotions = [
     image:
       "https://cdn.pixabay.com/photo/2020/05/31/20/06/cyber-5244032_1280.png",
     description:
-      "Act fast! This limited-time offer won't last long. Use the code below.",
+      "Act fast! This limited-time offer won't last long. Click the button below to claim.",
     code: "PR-LMTD2025",
     learnMoreMessage:
       "Find out how to maximize your earnings with a 25% payout boost on your bets!",
@@ -57,6 +57,21 @@ const Promos = () => {
       .writeText(code)
       .then(() => {
         handleOpenModal(`Promo code copied: ${code}`, true);
+      })
+      .catch(() => {
+        handleOpenModal("Failed to copy promo code.", false);
+      });
+  };
+
+  const handleClaimCode = (code, index) => {
+    navigator.clipboard
+      .writeText(code)
+      .then(() => {
+        const message =
+          index === 1 || index === 2
+            ? `Promo code redeemed: ${code}`
+            : `Promo code copied: ${code}`;
+        handleOpenModal(message, true);
       })
       .catch(() => {
         handleOpenModal("Failed to copy promo code.", false);
@@ -140,9 +155,13 @@ const Promos = () => {
                     </button>
                     <button
                       className="font-mono bg-purple-600 hover:bg-purple-500 text-white px-4 py-2 rounded-md text-sm flex-grow"
-                      onClick={() => handleCopyCode(promo.code)}
+                      onClick={() =>
+                        index === 1 || index === 2
+                          ? handleClaimCode(promo.code, index)
+                          : handleCopyCode(promo.code)
+                      }
                     >
-                      Copy Link
+                      {index === 1 || index === 2 ? "Claim Offer" : "Copy Link"}
                     </button>
 
                     {/* Modal */}
