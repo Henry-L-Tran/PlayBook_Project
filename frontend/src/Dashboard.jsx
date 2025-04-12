@@ -12,15 +12,6 @@ import SearchBar from "./SearchBar";
 import "./Dashboard.css";
 import PieChart from "./PieChart";
 
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
 
 function Dashboard() {
   // State to Hold the Live Games and Player Stats
@@ -422,7 +413,7 @@ function Dashboard() {
   return (
     
     // Main Dashboard Container 
-    <Box className="flex w-full overflow-scroll justify-center items-center"
+    <Box className="flex w-full overflow-visible justify-center items-center"
       sx={{
         display: "flex",
         flexDirection: "row",
@@ -447,7 +438,6 @@ function Dashboard() {
         sx={{
           fontSize: "1.5rem",
           fontFamily: "monospace",
-          paddingTop: "1rem",
           paddingBottom: "1rem",
           textAlign: "center",
           fontWeight: "bold",
@@ -1371,10 +1361,11 @@ function Dashboard() {
           alignSelf: "flex-start",
           height: "fit-content",
           overflowY: "auto",
-          top: "4.25%",
+          top: "7%",
           width: "45%",
           marginRight: "2%",
           border: "1px solid gray",
+          overflowX: "hidden",
         }}
       >
         {/* Earnings Container */}
@@ -1413,47 +1404,47 @@ function Dashboard() {
           flexItem
         />
 
-        {/* Monthly Progress */}
-        <div className=" h-1/3 p-4">
-          <h2 className="text-xl font-bold text-center mb-2">
-            Monthly Progress
-          </h2>
-          <ResponsiveContainer width="100%" height={200}>
-            <LineChart data={data}>
-              <CartesianGrid stroke="#444" />
-              <XAxis dataKey="name" stroke="#fff" />
-              <YAxis stroke="#fff" />
-              <Tooltip
-                contentStyle={{ backgroundColor: "#333", border: "none" }}
-                labelStyle={{ color: "#fff" }}
-                itemStyle={{ color: "#fff" }}
-              />
-              <Line
-                type="monotone"
-                dataKey="value"
-                stroke="#fff"
-                strokeWidth={2}
-                dot={{ r: 4 }}
-              />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
+        {/* Game Highlights Header Container */}
+        <Box className=" text-white rounded-b-lg p-4 h-1/3">
 
-        <Divider
-          sx={{
-            bgcolor: "white",
-            height: "2px", // for horizontal
-          }}
-          flexItem
-        />
+          {/* Game Highlights Header Text */}
+          <Typography 
+            sx={{
+              fontFamily: "monospace",
+              textAlign: "center",
+              color: "white",
+              fontSize: "1.3rem",
+              fontWeight: "bold",
+            }}
+          >
+            Game Highlights
+          </Typography>
 
-        {/* Top Picks */}
-        <div className=" text-white rounded-b-lg p-4 h-1/3">
-          <h2 className="text-xl font-bold mb-4">Top Picks</h2>
-          <div className="flex justify-between items-center  rounded p-2 pl-6 mb-2">
-            <span>NYK vs LAL</span>
+          {/* 1st Game Highlights Container (1st Row) */}
+          <Box className="flex justify-between items-center rounded p-2 pl-6 mb-2 mt-2">
+
+            {/* 1st Game Highlights Text (1st Row) */}
+            <Typography
+              sx={{
+                fontFamily: "monospace",
+                color: "white",
+                fontSize: "1.2rem",
+                fontWeight: "bold",
+              }}
+            > 
+              NYK vs LAL 
+            </Typography>
+
+            {/* 1st Game Highlights Button (1st Row)*/}
             <button
-              className="px-3 py-1 rounded text-sm"
+              style={{
+                fontFamily: "monospace",
+                color: "white",
+                fontSize: "1.2rem",
+                backgroundColor: "transparent",
+                borderRadius: "0.5rem",
+                border: "1px solid white",
+              }}
               onClick={() =>
                 window.open(
                   "https://www.google.com/search?q=nyk+vs+lal&rlz=1C5CHFA_enUS944US952&oq=nyk+vs+lal&gs_lcrp=EgZjaHJvbWUyCQgAEEUYORiABDIHCAEQABiABDIHCAIQABiABDIHCAMQABiABDIHCAQQABiABDIHCAUQABiABDIHCAYQABiABDIHCAcQABiABDIHCAgQABiABDIHCAkQABiABNIBCDM1MjZqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8#sie=m;/g/11lmmffyw8;3;/m/05jvx;dt;fp;1;;;"
@@ -1462,11 +1453,34 @@ function Dashboard() {
             >
               View
             </button>
-          </div>
-          <div className="flex justify-between items-center  rounded p-2 pl-6 mb-2">
-            <span>DAL vs MIA</span>
+          </Box>
+          <Divider sx={{ bgcolor: "white", opacity: 0.3 }} />
+
+          {/* 2nd Game Highlights Container (2nd Row) */}
+          <Box className="flex justify-between items-center rounded p-2 pl-6 mb-2 mt-2">
+
+            {/* 2nd Game Highlights Text (2nd Row) */}
+            <Typography
+              sx={{
+                fontFamily: "monospace",
+                color: "white",
+                fontSize: "1.2rem",
+                fontWeight: "bold",
+              }}
+            >
+              DAL vs MIA
+            </Typography>
+
+            {/* 2nd Game Highlights Text (1nd Row) */}
             <button
-              className="px-3 py-1 rounded text-sm"
+              style={{
+                fontFamily: "monospace",
+                color: "white",
+                fontSize: "1.2rem",
+                backgroundColor: "transparent",
+                borderRadius: "0.5rem",
+                border: "1px solid white",
+              }}
               onClick={() => {
                 window.open(
                   "https://www.google.com/search?q=DAL+vs+MIA&sca_esv=7efe9108e6e32fec&rlz=1C5CHFA_enUS944US952&sxsrf=AHTn8zrEaDDdmDcZVD7guyebStxennkvvg%3A1744237313029&ei=AfP2Z5q3AankwN4PidblqQE&ved=0ahUKEwjau8mr_suMAxUpMtAFHQlrORUQ4dUDCBA&uact=5&oq=DAL+vs+MIA&gs_lp=Egxnd3Mtd2l6LXNlcnAiCkRBTCB2cyBNSUEyCxAAGIAEGJECGIoFMgcQLhiABBgKMgUQABiABDIHEAAYgAQYCjIFEAAYgAQyBxAuGIAEGAoyBxAAGIAEGAoyBxAAGIAEGAoyBxAAGIAEGAoyBxAAGIAEGApIjBxQAFj4GHABeACQAQGYAcYBoAHSCaoBAzkuNLgBA8gBAPgBAZgCDaACygjCAgQQIxgnwgIKECMYgAQYJxiKBcICEBAuGIAEGLEDGEMYgwEYigXCAgoQABiABBhDGIoFwgIKEC4YgAQYQxiKBcICDRAuGIAEGLEDGEMYigXCAggQLhiABBixA8ICEBAAGIAEGLEDGEMYgwEYigXCAgsQABiABBixAxiDAcICDhAAGIAEGLEDGIMBGIoFwgILEC4YgAQYsQMYgwGYAwCSBwQxMC4zoAeddLIHAzkuM7gHxQg&sclient=gws-wiz-serp#sie=m;/g/11wb07yms0;3;/m/05jvx;dt;fp;1;;;"
@@ -1475,11 +1489,34 @@ function Dashboard() {
             >
               View
             </button>
-          </div>
-          <div className="flex justify-between items-center  rounded p-2 pl-6">
-            <span>BOS vs CHI</span>
+          </Box>
+          <Divider sx={{ bgcolor: "white", opacity: 0.3 }} />
+
+          {/* 3rd Game Highlights Container (3rd Row) */}
+          <Box className="flex justify-between items-center rounded p-2 pl-6 mb-2 mt-2">
+
+            {/* 3rd Game Highlights Text (3rd Row) */}
+            <Typography
+              sx={{
+                fontFamily: "monospace",
+                color: "white",
+                fontSize: "1.2rem",
+                fontWeight: "bold",
+              }}
+            >
+              BOS vs CHI
+            </Typography>
+
+            {/* 3rd Game Highlights Text (3rd Row) */}
             <button
-              className="px-3 py-1 rounded text-sm"
+              style={{
+                fontFamily: "monospace",
+                color: "white",
+                fontSize: "1.2rem",
+                backgroundColor: "transparent",
+                borderRadius: "0.5rem",
+                border: "1px solid white",
+              }}
               onClick={() => {
                 window.open(
                   "https://www.google.com/search?q=BOS+vs+CHI&sca_esv=7efe9108e6e32fec&rlz=1C5CHFA_enUS944US952&sxsrf=AHTn8zqL60bwJFzCTIqYLTaAXKRm4f8Uxw%3A1744237434740&ei=evP2Z6_qLM7jwN4PytnF4Qw&ved=0ahUKEwivj87l_suMAxXOMdAFHcpsMcwQ4dUDCBA&uact=5&oq=BOS+vs+CHI&gs_lp=Egxnd3Mtd2l6LXNlcnAiCkJPUyB2cyBDSEkyCxAAGIAEGJECGIoFMgsQABiABBiRAhiKBTILEAAYgAQYkQIYigUyBRAAGIAEMgUQABiABDIFEAAYgAQyBxAAGIAEGAoyBRAAGIAEMgcQABiABBgKMgcQABiABBgKSO8OUABY5ApwAHgBkAEAmAGdAaAB1QeqAQM2LjS4AQPIAQD4AQGYAgqgAvkHwgIKECMYgAQYJxiKBcICBBAjGCfCAgoQABiABBhDGIoFwgIKEC4YgAQYQxiKBcICEBAuGIAEGLEDGEMYgwEYigXCAg4QABiABBixAxiDARiKBcICCxAAGIAEGLEDGIMBwgILEC4YgAQYsQMYgwHCAhAQABiABBixAxhDGIMBGIoFwgIQEAAYgAQYsQMYgwEYFBiHAsICChAAGIAEGBQYhwLCAgQQABgDwgIKEAAYgAQYsQMYCpgDAJIHAzYuNKAHzUiyBwM2LjS4B_kH&sclient=gws-wiz-serp#sie=m;/g/11wb08gz73;3;/m/05jvx;dt;fp;1;;;"
@@ -1488,8 +1525,8 @@ function Dashboard() {
             >
               View
             </button>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </Box>
     </Box>
   );
