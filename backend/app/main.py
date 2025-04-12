@@ -273,7 +273,7 @@ def fetch_nba_live_scores():
         # Fetch NBA Live Scores Every 30 Seconds
         time.sleep(30)
 
-threading.Thread(target=fetch_nba_live_scores, daemon=True).start()
+#threading.Thread(target=fetch_nba_live_scores, daemon=True).start()
 
 
 
@@ -342,7 +342,7 @@ def fetch_player_live_stats():
         # Refreshes All Player Stats in JSON File Every 30 Seconds
         time.sleep(30)
 
-#threading.Thread(target=fetch_player_live_stats, daemon=True).start()
+threading.Thread(target=fetch_player_live_stats, daemon=True).start()
 
 
 # NBA Player Season Stats Route

@@ -1,121 +1,222 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
+import { useState } from "react";
 
 const EarningsPieChart = ({ balance, wins, losses }) => {
   const totalGames = wins + losses;
   const winPercentage = totalGames > 0 ? (wins / totalGames) * 100 : 0;
   const lossPercentage = 100 - winPercentage;
 
+  const [showTotalEntries , setShowTotalEntries] = useState(false);
+
   return (
     // Main Container for the Pie Chart
     <Box
         sx={{
             position: "relative",
-            width: "12rem",
-            height: "12rem",
+            width: "100%",
+            height: "100%",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            gap: 8,
+            marginLeft: "10%",
         }}
     >
-        {/* Outer Circle for Win/Loss Percentage */}
-        <Box className="pie-chart"
-        sx={{
-            width: "10rem",
-            height: "10rem",
-            borderRadius: "50%",
-            background: `conic-gradient(green ${winPercentage}%, red ${winPercentage}%)`,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: "0.5rem",
-            marginTop: "1rem",
-        }}
+        {/* Pie Chart and Legend Container */}
+        <Box
+            sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+            }}
         >
-            {/* Inner Circle for Balance Display Container */}
-            <Box
-                sx={{
-                width: "8rem",
-                height: "8rem",
+            {/* Outer Circle for Win/Loss Percentage */}
+            <Box className="pie-chart"
+            sx={{
+                width: "10rem",
+                height: "10rem",
                 borderRadius: "50%",
-                backgroundColor: "black",
+                background: showTotalEntries
+              ? `conic-gradient(green ${winPercentage}%, red ${lossPercentage}%)`
+              : `conic-gradient(green 100%, red 0%)`,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                }}
+                marginBottom: "10%",
+                transition: "background 0.8s ease-in-out",
+            }}
             >
-                {/* Balance Text Display */}
-                <Typography
+                {/* Inner Circle for Balance Display Container */}
+                <Box
                     sx={{
-                        fontFamily: "monospace",
-                        color: "white",
-                        fontWeight: "bold",
-                        fontSize: "1.3rem",
+                    width: "8rem",
+                    height: "8rem",
+                    borderRadius: "50%",
+                    backgroundColor: "black",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                     }}
                 >
-                    ${balance?.toFixed(2) ?? "0.00"}
-                </Typography>
+                    {/* Balance Text Display */}
+                    <Typography
+                        sx={{
+                            fontFamily: "monospace",
+                            color: "white",
+                            fontWeight: "bold",
+                            fontSize: "1.3rem",
+                        }}
+                    >
+                        ${balance?.toFixed(2) ?? "0.00"}
+                    </Typography>
+                </Box>
+            </Box>
+
+            {/* Win/Loss Label Container */}
+            <Box
+                sx={{
+                    position: "absolute",
+                    bottom: "12%",
+                    color: "white",
+                    fontFamily: "monospace",
+                    fontWeight: "bold",
+                    backgroundColor: "transparent",
+                    borderRadius: "0.5rem",
+                    display: "flex",
+                    gap: 10,
+                    alignItems: "flex-start",
+                }}
+            >
+                {/* Win Container */}
+                <Box
+                    sx={{
+                        display: "flex",
+                        gap: 2,
+                    }}
+                >
+                    {/* Green Color Circle */}
+                    <Box
+                        sx={{
+                            width: "1rem",
+                            height: "1rem",
+                            backgroundColor: "green",
+                            borderRadius: "50%",
+                        }}
+                    />
+
+                    {/* Win Count Text */}
+                    <Typography
+                        sx={{
+                            fontSize: "0.75rem",
+                            color: "white",
+                            fontFamily: "monospace",
+                            fontWeight: "bold",
+                        }}
+                    >
+                        Wins: {wins}
+                    </Typography>
+                </Box>
+
+                {/* Loss Container (Only Shows When Total Entries Button is Toggled */}
+                {showTotalEntries && (
+                    <Box
+                        sx={{
+                            display: "flex",
+                            gap: 2,
+                        }}
+                    >
+                        {/* Red Color Circle */}
+                        <Box
+                            sx={{
+                                width: "1rem",
+                                height: "1rem",
+                                backgroundColor: "red",
+                                borderRadius: "50%",
+                            }}
+                        />
+
+                        {/* Loss Count Text */}
+                        <Typography
+                            sx={{
+                                fontSize: "0.75rem",
+                                color: "white",
+                                fontFamily: "monospace",
+                                fontWeight: "bold",
+                            }}
+                        >
+                            Losses: {losses}
+                        </Typography>
+                    </Box>
+                )}    
             </Box>
         </Box>
 
-        {/* Win/Loss Label Container */}
+        {/* Show Entries Toggle Buttons */}
         <Box
             sx={{
-                position: "absolute",
-                marginBottom: "80%",
-                color: "white",
-                fontFamily: "monospace",
-                fontWeight: "bold",
-                backgroundColor: "rgba(0, 0, 0, 0.6)",
-                borderRadius: "0.5rem",
                 display: "flex",
                 flexDirection: "column",
-                gap: 1,
-                alignItems: "flex-start",
             }}
         >
-            {/* Green Color Circle */}
-            <Box
+            {/* Won Entries Button */}
+            <Button
+                disableRipple
+                disableFocusRipple
+                variant={!showTotalEntries ? "contained" : "outlined"}
+                onClick={() => setShowTotalEntries(false)}
                 sx={{
-                    width: "0.75rem",
-                    height: "0.75rem",
-                    backgroundColor: "green",
-                    borderRadius: "50%",
-                }}
-            />
-
-            {/* Win Count Text */}
-            <Typography
-                sx={{
-                    fontSize: "0.75rem",
-                    marginLeft: "0.5rem",
-                    color: "white",
                     fontFamily: "monospace",
+                    fontWeight: "bold",
+                    textTransform: "none",
+                    color: !showTotalEntries ? "black" : "white",
+                    border: "1px solid white",
+                    backgroundColor: !showTotalEntries ? "white" : "transparent",
+                    "&:hover": {
+                        backgroundColor: !showTotalEntries ? "white" : "transparent",
+                        color: !showTotalEntries ? "black" : "white",
+                        border: "1px solid white",
+                  
+                    },
+                    "&:focus": {
+                        outline: "none",
+                        backgroundColor: "white",
+                        color: "black",
+                        border: "1px solid white",
+                    },
                 }}
             >
-                Wins: {wins}
-            </Typography>
+                Won Entries
+            </Button>
 
-            {/* Red Color Circle */}
-            <Box
+            {/* Total Entries Button */}
+            <Button
+                disableRipple
+                disableFocusRipple
+                variant={showTotalEntries ? "contained" : "outlined"}
+                onClick={() => setShowTotalEntries(true)}
                 sx={{
-                    width: "0.75rem",
-                    height: "0.75rem",
-                    backgroundColor: "red",
-                    borderRadius: "50%",
-                }}
-            />
-
-            {/* Loss Count Text */}
-            <Typography
-                sx={{
-                    fontSize: "0.75rem",
-                    marginLeft: "0.5rem",
-                    color: "white",
                     fontFamily: "monospace",
+                    fontWeight: "bold",
+                    textTransform: "none",
+                    color: showTotalEntries ? "black" : "white",
+                    border: "1px solid white",
+                    backgroundColor: showTotalEntries ? "white" : "transparent",
+                    "&:hover": {
+                        backgroundColor: showTotalEntries ? "white" : "transparent",
+                        color: showTotalEntries ? "black" : "white",
+                        border: "1px solid white",
+                    },
+                    "&:focus": {
+                        outline: "none",
+                        backgroundColor: "white",
+                        color: "black",
+                        border: "1px solid white",
+                    },
                 }}
             >
-                Losses: {losses}
-            </Typography>
+                Total Entries
+            </Button>
         </Box>
     </Box>
   );

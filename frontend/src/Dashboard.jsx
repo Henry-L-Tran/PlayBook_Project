@@ -1371,7 +1371,7 @@ function Dashboard() {
           alignSelf: "flex-start",
           height: "fit-content",
           overflowY: "auto",
-          top: "1.65%",
+          top: "4.25%",
           width: "45%",
           marginRight: "2%",
           border: "1px solid gray",
@@ -1380,18 +1380,18 @@ function Dashboard() {
         {/* Earnings Container */}
         <Box className=" text-white rounded-t-lg flex flex-col items-center h-1/3"
           sx={{
-            height: "20em",
+            height: "18em",
             position: "relative",
-            marginTop: "5%",
+            marginTop: "4%",
           }}
         >
           {/* Earnings Header Text */}
-          <Typography className="text-xl font-bold mb-2"
+          <Typography className="text-xl font-bold"
             sx={{
               fontFamily: "monospace",
               textAlign: "center",
               color: "white",
-              fontSize: "1.5rem",
+              fontSize: "1.3rem",
               fontWeight: "bold",
             }}>
             Earnings
@@ -1407,8 +1407,8 @@ function Dashboard() {
 
         <Divider
           sx={{
-            bgcolor: "white",
-            height: "2px", // for horizontal
+            bgcolor: "gray",
+            height: "1px",
           }}
           flexItem
         />
