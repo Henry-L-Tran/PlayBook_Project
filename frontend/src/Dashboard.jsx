@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { Tabs, Tab } from "@mui/material";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Divider } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { v4 as uuidv4 } from "uuid";
@@ -10,9 +10,17 @@ import { calculatePayoutMultiplier } from "./payoutMultiplier";
 import { format } from "date-fns";
 import SearchBar from "./SearchBar";
 import "./Dashboard.css";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 
 function Dashboard() {
-
   // State to Hold the Live Games and Player Stats
   const [nbaLiveGames, setNbaLiveGames] = useState({
     gameDate: "",
@@ -49,7 +57,6 @@ function Dashboard() {
       clearInterval(fetchTimer);
     };
   }, []);
-
 
   // Function to Convert ISO Time to Game Clock Format (MM:SS)
   const gameClockConverter = (isoTime) => {
@@ -95,7 +102,6 @@ function Dashboard() {
     );
   };
 
-
   // Function to Handle the Scrolling When Betting Lines are Opened
   useEffect(() => {
     if (showBettingLines) {
@@ -108,7 +114,6 @@ function Dashboard() {
       document.body.style.overflow = "auto";
     };
   }, [showBettingLines]);
-
 
   // Function to Round the Player's Line
   const lineRounding = (line) => {
@@ -124,7 +129,6 @@ function Dashboard() {
     }
   };
 
-
   // All the Possible Line Categories for NBA
   const lineCategoryOptions = [
     "PTS",
@@ -138,7 +142,6 @@ function Dashboard() {
     "PTS + REB + AST",
     "BLKS + STLS",
   ];
-
 
   // Determines Which Stat Category to Show
   const getStatCategory = (player) => {
@@ -201,7 +204,6 @@ function Dashboard() {
             (entry) => entry.player_id !== playerId
           );
         } else {
-
           // If Player is Selected but Over/Under is Changed, Update the Existing Entry
           newCategoryLineup = categoryLineup.map((entry) =>
             entry.player_id === playerId
@@ -381,6 +383,18 @@ function Dashboard() {
     };
   }
 
+
+  const data = [
+    // { name: "Oct", value: 35 },
+    // { name: "Nov", value: 65 },
+    { name: "Dec", value: 33 },
+    { name: "Jan", value: 45 },
+    { name: "Feb", value: 50 },
+    { name: "Mar", value: 10 },
+    { name: "Apr", value: 25 },
+    { name: "May", value: 55 },
+    { name: "Jun", value: 78 },
+  ];
 
   return (
     
@@ -576,324 +590,321 @@ function Dashboard() {
                       {game.awayTeam.teamTriCode}{" "}
                     </Typography>
 
-                    <Typography
-                      sx={{
-                        fontWeight: "bold",
-                        fontSize: "0.75rem",
-                      }}
-                    >
-                      {" "}
-                      {game.awayTeam.wins} - {game.awayTeam.losses}{" "}
-                    </Typography>
+                      <Typography
+                        sx={{
+                          fontWeight: "bold",
+                          fontSize: "0.75rem",
+                        }}
+                      >
+                        {" "}
+                        {game.awayTeam.wins} - {game.awayTeam.losses}{" "}
+                      </Typography>
 
-                    {/* Away Team Periods and Score */}
-                    <Box className="mt-2">
-                      <Box className="grid grid-cols-5 text-white gap-x-8 ml-40">
-                        {game.awayTeam.periods.map((period, index) => (
-                          <Box key={index} className="text-center">
-                            <Typography
-                              sx={{
-                                fontFamily: "monospace",
-                                gridTemplateColumns: "repeat(4, 40px) 60px",
-                              }}
-                              className="text-center"
-                            >
-                              {period.period}
-                            </Typography>
+                      {/* Away Team Periods and Score */}
+                      <Box className="mt-2">
+                        <Box className="grid grid-cols-5 text-white gap-x-8 ml-40">
+                          {game.awayTeam.periods.map((period, index) => (
+                            <Box key={index} className="text-center">
+                              <Typography
+                                sx={{
+                                  fontFamily: "monospace",
+                                  gridTemplateColumns: "repeat(4, 40px) 60px",
+                                }}
+                                className="text-center"
+                              >
+                                {period.period}
+                              </Typography>
 
-                            <Typography
-                              sx={{
-                                fontFamily: "monospace",
-                                fontSize: "0.75rem",
-                              }}
-                              className="text-center"
-                            >
-                              {period.score}
-                            </Typography>
-                          </Box>
-                        ))}
+                              <Typography
+                                sx={{
+                                  fontFamily: "monospace",
+                                  fontSize: "0.75rem",
+                                }}
+                                className="text-center"
+                              >
+                                {period.score}
+                              </Typography>
+                            </Box>
+                          ))}
 
-                        <Typography
-                          sx={{
-                            fontFamily: "monospace",
-                            fontSize: "1.3rem",
-                            color:
-                              game.gameStatus === 3 &&
-                              game.awayTeam.score > game.homeTeam.score
-                                ? "#10833C"
-                                : "white",
-                          }}
-                        >
-                          {" "}
-                          {game.awayTeam.score}{" "}
-                        </Typography>
+                          <Typography
+                            sx={{
+                              fontFamily: "monospace",
+                              fontSize: "1.3rem",
+                              color:
+                                game.gameStatus === 3 &&
+                                game.awayTeam.score > game.homeTeam.score
+                                  ? "#10833C"
+                                  : "white",
+                            }}
+                          >
+                            {" "}
+                            {game.awayTeam.score}{" "}
+                          </Typography>
+                        </Box>
                       </Box>
                     </Box>
-                  </Box>
 
-                  {/* Home Team Box*/}
-                  <Box
-                    sx={{
-                      display: "grid",
-                      gridTemplateColumns: "80px 80px 240px 1fr",
-                      alignItems: "center",
-                    }}
-                  >
-                    {/* Home Team Data */}
-                    <Typography
-                      variant="h6"
+                    {/* Home Team Box*/}
+                    <Box
                       sx={{
-                        color:
-                          game.gameStatus === 3 &&
-                          game.homeTeam.score > game.awayTeam.score
-                            ? "#10833C"
-                            : "white",
+                        display: "grid",
+                        gridTemplateColumns: "80px 80px 240px 1fr",
+                        alignItems: "center",
                       }}
                     >
-                      {" "}
-                      {game.homeTeam.teamTriCode}
-                    </Typography>
+                      {/* Home Team Data */}
+                      <Typography
+                        variant="h6"
+                        sx={{
+                          color:
+                            game.gameStatus === 3 &&
+                            game.homeTeam.score > game.awayTeam.score
+                              ? "#10833C"
+                              : "white",
+                        }}
+                      >
+                        {" "}
+                        {game.homeTeam.teamTriCode}
+                      </Typography>
 
-                    <Typography
-                      sx={{
-                        fontWeight: "bold",
-                        fontSize: "0.75rem",
-                      }}
-                    >
-                      {" "}
-                      {game.homeTeam.wins} - {game.homeTeam.losses}
-                    </Typography>
+                      <Typography
+                        sx={{
+                          fontWeight: "bold",
+                          fontSize: "0.75rem",
+                        }}
+                      >
+                        {" "}
+                        {game.homeTeam.wins} - {game.homeTeam.losses}
+                      </Typography>
 
-                    {/* Home Team Periods and Score */}
-                    <Box className="mt-2">
-                      <Box className="grid grid-cols-5 text-white gap-x-8 ml-40">
-                        {game.homeTeam.periods.map((period, index) => (
-                          <Box key={index} className="text-center">
-                            <Typography
-                              sx={{ fontFamily: "monospace" }}
-                              className="text-center"
-                            >
-                              {period.period}
-                            </Typography>
+                      {/* Home Team Periods and Score */}
+                      <Box className="mt-2">
+                        <Box className="grid grid-cols-5 text-white gap-x-8 ml-40">
+                          {game.homeTeam.periods.map((period, index) => (
+                            <Box key={index} className="text-center">
+                              <Typography
+                                sx={{ fontFamily: "monospace" }}
+                                className="text-center"
+                              >
+                                {period.period}
+                              </Typography>
 
-                            <Typography
-                              sx={{
-                                fontFamily: "monospace",
-                                fontSize: "0.75rem",
-                              }}
-                              className="text-center"
-                            >
-                              {period.score}
-                            </Typography>
-                          </Box>
-                        ))}
-                        <Typography
-                          sx={{
-                            fontFamily: "monospace",
-                            fontSize: "1.3rem",
-                            color:
-                              game.gameStatus === 3 &&
-                              game.homeTeam.score > game.awayTeam.score
-                                ? "#10833C"
-                                : "white",
-                          }}
-                        >
-                          {" "}
-                          {game.homeTeam.score}
-                        </Typography>
+                              <Typography
+                                sx={{
+                                  fontFamily: "monospace",
+                                  fontSize: "0.75rem",
+                                }}
+                                className="text-center"
+                              >
+                                {period.score}
+                              </Typography>
+                            </Box>
+                          ))}
+                          <Typography
+                            sx={{
+                              fontFamily: "monospace",
+                              fontSize: "1.3rem",
+                              color:
+                                game.gameStatus === 3 &&
+                                game.homeTeam.score > game.awayTeam.score
+                                  ? "#10833C"
+                                  : "white",
+                            }}
+                          >
+                            {" "}
+                            {game.homeTeam.score}
+                          </Typography>
+                        </Box>
                       </Box>
                     </Box>
-                  </Box>
 
-                  {/* Game Status and Clock Box */}
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      gap: "1rem",
-                      fontFamily: "monospace",
-                      marginTop: "1rem",
-                    }}
-                  >
-                    {/* Game Status Text */}
-                    <Typography
+                    {/* Game Status and Clock Box */}
+                    <Box
                       sx={{
-                        fontSize: "1.2rem",
-                        fontWeight: "bold",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "1rem",
                         fontFamily: "monospace",
-                        width: "20rem",
-                        marginLeft: "30rem",
-                        marginTop: "-12rem",
-                        textAlign: "right",
+                        marginTop: "1rem",
                       }}
                     >
-                      {" "}
-                      {game.gameStatusText}
-                    </Typography>
-
-                    {/* Game Clock Display */}
-                    {game.gameStatus === 2 && (
+                      {/* Game Status Text */}
                       <Typography
                         sx={{
                           fontSize: "1.2rem",
+                          fontWeight: "bold",
                           fontFamily: "monospace",
                           width: "20rem",
                           marginLeft: "30rem",
+                          marginTop: "-12rem",
                           textAlign: "right",
                         }}
                       >
                         {" "}
-                        {gameClockConverter(game.gameClock)}
+                        {game.gameStatusText}
                       </Typography>
-                    )}
+
+                      {/* Game Clock Display */}
+                      {game.gameStatus === 2 && (
+                        <Typography
+                          sx={{
+                            fontSize: "1.2rem",
+                            fontFamily: "monospace",
+                            width: "20rem",
+                            marginLeft: "30rem",
+                            textAlign: "right",
+                          }}
+                        >
+                          {" "}
+                          {gameClockConverter(game.gameClock)}
+                        </Typography>
+                      )}
+                    </Box>
                   </Box>
-                </Box>
-              ))
-            )}
-          </Box>
-        )}
-      </Box>
+                ))
+              )}
+            </Box>
+          )}
+        </Box>
 
-      {/* ------Betting Lines Popup Display------ */}
-      {activeCategoryTab === "NBA" &&
-        showBettingLines &&
-        nbaSelectedGame &&
-        (() => {
+        {/* ------Betting Lines Popup Display------ */}
+        {activeCategoryTab === "NBA" &&
+          showBettingLines &&
+          nbaSelectedGame &&
+          (() => {
+            // Filters Away Players Based on the Selected Game
+            const awayPlayers = playersInGame(nbaSelectedGame).filter(
+              (player) =>
+                player.teamTriCode === nbaSelectedGame.awayTeam.teamTriCode
+            );
 
-          // Filters Away Players Based on the Selected Game
-          const awayPlayers = playersInGame(nbaSelectedGame).filter(
-            (player) =>
-              player.teamTriCode === nbaSelectedGame.awayTeam.teamTriCode
-          );
+            // Filters Home Players Based on the Selected Game
+            const homePlayers = playersInGame(nbaSelectedGame).filter(
+              (player) =>
+                player.teamTriCode === nbaSelectedGame.homeTeam.teamTriCode
+            );
 
-          // Filters Home Players Based on the Selected Game
-          const homePlayers = playersInGame(nbaSelectedGame).filter(
-            (player) =>
-              player.teamTriCode === nbaSelectedGame.homeTeam.teamTriCode
-          );
-
-          return (
-
-            // Full Popup Screen for Betting Lines
-            <Box
-              sx={{
-                position: "fixed",
-                backgroundColor: "rgba(0, 0, 0, 0.8)",
-                justifyContent: "center",
-                fontFamily: "monospace",
-                width: "100%",
-                maxHeight: "100vh",
-                overflowY: "auto",
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-              }}
-            >
-              
-              {/* Header Away Team @ Home Team Box */}
+            return (
+              // Full Popup Screen for Betting Lines
               <Box
                 sx={{
+                  position: "fixed",
                   backgroundColor: "rgba(0, 0, 0, 0.8)",
-                  borderRadius: "1rem",
+                  justifyContent: "center",
+                  fontFamily: "monospace",
+                  width: "100%",
+                  maxHeight: "100vh",
+                  overflowY: "auto",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
                 }}
               >
-                {/* Header Text (Away Team @ Home Team) */}
-                <Typography
-                  variant="h6"
-                  sx={{
-                    textAlign: "center",
-                    paddingTop: "3rem",
-                    fontFamily: "monospace",
-                  }}
-                >
-                  {nbaSelectedGame.awayTeam.teamTriCode} @{" "}
-                  {nbaSelectedGame.homeTeam.teamTriCode}
-                </Typography>
-
-                {/* Exit ("X") Button In Top Right Corner*/}
-                <IconButton
-                  sx={{
-                    position: "absolute",
-                    right: "1rem",
-                    top: "1rem",
-                    "&:hover": {
-                      background: "none",
-                    },
-                    "&:focus": {
-                      outline: "none",
-                    },
-                  }}
-                  onClick={() => setShowBettingLines(false)}
-                >
-                  <CloseIcon />
-                </IconButton>
-
-                {/* Betting Lines Buttons Header/Box */}
+                {/* Header Away Team @ Home Team Box */}
                 <Box
                   sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    marginTop: "2rem",
-                    gap: "2rem",
+                    backgroundColor: "rgba(0, 0, 0, 0.8)",
+                    borderRadius: "1rem",
                   }}
                 >
-                  {/* Betting Lines Category Buttons (PTS, REB, AST, etc.) */}
-                  {lineCategoryOptions.map((category) => (
-                    <button
-                      key={category}
-                      onClick={() => {
-                        setViewLineCategory(category);
-                      }}
-                      style={{
-                        fontFamily: "monospace",
-                        backgroundColor:
-                          viewLineCategory === category
-                            ? "white"
-                            : "transparent",
-                        color:
-                          viewLineCategory === category ? "black" : "white",
-                        border: "1px solid white",
-                        borderRadius: "5rem",
-                      }}
-                    >
-                      {category}
-                    </button>
-                  ))}
-                </Box>
-
-                {/* All Player Squares Main Box/Section */}
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    padding: "2rem 4rem",
-                    width: "100%",
-                    gap: "2rem",
-                  }}
-                >
-                  {/* Away Team Players Squares Column */}
-                  <Box
+                  {/* Header Text (Away Team @ Home Team) */}
+                  <Typography
+                    variant="h6"
                     sx={{
-                      flex: 1,
-                      paddingBottom: "4rem",
+                      textAlign: "center",
+                      paddingTop: "3rem",
+                      fontFamily: "monospace",
                     }}
                   >
-                    {/* Away Team Tri-Code Header */}
-                    <Typography
-                      variant="h6"
+                    {nbaSelectedGame.awayTeam.teamTriCode} @{" "}
+                    {nbaSelectedGame.homeTeam.teamTriCode}
+                  </Typography>
+
+                  {/* Exit ("X") Button In Top Right Corner*/}
+                  <IconButton
+                    sx={{
+                      position: "absolute",
+                      right: "1rem",
+                      top: "1rem",
+                      "&:hover": {
+                        background: "none",
+                      },
+                      "&:focus": {
+                        outline: "none",
+                      },
+                    }}
+                    onClick={() => setShowBettingLines(false)}
+                  >
+                    <CloseIcon />
+                  </IconButton>
+
+                  {/* Betting Lines Buttons Header/Box */}
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginTop: "2rem",
+                      gap: "2rem",
+                    }}
+                  >
+                    {/* Betting Lines Category Buttons (PTS, REB, AST, etc.) */}
+                    {lineCategoryOptions.map((category) => (
+                      <button
+                        key={category}
+                        onClick={() => {
+                          setViewLineCategory(category);
+                        }}
+                        style={{
+                          fontFamily: "monospace",
+                          backgroundColor:
+                            viewLineCategory === category
+                              ? "white"
+                              : "transparent",
+                          color:
+                            viewLineCategory === category ? "black" : "white",
+                          border: "1px solid white",
+                          borderRadius: "5rem",
+                        }}
+                      >
+                        {category}
+                      </button>
+                    ))}
+                  </Box>
+
+                  {/* All Player Squares Main Box/Section */}
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      padding: "2rem 4rem",
+                      width: "100%",
+                      gap: "2rem",
+                    }}
+                  >
+                    {/* Away Team Players Squares Column */}
+                    <Box
                       sx={{
-                        textAlign: "center",
-                        width: "40%",
-                        fontFamily: "monospace",
-                        marginBottom: "1rem",
+                        flex: 1,
+                        paddingBottom: "4rem",
                       }}
                     >
-                      {nbaSelectedGame.awayTeam.teamTriCode}
-                    </Typography>
+                      {/* Away Team Tri-Code Header */}
+                      <Typography
+                        variant="h6"
+                        sx={{
+                          textAlign: "center",
+                          width: "40%",
+                          fontFamily: "monospace",
+                          marginBottom: "1rem",
+                        }}
+                      >
+                        {nbaSelectedGame.awayTeam.teamTriCode}
+                      </Typography>
 
                     {/* Away Team Players Squares Green Selected Highlights */}
                     {awayPlayers
@@ -946,157 +957,156 @@ function Dashboard() {
                               />
                             </Box>
 
-                            {/* Player Team Tri-Code */}
-                            <Typography
-                              sx={{
-                                fontFamily: "monospace",
-                                fontSize: "0.8rem",
-                                textAlign: "center",
-                              }}
-                            >
-                              {" "}
-                              {player.teamTriCode}
-                            </Typography>
+                              {/* Player Team Tri-Code */}
+                              <Typography
+                                sx={{
+                                  fontFamily: "monospace",
+                                  fontSize: "0.8rem",
+                                  textAlign: "center",
+                                }}
+                              >
+                                {" "}
+                                {player.teamTriCode}
+                              </Typography>
 
-                            {/* Player Name */}
-                            <Typography
-                              sx={{
-                                fontFamily: "monospace",
-                                textAlign: "center",
-                              }}
-                            >
-                              {" "}
-                              {player.playerName}
-                            </Typography>
+                              {/* Player Name */}
+                              <Typography
+                                sx={{
+                                  fontFamily: "monospace",
+                                  textAlign: "center",
+                                }}
+                              >
+                                {" "}
+                                {player.playerName}
+                              </Typography>
 
-                            {/* Player Opponent Team & Game Status */}
-                            <Typography
-                              sx={{
-                                fontFamily: "monospace",
-                                textAlign: "center",
-                                fontSize: "0.8rem",
-                              }}
-                            >
-                              vs {nbaSelectedGame.homeTeam.teamTriCode}{" "}
-                              {nbaSelectedGame.gameStatusText}
-                            </Typography>
+                              {/* Player Opponent Team & Game Status */}
+                              <Typography
+                                sx={{
+                                  fontFamily: "monospace",
+                                  textAlign: "center",
+                                  fontSize: "0.8rem",
+                                }}
+                              >
+                                vs {nbaSelectedGame.homeTeam.teamTriCode}{" "}
+                                {nbaSelectedGame.gameStatusText}
+                              </Typography>
 
-                            {/* Player Square Lower Line Section */}
+                              {/* Player Square Lower Line Section */}
+                              <Box
+                                sx={{
+                                  display: "flex",
+                                  justifyContent: "center",
+                                }}
+                              >
+                                {/* Player Projected Line */}
+                                <Typography
+                                  sx={{
+                                    fontFamily: "monospace",
+                                    textAlign: "center",
+                                    marginTop: "0.5rem",
+                                    fontSize: "1.2rem",
+                                    fontWeight: "bold",
+                                  }}
+                                >
+                                  {getStatCategory(player)}
+                                </Typography>
+
+                                {/* Player Line Category (PTS, REB, AST, etc.) */}
+                                <Typography
+                                  sx={{
+                                    display: "flex",
+                                    fontFamily: "monospace",
+                                    textAlign: "center",
+                                    marginTop: "0.9rem",
+                                    fontSize: "0.8rem",
+                                    justifyContent: "right",
+                                    marginLeft: "0.5rem",
+                                  }}
+                                >
+                                  {viewLineCategory}
+                                </Typography>
+                              </Box>
+                            </Box>
+
+                            {/* Player Square Lower Buttons Section */}
                             <Box
                               sx={{
                                 display: "flex",
-                                justifyContent: "center",
+                                borderTop: "1px solid gray",
+                                width: "100%",
                               }}
                             >
-                              {/* Player Projected Line */}
-                              <Typography
-                                sx={{
+                              {/* Player Under Button */}
+                              <button
+                                onClick={() => handleUserLines(player, "Under")}
+                                style={{
+                                  flex: 1,
+                                  backgroundColor: selectedBetButton(
+                                    player.playerId,
+                                    "Under"
+                                  )
+                                    ? "green"
+                                    : "transparent",
+                                  color: "white",
+                                  padding: "0.5rem",
                                   fontFamily: "monospace",
-                                  textAlign: "center",
-                                  marginTop: "0.5rem",
-                                  fontSize: "1.2rem",
-                                  fontWeight: "bold",
+                                  border: "none",
+                                  borderRight: "1px solid gray",
+                                  cursor: "pointer",
+                                  borderRadius: "0 0 0 1rem",
                                 }}
                               >
-                                {getStatCategory(player)}
-                              </Typography>
+                                ↓ Under
+                              </button>
 
-                              {/* Player Line Category (PTS, REB, AST, etc.) */}
-                              <Typography
-                                sx={{
-                                  display: "flex",
+                              {/* Player Over Button */}
+                              <button
+                                onClick={() => handleUserLines(player, "Over")}
+                                style={{
+                                  flex: 1,
+                                  backgroundColor: selectedBetButton(
+                                    player.playerId,
+                                    "Over"
+                                  )
+                                    ? "green"
+                                    : "transparent",
+                                  color: "white",
+                                  padding: "0.5rem",
                                   fontFamily: "monospace",
-                                  textAlign: "center",
-                                  marginTop: "0.9rem",
-                                  fontSize: "0.8rem",
-                                  justifyContent: "right",
-                                  marginLeft: "0.5rem",
+                                  border: "none",
+                                  cursor: "pointer",
+                                  borderRadius: "0 0 1rem 0",
                                 }}
                               >
-                                {viewLineCategory}
-                              </Typography>
+                                ↑ Over
+                              </button>
                             </Box>
                           </Box>
+                        ))}
+                    </Box>
 
-                          {/* Player Square Lower Buttons Section */}
-                          <Box
-                            sx={{
-                              display: "flex",
-                              borderTop: "1px solid gray",
-                              width: "100%",
-                            }}
-                          >
-
-                            {/* Player Under Button */}
-                            <button
-                              onClick={() => handleUserLines(player, "Under")}
-                              style={{
-                                flex: 1,
-                                backgroundColor: selectedBetButton(
-                                  player.playerId,
-                                  "Under"
-                                )
-                                  ? "green"
-                                  : "transparent",
-                                color: "white",
-                                padding: "0.5rem",
-                                fontFamily: "monospace",
-                                border: "none",
-                                borderRight: "1px solid gray",
-                                cursor: "pointer",
-                                borderRadius: "0 0 0 1rem",
-                              }}
-                            >
-                              ↓ Under
-                            </button>
-
-                            {/* Player Over Button */}
-                            <button
-                              onClick={() => handleUserLines(player, "Over")}
-                              style={{
-                                flex: 1,
-                                backgroundColor: selectedBetButton(
-                                  player.playerId,
-                                  "Over"
-                                )
-                                  ? "green"
-                                  : "transparent",
-                                color: "white",
-                                padding: "0.5rem",
-                                fontFamily: "monospace",
-                                border: "none",
-                                cursor: "pointer",
-                                borderRadius: "0 0 1rem 0",
-                              }}
-                            >
-                              ↑ Over
-                            </button>
-                          </Box>
-                        </Box>
-                      ))}
-                  </Box>
-
-                  {/* Home Team Players Squares Column */}
-                  <Box
-                    sx={{
-                      flex: 1,
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "flex-end",
-                    }}
-                  >
-                    {/* Home Team Tri-Code Header */}
-                    <Typography
-                      variant="h6"
+                    {/* Home Team Players Squares Column */}
+                    <Box
                       sx={{
-                        textAlign: "center",
-                        width: "40%",
-                        fontFamily: "monospace",
-                        marginBottom: "1rem",
+                        flex: 1,
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-end",
                       }}
                     >
-                      {nbaSelectedGame.homeTeam.teamTriCode}
-                    </Typography>
+                      {/* Home Team Tri-Code Header */}
+                      <Typography
+                        variant="h6"
+                        sx={{
+                          textAlign: "center",
+                          width: "40%",
+                          fontFamily: "monospace",
+                          marginBottom: "1rem",
+                        }}
+                      >
+                        {nbaSelectedGame.homeTeam.teamTriCode}
+                      </Typography>
 
                     {/* Home Team Players Squares Green Selected Highlights */}
                     {homePlayers
@@ -1150,108 +1160,108 @@ function Dashboard() {
                               />
                             </Box>
 
-                            {/* Player Team Tri-Code */}
-                            <Typography
-                              sx={{
-                                fontFamily: "monospace",
-                                fontSize: "0.8rem",
-                                textAlign: "center",
-                              }}
-                            >
-                              {" "}
-                              {player.teamTriCode}
-                            </Typography>
+                              {/* Player Team Tri-Code */}
+                              <Typography
+                                sx={{
+                                  fontFamily: "monospace",
+                                  fontSize: "0.8rem",
+                                  textAlign: "center",
+                                }}
+                              >
+                                {" "}
+                                {player.teamTriCode}
+                              </Typography>
 
-                            {/* Player Name */}
-                            <Typography
-                              sx={{
-                                fontFamily: "monospace",
-                                textAlign: "center",
-                              }}
-                            >
-                              {" "}
-                              {player.playerName}
-                            </Typography>
+                              {/* Player Name */}
+                              <Typography
+                                sx={{
+                                  fontFamily: "monospace",
+                                  textAlign: "center",
+                                }}
+                              >
+                                {" "}
+                                {player.playerName}
+                              </Typography>
 
-                            {/* Player Opponent Team & Game Status */}
-                            <Typography
-                              sx={{
-                                fontFamily: "monospace",
-                                textAlign: "center",
-                                fontSize: "0.8rem",
-                              }}
-                            >
-                              vs {nbaSelectedGame.awayTeam.teamTriCode}{" "}
-                              {nbaSelectedGame.gameStatusText}
-                            </Typography>
+                              {/* Player Opponent Team & Game Status */}
+                              <Typography
+                                sx={{
+                                  fontFamily: "monospace",
+                                  textAlign: "center",
+                                  fontSize: "0.8rem",
+                                }}
+                              >
+                                vs {nbaSelectedGame.awayTeam.teamTriCode}{" "}
+                                {nbaSelectedGame.gameStatusText}
+                              </Typography>
 
-                            {/* Player Square Lower Line Section */}
+                              {/* Player Square Lower Line Section */}
+                              <Box
+                                sx={{
+                                  display: "flex",
+                                  justifyContent: "center",
+                                }}
+                              >
+                                {/* Player Projected Line */}
+                                <Typography
+                                  sx={{
+                                    fontFamily: "monospace",
+                                    textAlign: "center",
+                                    marginTop: "0.5rem",
+                                    fontSize: "1.2rem",
+                                    fontWeight: "bold",
+                                  }}
+                                >
+                                  {getStatCategory(player)}
+                                </Typography>
+
+                                {/* Player Line Category (PTS, REB, AST, etc.) */}
+                                <Typography
+                                  sx={{
+                                    display: "flex",
+                                    fontFamily: "monospace",
+                                    textAlign: "center",
+                                    marginTop: "0.9rem",
+                                    fontSize: "0.8rem",
+                                    justifyContent: "right",
+                                    marginLeft: "0.5rem",
+                                  }}
+                                >
+                                  {viewLineCategory}
+                                </Typography>
+                              </Box>
+                            </Box>
+
+                            {/* Player Square Lower Buttons Section */}
                             <Box
                               sx={{
                                 display: "flex",
-                                justifyContent: "center",
+                                borderTop: "1px solid gray",
+                                width: "100%",
                               }}
                             >
-                              {/* Player Projected Line */}
-                              <Typography
-                                sx={{
+                              {/* Player Under Button */}
+                              <button
+                                onClick={() => handleUserLines(player, "Under")}
+                                style={{
+                                  flex: 1,
+                                  backgroundColor: selectedBetButton(
+                                    player.playerId,
+                                    "Under"
+                                  )
+                                    ? "green"
+                                    : "transparent",
+                                  color: "white",
+                                  padding: "0.5rem",
                                   fontFamily: "monospace",
-                                  textAlign: "center",
-                                  marginTop: "0.5rem",
-                                  fontSize: "1.2rem",
-                                  fontWeight: "bold",
+                                  border: "none",
+                                  borderRight: "1px solid gray",
+                                  cursor: "pointer",
+                                  borderRadius: "0 0 0 1rem",
                                 }}
                               >
-                                {getStatCategory(player)}
-                              </Typography>
-
-                              {/* Player Line Category (PTS, REB, AST, etc.) */}
-                              <Typography
-                                sx={{
-                                  display: "flex",
-                                  fontFamily: "monospace",
-                                  textAlign: "center",
-                                  marginTop: "0.9rem",
-                                  fontSize: "0.8rem",
-                                  justifyContent: "right",
-                                  marginLeft: "0.5rem",
-                                }}
-                              >
-                                {viewLineCategory}
-                              </Typography>
-                            </Box>
-                          </Box>
-
-                          {/* Player Square Lower Buttons Section */}
-                          <Box
-                            sx={{
-                              display: "flex",
-                              borderTop: "1px solid gray",
-                              width: "100%",
-                            }}
-                          >
-                            {/* Player Under Button */}
-                            <button
-                              onClick={() => handleUserLines(player, "Under")}
-                              style={{
-                                flex: 1,
-                                backgroundColor: selectedBetButton(
-                                  player.playerId,
-                                  "Under"
-                                )
-                                  ? "green"
-                                  : "transparent",
-                                color: "white",
-                                padding: "0.5rem",
-                                fontFamily: "monospace",
-                                border: "none",
-                                borderRight: "1px solid gray",
-                                cursor: "pointer",
-                                borderRadius: "0 0 0 1rem",
-                              }}
-                            >
-                              ↓ Under
-                            </button>
+                                ↓ Under
+                              </button>
 
                             {/* Player Over Button */}
                             <button
@@ -1282,7 +1292,7 @@ function Dashboard() {
             </Box>
           );
         })()}
-
+      
       {/* ------Lineups Bar Popup Display------ */}
       {Object.values(lineup).flat().length >= 1 && 
       Object.values(lineup).flat().length <= 6 && (
@@ -1308,6 +1318,110 @@ function Dashboard() {
           pickUpdate={userPickUpdate}
         />
       )}
+
+<Box
+        className={`flex flex-col basis-1/4 h-full border-2 border-white rounded-2xl ${
+          !(activeCategoryTab === "NBA" && showBettingLines && nbaSelectedGame)
+            ? "sticky top-0"
+            : "hidden"
+        }`}
+        sx={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}
+      >
+        {/* Earnings */}
+        <div className=" text-white rounded-t-lg p-4 flex flex-col items-center justify-center h-1/3">
+          <h2 className="text-xl font-bold mb-2">Earnings</h2>
+          <div className="w-24 h-24 rounded-full border-8 border-gray-700 flex items-center justify-center mb-2">
+            {/* Placeholder value for earnings */}
+            <span className="text-2xl font-bold">$50.00</span>
+          </div>
+        </div>
+
+        <Divider
+          sx={{
+            bgcolor: "white",
+            height: "2px", // for horizontal
+          }}
+          flexItem
+        />
+
+        {/* Monthly Progress */}
+        <div className=" h-1/3 p-4">
+          <h2 className="text-xl font-bold text-center mb-2">
+            Monthly Progress
+          </h2>
+          <ResponsiveContainer width="100%" height={200}>
+            <LineChart data={data}>
+              <CartesianGrid stroke="#444" />
+              <XAxis dataKey="name" stroke="#fff" />
+              <YAxis stroke="#fff" />
+              <Tooltip
+                contentStyle={{ backgroundColor: "#333", border: "none" }}
+                labelStyle={{ color: "#fff" }}
+                itemStyle={{ color: "#fff" }}
+              />
+              <Line
+                type="monotone"
+                dataKey="value"
+                stroke="#fff"
+                strokeWidth={2}
+                dot={{ r: 4 }}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+
+        <Divider
+          sx={{
+            bgcolor: "white",
+            height: "2px", // for horizontal
+          }}
+          flexItem
+        />
+
+        {/* Top Picks */}
+        <div className=" text-white rounded-b-lg p-4 h-1/3">
+          <h2 className="text-xl font-bold mb-4">Top Picks</h2>
+          <div className="flex justify-between items-center  rounded p-2 pl-6 mb-2">
+            <span>NYK vs LAL</span>
+            <button
+              className="px-3 py-1 rounded text-sm"
+              onClick={() =>
+                window.open(
+                  "https://www.google.com/search?q=nyk+vs+lal&rlz=1C5CHFA_enUS944US952&oq=nyk+vs+lal&gs_lcrp=EgZjaHJvbWUyCQgAEEUYORiABDIHCAEQABiABDIHCAIQABiABDIHCAMQABiABDIHCAQQABiABDIHCAUQABiABDIHCAYQABiABDIHCAcQABiABDIHCAgQABiABDIHCAkQABiABNIBCDM1MjZqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8#sie=m;/g/11lmmffyw8;3;/m/05jvx;dt;fp;1;;;"
+                )
+              }
+            >
+              View
+            </button>
+          </div>
+          <div className="flex justify-between items-center  rounded p-2 pl-6 mb-2">
+            <span>DAL vs MIA</span>
+            <button
+              className="px-3 py-1 rounded text-sm"
+              onClick={() => {
+                window.open(
+                  "https://www.google.com/search?q=DAL+vs+MIA&sca_esv=7efe9108e6e32fec&rlz=1C5CHFA_enUS944US952&sxsrf=AHTn8zrEaDDdmDcZVD7guyebStxennkvvg%3A1744237313029&ei=AfP2Z5q3AankwN4PidblqQE&ved=0ahUKEwjau8mr_suMAxUpMtAFHQlrORUQ4dUDCBA&uact=5&oq=DAL+vs+MIA&gs_lp=Egxnd3Mtd2l6LXNlcnAiCkRBTCB2cyBNSUEyCxAAGIAEGJECGIoFMgcQLhiABBgKMgUQABiABDIHEAAYgAQYCjIFEAAYgAQyBxAuGIAEGAoyBxAAGIAEGAoyBxAAGIAEGAoyBxAAGIAEGAoyBxAAGIAEGApIjBxQAFj4GHABeACQAQGYAcYBoAHSCaoBAzkuNLgBA8gBAPgBAZgCDaACygjCAgQQIxgnwgIKECMYgAQYJxiKBcICEBAuGIAEGLEDGEMYgwEYigXCAgoQABiABBhDGIoFwgIKEC4YgAQYQxiKBcICDRAuGIAEGLEDGEMYigXCAggQLhiABBixA8ICEBAAGIAEGLEDGEMYgwEYigXCAgsQABiABBixAxiDAcICDhAAGIAEGLEDGIMBGIoFwgILEC4YgAQYsQMYgwGYAwCSBwQxMC4zoAeddLIHAzkuM7gHxQg&sclient=gws-wiz-serp#sie=m;/g/11wb07yms0;3;/m/05jvx;dt;fp;1;;;"
+                );
+              }}
+            >
+              View
+            </button>
+          </div>
+          <div className="flex justify-between items-center  rounded p-2 pl-6">
+            <span>BOS vs CHI</span>
+            <button
+              className="px-3 py-1 rounded text-sm"
+              onClick={() => {
+                window.open(
+                  "https://www.google.com/search?q=BOS+vs+CHI&sca_esv=7efe9108e6e32fec&rlz=1C5CHFA_enUS944US952&sxsrf=AHTn8zqL60bwJFzCTIqYLTaAXKRm4f8Uxw%3A1744237434740&ei=evP2Z6_qLM7jwN4PytnF4Qw&ved=0ahUKEwivj87l_suMAxXOMdAFHcpsMcwQ4dUDCBA&uact=5&oq=BOS+vs+CHI&gs_lp=Egxnd3Mtd2l6LXNlcnAiCkJPUyB2cyBDSEkyCxAAGIAEGJECGIoFMgsQABiABBiRAhiKBTILEAAYgAQYkQIYigUyBRAAGIAEMgUQABiABDIFEAAYgAQyBxAAGIAEGAoyBRAAGIAEMgcQABiABBgKMgcQABiABBgKSO8OUABY5ApwAHgBkAEAmAGdAaAB1QeqAQM2LjS4AQPIAQD4AQGYAgqgAvkHwgIKECMYgAQYJxiKBcICBBAjGCfCAgoQABiABBhDGIoFwgIKEC4YgAQYQxiKBcICEBAuGIAEGLEDGEMYgwEYigXCAg4QABiABBixAxiDARiKBcICCxAAGIAEGLEDGIMBwgILEC4YgAQYsQMYgwHCAhAQABiABBixAxhDGIMBGIoFwgIQEAAYgAQYsQMYgwEYFBiHAsICChAAGIAEGBQYhwLCAgQQABgDwgIKEAAYgAQYsQMYCpgDAJIHAzYuNKAHzUiyBwM2LjS4B_kH&sclient=gws-wiz-serp#sie=m;/g/11wb08gz73;3;/m/05jvx;dt;fp;1;;;"
+                );
+              }}
+            >
+              View
+            </button>
+          </div>
+        </div>
+      </Box>
     </Box>
   );
 }
