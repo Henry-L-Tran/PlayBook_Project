@@ -468,17 +468,6 @@ def val_filter_matches(matches: dict):
 
     return filtered_matches
 
-# Get VALORANT player stats from given region from past 14 days from API
-def fetch_val_recent_player_stats(region: str):
-    try:
-        # Retrieve player stats from given region from past 14 days
-        stats = Vlr.vlr_stats(region, "14")
-        # Write the result (a Python dictionary) to a JSON file
-        with open("backend/app/valorant_data/val_recent_player_stats.json", "w") as file:
-            json.dump(stats, file, indent=4)
-    except Exception as e:
-        print("Error retrieving player stats:", e)
-
 # Fetch team names and logos from live matches
 def fetch_team_logos():
     try:
