@@ -397,19 +397,6 @@ function Dashboard() {
     };
   }
 
-
-  const data = [
-    // { name: "Oct", value: 35 },
-    // { name: "Nov", value: 65 },
-    { name: "Dec", value: 33 },
-    { name: "Jan", value: 45 },
-    { name: "Feb", value: 50 },
-    { name: "Mar", value: 10 },
-    { name: "Apr", value: 25 },
-    { name: "May", value: 55 },
-    { name: "Jun", value: 78 },
-  ];
-
   return (
     
     // Main Dashboard Container 
@@ -421,8 +408,8 @@ function Dashboard() {
         gap: "2%",
       }}>
 
-      {/* Date & Game Schedule Container */}
-      <Box
+      {/* Game Schedule Container */}
+      <Box className="TESTING"
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -432,21 +419,6 @@ function Dashboard() {
           maxWidth: "100%",
         }}
       >
-
-      {/* Display the Date of the NBA Games */}
-      <Typography
-        sx={{
-          fontSize: "1.5rem",
-          fontFamily: "monospace",
-          paddingBottom: "1rem",
-          textAlign: "center",
-          fontWeight: "bold",
-        }}
-      >
-        {nbaLiveGames.gameDate && nbaLiveGames.gameDate !== "N/A" ?
-        format(new Date(`${nbaLiveGames.gameDate}T00:00:00`), "MMMM d, yyyy") :
-        ""}
-      </Typography>
       
       {/* Outer Scoreboard Container */}
       <Box
@@ -533,7 +505,7 @@ function Dashboard() {
               minHeight: "100vh",
             }}
           >
-            {/* TESTING SEARCH BAR COMPONENT TEMPORARILY HERE */}
+            {/* Search Bar Container */}
             <Box
               sx={{
                 position: "relative",
@@ -1361,13 +1333,45 @@ function Dashboard() {
           alignSelf: "flex-start",
           height: "fit-content",
           overflowY: "auto",
-          top: "7%",
           width: "45%",
           marginRight: "2%",
           border: "1px solid gray",
           overflowX: "hidden",
         }}
       >
+        {/* Date Container */}
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: "5%",
+          }}
+        >
+          {/* Display the Date of the NBA Games */}
+          <Typography
+            sx={{
+              fontSize: "1.5rem",
+              fontFamily: "monospace",
+              paddingBottom: "1rem",
+              textAlign: "center",
+              fontWeight: "bold",
+            }}
+          >
+            {nbaLiveGames.gameDate && nbaLiveGames.gameDate !== "N/A" ?
+            format(new Date(`${nbaLiveGames.gameDate}T00:00:00`), "MMMM d, yyyy") :
+            ""}
+          </Typography>
+        </Box>
+
+        <Divider
+          sx={{
+            bgcolor: "gray",
+            height: "1px",
+          }}
+          flexItem
+        />
+
         {/* Earnings Container */}
         <Box className=" text-white rounded-t-lg flex flex-col items-center h-1/3"
           sx={{
