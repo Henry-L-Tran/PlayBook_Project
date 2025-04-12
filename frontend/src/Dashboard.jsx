@@ -402,9 +402,22 @@ function Dashboard() {
     <Box className="flex w-full  overflow-scroll justify-center items-center"
       sx={{
         display: "flex",
-        flexDirection: "column",
+        flexDirection: "row",
         justifyContent: "center",
+        gap: "2%",
       }}>
+
+      {/* Date & Game Schedule Container */}
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+          maxWidth: "100%",
+        }}
+      >
 
       {/* Display the Date of the NBA Games */}
       <Typography
@@ -546,7 +559,7 @@ function Dashboard() {
                   onClick={() => {
 
                     // If the Game Hasn't Started, Show the Betting Lines Popup
-                    if (game.gameStatus === 2) {
+                    if (game.gameStatus === 3) {
                       setnbaselectedGame(game);
                       setShowBettingLines(true);
                     }
@@ -1293,48 +1306,72 @@ function Dashboard() {
           );
         })()}
       
-      {/* ------Lineups Bar Popup Display------ */}
-      {Object.values(lineup).flat().length >= 1 && 
-      Object.values(lineup).flat().length <= 6 && (
+        {/* ------Lineups Bar Popup Display------ */}
+        {Object.values(lineup).flat().length >= 1 && 
+        Object.values(lineup).flat().length <= 6 && (
 
-        <Lineups
-          lineup={Object.values(lineup).flat()}
-          expand={() => setShowLineups(true)}
-          onSubmit={submitLineup}
-          pickUpdate={userPickUpdate}
-          entryType={entryType}
-          setEntryType={setEntryType}
-          entryAmount={entryAmount}
-          setEntryAmount={setEntryAmount}
-        />
-      )}
+          <Lineups
+            lineup={Object.values(lineup).flat()}
+            expand={() => setShowLineups(true)}
+            onSubmit={submitLineup}
+            pickUpdate={userPickUpdate}
+            entryType={entryType}
+            setEntryType={setEntryType}
+            entryAmount={entryAmount}
+            setEntryAmount={setEntryAmount}
+          />
+        )}
 
-      {showLineupBar && (
-        <Lineups
-          lineup={Object.values(lineup).flat()}
-          onClose={() => setShowLineups(false)}
-          onSubmit={submitLineup}
-          isExpanded={showLineupBar}
-          pickUpdate={userPickUpdate}
-        />
-      )}
+        {showLineupBar && (
+          <Lineups
+            lineup={Object.values(lineup).flat()}
+            onClose={() => setShowLineups(false)}
+            onSubmit={submitLineup}
+            isExpanded={showLineupBar}
+            pickUpdate={userPickUpdate}
+          />
+        )}
+      </Box>
 
-<Box
-        className={`flex flex-col basis-1/4 h-full border-2 border-white rounded-2xl ${
+      {/* ------Right Sidebar Display------ */}
+      <Box
+        className={`flex flex-col h-full border-2 border-white rounded-2xl ${
           !(activeCategoryTab === "NBA" && showBettingLines && nbaSelectedGame)
             ? "sticky top-0"
             : "hidden"
         }`}
-        sx={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}
+        sx={{ 
+          backgroundColor: "rgba(0, 0, 0, 0.3)",
+          position: "sticky",
+          alignSelf: "flex-start",
+          height: "fit-content",
+          overflowY: "auto",
+          top: "1.65%",
+          width: "45%",
+          marginRight: "2%",
+        }}
       >
         {/* Earnings */}
-        <div className=" text-white rounded-t-lg p-4 flex flex-col items-center justify-center h-1/3">
-          <h2 className="text-xl font-bold mb-2">Earnings</h2>
+        <Box className=" text-white rounded-t-lg p-4 flex flex-col items-center justify-center h-1/3"
+          sx={{
+            height: "20em",
+          }}
+        >
+          <Typography className="text-xl font-bold mb-2"
+            sx={{
+              fontFamily: "monospace",
+              textAlign: "center",
+              color: "white",
+              fontSize: "1.5rem",
+              fontWeight: "bold",
+            }}>
+            Earnings
+          </Typography>
           <div className="w-24 h-24 rounded-full border-8 border-gray-700 flex items-center justify-center mb-2">
             {/* Placeholder value for earnings */}
             <span className="text-2xl font-bold">$50.00</span>
           </div>
-        </div>
+        </Box>
 
         <Divider
           sx={{

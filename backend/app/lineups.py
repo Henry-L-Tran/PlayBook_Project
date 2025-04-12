@@ -152,7 +152,7 @@ def submit_lineup(lineup_data: SubmitLineup):
     # Freezing the Lineup Matchup Data When Parlay is Placed
     def freeze_matchups_data(team_tri_code):
         for game in live_scores.get("gameData", []):
-            if game["homeTeam"]["teamTriCode"] == team_tri_code or game["awayTeam"]["teamTricode"] == team_tri_code:
+            if game["homeTeam"]["teamTriCode"] == team_tri_code or game["awayTeam"]["teamTriCode"] == team_tri_code:
                  return f'{game["awayTeam"]["teamTriCode"]} @ {game["homeTeam"]["teamTriCode"]}'
         return "N/A"
     
@@ -208,8 +208,17 @@ def fetch_user_live_lineup_data():
         try:
             games = scoreboard.ScoreBoard().get_dict()["scoreboard"]["games"]
             for game in games:
-                game_status[game["homeTeam"]["teamTricode"]] = game["gameStatus"]
-                game_status[game["awayTeam"]["teamTricode"]] = game["gameStatus"]
+                home = game.get("homeTeam", {})
+                away = game.get("awayTeam", {})
+
+                # Checking Both teamTriCode and teamTricode (Idk Why it Alternates)
+                home_code = home.get("teamTricode") or home.get("teamTriCode")
+                away_code = away.get("teamTricode") or away.get("teamTriCode")
+
+                if home_code:
+                    game_status[home_code] = game.get("gameStatus", 0)
+                if away_code:
+                    game_status[away_code] = game.get("gameStatus", 0)
         except Exception as e:
             print("Error fetching game status:", e)
             

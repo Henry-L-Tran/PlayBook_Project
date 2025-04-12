@@ -365,5 +365,40 @@
         "time": "2025-04-10T02:22:43.435609",
         "result": "WON",
         "evaluated": true
+    },
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "henry.l.tran-1@ou.edu_1744424560123_98d8bee0-19ff-496d-b125-b48f9b5b72c1",
+        "entry_type": "Power Play",
+        "entry_amount": 20.0,
+        "potential_payout": 60.0,
+        "entries": [
+            {
+                "player_id": 1630598,
+                "player_name": "Aaron Wiggins",
+                "team_tri_code": "OKC",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630598.png",
+                "line_category": "PTS",
+                "projected_line": 11.5,
+                "users_pick": "Over",
+                "matchup": "OKC @ UTA",
+                "live_value": "N/A",
+                "status": "pending"
+            },
+            {
+                "player_id": 1641729,
+                "player_name": "Brice Sensabaugh",
+                "team_tri_code": "UTA",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1641729.png",
+                "line_category": "PTS",
+                "projected_line": 10.5,
+                "users_pick": "Under",
+                "matchup": "OKC @ UTA",
+                "live_value": "N/A",
+                "status": "pending"
+            }
+        ],
+        "time": "2025-04-12T02:22:40.431891"
     }
 ]
