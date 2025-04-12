@@ -37,6 +37,27 @@ function Dashboard() {
   const [entryType, setEntryType] = useState("");
   const [entryAmount, setEntryAmount] = useState("");
 
+  useEffect(() => {
+    if (!showBettingLines) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      {threshold: 0.1}
+    );
+
+    const elements = document.querySelectorAll(".fade-up");
+    elements.forEach((el) => observer.observe(el));
+
+    return () => {
+      elements.forEach((el) => observer.unobserve(el));
+    };
+  }, [showBettingLines]);
 
   // Function to Fetch Live NBA Games (Updates Every 30 Seconds)
   useEffect(() => {
@@ -809,12 +830,13 @@ function Dashboard() {
                   justifyContent: "center",
                   fontFamily: "monospace",
                   width: "100%",
-                  maxHeight: "100vh",
+                  height: "100%",
                   overflowY: "auto",
                   top: 0,
                   left: 0,
                   right: 0,
                   bottom: 0,
+                  paddingBottom: "10%",
                 }}
               >
                 {/* Header Away Team @ Home Team Box */}
@@ -928,6 +950,7 @@ function Dashboard() {
                         <Box
                           key={index}
                           id={`player-${player.playerId}`}
+                          className="fade-up"
                           sx={{
                             border: selectedSquare(player.playerId)
                               ? "2px solid green"
@@ -1130,6 +1153,7 @@ function Dashboard() {
                         <Box
                           key={index}
                           id={`player-${player.playerId}`}
+                          className="fade-up"
                           sx={{
                             border: selectedSquare(player.playerId)
                               ? "2px solid green"
@@ -1306,35 +1330,35 @@ function Dashboard() {
           );
         })()}
       
-        {/* ------Lineups Bar Popup Display------ */}
-        {Object.values(lineup).flat().length >= 1 && 
-        Object.values(lineup).flat().length <= 6 && (
+      {/* ------Lineups Bar Popup Display------ */}
+      {Object.values(lineup).flat().length >= 1 && 
+      Object.values(lineup).flat().length <= 6 && (
 
-          <Lineups
-            lineup={Object.values(lineup).flat()}
-            expand={() => setShowLineups(true)}
-            onSubmit={submitLineup}
-            pickUpdate={userPickUpdate}
-            entryType={entryType}
-            setEntryType={setEntryType}
-            entryAmount={entryAmount}
-            setEntryAmount={setEntryAmount}
-          />
-        )}
+        <Lineups
+          lineup={Object.values(lineup).flat()}
+          expand={() => setShowLineups(true)}
+          onSubmit={submitLineup}
+          pickUpdate={userPickUpdate}
+          entryType={entryType}
+          setEntryType={setEntryType}
+          entryAmount={entryAmount}
+          setEntryAmount={setEntryAmount}
+        />
+      )}
 
-        {showLineupBar && (
-          <Lineups
-            lineup={Object.values(lineup).flat()}
-            onClose={() => setShowLineups(false)}
-            onSubmit={submitLineup}
-            isExpanded={showLineupBar}
-            pickUpdate={userPickUpdate}
-          />
-        )}
+      {showLineupBar && (
+        <Lineups
+          lineup={Object.values(lineup).flat()}
+          onClose={() => setShowLineups(false)}
+          onSubmit={submitLineup}
+          isExpanded={showLineupBar}
+          pickUpdate={userPickUpdate}
+        />
+      )}
       </Box>
 
       {/* ------Right Sidebar Display------ */}
-      <Box
+<Box
         className={`flex flex-col h-full border-2 border-white rounded-2xl ${
           !(activeCategoryTab === "NBA" && showBettingLines && nbaSelectedGame)
             ? "sticky top-0"
