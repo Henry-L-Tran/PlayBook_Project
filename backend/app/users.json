@@ -7,7 +7,7 @@
             "password": "password123",
             "address": "1234 Main St",
             "birthday": "01/01/1990",
-            "balance": 0,
+            "balance": 5587.0,
             "payment_info": {
                 "credit_card": true,
                 "card_type": "Visa",

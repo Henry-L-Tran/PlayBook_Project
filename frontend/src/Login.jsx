@@ -40,8 +40,11 @@ function Login() {
       // If Response is Sucessful, Store User Email in Local Storage and Redirect to Home Page
       if (response.status === 200) {
         const data = await response.json();
-        localStorage.setItem("currUser", data.user.email);
+        localStorage.setItem("currUser", JSON.stringify(data.user));
         console.log("Login Successful, User:", data.user.email);
+        // Stores User's Information in Local Storage
+        localStorage.setItem("currUser", JSON.stringify(data.user));
+        // Redirect to Home Page
         navigate("/home");
       } 
       

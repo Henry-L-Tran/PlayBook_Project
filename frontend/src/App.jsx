@@ -45,10 +45,6 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/promos" element={<Promos />} />
-          {/*<Route path="/lineups" element={<Lineups />} />
-          <Route path="/social" element={<Social />} />*/}
-          <Route path="/funds" element={<Funds />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
