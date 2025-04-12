@@ -193,6 +193,8 @@ def register(user_data: RegisterUser):
         "address": user_data.address,
         "birthday": user_data.birthday,
         "balance": user_data.balance,
+        "wins": 0,
+        "losses": 0,
         "payment_info": {
             "credit_card": user_data.payment_info.credit_card,
             "card_type": user_data.payment_info.card_type,
@@ -340,7 +342,7 @@ def fetch_player_live_stats():
         # Refreshes All Player Stats in JSON File Every 30 Seconds
         time.sleep(30)
 
-threading.Thread(target=fetch_player_live_stats, daemon=True).start()
+#threading.Thread(target=fetch_player_live_stats, daemon=True).start()
 
 
 # NBA Player Season Stats Route

@@ -10,6 +10,8 @@ import { calculatePayoutMultiplier } from "./payoutMultiplier";
 import { format } from "date-fns";
 import SearchBar from "./SearchBar";
 import "./Dashboard.css";
+import PieChart from "./PieChart";
+
 import {
   LineChart,
   Line,
@@ -36,6 +38,7 @@ function Dashboard() {
   const [showLineupBar, setShowLineupBar] = useState(false);
   const [entryType, setEntryType] = useState("");
   const [entryAmount, setEntryAmount] = useState("");
+  const [currUser, setCurrUser] = useState(null);
 
 
   // Function to Fetch Live NBA Games (Updates Every 30 Seconds)
@@ -56,6 +59,26 @@ function Dashboard() {
     return () => {
       clearInterval(fetchTimer);
     };
+  }, []);
+
+  useEffect(() => {
+    const fetchUpdatedUser = async () => {
+      const user = JSON.parse(localStorage.getItem("currUser"));
+      if (user?.email) {
+        try {
+          const response = await fetch(`http://localhost:8000/funds/user/${user.email}`);
+          const updatedUser = await response.json();
+
+          // Updates localStorage with the Updated User Data
+          localStorage.setItem("currUser", JSON.stringify(updatedUser));
+          setCurrUser(updatedUser);
+        }
+        catch (error) {
+          console.error("Error fetching updated user data: ", error);
+        }
+      }
+    }
+    fetchUpdatedUser();
   }, []);
 
   // Function to Convert ISO Time to Game Clock Format (MM:SS)
@@ -399,7 +422,7 @@ function Dashboard() {
   return (
     
     // Main Dashboard Container 
-    <Box className="flex w-full  overflow-scroll justify-center items-center"
+    <Box className="flex w-full overflow-scroll justify-center items-center"
       sx={{
         display: "flex",
         flexDirection: "row",
@@ -442,6 +465,7 @@ function Dashboard() {
           maxWidth: "1200px",
           backgroundColor: "rgba(0, 0, 0, 0.3)",
           borderRadius: "1rem",
+          border: "1px solid gray",
         }}
       >
         {/* Tabs (NBA, NFL, LoL, VAL) */}
@@ -578,6 +602,7 @@ function Dashboard() {
                     paddingLeft: "10rem",
                     gridTemplateColumns: "80px 80px 200px 80px",
                     cursor: "pointer",
+                    border: "1px solid gray",
                   }}
                 >
                   {/* Away Team Box */}
@@ -1335,7 +1360,7 @@ function Dashboard() {
 
       {/* ------Right Sidebar Display------ */}
       <Box
-        className={`flex flex-col h-full border-2 border-white rounded-2xl ${
+        className={`flex flex-col h-full rounded-2xl ${
           !(activeCategoryTab === "NBA" && showBettingLines && nbaSelectedGame)
             ? "sticky top-0"
             : "hidden"
@@ -1349,14 +1374,18 @@ function Dashboard() {
           top: "1.65%",
           width: "45%",
           marginRight: "2%",
+          border: "1px solid gray",
         }}
       >
-        {/* Earnings */}
-        <Box className=" text-white rounded-t-lg p-4 flex flex-col items-center justify-center h-1/3"
+        {/* Earnings Container */}
+        <Box className=" text-white rounded-t-lg flex flex-col items-center h-1/3"
           sx={{
             height: "20em",
+            position: "relative",
+            marginTop: "5%",
           }}
         >
+          {/* Earnings Header Text */}
           <Typography className="text-xl font-bold mb-2"
             sx={{
               fontFamily: "monospace",
@@ -1367,10 +1396,13 @@ function Dashboard() {
             }}>
             Earnings
           </Typography>
-          <div className="w-24 h-24 rounded-full border-8 border-gray-700 flex items-center justify-center mb-2">
-            {/* Placeholder value for earnings */}
-            <span className="text-2xl font-bold">$50.00</span>
-          </div>
+
+          {/* Earnings Pie Chart */}
+          <PieChart 
+            balance={currUser?.balance ?? 0} 
+            wins={currUser?.wins ?? 0} 
+            losses={currUser?.losses ?? 0} 
+          />
         </Box>
 
         <Divider
