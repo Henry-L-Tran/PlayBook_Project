@@ -26,12 +26,17 @@ const Header = ({ onNavigate }) => {
       {/* Header Container with Logo and Navigation Links */}
       <div className="flex flex-col sm:flex-row justify-between items-center w-full flex-wrap">
         {/* Logo and App Name */}
-        <Link>
+        <Link
+          underline="none"
+          sx={{
+            textDecoration: "none",
+          }}
+        >
           <Box
             className="flex items-center gap-4 min-w-1/4"
             onClick={() => onNavigate("Dashboard")}
             sx={{
-              cursor: "pointer", // Add this line to change the cursor
+              cursor: "pointer",
             }}
           >
             {/* Logo Image */}
@@ -89,7 +94,7 @@ const Header = ({ onNavigate }) => {
             <Typography
               sx={{
                 color: "white",
-                fontSize: "1rem", // Same font size as the other items
+                fontSize: "1rem", 
                 fontFamily: "monospace",
               }}
             >
@@ -98,7 +103,7 @@ const Header = ({ onNavigate }) => {
             <Typography
               sx={{
                 color: "white",
-                fontSize: "1rem", // Same font size as the other items
+                fontSize: "1rem", 
                 fontFamily: "monospace",
               }}
             >
@@ -119,8 +124,8 @@ const Header = ({ onNavigate }) => {
             color="inherit"
             onClick={() => console.log("Help Icon Clicked")}
             sx={{
-              marginLeft: "auto", // Push it to the end
-              fontSize: "2rem", // Adjust the size of the icon here
+              marginLeft: "auto", 
+              fontSize: "2rem",
             }}
           >
             <HelpOutlineIcon sx={{ fontSize: "inherit" }} />
