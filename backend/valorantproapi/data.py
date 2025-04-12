@@ -321,10 +321,4 @@ class Round:
         def __init__(self, round_id: str, match_id: str, name: str, score: str): 
             self.name = name 
             self.score = score 
-            self.player_1, self.player_2, self.player_3, self.player_4, self.player_5 = _get_players(round_id, match_id, self.name, False)
-
-print(len(Match("450072").rounds[1]))
-print(Round(Match("450072").rounds[1], "450072").team_a.player_1)
-print(Round(Match("450072").rounds[1], "450072").team_a.player_1.kills)
-print(Round(Match("450072").rounds[1], "450072").team_a.player_2)
-print(Round(Match("450072").rounds[1], "450072").team_a.player_2.kills)     
+            self.player_1, self.player_2, self.player_3, self.player_4, self.player_5 = _get_players(round_id, match_id, self.name, False)    

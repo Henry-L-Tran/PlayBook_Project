@@ -425,7 +425,7 @@ def fetch_val_upcoming_matches():
         upcoming_matches = Vlr.vlr_upcoming_matches()
         filtered_matches = val_filter_matches(upcoming_matches)
         # Convert the result (a Python dictionary) to a JSON formatted string
-        with open("backend/app/valorant_data/val_upcoming_matches.json", "w") as file:
+        with open("app/valorant_data/val_upcoming_matches.json", "w") as file:
                 json.dump(filtered_matches, file, indent=4)
     except Exception as e:
         print("Error retrieving upcoming matches:", e)
@@ -437,7 +437,7 @@ def fetch_val_live_matches():
         live_Scores = Vlr.vlr_live_score()
         filtered_matches = val_filter_matches(live_Scores)
         # Write the result (a Python dictionary) to a JSON file
-        with open("backend/app/valorant_data/val_live_scores.json", "w") as file:
+        with open("app/valorant_data/val_live_scores.json", "w") as file:
             json.dump(filtered_matches, file, indent=4)
     except Exception as e:
         print("Error retrieving live matches:", e)
@@ -471,7 +471,7 @@ def val_filter_matches(matches: dict):
 # Fetch team names and logos from live matches
 def fetch_team_logos():
     try:
-        with open("backend/app/valorant_data/val_live_scores.json", "r") as file:
+        with open("app/valorant_data/val_live_scores.json", "r") as file:
             data = json.load(file)
             logos = []
 
@@ -490,7 +490,7 @@ def fetch_team_logos():
             segments = {"segments": logos}
             data = {"data": segments}
 
-            with open("backend/app/valorant_data/val_live_game_logos.json", "w") as file:
+            with open("app/valorant_data/val_live_game_logos.json", "w") as file:
                 json.dump(data, file, indent=4)
         
     except FileNotFoundError:
@@ -500,7 +500,7 @@ def fetch_team_logos():
 @app.get("/VALROANT/matches")
 def val_matches():
     try:
-        with open("backend/app/valorant_data/val_upcoming_matches.json", "r") as file:
+        with open("app/valorant_data/val_upcoming_matches.json", "r") as file:
             data = json.load(file)
             return data
         
@@ -511,7 +511,7 @@ def val_matches():
 @app.get("/VALROANT/scores")
 def val_live_scores():
     try:
-        with open("backend/app/valorant_data/val_live_scores.json", "r") as file:
+        with open("app/valorant_data/val_live_scores.json", "r") as file:
             data = json.load(file)
             return data
         
@@ -522,7 +522,7 @@ def val_live_scores():
 @app.get("/VALROANT/player_stats")
 def val_player_stats():
     try:
-        with open("backend/app/valorant_data/val_recent_player_stats.json", "r") as file:
+        with open("app/valorant_data/val_recent_player_stats.json", "r") as file:
             data = json.load(file)
             return data
         
