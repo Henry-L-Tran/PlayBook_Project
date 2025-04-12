@@ -635,6 +635,17 @@ def val_live_scores():
         
     except FileNotFoundError:
         return {"message": "No Scores Found"}
+    
+# VALORANT Player Stats Route
+@app.get("/VALROANT/player_stats")
+def val_player_stats():
+    try:
+        with open("app/valorant_data/val_recent_player_stats.json", "r") as file:
+            data = json.load(file)
+            return data
+        
+    except FileNotFoundError:
+        return {"message": "No Stats Found"}
 
 
 
