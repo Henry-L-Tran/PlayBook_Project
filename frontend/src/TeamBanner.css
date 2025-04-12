@@ -1,41 +1,4 @@
-/* FOR Dashboard.jsx */
 
-/* Quick Highlight Effect for the Player Box Searched by the User */
-@keyframes card-highlight {
-    0% { 
-        box-shadow: 1 1 1px white; 
-    }
-    50% { 
-        box-shadow: 0 0 12px 6px white; 
-    }
-    100% { 
-        box-shadow: 1 1 1px white; 
-    }
-  }
-  
-  .card-highlight {
-    animation: card-highlight 3.5s ease-in-out;
-  }
-  
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(100px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0px);
-    }
-}
-    
-.fade-up {
-    animation-name: fadeUp;
-    animation-duration: 0.6s;
-    animation-timing-function: ease-out;
-    animation-fill-mode: both;
-    animation-timeline: view();
-    animation-range: entry 0% cover 40%;
-}
 
 .banner-container {
     display: flex;

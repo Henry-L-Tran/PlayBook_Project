@@ -10,6 +10,7 @@ import { calculatePayoutMultiplier } from "./payoutMultiplier";
 import { format } from "date-fns";
 import SearchBar from "./SearchBar";
 import "./Dashboard.css";
+import TeamBanner from "./TeamBanner"
 import {
   LineChart,
   Line,
@@ -909,6 +910,10 @@ function Dashboard() {
                         {category}
                       </button>
                     ))}
+                  </Box>
+
+                  <Box>
+                    <TeamBanner nbaSelectedGame={nbaSelectedGame} />
                   </Box>
 
                   {/* All Player Squares Main Box/Section */}
