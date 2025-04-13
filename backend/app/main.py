@@ -591,27 +591,25 @@ def val_filter_matches(matches: dict):
 # Fetch team names and logos from live matches
 def fetch_val_team_logos():
     try:
-        with open("app/valorant_data/val_live_scores.json", "r") as file:
-            data = json.load(file)
-            logos = []
+        live_Scores = Vlr.vlr_live_score()
+        filtered_matches = val_filter_matches(live_Scores)
+        logos = []
 
-            get_segments = data.get("data", {}).get("segments", [])
+        for game in filtered_matches:
+            logos.append(
+                {
+                    "team 1": game["team1"],
+                    "team 2": game["team2"],
+                    "team1_logo": game["team1_logo"],
+                    "team2_logo": game["team2_logo"]
+                }
+            )
+        
+        segments = {"segments": logos}
+        data = {"data": segments}
 
-            for game in get_segments:
-                logos.append(
-                    {
-                        "team 1": game["team1"],
-                        "team 2": game["team2"],
-                        "team1_logo": game["team1_logo"],
-                        "team2_logo": game["team2_logo"]
-                    }
-                )
-            
-            segments = {"segments": logos}
-            data = {"data": segments}
-
-            with open("app/valorant_data/val_live_game_logos.json", "w") as file:
-                json.dump(data, file, indent=4)
+        with open("app/valorant_data/val_live_game_logos.json", "w") as file:
+            json.dump(data, file, indent=4)
         
     except FileNotFoundError:
         return {"message": "No Scores Found"}

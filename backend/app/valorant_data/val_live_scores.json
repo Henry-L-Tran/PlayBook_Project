@@ -1,1 +1,23 @@
-[]
+[
+    {
+        "team1": "Sentinels",
+        "team2": "LOUD",
+        "flag1": "flag_us",
+        "flag2": "flag_br",
+        "team1_logo": "https://owcdn.net/img/62875027c8e06.png",
+        "team2_logo": "https://owcdn.net/img/62bbec8dc1b9f.png",
+        "score1": "0",
+        "score2": "0",
+        "team1_round_ct": "11",
+        "team1_round_t": "N/A",
+        "team2_round_ct": "N/A",
+        "team2_round_t": "6",
+        "map_number": "1",
+        "current_map": "Split",
+        "time_until_match": "LIVE",
+        "match_event": "Champions Tour 2025: Americas Stage 1",
+        "match_series": "Group Stage: Week 4",
+        "unix_timestamp": "2025-04-12 23:25:00",
+        "match_page": "https://www.vlr.gg/459538/sentinels-vs-loud-champions-tour-2025-americas-stage-1-w4"
+    }
+]
