@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import { Box } from "@mui/material";
+import CenteredModal from "./utilities/CenteredModal";
 
 function Funds() {
   const [user, setUser] = useState(null);
   const [currTab, setCurrTab] = useState("card-info");
   const [amount, setAmount] = useState("");
   const [card, setCard] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   // Check if User is Logged In and Fetch User Data
   useEffect(() => {
@@ -24,7 +27,7 @@ function Funds() {
 
     try {
       const response = await fetch(
-        `http://localhost:8000/funds/user/${currUser.email}`,
+        `http://localhost:8000/funds/user/${currUser.email}`
       );
       const data = await response.json();
       setUser(data);
@@ -79,6 +82,9 @@ function Funds() {
     }
   };
 
+  // helper function to capitalize first letter
+  const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+
   // Handle User Transactions (Deposit/Withdraw)
   const userTransactions = async (type) => {
     if (!user) {
@@ -86,7 +92,6 @@ function Funds() {
       return;
     }
 
-    // Information Parameters to Send to Backend
     const requestInfo = {
       email: user.email,
       amount: amount,
@@ -101,14 +106,18 @@ function Funds() {
       });
 
       const data = await response.json();
-      if (response.status == 200) {
-        alert(data.message);
+      if (response.status === 200) {
+        setModalMessage(`${capitalize(type)} successful`);
+        setIsModalOpen(true);
         getUserData();
       } else {
-        alert("Transction Failed");
+        setModalMessage(`${capitalize(type)} failed`);
+        setIsModalOpen(true);
       }
     } catch (error) {
       console.error(`${type} Failed:`, error);
+      setModalMessage(`${capitalize(type)} failed`);
+      setIsModalOpen(true);
     }
   };
 
@@ -116,7 +125,6 @@ function Funds() {
     <>
       {/* Funds Page Box (Entire Page) */}
       <div className="font-mono">
-
         {/* Funds Header */}
         <h1 className="flex items-center flex-col justify-center font-mono">
           Funds
@@ -129,7 +137,6 @@ function Funds() {
 
         {/* Container for Card Information, Deposit, and Withdraw Buttons */}
         <div className="flex flex-col items-center px-4 sm:px-0 sm:flex-row  flex-wrap justify-center mt-5 gap-3 font-mono">
-          
           {/* Card Information Button */}
           <button
             onClick={() => setCurrTab("card-info")}
@@ -168,16 +175,13 @@ function Funds() {
           }}
         >
           {currTab === "card-info" && (
-            
             // Container for Payment Information
             <div>
-
               {/* Header for Payment Information */}
               <h2 className="text-3xl font-mono pb-10">Payment Information</h2>
-              
+
               {/* Container for Card Information Inputs */}
               <div className="flex flex-col items-center sm:flex-row flex-wrap justify-center gap-3 p-5">
-                
                 {/* Card Type Input */}
                 <input
                   className="w-50 md:w-1/5 p-3 rounded-md bg-gray-900 text-white border border-gray-600 font-mono"
@@ -230,16 +234,13 @@ function Funds() {
           )}
 
           {currTab === "deposit" && user?.payment_info?.card_number && (
-            
             // Container for Deposit Funds
             <div className="flex w-full flex-col items-center justify-center">
-              
               {/* Header for Deposit Funds */}
               <h2 className="text-3xl font-mono  pb-10">Deposit Funds</h2>
 
               {/* Container for Deposit Amount Input */}
               <div className="relative w-full sm:w-4/5 flex items-center">
-                
                 {/* Dollar Sign Placeholder */}
                 <span className="absolute inset-y-8 left-4 flex text-gray-400 font-mono font-bold">
                   $
@@ -275,7 +276,6 @@ function Funds() {
 
               {/* Container for Card Selection and CVV Input */}
               <div className="flex w-4/5 flex-row justify-center items-center gap-5 mt-5 font-mono">
-                
                 {/* Card Selection Dropdown */}
                 <select
                   className="w-1/2 h-12 px-3 py-3 rounded-md bg-gray-900"
@@ -315,16 +315,13 @@ function Funds() {
           )}
 
           {currTab === "withdraw" && user?.payment_info?.card_number && (
-            
             // Container for Withdraw Funds
             <div className="flex w-full flex-col items-center justify-center">
-              
               {/* Header for Withdraw Funds */}
               <h2 className="text-3xl font-mono pb-10">Withdraw Funds</h2>
-              
+
               {/* Container for Withdraw Amount Input */}
               <div className="relative w-full sm:w-4/5 flex items-center">
-                
                 {/* Dollar Sign Placeholder */}
                 <span className="absolute inset-y-8 left-4 flex text-gray-400 font-mono font-bold">
                   $
@@ -342,7 +339,6 @@ function Funds() {
 
               {/* Container for Selecting Card and Confirm Button*/}
               <div className="flex justify-center gap-5">
-
                 {/* Card Selection Dropdown */}
                 <select
                   className="w-fit sm:w-98 mt-10 px-3 py-3 rounded-md bg-gray-900 font-mono"
@@ -369,6 +365,12 @@ function Funds() {
               </div>
             </div>
           )}
+          {/* Modal */}
+          <CenteredModal
+            isOpen={isModalOpen}
+            message={modalMessage}
+            onClose={() => setIsModalOpen(false)}
+          />
         </Box>
       </div>
     </>
