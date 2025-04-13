@@ -603,44 +603,50 @@ function Dashboard() {
                       {/* Away Team Periods and Score */}
                       <Box className="mt-2">
                         <Box className="grid grid-cols-5 text-white gap-x-8 ml-40">
-                          {game.awayTeam.periods.map((period, index) => (
-                            <Box key={index} className="text-center">
-                              <Typography
-                                sx={{
-                                  fontFamily: "monospace",
-                                  gridTemplateColumns: "repeat(4, 40px) 60px",
-                                }}
-                                className="text-center"
-                              >
-                                {period.period}
-                              </Typography>
+                          
+                          {/* Away Team Periods and Score Display Shows Only When Game Starts or Finished */}
+                          {(game.gameStatus === 2 || game.gameStatus === 3) &&
+                            game.awayTeam.periods.map((period, index) => (
+                              <Box key={index} className="text-center">
+                                <Typography
+                                  sx={{
+                                    fontFamily: "monospace",
+                                    gridTemplateColumns: "repeat(4, 40px) 60px",
+                                  }}
+                                  className="text-center"
+                                >
+                                  {period.period}
+                                </Typography>
 
-                              <Typography
-                                sx={{
-                                  fontFamily: "monospace",
-                                  fontSize: "0.75rem",
-                                }}
-                                className="text-center"
-                              >
-                                {period.score}
-                              </Typography>
-                            </Box>
+                                <Typography
+                                  sx={{
+                                    fontFamily: "monospace",
+                                    fontSize: "0.75rem",
+                                  }}
+                                  className="text-center"
+                                >
+                                  {period.score}
+                                </Typography>
+                              </Box>
                           ))}
 
-                          <Typography
-                            sx={{
-                              fontFamily: "monospace",
-                              fontSize: "1.3rem",
-                              color:
-                                game.gameStatus === 3 &&
-                                game.awayTeam.score > game.homeTeam.score
-                                  ? "#10833C"
-                                  : "white",
-                            }}
-                          >
-                            {" "}
-                            {game.awayTeam.score}{" "}
-                          </Typography>
+                          {/* Away Team Score Display Shows Only When Game Starts or Finished */}
+                          {(game.gameStatus === 2 || game.gameStatus === 3) && (
+                            <Typography
+                              sx={{
+                                fontFamily: "monospace",
+                                fontSize: "1.3rem",
+                                color:
+                                  game.gameStatus === 3 &&
+                                  game.awayTeam.score > game.homeTeam.score
+                                    ? "#10833C"
+                                    : "white",
+                              }}
+                            >
+                              {" "}
+                              {game.awayTeam.score}{" "}
+                            </Typography>
+                          )}
                         </Box>
                       </Box>
                     </Box>
@@ -681,40 +687,47 @@ function Dashboard() {
                       {/* Home Team Periods and Score */}
                       <Box className="mt-2">
                         <Box className="grid grid-cols-5 text-white gap-x-8 ml-40">
-                          {game.homeTeam.periods.map((period, index) => (
-                            <Box key={index} className="text-center">
-                              <Typography
-                                sx={{ fontFamily: "monospace" }}
-                                className="text-center"
-                              >
-                                {period.period}
-                              </Typography>
+                          
+                          {/* Home Team Periods and Score Display Shows Only When Game Starts or Finished */}
+                          {(game.gameStatus === 2 || game.gameStatus === 3) &&
+                            game.homeTeam.periods.map((period, index) => (
+                              <Box key={index} className="text-center">
+                                <Typography
+                                  sx={{ fontFamily: "monospace" }}
+                                  className="text-center"
+                                >
+                                  {period.period}
+                                </Typography>
 
-                              <Typography
-                                sx={{
-                                  fontFamily: "monospace",
-                                  fontSize: "0.75rem",
-                                }}
-                                className="text-center"
-                              >
-                                {period.score}
-                              </Typography>
-                            </Box>
+                                <Typography
+                                  sx={{
+                                    fontFamily: "monospace",
+                                    fontSize: "0.75rem",
+                                  }}
+                                  className="text-center"
+                                >
+                                  {period.score}
+                                </Typography>
+                              </Box>
                           ))}
-                          <Typography
-                            sx={{
-                              fontFamily: "monospace",
-                              fontSize: "1.3rem",
-                              color:
-                                game.gameStatus === 3 &&
-                                game.homeTeam.score > game.awayTeam.score
-                                  ? "#10833C"
-                                  : "white",
-                            }}
-                          >
-                            {" "}
-                            {game.homeTeam.score}
-                          </Typography>
+
+                          {/* Home Team Score Display Shows Only When Game Starts or Finished */}
+                          {(game.gameStatus === 2 || game.gameStatus === 3) && (
+                            <Typography
+                              sx={{
+                                fontFamily: "monospace",
+                                fontSize: "1.3rem",
+                                color:
+                                  game.gameStatus === 3 &&
+                                  game.homeTeam.score > game.awayTeam.score
+                                    ? "#10833C"
+                                    : "white",
+                              }}
+                            >
+                              {" "}
+                              {game.homeTeam.score}
+                            </Typography>
+                          )}
                         </Box>
                       </Box>
                     </Box>
