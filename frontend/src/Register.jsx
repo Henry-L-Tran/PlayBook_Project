@@ -14,6 +14,7 @@ import CenteredModal from "./utilities/CenteredModal";
 function Register() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
+  const [autoCloseModal, setAutoCloseModal] = useState(false);
 
   // State to Track User Input for Registration Form Data
   const [registerData, setRegisterData] = useState({
@@ -63,6 +64,7 @@ function Register() {
 
     if (registerData.password !== registerData.confirm_password) {
       setModalMessage("Passwords do not match!");
+      setAutoCloseModal(false); // Keep it open so the user can close manually
       setIsModalOpen(true);
       return;
     }
@@ -76,19 +78,21 @@ function Register() {
 
       if (response.status === 200) {
         setModalMessage("Registration Successful!");
+        setAutoCloseModal(true); // Close automatically after a second or two
         setIsModalOpen(true);
 
-        // Wait a bit before redirecting to login
         setTimeout(() => {
           setIsModalOpen(false);
           navigate("/login");
-        }, 2000); // 2 seconds delay for user to see the message
+        }, 2000);
       } else {
         setModalMessage("Registration Failed");
+        setAutoCloseModal(false); // Keep it open on error
         setIsModalOpen(true);
       }
     } catch (error) {
       setModalMessage("Registration Failed");
+      setAutoCloseModal(false);
       setIsModalOpen(true);
     }
   };
@@ -336,7 +340,7 @@ function Register() {
         isOpen={isModalOpen}
         message={modalMessage}
         onClose={() => setIsModalOpen(false)}
-        autoClose={true}
+        autoClose={autoCloseModal}
       />
     </Box>
   );

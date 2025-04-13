@@ -1,5 +1,5 @@
-// import React from "react";
 import PropTypes from "prop-types";
+import { useEffect } from "react";
 
 const CenteredModal = ({
   isOpen,
@@ -8,6 +8,17 @@ const CenteredModal = ({
   onClose,
   opacity = 1,
 }) => {
+  useEffect(() => {
+    let timer;
+    if (isOpen && autoClose) {
+      // Close after 1.75 seconds
+      timer = setTimeout(() => {
+        onClose();
+      }, 1000);
+    }
+    return () => clearTimeout(timer);
+  }, [isOpen, autoClose, onClose]);
+
   if (!isOpen) return null;
 
   return (
@@ -16,7 +27,7 @@ const CenteredModal = ({
         className="bg-black p-6 rounded-md shadow-lg"
         style={{
           opacity: opacity,
-          transition: "opacity 0.5s",
+          transition: "opacity 0.25s", // Slightly faster fade-in/out
         }}
       >
         <p className="text-white">{message}</p>
