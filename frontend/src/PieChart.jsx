@@ -157,6 +157,7 @@ const EarningsPieChart = ({ balance, wins, losses }) => {
             sx={{
                 display: "flex",
                 flexDirection: "column",
+                gap: 2,
             }}
         >
             {/* Won Entries Button */}
