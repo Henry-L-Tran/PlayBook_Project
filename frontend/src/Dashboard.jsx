@@ -312,11 +312,14 @@ function Dashboard() {
         setModalMessage("Lineup submitted successfully.");
         setIsModalOpen(true);
         setLineup({});
-      } else {
+        setShowBettingLines(false);
+      } 
+      else {
         setModalMessage("Error submitting lineup.");
         setIsModalOpen(true);
       }
-    } catch (error) {
+    } 
+    catch (error) {
       setModalMessage("Error submitting lineup.");
       setIsModalOpen(true);
     }
@@ -1352,7 +1355,7 @@ function Dashboard() {
           Object.values(lineup).flat().length <= 6 && (
             <Lineups
               lineup={Object.values(lineup).flat()}
-              expand={() => setShowLineups(true)}
+              expand={() => setShowLineupBar(true)}
               onSubmit={submitLineup}
               pickUpdate={userPickUpdate}
               entryType={entryType}
@@ -1365,7 +1368,7 @@ function Dashboard() {
         {showLineupBar && (
           <Lineups
             lineup={Object.values(lineup).flat()}
-            onClose={() => setShowLineups(false)}
+            onClose={() => setShowLineupBar(false)}
             onSubmit={submitLineup}
             isExpanded={showLineupBar}
             pickUpdate={userPickUpdate}

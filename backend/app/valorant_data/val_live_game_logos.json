@@ -1,5 +1,12 @@
 {
     "data": {
-        "segments": []
+        "segments": [
+            {
+                "team 1": "T1",
+                "team 2": "Rex Regum Qeon",
+                "team1_logo": "https://owcdn.net/img/62fe0b8f6b084.png",
+                "team2_logo": "https://owcdn.net/img/629f17f51e7a3.png"
+            }
+        ]
     }
 }
