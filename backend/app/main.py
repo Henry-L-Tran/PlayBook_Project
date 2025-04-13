@@ -442,22 +442,22 @@ def fetch_val_upcoming_matches():
 threading.Thread(target=fetch_val_upcoming_matches, daemon=True).start()
 
 # Get VALORANT current live matches from API
-# def fetch_val_live_matches():
-#     while True:    
-#         try:
-#             # Retrieve live matches and filter them
-#             live_Scores = Vlr.vlr_live_score()
-#             filtered_matches = val_filter_matches(live_Scores)
-#             # Write the result (a Python dictionary) to a JSON file
-#             with open("app/valorant_data/val_live_scores.json", "w") as file:
-#                 json.dump(filtered_matches, file, indent=4)
-#         except Exception as e:
-#             print("Error retrieving live matches:", e)
+def fetch_val_live_matches():
+    while True:    
+        try:
+            # Retrieve live matches and filter them
+            live_Scores = Vlr.vlr_live_score()
+            filtered_matches = val_filter_matches(live_Scores)
+            # Write the result (a Python dictionary) to a JSON file
+            with open("app/valorant_data/val_live_scores.json", "w") as file:
+                json.dump(filtered_matches, file, indent=4)
+        except Exception as e:
+            print("Error retrieving live matches:", e)
 
-#         # Update the score every 30 seconds
-#         time.sleep(30)
+        # Update the score every 30 seconds
+        time.sleep(30)
 
-# threading.Thread(target=fetch_val_live_matches, daemon=True).start()
+threading.Thread(target=fetch_val_live_matches, daemon=True).start()
 
 # Retrieve most recent tier 1 match results
 def fetch_val_match_results():
