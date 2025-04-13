@@ -19,6 +19,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import CenteredModal from "./utilities/CenteredModal";
 
 function Dashboard() {
   // State to Hold the Live Games and Player Stats
@@ -36,7 +37,8 @@ function Dashboard() {
   const [showLineupBar, setShowLineupBar] = useState(false);
   const [entryType, setEntryType] = useState("");
   const [entryAmount, setEntryAmount] = useState("");
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   // Function to Fetch Live NBA Games (Updates Every 30 Seconds)
   useEffect(() => {
@@ -238,41 +240,44 @@ function Dashboard() {
   const submitLineup = async () => {
     const allEntries = Object.values(lineup).flat();
 
-    // Lineup MUST Be Between 2 and 6 Players
     if (allEntries.length < 2 || allEntries.length > 6) {
-      console.log("Lineup must be between 2 and 6 players.");
+      setModalMessage("Lineup must be between 2 and 6 players.");
+      setIsModalOpen(true);
       return;
     }
 
-    // Lineup Cannot Contain Players from the Same Team
     const sameTeam =
       new Set(allEntries.map((player) => player.team_tri_code)).size === 1;
     if (sameTeam) {
-      console.log("Lineup cannot contain players from the same team.");
+      setModalMessage("Lineup cannot contain players from the same team.");
+      setIsModalOpen(true);
       return;
     }
 
-
-    // Gets the Current User's Info from Local Storage
     const currUser = JSON.parse(localStorage.getItem("currUser"));
 
     if (!currUser || !currUser.email) {
-      console.log("User not logged in.");
+      setModalMessage("User not logged in.");
+      setIsModalOpen(true);
       return;
     }
 
-    // Generate a Unique Entry ID for the Lineup 
     const entryId = `${currUser.email}_${Date.now()}_${uuidv4()}`;
 
-
-    if(!entryType || !entryAmount || entryAmount <= 0) {
-      console.log("Select a valid entry type and/or input a valid entry amount.");
+    if (!entryType || !entryAmount || entryAmount <= 0) {
+      setModalMessage(
+        "Select a valid entry type and/or input a valid entry amount."
+      );
+      setIsModalOpen(true);
       return;
     }
 
-    const calculatePayout = calculatePayoutMultiplier(entryType, allEntries.length, allEntries.length);
+    const calculatePayout = calculatePayoutMultiplier(
+      entryType,
+      allEntries.length,
+      allEntries.length
+    );
 
-    // Submit the Lineup to the Backend as JSON
     try {
       const response = await fetch("http://localhost:8000/lineups/submit", {
         method: "POST",
@@ -291,15 +296,16 @@ function Dashboard() {
       });
 
       if (response.status === 200) {
-        console.log("Lineup submitted successfully.");
-
-        // Resets the Lineup State After Submitting Lineup
+        setModalMessage("Lineup submitted successfully.");
+        setIsModalOpen(true);
         setLineup({});
       } else {
-        console.log("Error submitting lineup");
+        setModalMessage("Error submitting lineup.");
+        setIsModalOpen(true);
       }
     } catch (error) {
-      console.error("Error submitting lineup", error);
+      setModalMessage("Error submitting lineup.");
+      setIsModalOpen(true);
     }
   };
 
@@ -317,34 +323,33 @@ function Dashboard() {
 
   // Function to Update the Lineup with the Selected Player's Pick in the Lineup Builder Popup
   const userPickUpdate = (playerId, pick) => {
-
-    if(pick === "Clear All") {
+    if (pick === "Clear All") {
       setLineup({});
       return;
     }
 
     setLineup((prevLines) => {
       const newPick = {};
-    
-      
-      for(const category in prevLines) {
+
+      for (const category in prevLines) {
         const categoryLineup = prevLines[category];
 
-        if(pick === "Remove") {
-          const filteredLineup = categoryLineup.filter(entry => entry.player_id !== playerId);
-          if(filteredLineup.length > 0) {
+        if (pick === "Remove") {
+          const filteredLineup = categoryLineup.filter(
+            (entry) => entry.player_id !== playerId
+          );
+          if (filteredLineup.length > 0) {
             newPick[category] = filteredLineup;
           }
-        }
-
-        else {
+        } else {
           newPick[category] = prevLines[category].map((entry) =>
-          entry.player_id === playerId ? { ...entry, users_pick: pick } : entry
+            entry.player_id === playerId
+              ? { ...entry, users_pick: pick }
+              : entry
           );
         }
       }
       return newPick;
-
     });
   };
 
@@ -363,15 +368,17 @@ function Dashboard() {
 
       // Quick Delay to Allow for the Animation & Players to Load
       setTimeout(() => {
-        const findPlayerSquare = document.getElementById(`player-${player.playerId}`);
-        
-        // Finding the Player Square, Scrolling to It Then Highlighting It 
+        const findPlayerSquare = document.getElementById(
+          `player-${player.playerId}`
+        );
+
+        // Finding the Player Square, Scrolling to It Then Highlighting It
         if (findPlayerSquare) {
           findPlayerSquare.scrollIntoView({
             behavior: "smooth",
             block: "center",
-          })
-          
+          });
+
           findPlayerSquare.classList.add("card-highlight");
           // setTimeout(() => {
           //   findPlayerSquare.remove("card-highlight");
@@ -379,10 +386,9 @@ function Dashboard() {
         }
       }, 600);
 
-    console.log("Selected Player: ", player);
-    };
-  }
-
+      console.log("Selected Player: ", player);
+    }
+  };
 
   const data = [
     // { name: "Oct", value: 35 },
@@ -397,16 +403,16 @@ function Dashboard() {
   ];
 
   return (
-    
-    // Main Dashboard Container 
-    <Box className="flex w-full  overflow-scroll justify-center items-center"
+    // Main Dashboard Container
+    <Box
+      className="flex w-full  overflow-scroll justify-center items-center"
       sx={{
         display: "flex",
         flexDirection: "row",
         justifyContent: "center",
         gap: "2%",
-      }}>
-
+      }}
+    >
       {/* Date & Game Schedule Container */}
       <Box
         sx={{
@@ -418,190 +424,190 @@ function Dashboard() {
           maxWidth: "100%",
         }}
       >
-
-      {/* Display the Date of the NBA Games */}
-      <Typography
-        sx={{
-          fontSize: "1.5rem",
-          fontFamily: "monospace",
-          paddingTop: "1rem",
-          paddingBottom: "1rem",
-          textAlign: "center",
-          fontWeight: "bold",
-        }}
-      >
-        {nbaLiveGames.gameDate && nbaLiveGames.gameDate !== "N/A" ?
-        format(new Date(`${nbaLiveGames.gameDate}T00:00:00`), "MMMM d, yyyy") :
-        ""}
-      </Typography>
-      
-      {/* Outer Scoreboard Container */}
-      <Box
-        className="w-full max-w-full p-2 md:p-8 text-white"
-        sx={{
-          maxWidth: "1200px",
-          backgroundColor: "rgba(0, 0, 0, 0.3)",
-          borderRadius: "1rem",
-        }}
-      >
-        {/* Tabs (NBA, NFL, LoL, VAL) */}
-        <Tabs
-          value={activeCategoryTab}
-          onChange={handleCategoryTabChange}
-          variant="fullWidth"
-          scrollButtons="auto"
-          allowScrollButtonsMobile
-          textColor="inherit"
-          slotProps={{
-            indicator: {
-              sx: {
-                backgroundColor: "white",
-                height: "0.25rem",
-                borderRadius: "1rem",
-                marginTop: "1rem",
-              },
-            },
-            scrollButtons: {
-              sx: {
-                color: "white",
-              },
-            },
-          }}
+        {/* Display the Date of the NBA Games */}
+        <Typography
           sx={{
-            marginTop: "1rem",
-            width: "100%",
-            maxWidth: "100%",
-            "& .MuiTabs-flexContainer": {
-              justifyContent: { xs: "flex-start", md: "center" },
-            },
-            "& .MuiTabs-scroller": {
-              width: "100%",
-              overflowX: "auto",
-            },
+            fontSize: "1.5rem",
+            fontFamily: "monospace",
+            paddingTop: "1rem",
+            paddingBottom: "1rem",
+            textAlign: "center",
+            fontWeight: "bold",
           }}
         >
+          {nbaLiveGames.gameDate && nbaLiveGames.gameDate !== "N/A"
+            ? format(
+                new Date(`${nbaLiveGames.gameDate}T00:00:00`),
+                "MMMM d, yyyy"
+              )
+            : ""}
+        </Typography>
 
-          {/*Each Tab (NBA, NFL, LoL, VAL) */}
-          {["NBA", "NFL", "LoL", "VAL"].map((category) => (
-          <Tab
-            key={category}
-            label={category}
-            value={category}
-            disableRipple
-            sx={{
-              mx: { xs: 0.5, sm: 1, md: 3 },
-              px: { xs: 1, sm: 2, md: 2 },
-              fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
-              fontFamily: "monospace",
-              color: "white",
-              minWidth: "fit-content",
-              outline: "none",
-              "&.Mui-selected": {
-                color: "white",
-                fontWeight: "bold",
-                outline: "none",
+        {/* Outer Scoreboard Container */}
+        <Box
+          className="w-full max-w-full p-2 md:p-8 text-white"
+          sx={{
+            maxWidth: "1200px",
+            backgroundColor: "rgba(0, 0, 0, 0.3)",
+            borderRadius: "1rem",
+          }}
+        >
+          {/* Tabs (NBA, NFL, LoL, VAL) */}
+          <Tabs
+            value={activeCategoryTab}
+            onChange={handleCategoryTabChange}
+            variant="fullWidth"
+            scrollButtons="auto"
+            allowScrollButtonsMobile
+            textColor="inherit"
+            slotProps={{
+              indicator: {
+                sx: {
+                  backgroundColor: "white",
+                  height: "0.25rem",
+                  borderRadius: "1rem",
+                  marginTop: "1rem",
+                },
               },
-              "&:focus": {
-                outline: "none",
-                color: "white",
+              scrollButtons: {
+                sx: {
+                  color: "white",
+                },
               },
             }}
-          />
-          ))}
-        </Tabs>
-
-        {/* ------NBA Games Dashboard Display------ */}
-        {activeCategoryTab === "NBA" && (
-          <Box className="flex flex-col w-full h-full"
             sx={{
-              overflow: "visible",
-              position: "relative",
-              minHeight: "100vh",
+              marginTop: "1rem",
+              width: "100%",
+              maxWidth: "100%",
+              "& .MuiTabs-flexContainer": {
+                justifyContent: { xs: "flex-start", md: "center" },
+              },
+              "& .MuiTabs-scroller": {
+                width: "100%",
+                overflowX: "auto",
+              },
             }}
           >
-            {/* TESTING SEARCH BAR COMPONENT TEMPORARILY HERE */}
+            {/*Each Tab (NBA, NFL, LoL, VAL) */}
+            {["NBA", "NFL", "LoL", "VAL"].map((category) => (
+              <Tab
+                key={category}
+                label={category}
+                value={category}
+                disableRipple
+                sx={{
+                  mx: { xs: 0.5, sm: 1, md: 3 },
+                  px: { xs: 1, sm: 2, md: 2 },
+                  fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
+                  fontFamily: "monospace",
+                  color: "white",
+                  minWidth: "fit-content",
+                  outline: "none",
+                  "&.Mui-selected": {
+                    color: "white",
+                    fontWeight: "bold",
+                    outline: "none",
+                  },
+                  "&:focus": {
+                    outline: "none",
+                    color: "white",
+                  },
+                }}
+              />
+            ))}
+          </Tabs>
+
+          {/* ------NBA Games Dashboard Display------ */}
+          {activeCategoryTab === "NBA" && (
             <Box
+              className="flex flex-col w-full h-full"
               sx={{
-                position: "relative",
                 overflow: "visible",
-                minHeight: "6rem",
+                position: "relative",
+                minHeight: "100vh",
               }}
             >
-              {/* Search Bar Component to Show Players Playing Today */}
-              <SearchBar 
-                playersPlayingToday={nbaPlayerStats.filter((player) =>
-                  nbaLiveGames.gameData.some(
-                    (game) =>
-                      player.teamTriCode === game.awayTeam.teamTriCode ||
-                      player.teamTriCode === game.homeTeam.teamTriCode
-                  )
-                )}
-                // Brings the User to the Player's Betting Lines Popup
-                playerSelected={handlePlayerClick}
-              />
-            </Box>
-
-            {nbaLiveGames.gameData.length === 0 ? (
-              <Typography
+              {/* TESTING SEARCH BAR COMPONENT TEMPORARILY HERE */}
+              <Box
                 sx={{
-                  fontSize: "1.5rem",
-                  fontFamily: "monospace",
+                  position: "relative",
+                  overflow: "visible",
+                  minHeight: "6rem",
                 }}
-              > 
-                No Scheduled Games 
-              </Typography>
-            ) : (
-              nbaLiveGames.gameData.map((game, index) => (
+              >
+                {/* Search Bar Component to Show Players Playing Today */}
+                <SearchBar
+                  playersPlayingToday={nbaPlayerStats.filter((player) =>
+                    nbaLiveGames.gameData.some(
+                      (game) =>
+                        player.teamTriCode === game.awayTeam.teamTriCode ||
+                        player.teamTriCode === game.homeTeam.teamTriCode
+                    )
+                  )}
+                  // Brings the User to the Player's Betting Lines Popup
+                  playerSelected={handlePlayerClick}
+                />
+              </Box>
 
-                // Each Game Box
-                <Box
-                  key={index}
-                  onClick={() => {
-
-                    // If the Game Hasn't Started, Show the Betting Lines Popup
-                    if (game.gameStatus === 3) {
-                      setnbaselectedGame(game);
-                      setShowBettingLines(true);
-                    }
-                  }}
+              {nbaLiveGames.gameData.length === 0 ? (
+                <Typography
                   sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    gap: "2rem",
-                    padding: "2rem",
-                    backgroundColor: "rgba(0, 0, 0, 0.5)",
-                    borderRadius: "0.5rem",
-                    marginBottom: "1rem",
-                    alignItems: "flex-start",
-                    textAlign: "left",
-                    paddingLeft: "10rem",
-                    gridTemplateColumns: "80px 80px 200px 80px",
-                    cursor: "pointer",
+                    fontSize: "1.5rem",
+                    fontFamily: "monospace",
                   }}
                 >
-                  {/* Away Team Box */}
+                  No Scheduled Games
+                </Typography>
+              ) : (
+                nbaLiveGames.gameData.map((game, index) => (
+                  // Each Game Box
                   <Box
+                    key={index}
+                    onClick={() => {
+                      // If the Game Hasn't Started, Show the Betting Lines Popup
+                      if (game.gameStatus === 3) {
+                        setnbaselectedGame(game);
+                        setShowBettingLines(true);
+                      }
+                    }}
                     sx={{
-                      display: "grid",
-                      gridTemplateColumns: "80px 80px 240px 1fr",
-                      alignItems: "center",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      gap: "2rem",
+                      padding: "2rem",
+                      backgroundColor: "rgba(0, 0, 0, 0.5)",
+                      borderRadius: "0.5rem",
+                      marginBottom: "1rem",
+                      alignItems: "flex-start",
+                      textAlign: "left",
+                      paddingLeft: "10rem",
+                      gridTemplateColumns: "80px 80px 200px 80px",
+                      cursor: "pointer",
                     }}
                   >
-                    {/* Away Team Data */}
-                    <Typography
-                      variant="h6"
+                    {/* Away Team Box */}
+                    <Box
                       sx={{
-                        color:
-                          game.gameStatus === 3 &&
-                          game.awayTeam.score > game.homeTeam.score
-                            ? "#10833C"
-                            : "white",
+                        display: "grid",
+                        gridTemplateColumns: "80px 80px 240px 1fr",
+                        alignItems: "center",
                       }}
                     >
-                      {" "}
-                      {game.awayTeam.teamTriCode}{" "}
-                    </Typography>
+                      {/* Away Team Data */}
+                      <Typography
+                        variant="h6"
+                        sx={{
+                          color:
+                            game.gameStatus === 3 &&
+                            game.awayTeam.score > game.homeTeam.score
+                              ? "#10833C"
+                              : "white",
+                        }}
+                      >
+                        {" "}
+                        {game.awayTeam.teamTriCode}{" "}
+                      </Typography>
 
                       <Typography
                         sx={{
@@ -919,56 +925,56 @@ function Dashboard() {
                         {nbaSelectedGame.awayTeam.teamTriCode}
                       </Typography>
 
-                    {/* Away Team Players Squares Green Selected Highlights */}
-                    {awayPlayers
-                      .filter(
-                        (player) => parseFloat(getStatCategory(player)) !== 0
-                      )
-                      .map((player, index) => (
-                        <Box
-                          key={index}
-                          id={`player-${player.playerId}`}
-                          sx={{
-                            border: selectedSquare(player.playerId)
-                              ? "2px solid green"
-                              : "2px solid gray",
-                            borderRadius: "1rem",
-                            padding: 0,
-                            backgroundColor: "rgba(0, 0, 0, 0.5)",
-                            marginBottom: "1rem",
-                            width: "22rem",
-                            height: "18rem",
-                            overflow: "hidden",
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "space-between",
-                          }}
-                        >
-                          {/* Player Square Top Header Section */}
+                      {/* Away Team Players Squares Green Selected Highlights */}
+                      {awayPlayers
+                        .filter(
+                          (player) => parseFloat(getStatCategory(player)) !== 0
+                        )
+                        .map((player, index) => (
                           <Box
+                            key={index}
+                            id={`player-${player.playerId}`}
                             sx={{
-                              padding: "0.5rem",
+                              border: selectedSquare(player.playerId)
+                                ? "2px solid green"
+                                : "2px solid gray",
+                              borderRadius: "1rem",
+                              padding: 0,
+                              backgroundColor: "rgba(0, 0, 0, 0.5)",
+                              marginBottom: "1rem",
+                              width: "22rem",
+                              height: "18rem",
+                              overflow: "hidden",
+                              display: "flex",
+                              flexDirection: "column",
+                              justifyContent: "space-between",
                             }}
                           >
-                            {/* Player Picture */}
+                            {/* Player Square Top Header Section */}
                             <Box
                               sx={{
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                marginTop: "0.5rem",
-                                marginBottom: "0.5rem",
+                                padding: "0.5rem",
                               }}
                             >
-                              <img
-                                src={player.playerPicture}
-                                alt={player.playerName}
-                                style={{
-                                  width: "6rem",
-                                  marginTop: "1rem",
+                              {/* Player Picture */}
+                              <Box
+                                sx={{
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                  marginTop: "0.5rem",
+                                  marginBottom: "0.5rem",
                                 }}
-                              />
-                            </Box>
+                              >
+                                <img
+                                  src={player.playerPicture}
+                                  alt={player.playerName}
+                                  style={{
+                                    width: "6rem",
+                                    marginTop: "1rem",
+                                  }}
+                                />
+                              </Box>
 
                               {/* Player Team Tri-Code */}
                               <Typography
@@ -1121,57 +1127,56 @@ function Dashboard() {
                         {nbaSelectedGame.homeTeam.teamTriCode}
                       </Typography>
 
-                    {/* Home Team Players Squares Green Selected Highlights */}
-                    {homePlayers
-                      .filter(
-                        (player) => parseFloat(getStatCategory(player)) !== 0
-                      )
-                      .map((player, index) => (
-                        <Box
-                          key={index}
-                          id={`player-${player.playerId}`}
-                          sx={{
-                            border: selectedSquare(player.playerId)
-                              ? "2px solid green"
-                              : "2px solid gray",
-                            borderRadius: "1rem",
-                            padding: 0,
-                            backgroundColor: "rgba(0, 0, 0, 0.5)",
-                            marginBottom: "1rem",
-                            width: "22rem",
-                            height: "18rem",
-                            overflow: "hidden",
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "space-between",
-                          }}
-                        >
-                          {/* Player Square Top Header Section */}
+                      {/* Home Team Players Squares Green Selected Highlights */}
+                      {homePlayers
+                        .filter(
+                          (player) => parseFloat(getStatCategory(player)) !== 0
+                        )
+                        .map((player, index) => (
                           <Box
+                            key={index}
+                            id={`player-${player.playerId}`}
                             sx={{
-                              padding: "0.5rem",
+                              border: selectedSquare(player.playerId)
+                                ? "2px solid green"
+                                : "2px solid gray",
+                              borderRadius: "1rem",
+                              padding: 0,
+                              backgroundColor: "rgba(0, 0, 0, 0.5)",
+                              marginBottom: "1rem",
+                              width: "22rem",
+                              height: "18rem",
+                              overflow: "hidden",
+                              display: "flex",
+                              flexDirection: "column",
+                              justifyContent: "space-between",
                             }}
                           >
-
-                            {/* Player Picture */}
+                            {/* Player Square Top Header Section */}
                             <Box
                               sx={{
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                marginTop: "0.5rem",
-                                marginBottom: "0.5rem",
+                                padding: "0.5rem",
                               }}
                             >
-                              <img
-                                src={player.playerPicture}
-                                alt={player.playerName}
-                                style={{
-                                  width: "6rem",
-                                  marginTop: "1rem",
+                              {/* Player Picture */}
+                              <Box
+                                sx={{
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                  marginTop: "0.5rem",
+                                  marginBottom: "0.5rem",
                                 }}
-                              />
-                            </Box>
+                              >
+                                <img
+                                  src={player.playerPicture}
+                                  alt={player.playerName}
+                                  style={{
+                                    width: "6rem",
+                                    marginTop: "1rem",
+                                  }}
+                                />
+                              </Box>
 
                               {/* Player Team Tri-Code */}
                               <Typography
@@ -1276,51 +1281,50 @@ function Dashboard() {
                                 ↓ Under
                               </button>
 
-                            {/* Player Over Button */}
-                            <button
-                              onClick={() => handleUserLines(player, "Over")}
-                              style={{
-                                flex: 1,
-                                backgroundColor: selectedBetButton(
-                                  player.playerId,
-                                  "Over"
-                                )
-                                  ? "green"
-                                  : "transparent",
-                                padding: "0.5rem",
-                                fontFamily: "monospace",
-                                border: "none",
-                                cursor: "pointer",
-                                borderRadius: "0 0 1rem 0",
-                              }}
-                            >
-                              ↑ Over
-                            </button>
+                              {/* Player Over Button */}
+                              <button
+                                onClick={() => handleUserLines(player, "Over")}
+                                style={{
+                                  flex: 1,
+                                  backgroundColor: selectedBetButton(
+                                    player.playerId,
+                                    "Over"
+                                  )
+                                    ? "green"
+                                    : "transparent",
+                                  padding: "0.5rem",
+                                  fontFamily: "monospace",
+                                  border: "none",
+                                  cursor: "pointer",
+                                  borderRadius: "0 0 1rem 0",
+                                }}
+                              >
+                                ↑ Over
+                              </button>
+                            </Box>
                           </Box>
-                        </Box>
-                      ))}
+                        ))}
+                    </Box>
                   </Box>
                 </Box>
               </Box>
-            </Box>
-          );
-        })()}
-      
-        {/* ------Lineups Bar Popup Display------ */}
-        {Object.values(lineup).flat().length >= 1 && 
-        Object.values(lineup).flat().length <= 6 && (
+            );
+          })()}
 
-          <Lineups
-            lineup={Object.values(lineup).flat()}
-            expand={() => setShowLineups(true)}
-            onSubmit={submitLineup}
-            pickUpdate={userPickUpdate}
-            entryType={entryType}
-            setEntryType={setEntryType}
-            entryAmount={entryAmount}
-            setEntryAmount={setEntryAmount}
-          />
-        )}
+        {/* ------Lineups Bar Popup Display------ */}
+        {Object.values(lineup).flat().length >= 1 &&
+          Object.values(lineup).flat().length <= 6 && (
+            <Lineups
+              lineup={Object.values(lineup).flat()}
+              expand={() => setShowLineups(true)}
+              onSubmit={submitLineup}
+              pickUpdate={userPickUpdate}
+              entryType={entryType}
+              setEntryType={setEntryType}
+              entryAmount={entryAmount}
+              setEntryAmount={setEntryAmount}
+            />
+          )}
 
         {showLineupBar && (
           <Lineups
@@ -1340,7 +1344,7 @@ function Dashboard() {
             ? "sticky top-0"
             : "hidden"
         }`}
-        sx={{ 
+        sx={{
           backgroundColor: "rgba(0, 0, 0, 0.3)",
           position: "sticky",
           alignSelf: "flex-start",
@@ -1352,19 +1356,22 @@ function Dashboard() {
         }}
       >
         {/* Earnings */}
-        <Box className=" text-white rounded-t-lg p-4 flex flex-col items-center justify-center h-1/3"
+        <Box
+          className=" text-white rounded-t-lg p-4 flex flex-col items-center justify-center h-1/3"
           sx={{
             height: "20em",
           }}
         >
-          <Typography className="text-xl font-bold mb-2"
+          <Typography
+            className="text-xl font-bold mb-2"
             sx={{
               fontFamily: "monospace",
               textAlign: "center",
               color: "white",
               fontSize: "1.5rem",
               fontWeight: "bold",
-            }}>
+            }}
+          >
             Earnings
           </Typography>
           <div className="w-24 h-24 rounded-full border-8 border-gray-700 flex items-center justify-center mb-2">
@@ -1458,6 +1465,12 @@ function Dashboard() {
             </button>
           </div>
         </div>
+        {/* Modal */}
+        <CenteredModal
+          isOpen={isModalOpen}
+          message={modalMessage}
+          onClose={() => setIsModalOpen(false)}
+        />
       </Box>
     </Box>
   );

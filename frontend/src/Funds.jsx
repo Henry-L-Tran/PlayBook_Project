@@ -52,7 +52,6 @@ function Funds() {
       return;
     }
 
-    // Information Parameters to Send to Backend
     const requestInfo = {
       email: user.email,
       card_type: user.payment_info.card_type,
@@ -72,13 +71,17 @@ function Funds() {
       );
 
       if (response.status === 200) {
-        alert("Card Information Saved");
+        setModalMessage("Card Information Saved");
+        setIsModalOpen(true);
         getUserData();
       } else {
-        alert("Failed to Save Card Information");
+        setModalMessage("Failed to Save Card Information");
+        setIsModalOpen(true);
       }
     } catch (error) {
       console.error("Error Adding Card Information:", error);
+      setModalMessage("Failed to Save Card Information");
+      setIsModalOpen(true);
     }
   };
 

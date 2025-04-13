@@ -8,10 +8,12 @@ import {
   Typography,
   Box,
 } from "@mui/material";
-
+import CenteredModal from "./utilities/CenteredModal";
 
 // Register Component for User Registration
 function Register() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   // State to Track User Input for Registration Form Data
   const [registerData, setRegisterData] = useState({
@@ -32,10 +34,8 @@ function Register() {
     },
   });
 
-
   // React Router Navigation
   const navigate = useNavigate();
-
 
   // Check Backend Connection
   useEffect(() => {
@@ -51,7 +51,6 @@ function Register() {
     backendCheck();
   }, []);
 
-
   // Function to Handle User Input Changes for registerData
   const handleUserInput = (e) => {
     const { name, value } = e.target;
@@ -62,9 +61,9 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    // If Password and Confirm Password Don't match, Show Alert
     if (registerData.password !== registerData.confirm_password) {
-      alert("Passwords do not match!");
+      setModalMessage("Passwords do not match!");
+      setIsModalOpen(true);
       return;
     }
 
@@ -76,39 +75,49 @@ function Register() {
       });
 
       if (response.status === 200) {
-        console.log("Registration Successful");
-        navigate("/login");
+        setModalMessage("Registration Successful!");
+        setIsModalOpen(true);
+
+        // Wait a bit before redirecting to login
+        setTimeout(() => {
+          setIsModalOpen(false);
+          navigate("/login");
+        }, 2000); // 2 seconds delay for user to see the message
       } else {
-        console.log("Registration Failed");
+        setModalMessage("Registration Failed");
+        setIsModalOpen(true);
       }
     } catch (error) {
-      console.error("Registration Failed:", error);
+      setModalMessage("Registration Failed");
+      setIsModalOpen(true);
     }
   };
 
-
   return (
-
     // Fullscreen Container For Register Page
-    <Box className="flex items-center flex-col justify-center min-h-screen"
+    <Box
+      className="flex items-center flex-col justify-center min-h-screen"
       sx={{
         position: "absolute",
-        top: "0", left: "0", right: "0", 
+        top: "0",
+        left: "0",
+        right: "0",
         width: "100%",
         minHeight: "100vh",
         display: "flex",
-        backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('/images/playbook_background2.png')",
+        backgroundImage:
+          "linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('/images/playbook_background2.png')",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         overflowY: "auto",
-      }}>
-      
+      }}
+    >
       {/* Logo Picture at the Top Center of the Page */}
       <img
         src="/images/logo.png"
         alt="PlayBook Logo"
         style={{
-          width: "110px", 
+          width: "110px",
           height: "110px",
           alignSelf: "center",
           marginTop: "5rem",
@@ -117,21 +126,18 @@ function Register() {
       />
 
       {/* Full Registration Card Container */}
-      <Card 
-        className="w-full sm:w-3/5" 
+      <Card
+        className="w-full sm:w-3/5"
         variant="outlined"
         sx={{
           width: "36rem",
           backgroundColor: "rgba(0, 0, 0, 0.3)",
           marginTop: "-3rem",
           marginBottom: "8rem",
-          
         }}
-        >
-
+      >
         {/* Register Box Container Upper Header For Title */}
         <CardContent className="border-3 border-white rounded-md">
-
           {/* PlayBook Text */}
           <Typography
             className="text-center py-8 text-white"
@@ -147,7 +153,6 @@ function Register() {
             onSubmit={handleRegister}
             className="space-y-4 px-2 flex flex-col gap-4"
           >
-
             {/* First Name Container Input */}
             <TextField
               label="First Name"
@@ -155,15 +160,15 @@ function Register() {
               fullWidth
               value={registerData.first_name}
               onChange={handleUserInput}
-              sx={{ 
+              sx={{
                 marginBottom: "2rem",
                 "& label.Mui-focused": { color: "white" },
-                "& input": { color: "white" }, 
+                "& input": { color: "white" },
                 "& .MuiOutlinedInput-root": {
-                  "& fieldset": { borderColor: "white" }, 
-                  "&:hover fieldset": { borderColor: "gray" }, 
-                  "&.Mui-focused fieldset": { borderColor: "white" }, 
-               },
+                  "& fieldset": { borderColor: "white" },
+                  "&:hover fieldset": { borderColor: "gray" },
+                  "&.Mui-focused fieldset": { borderColor: "white" },
+                },
               }}
             />
 
@@ -174,15 +179,15 @@ function Register() {
               fullWidth
               value={registerData.last_name}
               onChange={handleUserInput}
-              sx={{ 
+              sx={{
                 marginBottom: "2rem",
                 "& label.Mui-focused": { color: "white" },
-                "& input": { color: "white" }, 
+                "& input": { color: "white" },
                 "& .MuiOutlinedInput-root": {
-                  "& fieldset": { borderColor: "white" }, 
-                  "&:hover fieldset": { borderColor: "gray" }, 
-                  "&.Mui-focused fieldset": { borderColor: "white" }, 
-               },
+                  "& fieldset": { borderColor: "white" },
+                  "&:hover fieldset": { borderColor: "gray" },
+                  "&.Mui-focused fieldset": { borderColor: "white" },
+                },
               }}
             />
 
@@ -194,15 +199,15 @@ function Register() {
               fullWidth
               value={registerData.email}
               onChange={handleUserInput}
-              sx={{ 
+              sx={{
                 marginBottom: "2rem",
                 "& label.Mui-focused": { color: "white" },
-                "& input": { color: "white" }, 
+                "& input": { color: "white" },
                 "& .MuiOutlinedInput-root": {
-                  "& fieldset": { borderColor: "white" }, 
-                  "&:hover fieldset": { borderColor: "gray" }, 
-                  "&.Mui-focused fieldset": { borderColor: "white" }, 
-               },
+                  "& fieldset": { borderColor: "white" },
+                  "&:hover fieldset": { borderColor: "gray" },
+                  "&.Mui-focused fieldset": { borderColor: "white" },
+                },
               }}
             />
 
@@ -214,15 +219,15 @@ function Register() {
               fullWidth
               value={registerData.password}
               onChange={handleUserInput}
-              sx={{ 
+              sx={{
                 marginBottom: "2rem",
                 "& label.Mui-focused": { color: "white" },
-                "& input": { color: "white" }, 
+                "& input": { color: "white" },
                 "& .MuiOutlinedInput-root": {
-                  "& fieldset": { borderColor: "white" }, 
-                  "&:hover fieldset": { borderColor: "gray" }, 
-                  "&.Mui-focused fieldset": { borderColor: "white" }, 
-               },
+                  "& fieldset": { borderColor: "white" },
+                  "&:hover fieldset": { borderColor: "gray" },
+                  "&.Mui-focused fieldset": { borderColor: "white" },
+                },
               }}
             />
 
@@ -234,15 +239,15 @@ function Register() {
               fullWidth
               value={registerData.confirm_password}
               onChange={handleUserInput}
-              sx={{ 
+              sx={{
                 marginBottom: "2rem",
                 "& label.Mui-focused": { color: "white" },
-                "& input": { color: "white" }, 
+                "& input": { color: "white" },
                 "& .MuiOutlinedInput-root": {
-                  "& fieldset": { borderColor: "white" }, 
-                  "&:hover fieldset": { borderColor: "gray" }, 
-                  "&.Mui-focused fieldset": { borderColor: "white" }, 
-               },
+                  "& fieldset": { borderColor: "white" },
+                  "&:hover fieldset": { borderColor: "gray" },
+                  "&.Mui-focused fieldset": { borderColor: "white" },
+                },
               }}
             />
 
@@ -253,15 +258,15 @@ function Register() {
               fullWidth
               value={registerData.address}
               onChange={handleUserInput}
-              sx={{ 
+              sx={{
                 marginBottom: "2rem",
                 "& label.Mui-focused": { color: "white" },
-                "& input": { color: "white" }, 
+                "& input": { color: "white" },
                 "& .MuiOutlinedInput-root": {
-                  "& fieldset": { borderColor: "white" }, 
-                  "&:hover fieldset": { borderColor: "gray" }, 
-                  "&.Mui-focused fieldset": { borderColor: "white" }, 
-               },
+                  "& fieldset": { borderColor: "white" },
+                  "&:hover fieldset": { borderColor: "gray" },
+                  "&.Mui-focused fieldset": { borderColor: "white" },
+                },
               }}
             />
 
@@ -274,21 +279,20 @@ function Register() {
               value={registerData.birthday}
               onChange={handleUserInput}
               InputLabelProps={{ shrink: true }}
-              sx={{ 
+              sx={{
                 marginBottom: "2rem",
                 "& label.Mui-focused": { color: "white" },
-                "& input": { color: "white" }, 
+                "& input": { color: "white" },
                 "& .MuiOutlinedInput-root": {
-                  "& fieldset": { borderColor: "white" }, 
-                  "&:hover fieldset": { borderColor: "gray" }, 
-                  "&.Mui-focused fieldset": { borderColor: "white" }, 
-               },
+                  "& fieldset": { borderColor: "white" },
+                  "&:hover fieldset": { borderColor: "gray" },
+                  "&.Mui-focused fieldset": { borderColor: "white" },
+                },
               }}
             />
 
             {/* Register Button and "Back to Login Button" Container */}
             <div className="flex flex-col gap-4 mb-4">
-
               {/* Register Button */}
               <Button
                 type="submit"
@@ -328,6 +332,12 @@ function Register() {
           </form>
         </CardContent>
       </Card>
+      <CenteredModal
+        isOpen={isModalOpen}
+        message={modalMessage}
+        onClose={() => setIsModalOpen(false)}
+        autoClose={true}
+      />
     </Box>
   );
 }
