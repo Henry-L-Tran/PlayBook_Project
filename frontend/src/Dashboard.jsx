@@ -9,6 +9,7 @@ import Lineups from "./Lineups";
 import { calculatePayoutMultiplier } from "./payoutMultiplier";
 import { format } from "date-fns";
 import SearchBar from "./SearchBar";
+import Valorant from "./Valorant";
 import "./Dashboard.css";
 import {
   LineChart,
@@ -518,6 +519,7 @@ function Dashboard() {
               position: "relative",
               minHeight: "100vh",
             }}
+            
           >
             {/* TESTING SEARCH BAR COMPONENT TEMPORARILY HERE */}
             <Box
@@ -1305,6 +1307,18 @@ function Dashboard() {
             </Box>
           );
         })()}
+
+        {activeCategoryTab === "VAL" && (
+          <Box className="flex flex-col w-full h-full" 
+            sx={{
+              overflow: "visible", 
+              position: "relative", 
+              minHeight: "100vh" 
+            }}>
+              {/* This is where the new Valorant component is rendered */}
+              <Valorant />
+            </Box>
+          )}
       
         {/* ------Lineups Bar Popup Display------ */}
         {Object.values(lineup).flat().length >= 1 && 
