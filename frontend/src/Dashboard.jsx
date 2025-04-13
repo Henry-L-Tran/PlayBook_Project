@@ -1217,7 +1217,6 @@ function Dashboard() {
                   </Box>
                 </Box>
               </Box>
-            </Box>
           );
         })()}
 
@@ -1233,10 +1232,6 @@ function Dashboard() {
             </Box>
           )}
       
-        {/* ------Lineups Bar Popup Display------ */}
-        {Object.values(lineup).flat().length >= 1 && 
-        Object.values(lineup).flat().length <= 6 && (
-
         {/* ------Lineups Bar Popup Display------ */}
         {Object.values(lineup).flat().length >= 1 &&
           Object.values(lineup).flat().length <= 6 && (

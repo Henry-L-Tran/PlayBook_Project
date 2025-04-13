@@ -456,8 +456,8 @@ def fetch_val_live_matches():
         except Exception as e:
             print("Error retrieving live matches:", e)
 
-        # Update the score every 30 seconds
-        time.sleep(30)
+        # Update the score every 15 seconds
+        time.sleep(15)
 
 threading.Thread(target=fetch_val_live_matches, daemon=True).start()
 

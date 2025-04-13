@@ -63,80 +63,104 @@ function Valorant() {
             gutterBottom
             sx={{ fontFamily: "monospace" }}
           >
-            Live Scores
+            VALORANT Live Scores
           </Typography>
-          {liveMatches.map((match, index) => (
-            <Box
-              key={index}
-              sx={{
-                backgroundColor: "rgba(0, 0, 0, 0.5)",
-                border: "1px solid red",
-                borderRadius: "1rem",
-                padding: "1rem",
-                marginBottom: "1rem",
-              }}
-            >
+          {liveMatches.map((match, index) => {
+            // Choose team1's round value: if team1_round_ct returns "N/A", use team1_round_t; otherwise use team1_round_ct.
+            const team1Round =
+              match.team1_round_ct === "N/A"
+                ? match.team1_round_t
+                : match.team1_round_ct;
+            // Do the same for team2.
+            const team2Round =
+              match.team2_round_ct === "N/A"
+                ? match.team2_round_t
+                : match.team2_round_ct;
+            return (
               <Box
+                key={index}
                 sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
+                  backgroundColor: "rgba(0, 0, 0, 0.5)",
+                  border: "1px solid red",
+                  borderRadius: "1rem",
+                  padding: "1rem",
+                  marginBottom: "1rem",
                 }}
               >
-                {/* Left container for team1 logo */}
-                <Box sx={{ width: "50px", position: "relative", height: "50px" }}>
-                  <Box
-                    component="img"
-                    src={match.team1_logo}
-                    alt={`${match.team1} logo`}
-                    sx={{
-                      width: "50px",
-                      height: "50px",
-                      objectFit: "contain",
-                      position: "absolute",
-                      top: "50%",
-                      transform: "translateY(-50%)",
-                      left: "30px",
-                    }}
-                  />
-                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  {/* Left container for team1 logo */}
+                  <Box sx={{ width: "50px", position: "relative", height: "50px" }}>
+                    <Box
+                      component="img"
+                      src={match.team1_logo}
+                      alt={`${match.team1} logo`}
+                      sx={{
+                        width: "50px",
+                        height: "50px",
+                        objectFit: "contain",
+                        position: "absolute",
+                        top: "50%",
+                        transform: "translateY(-50%)",
+                        left: "30px",
+                      }}
+                    />
+                  </Box>
 
-                {/* Center: Live Match Information */}
-                <Box sx={{ textAlign: "center", flex: 1, mx: 2 }}>
-                  <Typography variant="h5" sx={{ fontFamily: "monospace", fontWeight: "bold" }}>
-                    {match.team1} vs {match.team2}
-                  </Typography>
-                  <Typography variant="h6" sx={{ fontFamily: "monospace", fontWeight: "bold", mt: 1 }}>
-                    Score: {match.score1} - {match.score2}
-                  </Typography>
-                  <Typography variant="body2" sx={{ fontFamily: "monospace", mt: 1 }}>
-                    Map: {match.current_map}
-                  </Typography>
-                  <Typography variant="caption" sx={{ fontFamily: "monospace", mt: 0.5 }}>
-                    Map Score: {match.team1_round_ct} - {match.team2_round_t}
-                  </Typography>
-                </Box>
+                  {/* Center: Live Match Information */}
+                  <Box sx={{ textAlign: "center", flex: 1, mx: 2 }}>
+                    <Typography
+                      variant="h5"
+                      sx={{ fontFamily: "monospace", fontWeight: "bold" }}
+                    >
+                      {match.team1} vs {match.team2}
+                    </Typography>
+                    <Typography
+                      variant="h6"
+                      sx={{ fontFamily: "monospace", fontWeight: "bold", mt: 1 }}
+                    >
+                      Score: {match.score1} - {match.score2}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      sx={{ fontFamily: "monospace", mt: 1 }}
+                    >
+                      Map: {match.current_map}
+                    </Typography>
+                    <Typography
+                      variant="caption"
+                      sx={{ fontFamily: "monospace", mt: 0.5 }}
+                    >
+                      Map Score: {team1Round} - {team2Round}
+                    </Typography>
+                  </Box>
 
-                {/* Right container for team2 logo */}
-                <Box sx={{ width: "50px", position: "relative", height: "50px" }}>
-                  <Box
-                    component="img"
-                    src={match.team2_logo}
-                    alt={`${match.team2} logo`}
-                    sx={{
-                      width: "50px",
-                      height: "50px",
-                      objectFit: "contain",
-                      position: "absolute",
-                      top: "50%",
-                      transform: "translateY(-50%)",
-                      right: "30px",
-                    }}
-                  />
+                  {/* Right container for team2 logo */}
+                  <Box sx={{ width: "50px", position: "relative", height: "50px" }}>
+                    <Box
+                      component="img"
+                      src={match.team2_logo}
+                      alt={`${match.team2} logo`}
+                      sx={{
+                        width: "50px",
+                        height: "50px",
+                        objectFit: "contain",
+                        position: "absolute",
+                        top: "50%",
+                        transform: "translateY(-50%)",
+                        right: "30px",
+                      }}
+                    />
+                  </Box>
                 </Box>
               </Box>
-            </Box>
-          ))}
+            );
+          })}
         </Box>
       )}
 
