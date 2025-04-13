@@ -6,6 +6,7 @@ function Valorant() {
   // State for live matches and upcoming matches
   const [liveMatches, setLiveMatches] = useState([]);
   const [upcomingMatches, setUpcomingMatches] = useState([]);
+  const [matchResults, setMatchResults] = useState([]);
 
   // Fetch live matches from the backend endpoint
   useEffect(() => {
@@ -51,6 +52,28 @@ function Valorant() {
     const interval2 = setInterval(fetchUpcomingMatches, 30000);
     return () => clearInterval(interval2);
   }, []);
+
+    // Fetch match results from the backend endpoint
+    useEffect(() => {
+        const fetchMatchResults = async () => {
+          try {
+            const response = await fetch("http://localhost:8000/VALROANT/results");
+            const data = await response.json();
+            if (data.message) {
+              setMatchResults([]);
+            } else {
+              const matches = data.gameData ? data.gameData : data;
+              setMatchResults(matches);
+            }
+          } catch (error) {
+            console.error("Error fetching upcoming matches:", error);
+          }
+        };
+    
+        fetchMatchResults();
+        const interval2 = setInterval(fetchMatchResults, 30000);
+        return () => clearInterval(interval2);
+      }, []);
 
   return (
     <Box sx={{ padding: "2rem" }}>
@@ -215,6 +238,60 @@ function Valorant() {
           sx={{ fontFamily: "monospace" }}
         >
           No upcoming matches available.
+        </Typography>
+      )}
+
+        {/* Completed Matches Section: This section always appears */}
+        <Typography
+            variant="h5"
+            align="center"
+            gutterBottom
+            sx={{ fontFamily: "monospace", mt: liveMatches.length > 0 ? 4 : 0 }}
+      >
+        Recently Completed
+      </Typography>
+      {matchResults.length > 0 ? (
+        matchResults.map((match, index) => (
+          <Box
+            key={index}
+            sx={{
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
+              border: "1px solid green",
+              borderRadius: "1rem",
+              padding: "1rem",
+              marginBottom: "1rem",
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+
+              {/* Center: Upcoming Match Information */}
+              <Box sx={{ textAlign: "center", flex: 1, mx: 2 }}>
+                <Typography variant="h5" sx={{ fontFamily: "monospace", fontWeight: "bold" }}>
+                  {match.team1} vs {match.team2}
+                </Typography>
+                <Typography variant="h6" sx={{ fontFamily: "monospace", mt: 1 }}>
+                  Score: {match.score1} - {match.score2}
+                </Typography>
+                <Typography variant="caption" sx={{ fontFamily: "monospace", mt: 0.5 }}>
+                  Match Completed: {match.time_completed}
+                </Typography>
+              </Box>
+            </Box>
+          </Box>
+        ))
+      ) : (
+        <Typography
+          variant="h6"
+          align="center"
+          sx={{ fontFamily: "monospace" }}
+        >
+          No recent matches available.
         </Typography>
       )}
     </Box>
