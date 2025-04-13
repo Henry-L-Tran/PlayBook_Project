@@ -86,7 +86,7 @@ function Dashboard() {
     return `${minutes}:${seconds}`;
   };
 
-  // Function to Handle the Category Tab Change (NBA, NFL, LoL, VAL)
+  // Function to Handle the Category Tab Change (NBA, NFL, VAL)
   const handleCategoryTabChange = (event, newValue) => {
     setActiveCategoryTab(newValue);
   };
@@ -430,7 +430,7 @@ function Dashboard() {
           border: "1px solid gray",
         }}
       >
-        {/* Tabs (NBA, NFL, LoL, VAL) */}
+        {/* Tabs (NBA, NFL, VAL) */}
         <Tabs
           value={activeCategoryTab}
           onChange={handleCategoryTabChange}
@@ -467,8 +467,8 @@ function Dashboard() {
           }}
         >
 
-          {/*Each Tab (NBA, NFL, LoL, VAL) */}
-          {["NBA", "NFL", "LoL", "VAL"].map((category) => (
+          {/*Each Tab (NBA, NFL, VAL) */}
+          {["NBA", "NFL", "VAL"].map((category) => (
           <Tab
             key={category}
             label={category}
