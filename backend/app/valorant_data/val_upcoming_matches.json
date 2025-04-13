@@ -1,24 +1,24 @@
 [
     {
-        "team1": "Gen.G",
-        "team2": "Global Esports",
-        "flag1": "flag_kr",
-        "flag2": "flag_in",
-        "time_until_match": "40m from now",
-        "match_series": "Group Stage: Week 4",
-        "match_event": "Champions Tour 2025: Pacific Stage 1",
-        "unix_timestamp": "2025-04-13 10:00:00",
-        "match_page": "https://www.vlr.gg/458826/gen-g-vs-global-esports-champions-tour-2025-pacific-stage-1-w4"
-    },
-    {
         "team1": "EDward Gaming",
         "team2": "FunPlus Phoenix",
         "flag1": "flag_cn",
         "flag2": "flag_cn",
-        "time_until_match": "1h 40m from now",
+        "time_until_match": "55m from now",
         "match_series": "Group Stage: Week 5",
         "match_event": "Champions Tour 2025: China Stage 1",
         "unix_timestamp": "2025-04-13 11:00:00",
         "match_page": "https://www.vlr.gg/450076/edward-gaming-vs-funplus-phoenix-champions-tour-2025-china-stage-1-w5"
+    },
+    {
+        "team1": "Gen.G",
+        "team2": "Global Esports",
+        "flag1": "flag_kr",
+        "flag2": "flag_in",
+        "time_until_match": "1h 25m from now",
+        "match_series": "Group Stage: Week 4",
+        "match_event": "Champions Tour 2025: Pacific Stage 1",
+        "unix_timestamp": "2025-04-13 11:30:00",
+        "match_page": "https://www.vlr.gg/458826/gen-g-vs-global-esports-champions-tour-2025-pacific-stage-1-w4"
     }
 ]
