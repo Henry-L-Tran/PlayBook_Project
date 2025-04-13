@@ -58,18 +58,19 @@ function Dashboard() {
       const user = JSON.parse(localStorage.getItem("currUser"));
       if (user?.email) {
         try {
-          const response = await fetch(`http://localhost:8000/funds/user/${user.email}`);
+          const response = await fetch(
+            `http://localhost:8000/funds/user/${user.email}`
+          );
           const updatedUser = await response.json();
 
           // Updates localStorage with the Updated User Data
           localStorage.setItem("currUser", JSON.stringify(updatedUser));
           setCurrUser(updatedUser);
-        }
-        catch (error) {
+        } catch (error) {
           console.error("Error fetching updated user data: ", error);
         }
       }
-    }
+    };
     fetchUpdatedUser();
   }, []);
 
@@ -396,402 +397,273 @@ function Dashboard() {
         }
       }, 600);
 
-    console.log("Selected Player: ", player);
-    };
-  }
+      console.log("Selected Player: ", player);
+    }
+  };
 
   return (
-    
-    // Main Dashboard Container 
-    <Box className="flex w-full overflow-visible justify-center items-center"
+    // Main Dashboard Container
+    <Box
+      className="flex w-full overflow-visible justify-center items-center flex-col md:flex-row"
       sx={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "center",
         gap: "2%",
-      }}>
-
+      }}
+    >
       {/* Game Schedule Container */}
-      <Box className="TESTING"
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "100%",
-          maxWidth: "100%",
-        }}
-      >
-      
-      {/* Outer Scoreboard Container */}
-      <Box
-        className="w-full max-w-full p-2 md:p-8 text-white"
-        sx={{
-          maxWidth: "1200px",
-          backgroundColor: "rgba(0, 0, 0, 0.3)",
-          borderRadius: "1rem",
-          border: "1px solid gray",
-        }}
-      >
-        {/* Tabs (NBA, NFL, VAL) */}
-        <Tabs
-          value={activeCategoryTab}
-          onChange={handleCategoryTabChange}
-          variant="fullWidth"
-          scrollButtons="auto"
-          allowScrollButtonsMobile
-          textColor="inherit"
-          slotProps={{
-            indicator: {
-              sx: {
-                backgroundColor: "white",
-                height: "0.25rem",
-                borderRadius: "1rem",
-                marginTop: "1rem",
-              },
-            },
-            scrollButtons: {
-              sx: {
-                color: "white",
-              },
-            },
-          }}
+      <Box className="TESTING flex flex-col w-full  items-center justify-center md:w-2/3">
+        {/* Outer Scoreboard Container */}
+        <Box
+          className="w-full p-2 md:p-8 text-white"
           sx={{
-            marginTop: "1rem",
-            width: "100%",
-            maxWidth: "100%",
-            "& .MuiTabs-flexContainer": {
-              justifyContent: { xs: "flex-start", md: "center" },
-            },
-            "& .MuiTabs-scroller": {
-              width: "100%",
-              overflowX: "auto",
-            },
+            maxWidth: "1200px",
+            backgroundColor: "rgba(0, 0, 0, 0.3)",
+            borderRadius: "1rem",
+            border: "1px solid gray",
           }}
         >
-
-          {/*Each Tab (NBA, NFL, VAL) */}
-          {["NBA", "NFL", "VAL"].map((category) => (
-          <Tab
-            key={category}
-            label={category}
-            value={category}
-            disableRipple
-            sx={{
-              mx: { xs: 0.5, sm: 1, md: 3 },
-              px: { xs: 1, sm: 2, md: 2 },
-              fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
-              fontFamily: "monospace",
-              color: "white",
-              minWidth: "fit-content",
-              outline: "none",
-              "&.Mui-selected": {
-                color: "white",
-                fontWeight: "bold",
-                outline: "none",
+          {/* Tabs (NBA, NFL, VAL) */}
+          <Tabs
+            value={activeCategoryTab}
+            onChange={handleCategoryTabChange}
+            variant="fullWidth"
+            scrollButtons="auto"
+            allowScrollButtonsMobile
+            textColor="inherit"
+            slotProps={{
+              indicator: {
+                sx: {
+                  backgroundColor: "white",
+                  height: "0.25rem",
+                  borderRadius: "1rem",
+                  marginTop: "1rem",
+                },
               },
-              "&:focus": {
-                outline: "none",
-                color: "white",
+              scrollButtons: {
+                sx: {
+                  color: "white",
+                },
               },
             }}
-          />
-          ))}
-        </Tabs>
-
-        {/* ------NBA Games Dashboard Display------ */}
-        {activeCategoryTab === "NBA" && (
-          <Box className="flex flex-col w-full h-full"
             sx={{
-              overflow: "visible",
-              position: "relative",
-              minHeight: "100vh",
+              marginTop: "1rem",
+              width: "100%",
+              maxWidth: "100%",
+              "& .MuiTabs-flexContainer": {
+                justifyContent: { xs: "flex-start", md: "center" },
+              },
+              "& .MuiTabs-scroller": {
+                width: "100%",
+                overflowX: "auto",
+              },
             }}
           >
-            {/* Search Bar Container */}
-            <Box
-              sx={{
-                position: "relative",
-                overflow: "visible",
-                minHeight: "6rem",
-              }}
-            >
-              {/* Search Bar Component to Show Players Playing Today */}
-              <SearchBar 
-                playersPlayingToday={nbaPlayerStats.filter((player) =>
-                  nbaLiveGames.gameData.some(
-                    (game) =>
-                      player.teamTriCode === game.awayTeam.teamTriCode ||
-                      player.teamTriCode === game.homeTeam.teamTriCode
-                  )
-                )}
-                // Brings the User to the Player's Betting Lines Popup
-                playerSelected={handlePlayerClick}
-              />
-            </Box>
-
-            {nbaLiveGames.gameData.length === 0 ? (
-              <Typography
+            {/*Each Tab (NBA, NFL, VAL) */}
+            {["NBA", "NFL", "VAL"].map((category) => (
+              <Tab
+                key={category}
+                label={category}
+                value={category}
+                disableRipple
                 sx={{
-                  fontSize: "1.5rem",
+                  mx: { xs: 0.5, sm: 1, md: 3 },
+                  px: { xs: 1, sm: 2, md: 2 },
+                  fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
                   fontFamily: "monospace",
+                  color: "white",
+                  minWidth: "fit-content",
+                  outline: "none",
+                  "&.Mui-selected": {
+                    color: "white",
+                    fontWeight: "bold",
+                    outline: "none",
+                  },
+                  "&:focus": {
+                    outline: "none",
+                    color: "white",
+                  },
                 }}
-              > 
-                No Scheduled Games 
-              </Typography>
-            ) : (
-              nbaLiveGames.gameData.map((game, index) => (
+              />
+            ))}
+          </Tabs>
 
-                // Each Game Box
-                <Box
-                  key={index}
-                  onClick={() => {
+          {/* ------NBA Games Dashboard Display------ */}
+          {activeCategoryTab === "NBA" && (
+            <div className="flex flex-col w-full min-h-screen">
+              {/* Search Bar Container */}
+              <div className="relative overflow-visible min-h-24">
+                {/* Search Bar Component to Show Players Playing Today */}
+                <SearchBar
+                  playersPlayingToday={nbaPlayerStats.filter((player) =>
+                    nbaLiveGames.gameData.some(
+                      (game) =>
+                        player.teamTriCode === game.awayTeam.teamTriCode ||
+                        player.teamTriCode === game.homeTeam.teamTriCode
+                    )
+                  )}
+                  playerSelected={handlePlayerClick}
+                />
+              </div>
 
-                    // If the Game Hasn't Started, Show the Betting Lines Popup
-                    if (game.gameStatus === 3) {
-                      setnbaselectedGame(game);
-                      setShowBettingLines(true);
-                    }
-                  }}
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    gap: "2rem",
-                    padding: "2rem",
-                    backgroundColor: "rgba(0, 0, 0, 0.5)",
-                    borderRadius: "0.5rem",
-                    marginBottom: "1rem",
-                    alignItems: "flex-start",
-                    textAlign: "left",
-                    paddingLeft: "10rem",
-                    gridTemplateColumns: "80px 80px 200px 80px",
-                    cursor: "pointer",
-                    border: "1px solid gray",
-                  }}
-                >
-                  {/* Away Team Box */}
-                  <Box
-                    sx={{
-                      display: "grid",
-                      gridTemplateColumns: "80px 80px 240px 1fr",
-                      alignItems: "center",
+              {nbaLiveGames.gameData.length === 0 ? (
+                <Typography className="text-2xl font-mono">
+                  No Scheduled Games
+                </Typography>
+              ) : (
+                nbaLiveGames.gameData.map((game, index) => (
+                  // Each Game Box
+                  <div
+                    key={index}
+                    onClick={() => {
+                      if (game.gameStatus === 3) {
+                        setnbaselectedGame(game);
+                        setShowBettingLines(true);
+                      }
                     }}
+                    className="flex flex-col justify-center relative mb-4 p-4 md:p-8 md:pl-10 bg-black bg-opacity-50 rounded border border-gray-500 cursor-pointer"
                   >
-                    {/* Away Team Data */}
-                    <Typography
-                      variant="h6"
-                      sx={{
-                        color:
-                          game.gameStatus === 3 &&
-                          game.awayTeam.score > game.homeTeam.score
-                            ? "#10833C"
-                            : "white",
-                      }}
-                    >
-                      {" "}
-                      {game.awayTeam.teamTriCode}{" "}
-                    </Typography>
-
+                    {/* Game Status Display - Positioned Absolutely on the Right */}
+                    <div className="absolute mr-8 md:mr-24 right-0 flex flex-col items-end text-center">
                       <Typography
-                        sx={{
-                          fontWeight: "bold",
-                          fontSize: "0.75rem",
-                        }}
+                        className="text-base md:text-3xl font-bold font-mono text-right"
+                        fontSize={20}
                       >
-                        {" "}
-                        {game.awayTeam.wins} - {game.awayTeam.losses}{" "}
-                      </Typography>
-
-                      {/* Away Team Periods and Score */}
-                      <Box className="mt-2">
-                        <Box className="grid grid-cols-5 text-white gap-x-8 ml-40">
-                          
-                          {/* Away Team Periods and Score Display Shows Only When Game Starts or Finished */}
-                          {(game.gameStatus === 2 || game.gameStatus === 3) &&
-                            game.awayTeam.periods.map((period, index) => (
-                              <Box key={index} className="text-center">
-                                <Typography
-                                  sx={{
-                                    fontFamily: "monospace",
-                                    gridTemplateColumns: "repeat(4, 40px) 60px",
-                                  }}
-                                  className="text-center"
-                                >
-                                  {period.period}
-                                </Typography>
-
-                                <Typography
-                                  sx={{
-                                    fontFamily: "monospace",
-                                    fontSize: "0.75rem",
-                                  }}
-                                  className="text-center"
-                                >
-                                  {period.score}
-                                </Typography>
-                              </Box>
-                          ))}
-
-                          {/* Away Team Score Display Shows Only When Game Starts or Finished */}
-                          {(game.gameStatus === 2 || game.gameStatus === 3) && (
-                            <Typography
-                              sx={{
-                                fontFamily: "monospace",
-                                fontSize: "1.3rem",
-                                color:
-                                  game.gameStatus === 3 &&
-                                  game.awayTeam.score > game.homeTeam.score
-                                    ? "#10833C"
-                                    : "white",
-                              }}
-                            >
-                              {" "}
-                              {game.awayTeam.score}{" "}
-                            </Typography>
-                          )}
-                        </Box>
-                      </Box>
-                    </Box>
-
-                    {/* Home Team Box*/}
-                    <Box
-                      sx={{
-                        display: "grid",
-                        gridTemplateColumns: "80px 80px 240px 1fr",
-                        alignItems: "center",
-                      }}
-                    >
-                      {/* Home Team Data */}
-                      <Typography
-                        variant="h6"
-                        sx={{
-                          color:
-                            game.gameStatus === 3 &&
-                            game.homeTeam.score > game.awayTeam.score
-                              ? "#10833C"
-                              : "white",
-                        }}
-                      >
-                        {" "}
-                        {game.homeTeam.teamTriCode}
-                      </Typography>
-
-                      <Typography
-                        sx={{
-                          fontWeight: "bold",
-                          fontSize: "0.75rem",
-                        }}
-                      >
-                        {" "}
-                        {game.homeTeam.wins} - {game.homeTeam.losses}
-                      </Typography>
-
-                      {/* Home Team Periods and Score */}
-                      <Box className="mt-2">
-                        <Box className="grid grid-cols-5 text-white gap-x-8 ml-40">
-                          
-                          {/* Home Team Periods and Score Display Shows Only When Game Starts or Finished */}
-                          {(game.gameStatus === 2 || game.gameStatus === 3) &&
-                            game.homeTeam.periods.map((period, index) => (
-                              <Box key={index} className="text-center">
-                                <Typography
-                                  sx={{ fontFamily: "monospace" }}
-                                  className="text-center"
-                                >
-                                  {period.period}
-                                </Typography>
-
-                                <Typography
-                                  sx={{
-                                    fontFamily: "monospace",
-                                    fontSize: "0.75rem",
-                                  }}
-                                  className="text-center"
-                                >
-                                  {period.score}
-                                </Typography>
-                              </Box>
-                          ))}
-
-                          {/* Home Team Score Display Shows Only When Game Starts or Finished */}
-                          {(game.gameStatus === 2 || game.gameStatus === 3) && (
-                            <Typography
-                              sx={{
-                                fontFamily: "monospace",
-                                fontSize: "1.3rem",
-                                color:
-                                  game.gameStatus === 3 &&
-                                  game.homeTeam.score > game.awayTeam.score
-                                    ? "#10833C"
-                                    : "white",
-                              }}
-                            >
-                              {" "}
-                              {game.homeTeam.score}
-                            </Typography>
-                          )}
-                        </Box>
-                      </Box>
-                    </Box>
-
-                    {/* Game Status and Clock Box */}
-                    <Box
-                      sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        gap: "1rem",
-                        fontFamily: "monospace",
-                        marginTop: "1rem",
-                      }}
-                    >
-                      {/* Game Status Text */}
-                      <Typography
-                        sx={{
-                          fontSize: "1.2rem",
-                          fontWeight: "bold",
-                          fontFamily: "monospace",
-                          width: "20rem",
-                          marginLeft: "30rem",
-                          marginTop: "-12rem",
-                          textAlign: "right",
-                        }}
-                      >
-                        {" "}
                         {game.gameStatusText}
                       </Typography>
 
-                      {/* Game Clock Display */}
                       {game.gameStatus === 2 && (
                         <Typography
-                          sx={{
-                            fontSize: "1.2rem",
-                            fontFamily: "monospace",
-                            width: "20rem",
-                            marginLeft: "30rem",
-                            textAlign: "right",
-                          }}
+                          className="text-base md:text-xl font-mono text-right"
+                          fontSize={20}
                         >
-                          {" "}
                           {gameClockConverter(game.gameClock)}
                         </Typography>
                       )}
-                    </Box>
-                  </Box>
+                    </div>
+
+                    {/* Teams Container */}
+                    <div className="flex flex-col space-y-8 w-full ">
+                      {/* Away Team Row */}
+                      <div className="flex flex-wrap items-center ">
+                        <div className="w-3/4 flex justify-around ">
+                          {/* Team Code and Record */}
+                          <div className="flex items-center justify-center w-full gap-4 md:w-1/4 mb-2 md:mb-0 ">
+                            <Typography
+                              variant="h6"
+                              className={`mr-4 ${
+                                game.gameStatus === 3 &&
+                                game.awayTeam.score > game.homeTeam.score
+                                  ? "text-green-700"
+                                  : "text-white"
+                              }`}
+                            >
+                              {game.awayTeam.teamTriCode}
+                            </Typography>
+
+                            <Typography className="text-xs font-bold">
+                              {game.awayTeam.wins} - {game.awayTeam.losses}
+                            </Typography>
+                          </div>
+
+                          {/* Away Team Periods and Score */}
+                          {(game.gameStatus === 2 || game.gameStatus === 3) && (
+                            <div className="flex justify-between items-center w-full md:w-1/2 pl-0 md:pl-8">
+                              <div className="flex space-x-4 md:space-x-8">
+                                {game.awayTeam.periods.map((period, index) => (
+                                  <div key={index} className="text-center">
+                                    <Typography className="font-mono">
+                                      {period.period}
+                                    </Typography>
+                                    <Typography className="font-mono text-xs">
+                                      {period.score}
+                                    </Typography>
+                                  </div>
+                                ))}
+                              </div>
+                              {/* Away Team Score */}
+                              <Typography
+                                fontSize={20}
+                                className={`font-mono text-xl ml-4 ${
+                                  game.gameStatus === 3 &&
+                                  game.awayTeam.score > game.homeTeam.score
+                                    ? "text-green-700"
+                                    : "text-white"
+                                }`}
+                              >
+                                {game.awayTeam.score}
+                              </Typography>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Home Team Row */}
+                      <div className="flex flex-wrap items-center">
+                        <div className="w-3/4 flex justify-around ">
+                          {/* Team Code and Record */}
+                          <div className="flex items-center justify-center w-full gap-4 md:w-1/4 mb-2 md:mb-0">
+                            <Typography
+                              variant="h6"
+                              className={`mr-4 ${
+                                game.gameStatus === 3 &&
+                                game.homeTeam.score > game.awayTeam.score
+                                  ? "text-green-700"
+                                  : "text-white"
+                              }`}
+                            >
+                              {game.homeTeam.teamTriCode}
+                            </Typography>
+
+                            <Typography className="text-xs font-bold">
+                              {game.homeTeam.wins} - {game.homeTeam.losses}
+                            </Typography>
+                          </div>
+
+                          {/* Home Team Periods and Score */}
+                          {(game.gameStatus === 2 || game.gameStatus === 3) && (
+                            <div className="flex justify-between items-center w-full md:w-1/2 pl-0 md:pl-8">
+                              <div className="flex space-x-4 md:space-x-8">
+                                {game.homeTeam.periods.map((period, index) => (
+                                  <div key={index} className="text-center">
+                                    <Typography className="font-mono">
+                                      {period.period}
+                                    </Typography>
+                                    <Typography className="font-mono text-xs">
+                                      {period.score}
+                                    </Typography>
+                                  </div>
+                                ))}
+                              </div>
+
+                              <Typography
+                                fontSize={20}
+                                className={`font-mono text-xl ml-4 ${
+                                  game.gameStatus === 3 &&
+                                  game.homeTeam.score > game.awayTeam.score
+                                    ? "text-green-700"
+                                    : "text-white"
+                                }`}
+                              >
+                                {game.homeTeam.score}
+                              </Typography>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 ))
               )}
-            </Box>
+            </div>
           )}
 
           {/* ------NFL Games Dashboard Display (Visual Only)------ */}
           {activeCategoryTab === "NFL" && (
-            <Box className="flex flex-col w-full h-full" 
-              sx={{ 
-                overflow: "visible", 
-                position: "relative", 
-                minHeight: "100vh" 
+            <Box
+              className="flex flex-col w-full h-full"
+              sx={{
+                overflow: "visible",
+                position: "relative",
+                minHeight: "100vh",
               }}
             >
               {/* Search Bar Container (Visual Only) */}
@@ -803,10 +675,7 @@ function Dashboard() {
                 }}
               >
                 {/* Search Bar Component (Visual Only) */}
-                <SearchBar 
-                  playersPlayingToday={[]}
-                  playerSelected={() => {}}
-                />
+                <SearchBar playersPlayingToday={[]} playerSelected={() => {}} />
               </Box>
 
               {/* No Scheduled Games Message (Defaulted) */}
@@ -814,7 +683,7 @@ function Dashboard() {
                 sx={{
                   fontSize: "1.5rem",
                   fontFamily: "monospace",
-                  textAlign: "center"
+                  textAlign: "center",
                 }}
               >
                 No Scheduled Games
@@ -822,7 +691,6 @@ function Dashboard() {
             </Box>
           )}
         </Box>
-        
 
         {/* ------Betting Lines Popup Display------ */}
         {activeCategoryTab === "NBA" &&
@@ -1375,7 +1243,7 @@ function Dashboard() {
 
       {/* ------Right Sidebar Display------ */}
       <Box
-        className={`flex flex-col h-full rounded-2xl ${
+        className={`flex flex-col h-full rounded-2xl md:w-1/3 ${
           !(activeCategoryTab === "NBA" && showBettingLines && nbaSelectedGame)
             ? "sticky top-0"
             : "hidden"
@@ -1386,7 +1254,7 @@ function Dashboard() {
           alignSelf: "flex-start",
           height: "fit-content",
           overflowY: "auto",
-          width: "45%",
+          // width: "45%",
           marginRight: "2%",
           border: "1px solid gray",
           overflowX: "hidden",
@@ -1411,9 +1279,12 @@ function Dashboard() {
               fontWeight: "bold",
             }}
           >
-            {nbaLiveGames.gameDate && nbaLiveGames.gameDate !== "N/A" ?
-            format(new Date(`${nbaLiveGames.gameDate}T00:00:00`), "MMMM d, yyyy") :
-            ""}
+            {nbaLiveGames.gameDate && nbaLiveGames.gameDate !== "N/A"
+              ? format(
+                  new Date(`${nbaLiveGames.gameDate}T00:00:00`),
+                  "MMMM d, yyyy"
+                )
+              : ""}
           </Typography>
         </Box>
 
@@ -1426,7 +1297,8 @@ function Dashboard() {
         />
 
         {/* Earnings Container */}
-        <Box className=" text-white rounded-t-lg flex flex-col items-center h-1/3"
+        <Box
+          className=" text-white rounded-t-lg flex flex-col items-center h-1/3"
           sx={{
             height: "18em",
             position: "relative",
@@ -1434,22 +1306,24 @@ function Dashboard() {
           }}
         >
           {/* Earnings Header Text */}
-          <Typography className="text-xl font-bold"
+          <Typography
+            className="text-xl font-bold"
             sx={{
               fontFamily: "monospace",
               textAlign: "center",
               color: "white",
               fontSize: "1.3rem",
               fontWeight: "bold",
-            }}>
+            }}
+          >
             Earnings
           </Typography>
 
           {/* Earnings Pie Chart */}
-          <PieChart 
-            balance={currUser?.balance ?? 0} 
-            wins={currUser?.wins ?? 0} 
-            losses={currUser?.losses ?? 0} 
+          <PieChart
+            balance={currUser?.balance ?? 0}
+            wins={currUser?.wins ?? 0}
+            losses={currUser?.losses ?? 0}
           />
         </Box>
 
@@ -1463,9 +1337,8 @@ function Dashboard() {
 
         {/* Game Highlights Header Container */}
         <Box className=" text-white rounded-b-lg p-4 h-1/3">
-
           {/* Game Highlights Header Text */}
-          <Typography 
+          <Typography
             sx={{
               fontFamily: "monospace",
               textAlign: "center",
@@ -1479,7 +1352,6 @@ function Dashboard() {
 
           {/* 1st Game Highlights Container (1st Row) */}
           <Box className="flex justify-between items-center rounded p-2 pl-6 mb-2 mt-2">
-
             {/* 1st Game Highlights Text (1st Row) */}
             <Typography
               sx={{
@@ -1488,8 +1360,8 @@ function Dashboard() {
                 fontSize: "1.2rem",
                 fontWeight: "bold",
               }}
-            > 
-              NYK vs LAL 
+            >
+              NYK vs LAL
             </Typography>
 
             {/* 1st Game Highlights Button (1st Row)*/}
@@ -1515,7 +1387,6 @@ function Dashboard() {
 
           {/* 2nd Game Highlights Container (2nd Row) */}
           <Box className="flex justify-between items-center rounded p-2 pl-6 mb-2 mt-2">
-
             {/* 2nd Game Highlights Text (2nd Row) */}
             <Typography
               sx={{
@@ -1551,7 +1422,6 @@ function Dashboard() {
 
           {/* 3rd Game Highlights Container (3rd Row) */}
           <Box className="flex justify-between items-center rounded p-2 pl-6 mb-2 mt-2">
-
             {/* 3rd Game Highlights Text (3rd Row) */}
             <Typography
               sx={{
@@ -1591,7 +1461,6 @@ function Dashboard() {
           message={modalMessage}
           onClose={() => setIsModalOpen(false)}
         />
-
       </Box>
     </Box>
   );
