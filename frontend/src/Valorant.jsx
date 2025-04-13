@@ -7,7 +7,7 @@ function Valorant() {
   const [liveMatches, setLiveMatches] = useState([]);
   const [upcomingMatches, setUpcomingMatches] = useState([]);
 
-  // Fetch live matches from backend endpoint
+  // Fetch live matches from the backend endpoint
   useEffect(() => {
     const fetchLiveMatches = async () => {
       try {
@@ -16,6 +16,7 @@ function Valorant() {
         if (data.message) {
           setLiveMatches([]);
         } else {
+          // Use the gameData property if available, otherwise assume data is the array
           const scores = data.gameData ? data.gameData : data;
           setLiveMatches(scores);
         }
@@ -25,11 +26,11 @@ function Valorant() {
     };
 
     fetchLiveMatches();
-    const interval = setInterval(fetchLiveMatches, 30000);
-    return () => clearInterval(interval);
+    const interval1 = setInterval(fetchLiveMatches, 30000);
+    return () => clearInterval(interval1);
   }, []);
 
-  // Fetch upcoming matches from backend endpoint
+  // Fetch upcoming matches from the backend endpoint
   useEffect(() => {
     const fetchUpcomingMatches = async () => {
       try {
@@ -47,117 +48,29 @@ function Valorant() {
     };
 
     fetchUpcomingMatches();
-    const interval = setInterval(fetchUpcomingMatches, 30000);
-    return () => clearInterval(interval);
+    const interval2 = setInterval(fetchUpcomingMatches, 30000);
+    return () => clearInterval(interval2);
   }, []);
-
-  // If there are no live matches, do not render any section.
-  if (liveMatches.length === 0) {
-    return (
-      <Box sx={{ padding: "2rem" }}>
-        <Typography variant="h6" align="center" sx={{ fontFamily: "monospace" }}>
-          No Valorant live scores available.
-        </Typography>
-      </Box>
-    );
-  }
 
   return (
     <Box sx={{ padding: "2rem" }}>
-      {/* Live Scores Section */}
-      <Typography variant="h5" align="center" gutterBottom sx={{ fontFamily: "monospace" }}>
-        Live Scores
-      </Typography>
-      {liveMatches.map((match, index) => (
-        <Box
-          key={index}
-          sx={{
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-            border: "2px solid red",
-            borderRadius: "1rem",
-            padding: "1rem",
-            marginBottom: "1rem",
-          }}
-        >
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            {/* Left container for team1 logo */}
-            <Box sx={{ width: "50px", position: "relative", height: "50px" }}>
-              <Box
-                component="img"
-                src={match.team1_logo}
-                alt={`${match.team1} logo`}
-                sx={{
-                  width: "50px",
-                  height: "50px",
-                  objectFit: "contain",
-                  position: "absolute",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  left: "30px", // shift image outward without affecting container
-                }}
-              />
-            </Box>
-
-            {/* Center: Live Match Information */}
-            <Box sx={{ textAlign: "center", flex: 1, mx: 2 }}>
-              <Typography variant="h4" sx={{ fontFamily: "monospace", fontWeight: "bold" }}>
-                {match.team1} vs {match.team2}
-              </Typography>
-              <Typography variant="h5" sx={{ fontFamily: "monospace", fontWeight: "bold", mt: 1 }}>
-                Score: {match.score1} - {match.score2}
-              </Typography>
-              <Typography variant="body2" sx={{ fontFamily: "monospace", mt: 1 }}>
-                Map: {match.current_map}
-              </Typography>
-              <Typography variant="caption" sx={{ fontFamily: "monospace", mt: 0.5 }}>
-                Map Score: {match.team1_round_ct} - {match.team2_round_t}
-              </Typography>
-            </Box>
-
-            {/* Right container for team2 logo */}
-            <Box sx={{ width: "50px", position: "relative", height: "50px" }}>
-              <Box
-                component="img"
-                src={match.team2_logo}
-                alt={`${match.team2} logo`}
-                sx={{
-                  width: "50px",
-                  height: "50px",
-                  objectFit: "contain",
-                  position: "absolute",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  right: "30px",
-                }}
-              />
-            </Box>
-          </Box>
-        </Box>
-      ))}
-
-      {/* Upcoming Matches Section (only shows if there are live matches) */}
-      {upcomingMatches.length > 0 && (
-        <>
+      {/* Live Matches Section: Render only if liveMatches array has data */}
+      {liveMatches.length > 0 && (
+        <Box>
           <Typography
             variant="h5"
             align="center"
             gutterBottom
-            sx={{ fontFamily: "monospace", mt: 4 }}
+            sx={{ fontFamily: "monospace" }}
           >
-            Upcoming Matches
+            Live Scores
           </Typography>
-          {upcomingMatches.map((match, index) => (
+          {liveMatches.map((match, index) => (
             <Box
               key={index}
               sx={{
                 backgroundColor: "rgba(0, 0, 0, 0.5)",
-                border: "2px solid white",
+                border: "1px solid red",
                 borderRadius: "1rem",
                 padding: "1rem",
                 marginBottom: "1rem",
@@ -170,23 +83,115 @@ function Valorant() {
                   justifyContent: "space-between",
                 }}
               >
+                {/* Left container for team1 logo */}
+                <Box sx={{ width: "50px", position: "relative", height: "50px" }}>
+                  <Box
+                    component="img"
+                    src={match.team1_logo}
+                    alt={`${match.team1} logo`}
+                    sx={{
+                      width: "50px",
+                      height: "50px",
+                      objectFit: "contain",
+                      position: "absolute",
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                      left: "30px",
+                    }}
+                  />
+                </Box>
 
-                {/* Center: Upcoming Match Information */}
+                {/* Center: Live Match Information */}
                 <Box sx={{ textAlign: "center", flex: 1, mx: 2 }}>
                   <Typography variant="h5" sx={{ fontFamily: "monospace", fontWeight: "bold" }}>
                     {match.team1} vs {match.team2}
                   </Typography>
+                  <Typography variant="h6" sx={{ fontFamily: "monospace", fontWeight: "bold", mt: 1 }}>
+                    Score: {match.score1} - {match.score2}
+                  </Typography>
                   <Typography variant="body2" sx={{ fontFamily: "monospace", mt: 1 }}>
-                    {match.match_event}
+                    Map: {match.current_map}
                   </Typography>
                   <Typography variant="caption" sx={{ fontFamily: "monospace", mt: 0.5 }}>
-                    {match.time_until_match}
+                    Map Score: {match.team1_round_ct} - {match.team2_round_t}
                   </Typography>
+                </Box>
+
+                {/* Right container for team2 logo */}
+                <Box sx={{ width: "50px", position: "relative", height: "50px" }}>
+                  <Box
+                    component="img"
+                    src={match.team2_logo}
+                    alt={`${match.team2} logo`}
+                    sx={{
+                      width: "50px",
+                      height: "50px",
+                      objectFit: "contain",
+                      position: "absolute",
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                      right: "30px",
+                    }}
+                  />
                 </Box>
               </Box>
             </Box>
           ))}
-        </>
+        </Box>
+      )}
+
+      {/* Upcoming Matches Section: This section always appears */}
+      <Typography
+        variant="h5"
+        align="center"
+        gutterBottom
+        sx={{ fontFamily: "monospace", mt: liveMatches.length > 0 ? 4 : 0 }}
+      >
+        Upcoming Matches
+      </Typography>
+      {upcomingMatches.length > 0 ? (
+        upcomingMatches.map((match, index) => (
+          <Box
+            key={index}
+            sx={{
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
+              border: "2px solid white",
+              borderRadius: "1rem",
+              padding: "1rem",
+              marginBottom: "1rem",
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+
+              {/* Center: Upcoming Match Information */}
+              <Box sx={{ textAlign: "center", flex: 1, mx: 2 }}>
+                <Typography variant="h5" sx={{ fontFamily: "monospace", fontWeight: "bold" }}>
+                  {match.team1} vs {match.team2}
+                </Typography>
+                <Typography variant="body2" sx={{ fontFamily: "monospace", mt: 1 }}>
+                  {match.match_event}
+                </Typography>
+                <Typography variant="caption" sx={{ fontFamily: "monospace", mt: 0.5 }}>
+                  {match.time_until_match}
+                </Typography>
+              </Box>
+            </Box>
+          </Box>
+        ))
+      ) : (
+        <Typography
+          variant="h6"
+          align="center"
+          sx={{ fontFamily: "monospace" }}
+        >
+          No upcoming matches available.
+        </Typography>
       )}
     </Box>
   );
