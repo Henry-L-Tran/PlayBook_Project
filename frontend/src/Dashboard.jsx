@@ -474,7 +474,7 @@ function Dashboard() {
         >
 
           {/*Each Tab (NBA, NFL, VAL) */}
-          {["NBA", "NFL", "LoL", "VAL"].map((category) => (
+          {["NBA", "NFL", "VAL"].map((category) => (
           <Tab
             key={category}
             label={category}
