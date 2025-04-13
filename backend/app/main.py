@@ -1,4 +1,5 @@
 import os
+import re
 import json
 import requests
 import time
@@ -14,6 +15,7 @@ from nba_api.stats.static import players
 from nba_api.stats.endpoints import LeagueDashPlayerStats
 from app import lineups
 from vlrggapi.api.scrape import Vlr
+from valorantproapi import data as valdata
 
 app = FastAPI()
 app.include_router(lineups.router)
@@ -427,29 +429,143 @@ def nba_scores():
 # Get VALORANT upcoming matches from API
 def fetch_val_upcoming_matches():
     try:
-        # Retrieve upcoming matches
+        # Retrieve upcoming matches and filter them
         upcoming_matches = Vlr.vlr_upcoming_matches()
         filtered_matches = val_filter_matches(upcoming_matches)
         # Convert the result (a Python dictionary) to a JSON formatted string
-        with open("backend/app/valorant_data/val_upcoming_matches.json", "w") as file:
+        with open("app/valorant_data/val_upcoming_matches.json", "w") as file:
                 json.dump(filtered_matches, file, indent=4)
     except Exception as e:
         print("Error retrieving upcoming matches:", e)
 
+threading.Thread(target=fetch_val_upcoming_matches, daemon=True).start()
+
 # Get VALORANT current live matches from API
 def fetch_val_live_matches():
     try:
-        # Retrieve live matches
+        # Retrieve live matches and filter them
         live_Scores = Vlr.vlr_live_score()
         filtered_matches = val_filter_matches(live_Scores)
         # Write the result (a Python dictionary) to a JSON file
-        with open("backend/app/valorant_data/val_live_scores.json", "w") as file:
+        with open("app/valorant_data/val_live_scores.json", "w") as file:
             json.dump(filtered_matches, file, indent=4)
     except Exception as e:
         print("Error retrieving live matches:", e)
 
     # Update the score every 30 seconds
     time.sleep(30)
+
+threading.Thread(target=fetch_val_live_matches, daemon=True).start()
+
+# Retrieve most recent tier 1 match results
+def fetch_val_match_results():
+    try:
+        # Retrieve match results and filter them
+        match_results = Vlr.vlr_match_results()
+        filtered_matches = val_filter_matches(match_results)
+        # Write the result (a Python dictionary) to a JSON file
+        with open("app/valorant_data/val_match_results.json", "w") as file:
+            json.dump(filtered_matches, file, indent=4)
+    except Exception as e:
+        print("Error retrieving live matches:", e)
+
+threading.Thread(target=fetch_val_match_results, daemon=True).start()
+
+def fetch_val_player_kills():
+    try:
+        reg_pattern = r"^/(\d{6})/" # Regex pattern to get match_id
+
+        # Get match results and filter them
+        matches = Vlr.vlr_match_results()
+        filtered_matches = val_filter_matches(matches)
+        match_results = []
+
+        player_attrs = ['player_1', 'player_2', 'player_3', 'player_4', 'player_5']
+
+        # Loop through all matches
+        for match in filtered_matches:
+            # Grab match_id from vlr link
+            match_page = match["match_page"]
+            match_id_temp = re.search(reg_pattern, match_page)
+            match_id = match_id_temp.group(1)
+            
+            # Grab stats from first 2 maps
+            match_map_1 = valdata.Round(valdata.Match(match_id).rounds[0], match_id)
+            match_map_2 = valdata.Round(valdata.Match(match_id).rounds[1], match_id)
+
+            team1_players = {}
+            team2_players = {}
+
+            # Assign initial kills for both teams
+            for attr in player_attrs:
+                # Dynamically get the player object from team A using getatt.
+                player_a = getattr(match_map_1.team_a, attr)
+                key_a = player_a.name.lower()
+                team1_players[key_a] = int(player_a.kills)
+
+                # Similarly for team B.
+                player_b = getattr(match_map_1.team_b, attr)
+                key_b = player_b.name.lower()
+                team2_players[key_b] = int(player_b.kills)
+
+            # Add to the kills already recorded.
+            for attr in player_attrs:
+                player_a = getattr(match_map_2.team_a, attr)
+                key_a = player_a.name.lower()
+                team1_players[key_a] += int(player_a.kills)
+
+                player_b = getattr(match_map_2.team_b, attr)
+                key_b = player_b.name.lower()
+                team2_players[key_b] += int(player_b.kills)
+
+            # Append the matches players stats tot match_results
+            match_results.append(
+                {
+                    "match_id": match_id,
+
+
+                    "teama": match["team1"],
+                    "player1a": match_map_1.team_a.player_1.name,
+                    "player1a_kills": team1_players.get(match_map_1.team_a.player_1.name.lower()),
+
+                    "player2a": match_map_1.team_a.player_2.name,
+                    "player2a_kills": team1_players.get(match_map_1.team_a.player_2.name.lower()),
+
+                    "player3a": match_map_1.team_a.player_3.name,
+                    "player3a_kills": team1_players.get(match_map_1.team_a.player_3.name.lower()),
+
+                    "player4a": match_map_1.team_a.player_4.name,
+                    "player4a_kills": team1_players.get(match_map_1.team_a.player_4.name.lower()),
+
+                    "player5a": match_map_1.team_a.player_5.name,
+                    "player5a_kills": team1_players.get(match_map_1.team_a.player_5.name.lower()),
+
+
+                    "teamb": match["team2"],
+                    "player1b": match_map_1.team_b.player_1.name,
+                    "player1b_kills": team2_players.get(match_map_1.team_b.player_1.name.lower()),
+
+                    "player2b": match_map_1.team_b.player_2.name,
+                    "player2b_kills": team2_players.get(match_map_1.team_b.player_2.name.lower()),
+
+                    "player3b": match_map_1.team_b.player_3.name,
+                    "player3b_kills": team2_players.get(match_map_1.team_b.player_3.name.lower()),
+
+                    "player4b": match_map_1.team_b.player_4.name,
+                    "player4b_kills": team2_players.get(match_map_1.team_b.player_4.name.lower()),
+
+                    "player5b": match_map_1.team_b.player_5.name,
+                    "player5b_kills": team2_players.get(match_map_1.team_b.player_5.name.lower()),
+                }
+            )
+
+            with open("app/valorant_data/val_player_kills.json", "w") as file:
+                json.dump(match_results, file, indent=4)
+
+    except Exception as e:
+        print("Error retrieving match results:", e)
+
+threading.Thread(target=fetch_val_player_kills, daemon=True).start()
 
 # Filter only tier 1 (Riot Partnered) teams matches
 def val_filter_matches(matches: dict):
@@ -474,50 +590,39 @@ def val_filter_matches(matches: dict):
 
     return filtered_matches
 
-# Get VALORANT player stats from given region from past 14 days from API
-def fetch_val_recent_player_stats(region: str):
-    try:
-        # Retrieve player stats from given region from past 14 days
-        stats = Vlr.vlr_stats(region, "14")
-        # Write the result (a Python dictionary) to a JSON file
-        with open("backend/app/valorant_data/val_recent_player_stats.json", "w") as file:
-            json.dump(stats, file, indent=4)
-    except Exception as e:
-        print("Error retrieving player stats:", e)
-
 # Fetch team names and logos from live matches
-def fetch_team_logos():
+def fetch_val_team_logos():
     try:
-        with open("backend/app/valorant_data/val_live_scores.json", "r") as file:
-            data = json.load(file)
-            logos = []
+        live_Scores = Vlr.vlr_live_score()
+        filtered_matches = val_filter_matches(live_Scores)
+        logos = []
 
-            get_segments = data.get("data", {}).get("segments", [])
+        for game in filtered_matches:
+            logos.append(
+                {
+                    "team 1": game["team1"],
+                    "team 2": game["team2"],
+                    "team1_logo": game["team1_logo"],
+                    "team2_logo": game["team2_logo"]
+                }
+            )
+        
+        segments = {"segments": logos}
+        data = {"data": segments}
 
-            for game in get_segments:
-                logos.append(
-                    {
-                        "team 1": game["team1"],
-                        "team 2": game["team2"],
-                        "team1_logo": game["team1_logo"],
-                        "team2_logo": game["team2_logo"]
-                    }
-                )
-            
-            segments = {"segments": logos}
-            data = {"data": segments}
-
-            with open("backend/app/valorant_data/val_live_game_logos.json", "w") as file:
-                json.dump(data, file, indent=4)
+        with open("app/valorant_data/val_live_game_logos.json", "w") as file:
+            json.dump(data, file, indent=4)
         
     except FileNotFoundError:
         return {"message": "No Scores Found"}
+    
+threading.Thread(target=fetch_val_team_logos, daemon=True).start()
     
 # VALORANT Live Scores Route
 @app.get("/VALROANT/matches")
 def val_matches():
     try:
-        with open("backend/app/valorant_data/val_upcoming_matches.json", "r") as file:
+        with open("app/valorant_data/val_upcoming_matches.json", "r") as file:
             data = json.load(file)
             return data
         
@@ -528,7 +633,7 @@ def val_matches():
 @app.get("/VALROANT/scores")
 def val_live_scores():
     try:
-        with open("backend/app/valorant_data/val_live_scores.json", "r") as file:
+        with open("app/valorant_data/val_live_scores.json", "r") as file:
             data = json.load(file)
             return data
         
@@ -539,7 +644,7 @@ def val_live_scores():
 @app.get("/VALROANT/player_stats")
 def val_player_stats():
     try:
-        with open("backend/app/valorant_data/val_recent_player_stats.json", "r") as file:
+        with open("app/valorant_data/val_recent_player_stats.json", "r") as file:
             data = json.load(file)
             return data
         

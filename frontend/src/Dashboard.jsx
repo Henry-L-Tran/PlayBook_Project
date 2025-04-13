@@ -11,7 +11,7 @@ import { format } from "date-fns";
 import SearchBar from "./SearchBar";
 import "./Dashboard.css";
 import PieChart from "./PieChart";
-
+import CenteredModal from "./utilities/CenteredModal";
 
 function Dashboard() {
   // State to Hold the Live Games and Player Stats
@@ -30,7 +30,8 @@ function Dashboard() {
   const [entryType, setEntryType] = useState("");
   const [entryAmount, setEntryAmount] = useState("");
   const [currUser, setCurrUser] = useState(null);
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   // Function to Fetch Live NBA Games (Updates Every 30 Seconds)
   useEffect(() => {
@@ -252,41 +253,44 @@ function Dashboard() {
   const submitLineup = async () => {
     const allEntries = Object.values(lineup).flat();
 
-    // Lineup MUST Be Between 2 and 6 Players
     if (allEntries.length < 2 || allEntries.length > 6) {
-      console.log("Lineup must be between 2 and 6 players.");
+      setModalMessage("Lineup must be between 2 and 6 players.");
+      setIsModalOpen(true);
       return;
     }
 
-    // Lineup Cannot Contain Players from the Same Team
     const sameTeam =
       new Set(allEntries.map((player) => player.team_tri_code)).size === 1;
     if (sameTeam) {
-      console.log("Lineup cannot contain players from the same team.");
+      setModalMessage("Lineup cannot contain players from the same team.");
+      setIsModalOpen(true);
       return;
     }
 
-
-    // Gets the Current User's Info from Local Storage
     const currUser = JSON.parse(localStorage.getItem("currUser"));
 
     if (!currUser || !currUser.email) {
-      console.log("User not logged in.");
+      setModalMessage("User not logged in.");
+      setIsModalOpen(true);
       return;
     }
 
-    // Generate a Unique Entry ID for the Lineup 
     const entryId = `${currUser.email}_${Date.now()}_${uuidv4()}`;
 
-
-    if(!entryType || !entryAmount || entryAmount <= 0) {
-      console.log("Select a valid entry type and/or input a valid entry amount.");
+    if (!entryType || !entryAmount || entryAmount <= 0) {
+      setModalMessage(
+        "Select a valid entry type and/or input a valid entry amount."
+      );
+      setIsModalOpen(true);
       return;
     }
 
-    const calculatePayout = calculatePayoutMultiplier(entryType, allEntries.length, allEntries.length);
+    const calculatePayout = calculatePayoutMultiplier(
+      entryType,
+      allEntries.length,
+      allEntries.length
+    );
 
-    // Submit the Lineup to the Backend as JSON
     try {
       const response = await fetch("http://localhost:8000/lineups/submit", {
         method: "POST",
@@ -305,15 +309,16 @@ function Dashboard() {
       });
 
       if (response.status === 200) {
-        console.log("Lineup submitted successfully.");
-
-        // Resets the Lineup State After Submitting Lineup
+        setModalMessage("Lineup submitted successfully.");
+        setIsModalOpen(true);
         setLineup({});
       } else {
-        console.log("Error submitting lineup");
+        setModalMessage("Error submitting lineup.");
+        setIsModalOpen(true);
       }
     } catch (error) {
-      console.error("Error submitting lineup", error);
+      setModalMessage("Error submitting lineup.");
+      setIsModalOpen(true);
     }
   };
 
@@ -331,34 +336,33 @@ function Dashboard() {
 
   // Function to Update the Lineup with the Selected Player's Pick in the Lineup Builder Popup
   const userPickUpdate = (playerId, pick) => {
-
-    if(pick === "Clear All") {
+    if (pick === "Clear All") {
       setLineup({});
       return;
     }
 
     setLineup((prevLines) => {
       const newPick = {};
-    
-      
-      for(const category in prevLines) {
+
+      for (const category in prevLines) {
         const categoryLineup = prevLines[category];
 
-        if(pick === "Remove") {
-          const filteredLineup = categoryLineup.filter(entry => entry.player_id !== playerId);
-          if(filteredLineup.length > 0) {
+        if (pick === "Remove") {
+          const filteredLineup = categoryLineup.filter(
+            (entry) => entry.player_id !== playerId
+          );
+          if (filteredLineup.length > 0) {
             newPick[category] = filteredLineup;
           }
-        }
-
-        else {
+        } else {
           newPick[category] = prevLines[category].map((entry) =>
-          entry.player_id === playerId ? { ...entry, users_pick: pick } : entry
+            entry.player_id === playerId
+              ? { ...entry, users_pick: pick }
+              : entry
           );
         }
       }
       return newPick;
-
     });
   };
 
@@ -377,15 +381,17 @@ function Dashboard() {
 
       // Quick Delay to Allow for the Animation & Players to Load
       setTimeout(() => {
-        const findPlayerSquare = document.getElementById(`player-${player.playerId}`);
-        
-        // Finding the Player Square, Scrolling to It Then Highlighting It 
+        const findPlayerSquare = document.getElementById(
+          `player-${player.playerId}`
+        );
+
+        // Finding the Player Square, Scrolling to It Then Highlighting It
         if (findPlayerSquare) {
           findPlayerSquare.scrollIntoView({
             behavior: "smooth",
             block: "center",
-          })
-          
+          });
+
           findPlayerSquare.classList.add("card-highlight");
           // setTimeout(() => {
           //   findPlayerSquare.remove("card-highlight");
@@ -468,7 +474,7 @@ function Dashboard() {
         >
 
           {/*Each Tab (NBA, NFL, VAL) */}
-          {["NBA", "NFL", "VAL"].map((category) => (
+          {["NBA", "NFL", "LoL", "VAL"].map((category) => (
           <Tab
             key={category}
             label={category}
@@ -920,56 +926,56 @@ function Dashboard() {
                         {nbaSelectedGame.awayTeam.teamTriCode}
                       </Typography>
 
-                    {/* Away Team Players Squares Green Selected Highlights */}
-                    {awayPlayers
-                      .filter(
-                        (player) => parseFloat(getStatCategory(player)) !== 0
-                      )
-                      .map((player, index) => (
-                        <Box
-                          key={index}
-                          id={`player-${player.playerId}`}
-                          sx={{
-                            border: selectedSquare(player.playerId)
-                              ? "2px solid green"
-                              : "2px solid gray",
-                            borderRadius: "1rem",
-                            padding: 0,
-                            backgroundColor: "rgba(0, 0, 0, 0.5)",
-                            marginBottom: "1rem",
-                            width: "22rem",
-                            height: "18rem",
-                            overflow: "hidden",
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "space-between",
-                          }}
-                        >
-                          {/* Player Square Top Header Section */}
+                      {/* Away Team Players Squares Green Selected Highlights */}
+                      {awayPlayers
+                        .filter(
+                          (player) => parseFloat(getStatCategory(player)) !== 0
+                        )
+                        .map((player, index) => (
                           <Box
+                            key={index}
+                            id={`player-${player.playerId}`}
                             sx={{
-                              padding: "0.5rem",
+                              border: selectedSquare(player.playerId)
+                                ? "2px solid green"
+                                : "2px solid gray",
+                              borderRadius: "1rem",
+                              padding: 0,
+                              backgroundColor: "rgba(0, 0, 0, 0.5)",
+                              marginBottom: "1rem",
+                              width: "22rem",
+                              height: "18rem",
+                              overflow: "hidden",
+                              display: "flex",
+                              flexDirection: "column",
+                              justifyContent: "space-between",
                             }}
                           >
-                            {/* Player Picture */}
+                            {/* Player Square Top Header Section */}
                             <Box
                               sx={{
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                marginTop: "0.5rem",
-                                marginBottom: "0.5rem",
+                                padding: "0.5rem",
                               }}
                             >
-                              <img
-                                src={player.playerPicture}
-                                alt={player.playerName}
-                                style={{
-                                  width: "6rem",
-                                  marginTop: "1rem",
+                              {/* Player Picture */}
+                              <Box
+                                sx={{
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                  marginTop: "0.5rem",
+                                  marginBottom: "0.5rem",
                                 }}
-                              />
-                            </Box>
+                              >
+                                <img
+                                  src={player.playerPicture}
+                                  alt={player.playerName}
+                                  style={{
+                                    width: "6rem",
+                                    marginTop: "1rem",
+                                  }}
+                                />
+                              </Box>
 
                               {/* Player Team Tri-Code */}
                               <Typography
@@ -1122,57 +1128,56 @@ function Dashboard() {
                         {nbaSelectedGame.homeTeam.teamTriCode}
                       </Typography>
 
-                    {/* Home Team Players Squares Green Selected Highlights */}
-                    {homePlayers
-                      .filter(
-                        (player) => parseFloat(getStatCategory(player)) !== 0
-                      )
-                      .map((player, index) => (
-                        <Box
-                          key={index}
-                          id={`player-${player.playerId}`}
-                          sx={{
-                            border: selectedSquare(player.playerId)
-                              ? "2px solid green"
-                              : "2px solid gray",
-                            borderRadius: "1rem",
-                            padding: 0,
-                            backgroundColor: "rgba(0, 0, 0, 0.5)",
-                            marginBottom: "1rem",
-                            width: "22rem",
-                            height: "18rem",
-                            overflow: "hidden",
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "space-between",
-                          }}
-                        >
-                          {/* Player Square Top Header Section */}
+                      {/* Home Team Players Squares Green Selected Highlights */}
+                      {homePlayers
+                        .filter(
+                          (player) => parseFloat(getStatCategory(player)) !== 0
+                        )
+                        .map((player, index) => (
                           <Box
+                            key={index}
+                            id={`player-${player.playerId}`}
                             sx={{
-                              padding: "0.5rem",
+                              border: selectedSquare(player.playerId)
+                                ? "2px solid green"
+                                : "2px solid gray",
+                              borderRadius: "1rem",
+                              padding: 0,
+                              backgroundColor: "rgba(0, 0, 0, 0.5)",
+                              marginBottom: "1rem",
+                              width: "22rem",
+                              height: "18rem",
+                              overflow: "hidden",
+                              display: "flex",
+                              flexDirection: "column",
+                              justifyContent: "space-between",
                             }}
                           >
-
-                            {/* Player Picture */}
+                            {/* Player Square Top Header Section */}
                             <Box
                               sx={{
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                marginTop: "0.5rem",
-                                marginBottom: "0.5rem",
+                                padding: "0.5rem",
                               }}
                             >
-                              <img
-                                src={player.playerPicture}
-                                alt={player.playerName}
-                                style={{
-                                  width: "6rem",
-                                  marginTop: "1rem",
+                              {/* Player Picture */}
+                              <Box
+                                sx={{
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                  marginTop: "0.5rem",
+                                  marginBottom: "0.5rem",
                                 }}
-                              />
-                            </Box>
+                              >
+                                <img
+                                  src={player.playerPicture}
+                                  alt={player.playerName}
+                                  style={{
+                                    width: "6rem",
+                                    marginTop: "1rem",
+                                  }}
+                                />
+                              </Box>
 
                               {/* Player Team Tri-Code */}
                               <Typography
@@ -1277,51 +1282,50 @@ function Dashboard() {
                                 ↓ Under
                               </button>
 
-                            {/* Player Over Button */}
-                            <button
-                              onClick={() => handleUserLines(player, "Over")}
-                              style={{
-                                flex: 1,
-                                backgroundColor: selectedBetButton(
-                                  player.playerId,
-                                  "Over"
-                                )
-                                  ? "green"
-                                  : "transparent",
-                                padding: "0.5rem",
-                                fontFamily: "monospace",
-                                border: "none",
-                                cursor: "pointer",
-                                borderRadius: "0 0 1rem 0",
-                              }}
-                            >
-                              ↑ Over
-                            </button>
+                              {/* Player Over Button */}
+                              <button
+                                onClick={() => handleUserLines(player, "Over")}
+                                style={{
+                                  flex: 1,
+                                  backgroundColor: selectedBetButton(
+                                    player.playerId,
+                                    "Over"
+                                  )
+                                    ? "green"
+                                    : "transparent",
+                                  padding: "0.5rem",
+                                  fontFamily: "monospace",
+                                  border: "none",
+                                  cursor: "pointer",
+                                  borderRadius: "0 0 1rem 0",
+                                }}
+                              >
+                                ↑ Over
+                              </button>
+                            </Box>
                           </Box>
-                        </Box>
-                      ))}
+                        ))}
+                    </Box>
                   </Box>
                 </Box>
               </Box>
-            </Box>
-          );
-        })()}
-      
-        {/* ------Lineups Bar Popup Display------ */}
-        {Object.values(lineup).flat().length >= 1 && 
-        Object.values(lineup).flat().length <= 6 && (
+            );
+          })()}
 
-          <Lineups
-            lineup={Object.values(lineup).flat()}
-            expand={() => setShowLineups(true)}
-            onSubmit={submitLineup}
-            pickUpdate={userPickUpdate}
-            entryType={entryType}
-            setEntryType={setEntryType}
-            entryAmount={entryAmount}
-            setEntryAmount={setEntryAmount}
-          />
-        )}
+        {/* ------Lineups Bar Popup Display------ */}
+        {Object.values(lineup).flat().length >= 1 &&
+          Object.values(lineup).flat().length <= 6 && (
+            <Lineups
+              lineup={Object.values(lineup).flat()}
+              expand={() => setShowLineups(true)}
+              onSubmit={submitLineup}
+              pickUpdate={userPickUpdate}
+              entryType={entryType}
+              setEntryType={setEntryType}
+              entryAmount={entryAmount}
+              setEntryAmount={setEntryAmount}
+            />
+          )}
 
         {showLineupBar && (
           <Lineups
@@ -1341,7 +1345,7 @@ function Dashboard() {
             ? "sticky top-0"
             : "hidden"
         }`}
-        sx={{ 
+        sx={{
           backgroundColor: "rgba(0, 0, 0, 0.3)",
           position: "sticky",
           alignSelf: "flex-start",
@@ -1545,6 +1549,14 @@ function Dashboard() {
             </button>
           </Box>
         </Box>
+
+        {/* Modal */}
+        <CenteredModal
+          isOpen={isModalOpen}
+          message={modalMessage}
+          onClose={() => setIsModalOpen(false)}
+        />
+
       </Box>
     </Box>
   );

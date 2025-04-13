@@ -198,7 +198,6 @@ const Header = ({ onNavigate }) => {
                   top: "100%",
                   right: 0,
                   border: "1px solid white",
-                  backgroundColor: "transparent",
                   borderRadius: "0.5rem",
                   marginTop: "30%",
                   backgroundColor: "black",
