@@ -117,7 +117,7 @@ def payout_multiplier(entry_type: str, total_legs: int, hit_legs: int) -> float:
         
 
 # User Payout Function
-def user_payout(email: str, payout: float):
+def user_payout(email: str, payout: float, user_win: bool):
     users = loadUsers()
     for user in users:
         if user["email"] == email:
@@ -126,6 +126,11 @@ def user_payout(email: str, payout: float):
             print(f"Paying {payout} to {email}")
             
             user["balance"] = user.get("balance", 0) + payout
+
+            if user_win:
+                user["wins"] = user.get("wins", 0) + 1
+            else:
+                user["losses"] = user.get("losses", 0) + 1
             break
     saveUsers(users)
 
@@ -307,9 +312,10 @@ def fetch_user_live_lineup_data():
                     if multiplier > 0:
                         payout = round(lineup["entry_amount"] * multiplier, 2)
                         lineup["result"] = "WON"
-                        user_payout(lineup["email"], payout)
+                        user_payout(lineup["email"], payout, user_win = True)
                     else:
                         lineup["result"] = "LOST"
+                        user_payout(lineup["email"], 0, user_win = False)
 
                 # The Lineup Is Finalized, and The Live Data is Saved/Frozen
                 lineup["evaluated"] = True
