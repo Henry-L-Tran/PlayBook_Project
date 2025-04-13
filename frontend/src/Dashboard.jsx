@@ -393,9 +393,6 @@ function Dashboard() {
           });
 
           findPlayerSquare.classList.add("card-highlight");
-          // setTimeout(() => {
-          //   findPlayerSquare.remove("card-highlight");
-          // }, 1000);
         }
       }, 600);
 
@@ -787,7 +784,45 @@ function Dashboard() {
               )}
             </Box>
           )}
+
+          {/* ------NFL Games Dashboard Display (Visual Only)------ */}
+          {activeCategoryTab === "NFL" && (
+            <Box className="flex flex-col w-full h-full" 
+              sx={{ 
+                overflow: "visible", 
+                position: "relative", 
+                minHeight: "100vh" 
+              }}
+            >
+              {/* Search Bar Container (Visual Only) */}
+              <Box
+                sx={{
+                  position: "relative",
+                  overflow: "visible",
+                  minHeight: "6rem",
+                }}
+              >
+                {/* Search Bar Component (Visual Only) */}
+                <SearchBar 
+                  playersPlayingToday={[]}
+                  playerSelected={() => {}}
+                />
+              </Box>
+
+              {/* No Scheduled Games Message (Defaulted) */}
+              <Typography
+                sx={{
+                  fontSize: "1.5rem",
+                  fontFamily: "monospace",
+                  textAlign: "center"
+                }}
+              >
+                No Scheduled Games
+              </Typography>
+            </Box>
+          )}
         </Box>
+        
 
         {/* ------Betting Lines Popup Display------ */}
         {activeCategoryTab === "NBA" &&
@@ -1366,7 +1401,7 @@ function Dashboard() {
             marginTop: "5%",
           }}
         >
-          {/* Display the Date of the NBA Games */}
+          {/* Display the Date */}
           <Typography
             sx={{
               fontSize: "1.5rem",
