@@ -428,32 +428,36 @@ def nba_scores():
 
 # Get VALORANT upcoming matches from API
 def fetch_val_upcoming_matches():
-    try:
-        # Retrieve upcoming matches and filter them
-        upcoming_matches = Vlr.vlr_upcoming_matches()
-        filtered_matches = val_filter_matches(upcoming_matches)
-        # Convert the result (a Python dictionary) to a JSON formatted string
-        with open("app/valorant_data/val_upcoming_matches.json", "w") as file:
+    while True:
+        try:
+            # Retrieve upcoming matches and filter them
+            upcoming_matches = Vlr.vlr_upcoming_matches()
+            filtered_matches = val_filter_matches(upcoming_matches)
+            # Write filtered matches to a JSON file
+            with open("app/valorant_data/val_upcoming_matches.json", "w") as file:
                 json.dump(filtered_matches, file, indent=4)
-    except Exception as e:
-        print("Error retrieving upcoming matches:", e)
+        except Exception as e:
+            print("Error retrieving upcoming matches:", e)
+        # Refresh every 30 seconds, or set to whatever interval you prefer
+        time.sleep(30)
 
 threading.Thread(target=fetch_val_upcoming_matches, daemon=True).start()
 
 # Get VALORANT current live matches from API
 def fetch_val_live_matches():
-    try:
-        # Retrieve live matches and filter them
-        live_Scores = Vlr.vlr_live_score()
-        filtered_matches = val_filter_matches(live_Scores)
-        # Write the result (a Python dictionary) to a JSON file
-        with open("app/valorant_data/val_live_scores.json", "w") as file:
-            json.dump(filtered_matches, file, indent=4)
-    except Exception as e:
-        print("Error retrieving live matches:", e)
+    while True:    
+        try:
+            # Retrieve live matches and filter them
+            live_Scores = Vlr.vlr_live_score()
+            filtered_matches = val_filter_matches(live_Scores)
+            # Write the result (a Python dictionary) to a JSON file
+            with open("app/valorant_data/val_live_scores.json", "w") as file:
+                json.dump(filtered_matches, file, indent=4)
+        except Exception as e:
+            print("Error retrieving live matches:", e)
 
-    # Update the score every 30 seconds
-    time.sleep(30)
+        # Update the score every 30 seconds
+        time.sleep(30)
 
 threading.Thread(target=fetch_val_live_matches, daemon=True).start()
 
@@ -618,7 +622,7 @@ def fetch_val_team_logos():
     
 threading.Thread(target=fetch_val_team_logos, daemon=True).start()
     
-# VALORANT Live Scores Route
+# VALORANT Upcoming Matches Route
 @app.get("/VALROANT/matches")
 def val_matches():
     try:
@@ -645,6 +649,17 @@ def val_live_scores():
 def val_player_stats():
     try:
         with open("app/valorant_data/val_recent_player_stats.json", "r") as file:
+            data = json.load(file)
+            return data
+        
+    except FileNotFoundError:
+        return {"message": "No Stats Found"}
+    
+# VALORANT Player Stats Route
+@app.get("/VALROANT/player_kills")
+def val_player_kills():
+    try:
+        with open("app/valorant_data/val_player_kills.json", "r") as file:
             data = json.load(file)
             return data
         

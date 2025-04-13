@@ -9,6 +9,7 @@ import Lineups from "./Lineups";
 import { calculatePayoutMultiplier } from "./payoutMultiplier";
 import { format } from "date-fns";
 import SearchBar from "./SearchBar";
+import Valorant from "./Valorant";
 import "./Dashboard.css";
 import PieChart from "./PieChart";
 import CenteredModal from "./utilities/CenteredModal";
@@ -459,6 +460,7 @@ function Dashboard() {
                 overflowX: "auto",
               },
             }}
+            
           >
             {/*Each Tab (NBA, NFL, VAL) */}
             {["NBA", "NFL", "VAL"].map((category) => (
@@ -1215,8 +1217,25 @@ function Dashboard() {
                   </Box>
                 </Box>
               </Box>
-            );
-          })()}
+            </Box>
+          );
+        })()}
+
+        {activeCategoryTab === "VAL" && (
+          <Box className="flex flex-col w-full h-full" 
+            sx={{
+              overflow: "visible", 
+              position: "relative", 
+              minHeight: "100vh" 
+            }}>
+              {/* This is where the new Valorant component is rendered */}
+              <Valorant />
+            </Box>
+          )}
+      
+        {/* ------Lineups Bar Popup Display------ */}
+        {Object.values(lineup).flat().length >= 1 && 
+        Object.values(lineup).flat().length <= 6 && (
 
         {/* ------Lineups Bar Popup Display------ */}
         {Object.values(lineup).flat().length >= 1 &&
