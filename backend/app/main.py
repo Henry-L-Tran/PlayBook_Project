@@ -195,6 +195,8 @@ def register(user_data: RegisterUser):
         "address": user_data.address,
         "birthday": user_data.birthday,
         "balance": user_data.balance,
+        "wins": 0,
+        "losses": 0,
         "payment_info": {
             "credit_card": user_data.payment_info.credit_card,
             "card_type": user_data.payment_info.card_type,
@@ -273,7 +275,7 @@ def fetch_nba_live_scores():
         # Fetch NBA Live Scores Every 30 Seconds
         time.sleep(30)
 
-threading.Thread(target=fetch_nba_live_scores, daemon=True).start()
+#threading.Thread(target=fetch_nba_live_scores, daemon=True).start()
 
 
 

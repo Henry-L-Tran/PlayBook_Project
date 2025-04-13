@@ -22,6 +22,7 @@ const LineupDetails = ({ lineup, onClose, liveGames }) => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                zIndex: 1100,
             }}
         >
                 

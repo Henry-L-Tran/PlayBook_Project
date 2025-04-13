@@ -1,6 +1,7 @@
 import "./Promos.css";
 import { useState } from "react";
 import { useEffect } from "react";
+import CenteredModal from "./utilities/CenteredModal";
 // Promotions Data Array
 const promotions = [
   {
@@ -165,28 +166,14 @@ const Promos = () => {
                     </button>
 
                     {/* Modal */}
-                    {isModalOpen && (
-                      <div className="fixed inset-0 flex items-center justify-center">
-                        <div
-                          className="bg-black p-6 rounded-md shadow-lg"
-                          style={{
-                            opacity: modalOpacity,
-                            transition: "opacity 0.5s",
-                          }}
-                        >
-                          <p className="text-white">{modalMessage}</p>
-                          {/* Only show the close button when the modal isn't set to auto-close */}
-                          {!autoCloseModal && (
-                            <button
-                              className="mt-4 bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-md"
-                              onClick={() => setIsModalOpen(false)}
-                            >
-                              Close
-                            </button>
-                          )}
-                        </div>
-                      </div>
-                    )}
+
+                    <CenteredModal
+                      isOpen={isModalOpen}
+                      message={modalMessage}
+                      autoClose={autoCloseModal}
+                      onClose={() => setIsModalOpen(false)}
+                      opacity={modalOpacity}
+                    />
                   </div>
                 </div>
               </div>
