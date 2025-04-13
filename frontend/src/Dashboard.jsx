@@ -315,13 +315,11 @@ function Dashboard() {
         setIsModalOpen(true);
         setLineup({});
         setShowBettingLines(false);
-      } 
-      else {
+      } else {
         setModalMessage("Error submitting lineup.");
         setIsModalOpen(true);
       }
-    } 
-    catch (error) {
+    } catch (error) {
       setModalMessage("Error submitting lineup.");
       setIsModalOpen(true);
     }
@@ -460,7 +458,6 @@ function Dashboard() {
                 overflowX: "auto",
               },
             }}
-            
           >
             {/*Each Tab (NBA, NFL, VAL) */}
             {["NBA", "NFL", "VAL"].map((category) => (
@@ -529,7 +526,8 @@ function Dashboard() {
                     {/* Game Status Display - Positioned Absolutely on the Right */}
                     <div className="absolute mr-8 md:mr-24 right-0 flex flex-col items-end text-center">
                       <Typography
-                        className="text-base md:text-3xl font-bold font-mono text-right"
+                        sx={{ fontFamily: "monospace" }}
+                        className="text-base md:text-3xl font-bold text-right"
                         fontSize={20}
                       >
                         {game.gameStatusText}
@@ -537,6 +535,7 @@ function Dashboard() {
 
                       {game.gameStatus === 2 && (
                         <Typography
+                          sx={{ fontFamily: "monospace" }}
                           className="text-base md:text-xl font-mono text-right"
                           fontSize={20}
                         >
@@ -554,6 +553,7 @@ function Dashboard() {
                           <div className="flex items-center justify-center w-full gap-4 md:w-1/4 mb-2 md:mb-0 ">
                             <Typography
                               variant="h6"
+                              sx={{ fontFamily: "monospace" }}
                               className={`mr-4 ${
                                 game.gameStatus === 3 &&
                                 game.awayTeam.score > game.homeTeam.score
@@ -564,7 +564,10 @@ function Dashboard() {
                               {game.awayTeam.teamTriCode}
                             </Typography>
 
-                            <Typography className="text-xs font-bold">
+                            <Typography
+                              className="text-xs font-bold"
+                              sx={{ fontFamily: "monospace" }}
+                            >
                               {game.awayTeam.wins} - {game.awayTeam.losses}
                             </Typography>
                           </div>
@@ -575,10 +578,15 @@ function Dashboard() {
                               <div className="flex space-x-4 md:space-x-8">
                                 {game.awayTeam.periods.map((period, index) => (
                                   <div key={index} className="text-center">
-                                    <Typography className="font-mono">
+                                    <Typography
+                                      sx={{ fontFamily: "monospace" }}
+                                    >
                                       {period.period}
                                     </Typography>
-                                    <Typography className="font-mono text-xs">
+                                    <Typography
+                                      sx={{ fontFamily: "monospace" }}
+                                      className="text-xs"
+                                    >
                                       {period.score}
                                     </Typography>
                                   </div>
@@ -587,7 +595,8 @@ function Dashboard() {
                               {/* Away Team Score */}
                               <Typography
                                 fontSize={20}
-                                className={`font-mono text-xl ml-4 ${
+                                sx={{ fontFamily: "monospace" }}
+                                className={` text-xl ml-4 ${
                                   game.gameStatus === 3 &&
                                   game.awayTeam.score > game.homeTeam.score
                                     ? "text-green-700"
@@ -608,6 +617,7 @@ function Dashboard() {
                           <div className="flex items-center justify-center w-full gap-4 md:w-1/4 mb-2 md:mb-0">
                             <Typography
                               variant="h6"
+                              sx={{ fontFamily: "monospace" }}
                               className={`mr-4 ${
                                 game.gameStatus === 3 &&
                                 game.homeTeam.score > game.awayTeam.score
@@ -618,7 +628,10 @@ function Dashboard() {
                               {game.homeTeam.teamTriCode}
                             </Typography>
 
-                            <Typography className="text-xs font-bold">
+                            <Typography
+                              sx={{ fontFamily: "monospace" }}
+                              className="text-xs font-bold"
+                            >
                               {game.homeTeam.wins} - {game.homeTeam.losses}
                             </Typography>
                           </div>
@@ -629,10 +642,15 @@ function Dashboard() {
                               <div className="flex space-x-4 md:space-x-8">
                                 {game.homeTeam.periods.map((period, index) => (
                                   <div key={index} className="text-center">
-                                    <Typography className="font-mono">
+                                    <Typography
+                                      sx={{ fontFamily: "monospace" }}
+                                    >
                                       {period.period}
                                     </Typography>
-                                    <Typography className="font-mono text-xs">
+                                    <Typography
+                                      sx={{ fontFamily: "monospace" }}
+                                      className="text-xs"
+                                    >
                                       {period.score}
                                     </Typography>
                                   </div>
@@ -641,7 +659,8 @@ function Dashboard() {
 
                               <Typography
                                 fontSize={20}
-                                className={`font-mono text-xl ml-4 ${
+                                sx={{ fontFamily: "monospace" }}
+                                className={`text-xl ml-4 ${
                                   game.gameStatus === 3 &&
                                   game.homeTeam.score > game.awayTeam.score
                                     ? "text-green-700"
@@ -1217,21 +1236,23 @@ function Dashboard() {
                   </Box>
                 </Box>
               </Box>
-          );
-        })()}
+            );
+          })()}
 
         {activeCategoryTab === "VAL" && (
-          <Box className="flex flex-col w-full h-full" 
+          <Box
+            className="flex flex-col w-full h-full"
             sx={{
-              overflow: "visible", 
-              position: "relative", 
-              minHeight: "100vh" 
-            }}>
-              {/* This is where the new Valorant component is rendered */}
-              <Valorant />
-            </Box>
-          )}
-      
+              overflow: "visible",
+              position: "relative",
+              minHeight: "100vh",
+            }}
+          >
+            {/* This is where the new Valorant component is rendered */}
+            <Valorant />
+          </Box>
+        )}
+
         {/* ------Lineups Bar Popup Display------ */}
         {Object.values(lineup).flat().length >= 1 &&
           Object.values(lineup).flat().length <= 6 && (
