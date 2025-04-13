@@ -655,11 +655,22 @@ def val_player_stats():
     except FileNotFoundError:
         return {"message": "No Stats Found"}
     
-# VALORANT Player Stats Route
+# VALORANT Player Kills Route
 @app.get("/VALROANT/player_kills")
 def val_player_kills():
     try:
         with open("app/valorant_data/val_player_kills.json", "r") as file:
+            data = json.load(file)
+            return data
+        
+    except FileNotFoundError:
+        return {"message": "No Stats Found"}
+
+# VALORANT Match Results Route
+@app.get("/VALROANT/results")   
+def val_match_results():
+    try:
+        with open("app/valorant_data/val_match_results.json", "r") as file:
             data = json.load(file)
             return data
         

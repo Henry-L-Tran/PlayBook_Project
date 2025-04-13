@@ -63,7 +63,7 @@ function Valorant() {
             gutterBottom
             sx={{ fontFamily: "monospace" }}
           >
-            VALORANT Live Scores
+            Live Matches
           </Typography>
           {liveMatches.map((match, index) => {
             // Choose team1's round value: if team1_round_ct returns "N/A", use team1_round_t; otherwise use team1_round_ct.
