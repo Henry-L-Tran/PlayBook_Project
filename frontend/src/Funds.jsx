@@ -9,6 +9,7 @@ function Funds() {
   const [card, setCard] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
+  const [userCVV, setUserCVV] = useState("");
 
   // Check if User is Logged In and Fetch User Data
   useEffect(() => {
@@ -74,11 +75,14 @@ function Funds() {
         setModalMessage("Card Information Saved");
         setIsModalOpen(true);
         getUserData();
-      } else {
+
+      } 
+      else {
         setModalMessage("Failed to Save Card Information");
         setIsModalOpen(true);
       }
-    } catch (error) {
+    } 
+    catch (error) {
       console.error("Error Adding Card Information:", error);
       setModalMessage("Failed to Save Card Information");
       setIsModalOpen(true);
@@ -101,6 +105,12 @@ function Funds() {
       card_number: card,
     };
 
+    if (type === "deposit" && userCVV !== user.payment_info.cvv) {
+      setModalMessage("Invalid CVV");
+      setIsModalOpen(true);
+      return;
+    }
+
     try {
       const response = await fetch(`http://localhost:8000/funds/${type}`, {
         method: "POST",
@@ -113,11 +123,18 @@ function Funds() {
         setModalMessage(`${capitalize(type)} successful`);
         setIsModalOpen(true);
         getUserData();
-      } else {
+
+        // Clear Input Fields After Saving
+        setAmount("");
+        setCard("");
+        setUserCVV("");
+      } 
+      else {
         setModalMessage(`${capitalize(type)} failed`);
         setIsModalOpen(true);
       }
-    } catch (error) {
+    } 
+    catch (error) {
       console.error(`${type} Failed:`, error);
       setModalMessage(`${capitalize(type)} failed`);
       setIsModalOpen(true);
@@ -302,8 +319,8 @@ function Funds() {
                   name="cvv"
                   placeholder="CVV"
                   maxLength="4"
-                  value={user?.payment_info?.cvv || ""}
-                  onChange={handleUserInput}
+                  value={userCVV}
+                  onChange={(e) => setUserCVV(e.target.value)}
                 />
               </div>
 
