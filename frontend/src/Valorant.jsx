@@ -155,7 +155,7 @@ function Valorant() {
             key={index}
             sx={{
               backgroundColor: "rgba(0, 0, 0, 0.5)",
-              border: "2px solid white",
+              border: "1px solid white",
               borderRadius: "1rem",
               padding: "1rem",
               marginBottom: "1rem",
