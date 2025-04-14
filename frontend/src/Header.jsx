@@ -32,6 +32,14 @@ const Header = ({ onNavigate }) => {
     if (user) {
       setCurrUser(JSON.parse(user));
     }
+  
+    // Trying a 1 Second Interval Update (TEMP)
+    const interval = setInterval(() => {
+      const updatedUser = JSON.parse(localStorage.getItem("currUser"));
+      setCurrUser(updatedUser); 
+    }, 1000)
+  
+    return () => clearInterval(interval);
   }, []);
 
   const toggleDropdown = () => {
@@ -134,6 +142,41 @@ const Header = ({ onNavigate }) => {
             </Button>
           ))}
 
+          {/* User Balance Container */}
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              cursor: "pointer",
+              gap: 0.5
+            }}
+          >
+            {/* $ Text */}
+            <Typography
+              sx={{
+                color: "green",
+                fontSize: "2rem",
+                fontFamily: "monospace",
+                fontWeight: "bold",
+              }}
+            >
+              $
+            </Typography>
+
+            {/* User Balance Text */}
+            <Typography
+              sx={{
+                color: "white",
+                fontSize: "1.5rem",
+                fontFamily: "monospace",
+                fontWeight: "bold",
+              }}
+            >
+              {currUser?.balance ?? 0}
+            </Typography>
+          </Box>
+
+          {/* Entire User Profile Container */}
           <Box
           ref={dropdownRef}
             sx={{

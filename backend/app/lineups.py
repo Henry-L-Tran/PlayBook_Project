@@ -127,9 +127,9 @@ def user_payout(email: str, payout: float, user_win: bool):
             
             user["balance"] = user.get("balance", 0) + payout
 
-            if user_win:
+            if user_win is True:
                 user["wins"] = user.get("wins", 0) + 1
-            else:
+            elif user_win is False:
                 user["losses"] = user.get("losses", 0) + 1
             break
     saveUsers(users)
@@ -248,10 +248,9 @@ def fetch_user_live_lineup_data():
 
                 # If No Live Stats For the Player, Set Status to Pending, and Live Value to N/A
                 live_player = live_stats.get(player_id)
-                if not live_player:
-                    entry["live_value"] = "N/A"
-                    entry["status"] = "pending"
-                    games_final = False
+                if not live_player or live_player.get("playerPlayed") is False:
+                    entry["live_value"] = "DNP"
+                    entry["status"] = "DNP"
                     continue
 
                 # Checks if the Game is Final or Not
@@ -306,16 +305,29 @@ def fetch_user_live_lineup_data():
             # Determines the Lineup Result
             if games_final:
                 if lineup.get("result") is None or lineup["result"] == "IN PROGRESS":
-                    total_legs = len(lineup["entries"])
-                    multiplier = payout_multiplier(lineup["entry_type"], total_legs, hit_legs)
-
-                    if multiplier > 0:
-                        payout = round(lineup["entry_amount"] * multiplier, 2)
-                        lineup["result"] = "WON"
-                        user_payout(lineup["email"], payout, user_win = True)
+                    
+                    # If DNP, Parlay is Reduced to the Number of Valid Legs
+                    valid_legs = [entry for entry in lineup["entries"] if entry["status"] != "DNP"]
+                    total_legs = len(valid_legs)
+                    hit_legs = len([entry for entry in valid_legs if entry["status"] == "hit"])
+                    
+                    # Refunds User w/ DNP Functionality (Gives User Back Their Entry Amount)
+                    if (lineup["entry_type"] == "Power Play" and total_legs < 1) or (lineup["entry_type"] == "Flex Play" and total_legs <= 2):
+                        lineup["result"] = "REFUNDED"
+                        lineup["actual_payout"] = lineup["entry_amount"]
+                        user_payout(lineup["email"], lineup["entry_amount"], user_win = None)
                     else:
-                        lineup["result"] = "LOST"
-                        user_payout(lineup["email"], 0, user_win = False)
+                        multiplier = payout_multiplier(lineup["entry_type"], total_legs, hit_legs)
+
+                        if multiplier > 0:
+                            payout = round(lineup["entry_amount"] * multiplier, 2)
+                            lineup["result"] = "WON"
+                            lineup["actual_payout"] = payout
+                            user_payout(lineup["email"], payout, user_win = True)
+                        elif multiplier == 0:
+                            lineup["result"] = "LOST"
+                            lineup["actual_payout"] = 0
+                            user_payout(lineup["email"], 0, user_win = False)
 
                 # The Lineup Is Finalized, and The Live Data is Saved/Frozen
                 lineup["evaluated"] = True

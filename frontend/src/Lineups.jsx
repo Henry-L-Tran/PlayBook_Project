@@ -40,6 +40,7 @@ function Lineups({
                     borderRadius: "10rem", 
                     border: "2px solid white",
                     marginBottom: "1rem",
+                    zIndex: 1300,
                 }}
             >
                 {/* Lineups Content */}
@@ -114,6 +115,7 @@ function Lineups({
                             right: 0,
                             bottom: 0,
                             backgroundColor: "rgba(0, 0, 0, 0.8)",
+                            zIndex: 1350,
                         }}
                     />
 
@@ -132,6 +134,7 @@ function Lineups({
                             fontFamily: "monospace",
                             color: "white",
                             overflowY: "auto",
+                            zIndex: 1350,
                         }}
                     >
                         {/* Lineup Builder Header */}
