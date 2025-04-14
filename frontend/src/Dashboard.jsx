@@ -10,16 +10,9 @@ import { calculatePayoutMultiplier } from "./payoutMultiplier";
 import { format } from "date-fns";
 import SearchBar from "./SearchBar";
 import "./Dashboard.css";
+import PieChart from "./PieChart";
+import CenteredModal from "./utilities/CenteredModal";
 import TeamBanner from "./TeamBanner"
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
 
 function Dashboard() {
   // State to Hold the Live Games and Player Stats
@@ -37,28 +30,9 @@ function Dashboard() {
   const [showLineupBar, setShowLineupBar] = useState(false);
   const [entryType, setEntryType] = useState("");
   const [entryAmount, setEntryAmount] = useState("");
-
-  useEffect(() => {
-    if (!showBettingLines) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-          }
-        });
-      },
-      {threshold: 0.1}
-    );
-
-    const elements = document.querySelectorAll(".fade-up");
-    elements.forEach((el) => observer.observe(el));
-
-    return () => {
-      elements.forEach((el) => observer.unobserve(el));
-    };
-  }, [showBettingLines]);
+  const [currUser, setCurrUser] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   // Function to Fetch Live NBA Games (Updates Every 30 Seconds)
   useEffect(() => {
@@ -80,6 +54,26 @@ function Dashboard() {
     };
   }, []);
 
+  useEffect(() => {
+    const fetchUpdatedUser = async () => {
+      const user = JSON.parse(localStorage.getItem("currUser"));
+      if (user?.email) {
+        try {
+          const response = await fetch(`http://localhost:8000/funds/user/${user.email}`);
+          const updatedUser = await response.json();
+
+          // Updates localStorage with the Updated User Data
+          localStorage.setItem("currUser", JSON.stringify(updatedUser));
+          setCurrUser(updatedUser);
+        }
+        catch (error) {
+          console.error("Error fetching updated user data: ", error);
+        }
+      }
+    }
+    fetchUpdatedUser();
+  }, []);
+
   // Function to Convert ISO Time to Game Clock Format (MM:SS)
   const gameClockConverter = (isoTime) => {
     if (!isoTime) return "00:00";
@@ -94,7 +88,7 @@ function Dashboard() {
     return `${minutes}:${seconds}`;
   };
 
-  // Function to Handle the Category Tab Change (NBA, NFL, LoL, VAL)
+  // Function to Handle the Category Tab Change (NBA, NFL, VAL)
   const handleCategoryTabChange = (event, newValue) => {
     setActiveCategoryTab(newValue);
   };
@@ -260,41 +254,44 @@ function Dashboard() {
   const submitLineup = async () => {
     const allEntries = Object.values(lineup).flat();
 
-    // Lineup MUST Be Between 2 and 6 Players
     if (allEntries.length < 2 || allEntries.length > 6) {
-      console.log("Lineup must be between 2 and 6 players.");
+      setModalMessage("Lineup must be between 2 and 6 players.");
+      setIsModalOpen(true);
       return;
     }
 
-    // Lineup Cannot Contain Players from the Same Team
     const sameTeam =
       new Set(allEntries.map((player) => player.team_tri_code)).size === 1;
     if (sameTeam) {
-      console.log("Lineup cannot contain players from the same team.");
+      setModalMessage("Lineup cannot contain players from the same team.");
+      setIsModalOpen(true);
       return;
     }
 
-
-    // Gets the Current User's Info from Local Storage
     const currUser = JSON.parse(localStorage.getItem("currUser"));
 
     if (!currUser || !currUser.email) {
-      console.log("User not logged in.");
+      setModalMessage("User not logged in.");
+      setIsModalOpen(true);
       return;
     }
 
-    // Generate a Unique Entry ID for the Lineup 
     const entryId = `${currUser.email}_${Date.now()}_${uuidv4()}`;
 
-
-    if(!entryType || !entryAmount || entryAmount <= 0) {
-      console.log("Select a valid entry type and/or input a valid entry amount.");
+    if (!entryType || !entryAmount || entryAmount <= 0) {
+      setModalMessage(
+        "Select a valid entry type and/or input a valid entry amount."
+      );
+      setIsModalOpen(true);
       return;
     }
 
-    const calculatePayout = calculatePayoutMultiplier(entryType, allEntries.length, allEntries.length);
+    const calculatePayout = calculatePayoutMultiplier(
+      entryType,
+      allEntries.length,
+      allEntries.length
+    );
 
-    // Submit the Lineup to the Backend as JSON
     try {
       const response = await fetch("http://localhost:8000/lineups/submit", {
         method: "POST",
@@ -313,15 +310,16 @@ function Dashboard() {
       });
 
       if (response.status === 200) {
-        console.log("Lineup submitted successfully.");
-
-        // Resets the Lineup State After Submitting Lineup
+        setModalMessage("Lineup submitted successfully.");
+        setIsModalOpen(true);
         setLineup({});
       } else {
-        console.log("Error submitting lineup");
+        setModalMessage("Error submitting lineup.");
+        setIsModalOpen(true);
       }
     } catch (error) {
-      console.error("Error submitting lineup", error);
+      setModalMessage("Error submitting lineup.");
+      setIsModalOpen(true);
     }
   };
 
@@ -339,34 +337,33 @@ function Dashboard() {
 
   // Function to Update the Lineup with the Selected Player's Pick in the Lineup Builder Popup
   const userPickUpdate = (playerId, pick) => {
-
-    if(pick === "Clear All") {
+    if (pick === "Clear All") {
       setLineup({});
       return;
     }
 
     setLineup((prevLines) => {
       const newPick = {};
-    
-      
-      for(const category in prevLines) {
+
+      for (const category in prevLines) {
         const categoryLineup = prevLines[category];
 
-        if(pick === "Remove") {
-          const filteredLineup = categoryLineup.filter(entry => entry.player_id !== playerId);
-          if(filteredLineup.length > 0) {
+        if (pick === "Remove") {
+          const filteredLineup = categoryLineup.filter(
+            (entry) => entry.player_id !== playerId
+          );
+          if (filteredLineup.length > 0) {
             newPick[category] = filteredLineup;
           }
-        }
-
-        else {
+        } else {
           newPick[category] = prevLines[category].map((entry) =>
-          entry.player_id === playerId ? { ...entry, users_pick: pick } : entry
+            entry.player_id === playerId
+              ? { ...entry, users_pick: pick }
+              : entry
           );
         }
       }
       return newPick;
-
     });
   };
 
@@ -385,15 +382,17 @@ function Dashboard() {
 
       // Quick Delay to Allow for the Animation & Players to Load
       setTimeout(() => {
-        const findPlayerSquare = document.getElementById(`player-${player.playerId}`);
-        
-        // Finding the Player Square, Scrolling to It Then Highlighting It 
+        const findPlayerSquare = document.getElementById(
+          `player-${player.playerId}`
+        );
+
+        // Finding the Player Square, Scrolling to It Then Highlighting It
         if (findPlayerSquare) {
           findPlayerSquare.scrollIntoView({
             behavior: "smooth",
             block: "center",
-          })
-          
+          });
+
           findPlayerSquare.classList.add("card-highlight");
           // setTimeout(() => {
           //   findPlayerSquare.remove("card-highlight");
@@ -405,23 +404,10 @@ function Dashboard() {
     };
   }
 
-
-  const data = [
-    // { name: "Oct", value: 35 },
-    // { name: "Nov", value: 65 },
-    { name: "Dec", value: 33 },
-    { name: "Jan", value: 45 },
-    { name: "Feb", value: 50 },
-    { name: "Mar", value: 10 },
-    { name: "Apr", value: 25 },
-    { name: "May", value: 55 },
-    { name: "Jun", value: 78 },
-  ];
-
   return (
     
     // Main Dashboard Container 
-    <Box className="flex w-full  overflow-scroll justify-center items-center"
+    <Box className="flex w-full overflow-visible justify-center items-center"
       sx={{
         display: "flex",
         flexDirection: "row",
@@ -429,8 +415,8 @@ function Dashboard() {
         gap: "2%",
       }}>
 
-      {/* Date & Game Schedule Container */}
-      <Box
+      {/* Game Schedule Container */}
+      <Box className="TESTING"
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -440,22 +426,6 @@ function Dashboard() {
           maxWidth: "100%",
         }}
       >
-
-      {/* Display the Date of the NBA Games */}
-      <Typography
-        sx={{
-          fontSize: "1.5rem",
-          fontFamily: "monospace",
-          paddingTop: "1rem",
-          paddingBottom: "1rem",
-          textAlign: "center",
-          fontWeight: "bold",
-        }}
-      >
-        {nbaLiveGames.gameDate && nbaLiveGames.gameDate !== "N/A" ?
-        format(new Date(`${nbaLiveGames.gameDate}T00:00:00`), "MMMM d, yyyy") :
-        ""}
-      </Typography>
       
       {/* Outer Scoreboard Container */}
       <Box
@@ -464,9 +434,10 @@ function Dashboard() {
           maxWidth: "1200px",
           backgroundColor: "rgba(0, 0, 0, 0.3)",
           borderRadius: "1rem",
+          border: "1px solid gray",
         }}
       >
-        {/* Tabs (NBA, NFL, LoL, VAL) */}
+        {/* Tabs (NBA, NFL, VAL) */}
         <Tabs
           value={activeCategoryTab}
           onChange={handleCategoryTabChange}
@@ -503,8 +474,8 @@ function Dashboard() {
           }}
         >
 
-          {/*Each Tab (NBA, NFL, LoL, VAL) */}
-          {["NBA", "NFL", "LoL", "VAL"].map((category) => (
+          {/*Each Tab (NBA, NFL, VAL) */}
+          {["NBA", "NFL", "VAL"].map((category) => (
           <Tab
             key={category}
             label={category}
@@ -541,7 +512,7 @@ function Dashboard() {
               minHeight: "100vh",
             }}
           >
-            {/* TESTING SEARCH BAR COMPONENT TEMPORARILY HERE */}
+            {/* Search Bar Container */}
             <Box
               sx={{
                 position: "relative",
@@ -600,6 +571,7 @@ function Dashboard() {
                     paddingLeft: "10rem",
                     gridTemplateColumns: "80px 80px 200px 80px",
                     cursor: "pointer",
+                    border: "1px solid gray",
                   }}
                 >
                   {/* Away Team Box */}
@@ -638,44 +610,50 @@ function Dashboard() {
                       {/* Away Team Periods and Score */}
                       <Box className="mt-2">
                         <Box className="grid grid-cols-5 text-white gap-x-8 ml-40">
-                          {game.awayTeam.periods.map((period, index) => (
-                            <Box key={index} className="text-center">
-                              <Typography
-                                sx={{
-                                  fontFamily: "monospace",
-                                  gridTemplateColumns: "repeat(4, 40px) 60px",
-                                }}
-                                className="text-center"
-                              >
-                                {period.period}
-                              </Typography>
+                          
+                          {/* Away Team Periods and Score Display Shows Only When Game Starts or Finished */}
+                          {(game.gameStatus === 2 || game.gameStatus === 3) &&
+                            game.awayTeam.periods.map((period, index) => (
+                              <Box key={index} className="text-center">
+                                <Typography
+                                  sx={{
+                                    fontFamily: "monospace",
+                                    gridTemplateColumns: "repeat(4, 40px) 60px",
+                                  }}
+                                  className="text-center"
+                                >
+                                  {period.period}
+                                </Typography>
 
-                              <Typography
-                                sx={{
-                                  fontFamily: "monospace",
-                                  fontSize: "0.75rem",
-                                }}
-                                className="text-center"
-                              >
-                                {period.score}
-                              </Typography>
-                            </Box>
+                                <Typography
+                                  sx={{
+                                    fontFamily: "monospace",
+                                    fontSize: "0.75rem",
+                                  }}
+                                  className="text-center"
+                                >
+                                  {period.score}
+                                </Typography>
+                              </Box>
                           ))}
 
-                          <Typography
-                            sx={{
-                              fontFamily: "monospace",
-                              fontSize: "1.3rem",
-                              color:
-                                game.gameStatus === 3 &&
-                                game.awayTeam.score > game.homeTeam.score
-                                  ? "#10833C"
-                                  : "white",
-                            }}
-                          >
-                            {" "}
-                            {game.awayTeam.score}{" "}
-                          </Typography>
+                          {/* Away Team Score Display Shows Only When Game Starts or Finished */}
+                          {(game.gameStatus === 2 || game.gameStatus === 3) && (
+                            <Typography
+                              sx={{
+                                fontFamily: "monospace",
+                                fontSize: "1.3rem",
+                                color:
+                                  game.gameStatus === 3 &&
+                                  game.awayTeam.score > game.homeTeam.score
+                                    ? "#10833C"
+                                    : "white",
+                              }}
+                            >
+                              {" "}
+                              {game.awayTeam.score}{" "}
+                            </Typography>
+                          )}
                         </Box>
                       </Box>
                     </Box>
@@ -716,40 +694,47 @@ function Dashboard() {
                       {/* Home Team Periods and Score */}
                       <Box className="mt-2">
                         <Box className="grid grid-cols-5 text-white gap-x-8 ml-40">
-                          {game.homeTeam.periods.map((period, index) => (
-                            <Box key={index} className="text-center">
-                              <Typography
-                                sx={{ fontFamily: "monospace" }}
-                                className="text-center"
-                              >
-                                {period.period}
-                              </Typography>
+                          
+                          {/* Home Team Periods and Score Display Shows Only When Game Starts or Finished */}
+                          {(game.gameStatus === 2 || game.gameStatus === 3) &&
+                            game.homeTeam.periods.map((period, index) => (
+                              <Box key={index} className="text-center">
+                                <Typography
+                                  sx={{ fontFamily: "monospace" }}
+                                  className="text-center"
+                                >
+                                  {period.period}
+                                </Typography>
 
-                              <Typography
-                                sx={{
-                                  fontFamily: "monospace",
-                                  fontSize: "0.75rem",
-                                }}
-                                className="text-center"
-                              >
-                                {period.score}
-                              </Typography>
-                            </Box>
+                                <Typography
+                                  sx={{
+                                    fontFamily: "monospace",
+                                    fontSize: "0.75rem",
+                                  }}
+                                  className="text-center"
+                                >
+                                  {period.score}
+                                </Typography>
+                              </Box>
                           ))}
-                          <Typography
-                            sx={{
-                              fontFamily: "monospace",
-                              fontSize: "1.3rem",
-                              color:
-                                game.gameStatus === 3 &&
-                                game.homeTeam.score > game.awayTeam.score
-                                  ? "#10833C"
-                                  : "white",
-                            }}
-                          >
-                            {" "}
-                            {game.homeTeam.score}
-                          </Typography>
+
+                          {/* Home Team Score Display Shows Only When Game Starts or Finished */}
+                          {(game.gameStatus === 2 || game.gameStatus === 3) && (
+                            <Typography
+                              sx={{
+                                fontFamily: "monospace",
+                                fontSize: "1.3rem",
+                                color:
+                                  game.gameStatus === 3 &&
+                                  game.homeTeam.score > game.awayTeam.score
+                                    ? "#10833C"
+                                    : "white",
+                              }}
+                            >
+                              {" "}
+                              {game.homeTeam.score}
+                            </Typography>
+                          )}
                         </Box>
                       </Box>
                     </Box>
@@ -837,6 +822,7 @@ function Dashboard() {
                   left: 0,
                   right: 0,
                   bottom: 0,
+                  zIndex: 1100,
                   paddingBottom: "10%",
                 }}
               >
@@ -851,6 +837,8 @@ function Dashboard() {
                   <Typography
                     variant="h6"
                     sx={{
+                      position: "sticky",
+                      top: "0",
                       textAlign: "center",
                       paddingTop: "3rem",
                       fontFamily: "monospace",
@@ -881,11 +869,15 @@ function Dashboard() {
                   {/* Betting Lines Buttons Header/Box */}
                   <Box
                     sx={{
+                      position: "sticky",
+                      top: "11%",
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
                       marginTop: "2rem",
+                      marginLeft: "37rem",
                       gap: "2rem",
+                      width: "55%",
                     }}
                   >
                     {/* Betting Lines Category Buttons (PTS, REB, AST, etc.) */}
@@ -910,10 +902,6 @@ function Dashboard() {
                         {category}
                       </button>
                     ))}
-                  </Box>
-
-                  <Box>
-                    <TeamBanner nbaSelectedGame={nbaSelectedGame} />
                   </Box>
 
                   {/* All Player Squares Main Box/Section */}
@@ -941,6 +929,7 @@ function Dashboard() {
                           width: "40%",
                           fontFamily: "monospace",
                           marginBottom: "1rem",
+                          marginLeft: "10rem",
                         }}
                       >
                         {nbaSelectedGame.awayTeam.teamTriCode}
@@ -970,6 +959,7 @@ function Dashboard() {
                             display: "flex",
                             flexDirection: "column",
                             justifyContent: "space-between",
+                            marginLeft: "7rem",
                           }}
                         >
                           {/* Player Square Top Header Section */}
@@ -1127,6 +1117,10 @@ function Dashboard() {
                         ))}
                     </Box>
 
+                    <Box>
+                      <TeamBanner nbaSelectedGame={nbaSelectedGame} />
+                    </Box>
+
                     {/* Home Team Players Squares Column */}
                     <Box
                       sx={{
@@ -1144,6 +1138,7 @@ function Dashboard() {
                           width: "40%",
                           fontFamily: "monospace",
                           marginBottom: "1rem",
+                          marginRight: "10rem",
                         }}
                       >
                         {nbaSelectedGame.homeTeam.teamTriCode}
@@ -1173,6 +1168,7 @@ function Dashboard() {
                             display: "flex",
                             flexDirection: "column",
                             justifyContent: "space-between",
+                            marginRight: "7rem",
                           }}
                         >
                           {/* Player Square Top Header Section */}
@@ -1335,21 +1331,21 @@ function Dashboard() {
           );
         })()}
       
-      {/* ------Lineups Bar Popup Display------ */}
-      {Object.values(lineup).flat().length >= 1 && 
-      Object.values(lineup).flat().length <= 6 && (
+        {/* ------Lineups Bar Popup Display------ */}
+        {Object.values(lineup).flat().length >= 1 && 
+        Object.values(lineup).flat().length <= 6 && (
 
-        <Lineups
-          lineup={Object.values(lineup).flat()}
-          expand={() => setShowLineups(true)}
-          onSubmit={submitLineup}
-          pickUpdate={userPickUpdate}
-          entryType={entryType}
-          setEntryType={setEntryType}
-          entryAmount={entryAmount}
-          setEntryAmount={setEntryAmount}
-        />
-      )}
+          <Lineups
+            lineup={Object.values(lineup).flat()}
+            expand={() => setShowLineups(true)}
+            onSubmit={submitLineup}
+            pickUpdate={userPickUpdate}
+            entryType={entryType}
+            setEntryType={setEntryType}
+            entryAmount={entryAmount}
+            setEntryAmount={setEntryAmount}
+          />
+        )}
 
       {showLineupBar && (
         <Lineups
@@ -1363,94 +1359,134 @@ function Dashboard() {
       </Box>
 
       {/* ------Right Sidebar Display------ */}
-<Box
+      <Box
         className={`flex flex-col h-full border-2 border-white rounded-2xl ${
           !(activeCategoryTab === "NBA" && showBettingLines && nbaSelectedGame)
             ? "sticky top-0"
             : "hidden"
         }`}
-        sx={{ 
+        sx={{
           backgroundColor: "rgba(0, 0, 0, 0.3)",
           position: "sticky",
           alignSelf: "flex-start",
           height: "fit-content",
           overflowY: "auto",
-          top: "1.65%",
           width: "45%",
           marginRight: "2%",
+          border: "1px solid gray",
+          overflowX: "hidden",
         }}
       >
-        {/* Earnings */}
-        <Box className=" text-white rounded-t-lg p-4 flex flex-col items-center justify-center h-1/3"
+        {/* Date Container */}
+        <Box
           sx={{
-            height: "20em",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: "5%",
           }}
         >
-          <Typography className="text-xl font-bold mb-2"
+          {/* Display the Date of the NBA Games */}
+          <Typography
             sx={{
-              fontFamily: "monospace",
-              textAlign: "center",
-              color: "white",
               fontSize: "1.5rem",
+              fontFamily: "monospace",
+              paddingBottom: "1rem",
+              textAlign: "center",
               fontWeight: "bold",
-            }}>
-            Earnings
+            }}
+          >
+            {nbaLiveGames.gameDate && nbaLiveGames.gameDate !== "N/A" ?
+            format(new Date(`${nbaLiveGames.gameDate}T00:00:00`), "MMMM d, yyyy") :
+            ""}
           </Typography>
-          <div className="w-24 h-24 rounded-full border-8 border-gray-700 flex items-center justify-center mb-2">
-            {/* Placeholder value for earnings */}
-            <span className="text-2xl font-bold">$50.00</span>
-          </div>
         </Box>
 
         <Divider
           sx={{
-            bgcolor: "white",
-            height: "2px", // for horizontal
+            bgcolor: "gray",
+            height: "1px",
           }}
           flexItem
         />
 
-        {/* Monthly Progress */}
-        <div className=" h-1/3 p-4">
-          <h2 className="text-xl font-bold text-center mb-2">
-            Monthly Progress
-          </h2>
-          <ResponsiveContainer width="100%" height={200}>
-            <LineChart data={data}>
-              <CartesianGrid stroke="#444" />
-              <XAxis dataKey="name" stroke="#fff" />
-              <YAxis stroke="#fff" />
-              <Tooltip
-                contentStyle={{ backgroundColor: "#333", border: "none" }}
-                labelStyle={{ color: "#fff" }}
-                itemStyle={{ color: "#fff" }}
-              />
-              <Line
-                type="monotone"
-                dataKey="value"
-                stroke="#fff"
-                strokeWidth={2}
-                dot={{ r: 4 }}
-              />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
+        {/* Earnings Container */}
+        <Box className=" text-white rounded-t-lg flex flex-col items-center h-1/3"
+          sx={{
+            height: "18em",
+            position: "relative",
+            marginTop: "4%",
+          }}
+        >
+          {/* Earnings Header Text */}
+          <Typography className="text-xl font-bold"
+            sx={{
+              fontFamily: "monospace",
+              textAlign: "center",
+              color: "white",
+              fontSize: "1.3rem",
+              fontWeight: "bold",
+            }}>
+            Earnings
+          </Typography>
+
+          {/* Earnings Pie Chart */}
+          <PieChart 
+            balance={currUser?.balance ?? 0} 
+            wins={currUser?.wins ?? 0} 
+            losses={currUser?.losses ?? 0} 
+          />
+        </Box>
 
         <Divider
           sx={{
-            bgcolor: "white",
-            height: "2px", // for horizontal
+            bgcolor: "gray",
+            height: "1px",
           }}
           flexItem
         />
 
-        {/* Top Picks */}
-        <div className=" text-white rounded-b-lg p-4 h-1/3">
-          <h2 className="text-xl font-bold mb-4">Top Picks</h2>
-          <div className="flex justify-between items-center  rounded p-2 pl-6 mb-2">
-            <span>NYK vs LAL</span>
+        {/* Game Highlights Header Container */}
+        <Box className=" text-white rounded-b-lg p-4 h-1/3">
+
+          {/* Game Highlights Header Text */}
+          <Typography 
+            sx={{
+              fontFamily: "monospace",
+              textAlign: "center",
+              color: "white",
+              fontSize: "1.3rem",
+              fontWeight: "bold",
+            }}
+          >
+            Game Highlights
+          </Typography>
+
+          {/* 1st Game Highlights Container (1st Row) */}
+          <Box className="flex justify-between items-center rounded p-2 pl-6 mb-2 mt-2">
+
+            {/* 1st Game Highlights Text (1st Row) */}
+            <Typography
+              sx={{
+                fontFamily: "monospace",
+                color: "white",
+                fontSize: "1.2rem",
+                fontWeight: "bold",
+              }}
+            > 
+              NYK vs LAL 
+            </Typography>
+
+            {/* 1st Game Highlights Button (1st Row)*/}
             <button
-              className="px-3 py-1 rounded text-sm"
+              style={{
+                fontFamily: "monospace",
+                color: "white",
+                fontSize: "1.2rem",
+                backgroundColor: "transparent",
+                borderRadius: "0.5rem",
+                border: "1px solid white",
+              }}
               onClick={() =>
                 window.open(
                   "https://www.google.com/search?q=nyk+vs+lal&rlz=1C5CHFA_enUS944US952&oq=nyk+vs+lal&gs_lcrp=EgZjaHJvbWUyCQgAEEUYORiABDIHCAEQABiABDIHCAIQABiABDIHCAMQABiABDIHCAQQABiABDIHCAUQABiABDIHCAYQABiABDIHCAcQABiABDIHCAgQABiABDIHCAkQABiABNIBCDM1MjZqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8#sie=m;/g/11lmmffyw8;3;/m/05jvx;dt;fp;1;;;"
@@ -1459,11 +1495,34 @@ function Dashboard() {
             >
               View
             </button>
-          </div>
-          <div className="flex justify-between items-center  rounded p-2 pl-6 mb-2">
-            <span>DAL vs MIA</span>
+          </Box>
+          <Divider sx={{ bgcolor: "white", opacity: 0.3 }} />
+
+          {/* 2nd Game Highlights Container (2nd Row) */}
+          <Box className="flex justify-between items-center rounded p-2 pl-6 mb-2 mt-2">
+
+            {/* 2nd Game Highlights Text (2nd Row) */}
+            <Typography
+              sx={{
+                fontFamily: "monospace",
+                color: "white",
+                fontSize: "1.2rem",
+                fontWeight: "bold",
+              }}
+            >
+              DAL vs MIA
+            </Typography>
+
+            {/* 2nd Game Highlights Text (1nd Row) */}
             <button
-              className="px-3 py-1 rounded text-sm"
+              style={{
+                fontFamily: "monospace",
+                color: "white",
+                fontSize: "1.2rem",
+                backgroundColor: "transparent",
+                borderRadius: "0.5rem",
+                border: "1px solid white",
+              }}
               onClick={() => {
                 window.open(
                   "https://www.google.com/search?q=DAL+vs+MIA&sca_esv=7efe9108e6e32fec&rlz=1C5CHFA_enUS944US952&sxsrf=AHTn8zrEaDDdmDcZVD7guyebStxennkvvg%3A1744237313029&ei=AfP2Z5q3AankwN4PidblqQE&ved=0ahUKEwjau8mr_suMAxUpMtAFHQlrORUQ4dUDCBA&uact=5&oq=DAL+vs+MIA&gs_lp=Egxnd3Mtd2l6LXNlcnAiCkRBTCB2cyBNSUEyCxAAGIAEGJECGIoFMgcQLhiABBgKMgUQABiABDIHEAAYgAQYCjIFEAAYgAQyBxAuGIAEGAoyBxAAGIAEGAoyBxAAGIAEGAoyBxAAGIAEGAoyBxAAGIAEGApIjBxQAFj4GHABeACQAQGYAcYBoAHSCaoBAzkuNLgBA8gBAPgBAZgCDaACygjCAgQQIxgnwgIKECMYgAQYJxiKBcICEBAuGIAEGLEDGEMYgwEYigXCAgoQABiABBhDGIoFwgIKEC4YgAQYQxiKBcICDRAuGIAEGLEDGEMYigXCAggQLhiABBixA8ICEBAAGIAEGLEDGEMYgwEYigXCAgsQABiABBixAxiDAcICDhAAGIAEGLEDGIMBGIoFwgILEC4YgAQYsQMYgwGYAwCSBwQxMC4zoAeddLIHAzkuM7gHxQg&sclient=gws-wiz-serp#sie=m;/g/11wb07yms0;3;/m/05jvx;dt;fp;1;;;"
@@ -1472,11 +1531,34 @@ function Dashboard() {
             >
               View
             </button>
-          </div>
-          <div className="flex justify-between items-center  rounded p-2 pl-6">
-            <span>BOS vs CHI</span>
+          </Box>
+          <Divider sx={{ bgcolor: "white", opacity: 0.3 }} />
+
+          {/* 3rd Game Highlights Container (3rd Row) */}
+          <Box className="flex justify-between items-center rounded p-2 pl-6 mb-2 mt-2">
+
+            {/* 3rd Game Highlights Text (3rd Row) */}
+            <Typography
+              sx={{
+                fontFamily: "monospace",
+                color: "white",
+                fontSize: "1.2rem",
+                fontWeight: "bold",
+              }}
+            >
+              BOS vs CHI
+            </Typography>
+
+            {/* 3rd Game Highlights Text (3rd Row) */}
             <button
-              className="px-3 py-1 rounded text-sm"
+              style={{
+                fontFamily: "monospace",
+                color: "white",
+                fontSize: "1.2rem",
+                backgroundColor: "transparent",
+                borderRadius: "0.5rem",
+                border: "1px solid white",
+              }}
               onClick={() => {
                 window.open(
                   "https://www.google.com/search?q=BOS+vs+CHI&sca_esv=7efe9108e6e32fec&rlz=1C5CHFA_enUS944US952&sxsrf=AHTn8zqL60bwJFzCTIqYLTaAXKRm4f8Uxw%3A1744237434740&ei=evP2Z6_qLM7jwN4PytnF4Qw&ved=0ahUKEwivj87l_suMAxXOMdAFHcpsMcwQ4dUDCBA&uact=5&oq=BOS+vs+CHI&gs_lp=Egxnd3Mtd2l6LXNlcnAiCkJPUyB2cyBDSEkyCxAAGIAEGJECGIoFMgsQABiABBiRAhiKBTILEAAYgAQYkQIYigUyBRAAGIAEMgUQABiABDIFEAAYgAQyBxAAGIAEGAoyBRAAGIAEMgcQABiABBgKMgcQABiABBgKSO8OUABY5ApwAHgBkAEAmAGdAaAB1QeqAQM2LjS4AQPIAQD4AQGYAgqgAvkHwgIKECMYgAQYJxiKBcICBBAjGCfCAgoQABiABBhDGIoFwgIKEC4YgAQYQxiKBcICEBAuGIAEGLEDGEMYgwEYigXCAg4QABiABBixAxiDARiKBcICCxAAGIAEGLEDGIMBwgILEC4YgAQYsQMYgwHCAhAQABiABBixAxhDGIMBGIoFwgIQEAAYgAQYsQMYgwEYFBiHAsICChAAGIAEGBQYhwLCAgQQABgDwgIKEAAYgAQYsQMYCpgDAJIHAzYuNKAHzUiyBwM2LjS4B_kH&sclient=gws-wiz-serp#sie=m;/g/11wb08gz73;3;/m/05jvx;dt;fp;1;;;"
@@ -1485,8 +1567,16 @@ function Dashboard() {
             >
               View
             </button>
-          </div>
-        </div>
+          </Box>
+        </Box>
+
+        {/* Modal */}
+        <CenteredModal
+          isOpen={isModalOpen}
+          message={modalMessage}
+          onClose={() => setIsModalOpen(false)}
+        />
+
       </Box>
     </Box>
   );
