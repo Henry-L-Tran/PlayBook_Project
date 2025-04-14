@@ -18,10 +18,10 @@ function Valorant() {
   // State for the popup modal and selected match
   const [showBettingLines, setShowBettingLines] = useState(false);
   const [selectedMatch, setSelectedMatch] = useState(null);
-  // New state for the kills data corresponding to the selected match
+  // New state to store kills data for the selected match (fetched from /VALROANT/player_kills)
   const [selectedMatchKills, setSelectedMatchKills] = useState(null);
 
-  // States and variables for the betting lines UI (if match isn’t completed)
+  // States and variables for betting lines UI (used if match is not completed)
   const [viewLineCategory, setViewLineCategory] = useState("PTS");
   const lineCategoryOptions = [
     "PTS",
@@ -36,7 +36,7 @@ function Valorant() {
     "BLKS + STLS",
   ];
 
-  // Placeholder helper functions (adjust as needed for your Valorant data)
+  // Placeholder helper functions (customize as needed for Valorant)
   const playersInGame = (match) => {
     return match.players || [];
   };
@@ -57,28 +57,7 @@ function Valorant() {
   const getRoundValue = (roundCt, roundT) =>
     roundCt === "N/A" ? roundT : roundCt;
 
-  // When a match is selected and it is completed, fetch its kills data
-  useEffect(() => {
-    if (selectedMatch && selectedMatch.time_completed) {
-      fetch("http://localhost:8000/VALROANT/player_kills")
-        .then(response => response.json())
-        .then(data => {
-          // data is expected to be an array of kill records
-          const killRecord = data.find(
-            record => record.match_id === selectedMatch.match_id
-          );
-          setSelectedMatchKills(killRecord);
-        })
-        .catch(err => {
-          console.error("Error fetching kill record", err);
-          setSelectedMatchKills(null);
-        });
-    } else {
-      setSelectedMatchKills(null);
-    }
-  }, [selectedMatch]);
-
-  // Fetch live matches
+  // Fetch live matches from VALROANT endpoint
   useEffect(() => {
     const fetchLiveMatches = async () => {
       try {
@@ -99,7 +78,7 @@ function Valorant() {
     return () => clearInterval(interval1);
   }, []);
 
-  // Fetch upcoming matches
+  // Fetch upcoming matches from VALROANT endpoint
   useEffect(() => {
     const fetchUpcomingMatches = async () => {
       try {
@@ -120,7 +99,7 @@ function Valorant() {
     return () => clearInterval(interval2);
   }, []);
 
-  // Fetch match results (recently completed matches)
+  // Fetch match results (recently completed matches) from VALROANT endpoint
   useEffect(() => {
     const fetchMatchResults = async () => {
       try {
@@ -141,6 +120,29 @@ function Valorant() {
     return () => clearInterval(interval3);
   }, []);
 
+  // When a completed match is selected (has time_completed), fetch its kill data from a separate endpoint
+  useEffect(() => {
+    if (selectedMatch && selectedMatch.time_completed) {
+      fetch("http://localhost:8000/VALROANT/player_kills")
+        .then((response) => response.json())
+        .then((data) => {
+          // Compare match_id values as strings
+          const killRecord = data.find(
+            (record) =>
+              String(record.match_id) === String(selectedMatch.match_id)
+          );
+          console.log("KillRecord found:", killRecord);
+          setSelectedMatchKills(killRecord);
+        })
+        .catch((err) => {
+          console.error("Error fetching kill record", err);
+          setSelectedMatchKills(null);
+        });
+    } else {
+      setSelectedMatchKills(null);
+    }
+  }, [selectedMatch]);
+
   return (
     <Box sx={{ padding: "2rem" }}>
       {/* Live Matches Section */}
@@ -150,17 +152,26 @@ function Valorant() {
             sx={{ display: "flex", alignItems: "center", cursor: "pointer" }}
             onClick={() => setOpenLive(!openLive)}
           >
-            <Typography variant="h5" sx={{ fontFamily: "monospace", flex: 1 }} align="center">
+            <Typography
+              variant="h5"
+              sx={{ fontFamily: "monospace", flex: 1 }}
+              align="center"
+            >
               Live Matches
             </Typography>
             {openLive ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </Box>
           <Collapse in={openLive} sx={{ mt: 2 }}>
             {liveMatches.map((match, index) => {
-              const team1Round = getRoundValue(match.team1_round_ct, match.team1_round_t);
+              const team1Round = getRoundValue(
+                match.team1_round_ct,
+                match.team1_round_t
+              );
               const team2Round = getRoundValue(
                 match.team2_round_ct,
-                match.team2_round_ct === "N/A" ? match.team2_round_t : match.team2_round_ct
+                match.team2_round_ct === "N/A"
+                  ? match.team2_round_t
+                  : match.team2_round_ct
               );
               return (
                 <Box
@@ -178,7 +189,14 @@ function Valorant() {
                     cursor: "pointer",
                   }}
                 >
-                  <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    {/* Left: Team 1 logo */}
                     <Box sx={{ width: "50px", position: "relative", height: "50px" }}>
                       <Box
                         component="img"
@@ -195,20 +213,38 @@ function Valorant() {
                         }}
                       />
                     </Box>
+                    {/* Center: Match Information */}
                     <Box sx={{ textAlign: "center", flex: 1, mx: 2 }}>
-                      <Typography variant="h5" sx={{ fontFamily: "monospace", fontWeight: "bold" }}>
+                      <Typography
+                        variant="h5"
+                        sx={{ fontFamily: "monospace", fontWeight: "bold" }}
+                      >
                         {match.team1} vs {match.team2}
                       </Typography>
-                      <Typography variant="h6" sx={{ fontFamily: "monospace", fontWeight: "bold", mt: 1 }}>
+                      <Typography
+                        variant="h6"
+                        sx={{
+                          fontFamily: "monospace",
+                          fontWeight: "bold",
+                          mt: 1,
+                        }}
+                      >
                         Score: {match.score1} - {match.score2}
                       </Typography>
-                      <Typography variant="body2" sx={{ fontFamily: "monospace", mt: 1 }}>
+                      <Typography
+                        variant="body2"
+                        sx={{ fontFamily: "monospace", mt: 1 }}
+                      >
                         Map: {match.current_map}
                       </Typography>
-                      <Typography variant="caption" sx={{ fontFamily: "monospace", mt: 0.5 }}>
+                      <Typography
+                        variant="caption"
+                        sx={{ fontFamily: "monospace", mt: 0.5 }}
+                      >
                         Map Score: {team1Round} - {team2Round}
                       </Typography>
                     </Box>
+                    {/* Right: Team 2 logo */}
                     <Box sx={{ width: "50px", position: "relative", height: "50px" }}>
                       <Box
                         component="img"
@@ -239,7 +275,11 @@ function Valorant() {
           sx={{ display: "flex", alignItems: "center", cursor: "pointer" }}
           onClick={() => setOpenUpcoming(!openUpcoming)}
         >
-          <Typography variant="h5" sx={{ fontFamily: "monospace", flex: 1 }} align="center">
+          <Typography
+            variant="h5"
+            sx={{ fontFamily: "monospace", flex: 1 }}
+            align="center"
+          >
             Upcoming Matches
           </Typography>
           {openUpcoming ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
@@ -264,7 +304,10 @@ function Valorant() {
               >
                 <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                   <Box sx={{ textAlign: "center", flex: 1, mx: 2 }}>
-                    <Typography variant="h5" sx={{ fontFamily: "monospace", fontWeight: "bold" }}>
+                    <Typography
+                      variant="h5"
+                      sx={{ fontFamily: "monospace", fontWeight: "bold" }}
+                    >
                       {match.team1} vs {match.team2}
                     </Typography>
                     <Typography variant="body2" sx={{ fontFamily: "monospace", mt: 1 }}>
@@ -291,7 +334,11 @@ function Valorant() {
           sx={{ display: "flex", alignItems: "center", cursor: "pointer" }}
           onClick={() => setOpenCompleted(!openCompleted)}
         >
-          <Typography variant="h5" sx={{ fontFamily: "monospace", flex: 1 }} align="center">
+          <Typography
+            variant="h5"
+            sx={{ fontFamily: "monospace", flex: 1 }}
+            align="center"
+          >
             Recently Completed
           </Typography>
           {openCompleted ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
@@ -314,7 +361,13 @@ function Valorant() {
                   cursor: "pointer",
                 }}
               >
-                <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
                   <Box sx={{ textAlign: "center", flex: 1, mx: 2 }}>
                     <Typography variant="h5" sx={{ fontFamily: "monospace", fontWeight: "bold" }}>
                       {match.team1} vs {match.team2}
@@ -379,53 +432,173 @@ function Valorant() {
             >
               <CloseIcon />
             </IconButton>
-            {/* If match is completed, try to display kills overview */}
+            {/* If the selected match is completed, show kills overview */}
             {selectedMatch.time_completed ? (
               selectedMatchKills ? (
                 <Box>
                   <Typography variant="h6" align="center" sx={{ mb: 2 }}>
-                    {selectedMatch.team1} vs {selectedMatch.team2} - Kills Overview
+                    {selectedMatch.team1} vs {selectedMatch.team2} - 2 Maps
                   </Typography>
-                  <Box sx={{ display: "flex", justifyContent: "space-around", mt: 2 }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-around",
+                      gap: 4,
+                      mt: 2,
+                    }}
+                  >
                     {/* Team A Column */}
-                    <Box sx={{ flex: 1 }}>
-                      <Typography variant="subtitle1" align="center" sx={{ mb: 1 }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        gap: 2,
+                      }}
+                    >
+                      <Typography variant="subtitle1" align="center" sx={{ mb: 1, fontWeight: "bold" }} >
                         {selectedMatch.team1}
                       </Typography>
-                      {[1, 2, 3, 4, 5].map(i => (
-                        <Box key={i} sx={{ mt: 1, textAlign: "center" }}>
-                          <Typography variant="body1">
-                            {selectedMatchKills[`player${i}a`]} : {selectedMatchKills[`player${i}a_kills`]} Kills
-                          </Typography>
-                        </Box>
-                      ))}
+                      {[1, 2, 3, 4, 5].map((i) => {
+                        const playerName = selectedMatchKills[`player${i}a`];
+                        const playerKills = selectedMatchKills[`player${i}a_kills`];
+                        return (
+                          <Box
+                            key={i}
+                            sx={{
+                              width: "14rem",
+                              height: "18rem",
+                              border: "2px solid gray",
+                              borderRadius: "1rem",
+                              backgroundColor: "rgba(0, 0, 0, 0.5)",
+                              display: "flex",
+                              flexDirection: "column",
+                              alignItems: "center",
+                              padding: "1rem",
+                            }}
+                          >
+                            <img
+                              src="https://diamond-dapp.vercel.app/sidebar/logo2.png"
+                              alt=""
+                              style={{
+                                width: "6rem",
+                                height: "6rem",
+                                borderRadius: "50%",
+                                marginBottom: "0.5rem",
+                              }}
+                            />
+                            <Typography
+                              sx={{
+                                fontFamily: "monospace",
+                                fontWeight: "bold",
+                                textAlign: "center",
+                                fontSize: "1rem",
+                              }}
+                            >
+                              {playerName}
+                            </Typography>
+                            <Typography
+                              sx={{
+                                fontFamily: "monospace",
+                                textAlign: "center",
+                                fontSize: "1rem",
+                                mt: "0.3rem",
+                              }}
+                            >
+                              {playerKills} Kills
+                            </Typography>
+                          </Box>
+                        );
+                      })}
                     </Box>
                     {/* Team B Column */}
-                    <Box sx={{ flex: 1 }}>
-                      <Typography variant="subtitle1" align="center" sx={{ mb: 1 }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        gap: 2,
+                      }}
+                    >
+                      <Typography variant="subtitle1" align="center" sx={{ mb: 1, fontWeight: "bold"  }}>
                         {selectedMatch.team2}
                       </Typography>
-                      {[1, 2, 3, 4, 5].map(i => (
-                        <Box key={i} sx={{ mt: 1, textAlign: "center" }}>
-                          <Typography variant="body1">
-                            {selectedMatchKills[`player${i}b`]} : {selectedMatchKills[`player${i}b_kills`]} Kills
-                          </Typography>
-                        </Box>
-                      ))}
+                      {[1, 2, 3, 4, 5].map((i) => {
+                        const playerName = selectedMatchKills[`player${i}b`];
+                        const playerKills = selectedMatchKills[`player${i}b_kills`];
+                        return (
+                          <Box
+                            key={i}
+                            sx={{
+                              width: "14rem",
+                              height: "18rem",
+                              border: "2px solid gray",
+                              borderRadius: "1rem",
+                              backgroundColor: "rgba(0, 0, 0, 0.5)",
+                              display: "flex",
+                              flexDirection: "column",
+                              alignItems: "center",
+                              padding: "1rem",
+                            }}
+                          >
+                            <img
+                              src="https://diamond-dapp.vercel.app/sidebar/logo2.png"
+                              alt=""
+                              style={{
+                                width: "6rem",
+                                height: "6rem",
+                                borderRadius: "50%",
+                                marginBottom: "0.5rem",
+                              }}
+                            />
+                            <Typography
+                              sx={{
+                                fontFamily: "monospace",
+                                fontWeight: "bold",
+                                textAlign: "center",
+                                fontSize: "1rem",
+                              }}
+                            >
+                              {playerName}
+                            </Typography>
+                            <Typography
+                              sx={{
+                                fontFamily: "monospace",
+                                textAlign: "center",
+                                fontSize: "1rem",
+                                mt: "0.3rem",
+                              }}
+                            >
+                              {playerKills} Kills
+                            </Typography>
+                          </Box>
+                        );
+                      })}
                     </Box>
                   </Box>
                 </Box>
               ) : (
-                <Typography sx={{ textAlign: "center" }}>Loading kill data...</Typography>
+                <Typography sx={{ textAlign: "center" }}>
+                  Loading kill data...
+                </Typography>
               )
             ) : (
-              // Otherwise, display the betting lines interface
+              // For matches that are not completed, display the betting lines interface
               <Box>
                 <Typography variant="h6" align="center" sx={{ mb: 2 }}>
                   {selectedMatch.team1} @ {selectedMatch.team2}
                 </Typography>
-                <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "2rem", mt: 2 }}>
-                  {lineCategoryOptions.map(category => (
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "2rem",
+                    mt: 2,
+                  }}
+                >
+                  {lineCategoryOptions.map((category) => (
                     <button
                       key={category}
                       onClick={() => setViewLineCategory(category)}
