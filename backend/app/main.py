@@ -715,12 +715,34 @@ def val_matches():
         
     except FileNotFoundError:
         return {"message": "No Macthes Found"}
+    
+# VALORANT Upcoming Players Route
+@app.get("/VALROANT/upcoming_players")
+def val_upcoming_players():
+    try:
+        with open("app/valorant_data/val_upcoming_players.json", "r") as file:
+            data = json.load(file)
+            return data
+        
+    except FileNotFoundError:
+        return {"message": "No Macthes Found"}
 
 # VALORANT Live Scores Route
 @app.get("/VALROANT/scores")
 def val_live_scores():
     try:
         with open("app/valorant_data/val_live_scores.json", "r") as file:
+            data = json.load(file)
+            return data
+        
+    except FileNotFoundError:
+        return {"message": "No Scores Found"}
+    
+# VALORANT Live Players Route
+@app.get("/VALROANT/live_players")
+def val_live_players():
+    try:
+        with open("app/valorant_data/val_live_players.json", "r") as file:
             data = json.load(file)
             return data
         
