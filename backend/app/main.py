@@ -10,12 +10,14 @@ from app.users import RegisterUser
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from nba_api.live.nba.endpoints import scoreboard
-from nba_api.stats.endpoints import boxscoretraditionalv2
 from nba_api.stats.static import players
 from nba_api.stats.endpoints import LeagueDashPlayerStats
 from app import lineups
 from vlrggapi.api.scrape import Vlr
 from valorantproapi import data as valdata
+
+# Replacing the BoxScoreTraditionalV2 w/ This Endpoint 
+from nba_api.live.nba.endpoints import boxscore
 
 app = FastAPI()
 app.include_router(lineups.router)
@@ -275,7 +277,7 @@ def fetch_nba_live_scores():
         # Fetch NBA Live Scores Every 30 Seconds
         time.sleep(30)
 
-#threading.Thread(target=fetch_nba_live_scores, daemon=True).start()
+threading.Thread(target=fetch_nba_live_scores, daemon=True).start()
 
 
 
@@ -306,27 +308,32 @@ def fetch_player_live_stats():
 
             for game_id in game_ids:
                 try:
-                    boxscore = boxscoretraditionalv2.BoxScoreTraditionalV2(game_id=game_id)
+                    live_boxscore = boxscore.BoxScore(game_id=game_id)
+                    playerStats = live_boxscore.get_dict()
 
-                    # Using Normalized Dict to Avoid Matching Header w/ Values 
-                    playerStats = boxscore.get_normalized_dict()["PlayerStats"]
+                    # Home and Away Players From Each Game
+                    home_players = playerStats["game"]["homeTeam"]["players"]
+                    away_players = playerStats["game"]["awayTeam"]["players"]
+                    all_players = home_players + away_players
 
-                    for player in playerStats:
+                    for player in all_players:
+                        stats = player["statistics"]
+
                         filtered_player_stats.append({
                             "gameId": game_id,
                             "gameStatus": game_status.get(game_id, 1),
-                            "playerId": player["PLAYER_ID"],
-                            "playerName": player["PLAYER_NAME"],
-                            "playerPosition": player["START_POSITION"],
-                            "teamId": player["TEAM_ID"],
-                            "teamTriCode": player["TEAM_ABBREVIATION"],
-                            "points": player["PTS"],
-                            "rebounds": player["REB"],
-                            "assists": player["AST"],
-                            "3ptMade": player["FG3M"],
-                            "steals": player["STL"],
-                            "blocks": player["BLK"],
-                            "turnovers": player["TO"],
+                            "playerId": player["personId"],
+                            "playerName": player["name"],
+                            "playerPosition": player.get("position", ""),
+                            "teamTricode": player.get("team", {}).get("teamTricode", ""),
+                            "points": stats.get("points", 0),
+                            "rebounds": stats.get("reboundsTotal", 0),
+                            "assists": stats.get("assists", 0),
+                            "3ptMade": stats.get("threePointersMade", 0),
+                            "steals": stats.get("steals", 0),
+                            "blocks": stats.get("blocks", 0),
+                            "turnovers": stats.get("turnovers", 0),
+                            "playerPlayed": player.get("played") == "1",
                         })
 
                     # Fetch Individual Player Stats Every 1.5 Seconds
