@@ -1,7 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import { useState } from "react";
 
-const EarningsPieChart = ({ balance, wins, losses }) => {
+const PieChart = ({ totalWon, totalEntriesValue, wins, losses }) => {
   const totalGames = wins + losses;
   const winPercentage = totalGames > 0 ? (wins / totalGames) * 100 : 0;
   const lossPercentage = 100 - winPercentage;
@@ -38,13 +38,12 @@ const EarningsPieChart = ({ balance, wins, losses }) => {
                 height: "10rem",
                 borderRadius: "50%",
                 background: showTotalEntries
-              ? `conic-gradient(green ${winPercentage}%, red ${lossPercentage}%)`
-              : `conic-gradient(green 100%, red 0%)`,
+                ? `conic-gradient(green 0% ${winPercentage}%, red ${winPercentage}% 100%)`
+                : `conic-gradient(green 0% 100%)`,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 marginBottom: "10%",
-                transition: "background 0.8s ease-in-out",
             }}
             >
                 {/* Inner Circle for Balance Display Container */}
@@ -68,7 +67,7 @@ const EarningsPieChart = ({ balance, wins, losses }) => {
                             fontSize: "1.3rem",
                         }}
                     >
-                        ${balance?.toFixed(2) ?? "0.00"}
+                        ${showTotalEntries ? totalEntriesValue.toFixed(2) : totalWon.toFixed(2)}
                     </Typography>
                 </Box>
             </Box>
@@ -187,7 +186,7 @@ const EarningsPieChart = ({ balance, wins, losses }) => {
                     },
                 }}
             >
-                Won Entries
+                Total Winnings
             </Button>
 
             {/* Total Entries Button */}
@@ -216,11 +215,11 @@ const EarningsPieChart = ({ balance, wins, losses }) => {
                     },
                 }}
             >
-                Total Entries
+                Net Win-Loss
             </Button>
         </Box>
     </Box>
   );
 };
 
-export default EarningsPieChart;
+export default PieChart;

@@ -134,6 +134,41 @@ const Header = ({ onNavigate }) => {
             </Button>
           ))}
 
+          {/* User Balance Container */}
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              cursor: "pointer",
+              gap: 0.5
+            }}
+          >
+            {/* $ Text */}
+            <Typography
+              sx={{
+                color: "green",
+                fontSize: "2rem",
+                fontFamily: "monospace",
+                fontWeight: "bold",
+              }}
+            >
+              $
+            </Typography>
+
+            {/* User Balance Text */}
+            <Typography
+              sx={{
+                color: "white",
+                fontSize: "1.5rem",
+                fontFamily: "monospace",
+                fontWeight: "bold",
+              }}
+            >
+              {currUser?.balance ?? 0}
+            </Typography>
+          </Box>
+
+          {/* Entire User Profile Container */}
           <Box
           ref={dropdownRef}
             sx={{

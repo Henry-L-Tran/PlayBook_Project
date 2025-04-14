@@ -7,9 +7,9 @@
             "password": "password123",
             "address": "1234 Main St",
             "birthday": "01/01/1990",
-            "balance": 5397.0,
-            "wins": 6,
-            "losses": 1,
+            "balance": 295.0,
+            "wins": 2,
+            "losses": 2,
             "payment_info": {
                 "credit_card": true,
                 "card_type": "Visa",

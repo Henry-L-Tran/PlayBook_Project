@@ -7,7 +7,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { v4 as uuidv4 } from "uuid";
 import Lineups from "./Lineups";
 import { calculatePayoutMultiplier } from "./payoutMultiplier";
-import { format } from "date-fns";
+import { format, parse, set } from "date-fns";
 import SearchBar from "./SearchBar";
 import Valorant from "./Valorant";
 import "./Dashboard.css";
@@ -33,6 +33,8 @@ function Dashboard() {
   const [currUser, setCurrUser] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
+  const [userTotalWon, setUserTotalWon] = useState(0);
+  const [userTotalEntriesValue, setUserTotalEntriesValue] = useState(0);
 
   // Function to Fetch Live NBA Games (Updates Every 30 Seconds)
   useEffect(() => {
@@ -59,10 +61,32 @@ function Dashboard() {
       const user = JSON.parse(localStorage.getItem("currUser"));
       if (user?.email) {
         try {
-          const response = await fetch(
-            `http://localhost:8000/funds/user/${user.email}`
-          );
-          const updatedUser = await response.json();
+          const response = await fetch(`http://localhost:8000/lineups/user/${user.email}`);
+          const data = await response.json();
+          const userLineups = data.lineups ?? [];
+
+          let userWins = 0
+          let userLosses = 0;
+          let totalPayoutSum = 0;
+          let totalEntryDeposit = 0;
+
+          userLineups.forEach((lineup) => {
+            const payout = parseFloat(lineup.actual_payout || 0);
+            const entry = parseFloat(lineup.entry_amount);
+
+            if(lineup.result === "WON" || lineup.result === "LOST") {
+              totalEntryDeposit += entry;
+            }
+
+            if (payout > 0) {
+              totalPayoutSum += payout;
+            }
+          });
+
+          setUserTotalWon(totalPayoutSum);
+          setUserTotalEntriesValue(totalPayoutSum - totalEntryDeposit);
+
+          const updatedUser = await fetch(`http://localhost:8000/funds/user/${user.email}`).then(res => res.json());
 
           // Updates localStorage with the Updated User Data
           localStorage.setItem("currUser", JSON.stringify(updatedUser));
@@ -522,6 +546,9 @@ function Dashboard() {
                     // Each Game Box
                     <div
                       key={index}
+                      style={{
+                        borderRadius: "1rem",
+                      }}
                       onClick={() => {
                         if (game.gameStatus === 3) {
                           setnbaselectedGame(game);
@@ -560,7 +587,10 @@ function Dashboard() {
                             <div className="flex items-center justify-center w-full gap-4 md:w-1/4 mb-2 md:mb-0 ">
                               <Typography
                                 variant="h6"
-                                sx={{ fontFamily: "monospace" }}
+                                sx={{ 
+                                  fontFamily: "monospace",
+                                  fontWeight: "bold",
+                                }}
                                 className={`mr-4 ${
                                   game.gameStatus === 3 &&
                                   game.awayTeam.score > game.homeTeam.score
@@ -573,7 +603,10 @@ function Dashboard() {
 
                               <Typography
                                 className="text-xs font-bold"
-                                sx={{ fontFamily: "monospace" }}
+                                sx={{ 
+                                  fontFamily: "monospace",
+                                  fontSize: "0.7rem",
+                                }}
                               >
                                 {game.awayTeam.wins} - {game.awayTeam.losses}
                               </Typography>
@@ -593,7 +626,10 @@ function Dashboard() {
                                           {period.period}
                                         </Typography>
                                         <Typography
-                                          sx={{ fontFamily: "monospace" }}
+                                          sx={{ 
+                                            fontFamily: "monospace",
+                                            fontWeight: "bold", 
+                                          }}
                                           className="text-xs"
                                         >
                                           {period.score}
@@ -605,7 +641,10 @@ function Dashboard() {
                                 {/* Away Team Score */}
                                 <Typography
                                   fontSize={20}
-                                  sx={{ fontFamily: "monospace" }}
+                                  sx={{ 
+                                    fontFamily: "monospace",
+                                    fontWeight: "bold", 
+                                  }}
                                   className={` text-xl ml-4 ${
                                     game.gameStatus === 3 &&
                                     game.awayTeam.score > game.homeTeam.score
@@ -627,7 +666,10 @@ function Dashboard() {
                             <div className="flex items-center justify-center w-full gap-4 md:w-1/4 mb-2 md:mb-0">
                               <Typography
                                 variant="h6"
-                                sx={{ fontFamily: "monospace" }}
+                                sx={{ 
+                                  fontFamily: "monospace",
+                                  fontWeight: "bold", 
+                                }}
                                 className={`mr-4 ${
                                   game.gameStatus === 3 &&
                                   game.homeTeam.score > game.awayTeam.score
@@ -639,7 +681,10 @@ function Dashboard() {
                               </Typography>
 
                               <Typography
-                                sx={{ fontFamily: "monospace" }}
+                                sx={{ 
+                                  fontFamily: "monospace",
+                                  fontSize: "0.7rem",
+                                }}
                                 className="text-xs font-bold"
                               >
                                 {game.homeTeam.wins} - {game.homeTeam.losses}
@@ -660,7 +705,10 @@ function Dashboard() {
                                           {period.period}
                                         </Typography>
                                         <Typography
-                                          sx={{ fontFamily: "monospace" }}
+                                          sx={{ 
+                                            fontFamily: "monospace",
+                                            fontWeight: "bold",
+                                          }}
                                           className="text-xs"
                                         >
                                           {period.score}
@@ -672,7 +720,10 @@ function Dashboard() {
 
                                 <Typography
                                   fontSize={20}
-                                  sx={{ fontFamily: "monospace" }}
+                                  sx={{ 
+                                    fontFamily: "monospace",
+                                    fontWeight: "bold", 
+                                  }}
                                   className={`text-xl ml-4 ${
                                     game.gameStatus === 3 &&
                                     game.homeTeam.score > game.awayTeam.score
@@ -1386,7 +1437,8 @@ function Dashboard() {
 
           {/* Earnings Pie Chart */}
           <PieChart
-            balance={currUser?.balance ?? 0}
+            totalWon={userTotalWon}
+            totalEntriesValue={userTotalEntriesValue}
             wins={currUser?.wins ?? 0}
             losses={currUser?.losses ?? 0}
           />
