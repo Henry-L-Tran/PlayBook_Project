@@ -2,16 +2,10 @@
     "data": {
         "segments": [
             {
-                "team 1": "T1",
-                "team 2": "Rex Regum Qeon",
-                "team1_logo": "https://owcdn.net/img/62fe0b8f6b084.png",
-                "team2_logo": "https://owcdn.net/img/629f17f51e7a3.png"
-            },
-            {
-                "team 1": "Titan Esports Club",
-                "team 2": "Nova Esports",
-                "team1_logo": "https://owcdn.net/img/65487414b8562.png",
-                "team2_logo": "https://owcdn.net/img/6404c0174250b.png"
+                "team 1": "TALON",
+                "team 2": "ZETA DIVISION",
+                "team1_logo": "https://owcdn.net/img/6226f3d764e03.png",
+                "team2_logo": "https://owcdn.net/img/62a411783d94d.png"
             }
         ]
     }
