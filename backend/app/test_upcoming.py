@@ -17,14 +17,12 @@ import re
 # Get VALORANT upcoming matches from API
 def main():
     try:
-        reg_pattern = r"^/(\d{6})/" # Regex pattern to get match_id
+        reg_pattern = r"vlr\.gg/(\d{6})/" # Regex pattern to get match_id
 
         # Get match results and filter them to tier 1 matches
-        matches = Vlr.vlr_match_results()
+        matches = Vlr.vlr_live_score()
         filtered_matches = val_filter_matches(matches)
         match_results = []
-
-        player_attrs = ['player_1', 'player_2', 'player_3', 'player_4', 'player_5']
 
         # Loop through all matches
         for match in filtered_matches:
@@ -32,35 +30,11 @@ def main():
             match_page = match["match_page"]
             match_id_temp = re.search(reg_pattern, match_page)
             match_id = match_id_temp.group(1)
+            print("MatchID: ", match_id)
             
-            # Grab stats from first 2 maps
-            match_map_1 = valdata.Round(valdata.Match(match_id).rounds[0], match_id)
-            match_map_2 = valdata.Round(valdata.Match(match_id).rounds[1], match_id)
-
-            team1_players = {}
-            team2_players = {}
-
-            # Assign initial kills for both teams
-            for attr in player_attrs:
-                # Dynamically get the player object from team A using getatt.
-                player_a = getattr(match_map_1.team_a, attr)
-                key_a = player_a.name.lower()
-                team1_players[key_a] = int(player_a.kills)
-
-                # Similarly for team B.
-                player_b = getattr(match_map_1.team_b, attr)
-                key_b = player_b.name.lower()
-                team2_players[key_b] = int(player_b.kills)
-
-            # Add to the kills already recorded.
-            for attr in player_attrs:
-                player_a = getattr(match_map_2.team_a, attr)
-                key_a = player_a.name.lower()
-                team1_players[key_a] += int(player_a.kills)
-
-                player_b = getattr(match_map_2.team_b, attr)
-                key_b = player_b.name.lower()
-                team2_players[key_b] += int(player_b.kills)
+            # Get players from each team
+            team1_player_data = valdata._get_basic_players(match_id, match["team1"], True)
+            team2_player_data = valdata._get_basic_players(match_id, match["team2"], False)
 
             match_results.append(
                 {
@@ -68,42 +42,24 @@ def main():
 
 
                     "teama": match["team1"],
-                    "player1a": match_map_1.team_a.player_1.name,
-                    "player1a_kills": team1_players.get(match_map_1.team_a.player_1.name.lower()),
-
-                    "player2a": match_map_1.team_a.player_2.name,
-                    "player2a_kills": team1_players.get(match_map_1.team_a.player_2.name.lower()),
-
-                    "player3a": match_map_1.team_a.player_3.name,
-                    "player3a_kills": team1_players.get(match_map_1.team_a.player_3.name.lower()),
-
-                    "player4a": match_map_1.team_a.player_4.name,
-                    "player4a_kills": team1_players.get(match_map_1.team_a.player_4.name.lower()),
-
-                    "player5a": match_map_1.team_a.player_5.name,
-                    "player5a_kills": team1_players.get(match_map_1.team_a.player_5.name.lower()),
+                    "player1a": team1_player_data[0].name,
+                    "player2a": team1_player_data[1].name,
+                    "player3a": team1_player_data[2].name,
+                    "player4a": team1_player_data[3].name,
+                    "player5a": team1_player_data[4].name,
 
 
                     "teamb": match["team2"],
-                    "player1b": match_map_1.team_b.player_1.name,
-                    "player1b_kills": team2_players.get(match_map_1.team_b.player_1.name.lower()),
-
-                    "player2b": match_map_1.team_b.player_2.name,
-                    "player2b_kills": team2_players.get(match_map_1.team_b.player_2.name.lower()),
-
-                    "player3b": match_map_1.team_b.player_3.name,
-                    "player3b_kills": team2_players.get(match_map_1.team_b.player_3.name.lower()),
-
-                    "player4b": match_map_1.team_b.player_4.name,
-                    "player4b_kills": team2_players.get(match_map_1.team_b.player_4.name.lower()),
-
-                    "player5b": match_map_1.team_b.player_5.name,
-                    "player5b_kills": team2_players.get(match_map_1.team_b.player_5.name.lower()),
+                    "player1b": team2_player_data[0].name,
+                    "player2b": team2_player_data[1].name,
+                    "player3b": team2_player_data[2].name,
+                    "player4b": team2_player_data[3].name,
+                    "player5b": team2_player_data[4].name,
                 }
             )
 
-            with open("app/valorant_data/val_player_kills.json", "w") as file:
-                json.dump(match_results, file, indent=4)
+        with open("backend/app/valorant_data/val_live_players.json", "w") as file:
+            json.dump(match_results, file, indent=4)
 
     except Exception as e:
         print("Error retrieving match results:", e)
