@@ -248,30 +248,5 @@
         "player4b_kills": 35,
         "player5b": "neT",
         "player5b_kills": 22
-    },
-    {
-        "match_id": "450074",
-        "teama": "Bilibili Gaming",
-        "player1a": "rushia",
-        "player1a_kills": 21,
-        "player2a": "Knight",
-        "player2a_kills": 21,
-        "player3a": "nephh",
-        "player3a_kills": 18,
-        "player4a": "whzy",
-        "player4a_kills": 35,
-        "player5a": "Levius",
-        "player5a_kills": 24,
-        "teamb": "Trace Esports",
-        "player1b": "Midi",
-        "player1b_kills": 18,
-        "player2b": "Kai",
-        "player2b_kills": 26,
-        "player3b": "heybay",
-        "player3b_kills": 19,
-        "player4b": "Biank",
-        "player4b_kills": 18,
-        "player5b": "LuoK1ng",
-        "player5b_kills": 35
     }
 ]

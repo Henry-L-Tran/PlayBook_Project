@@ -801,43 +801,46 @@ function Dashboard() {
                   player.teamTriCode === nbaSelectedGame.homeTeam.teamTriCode
               );
 
-              return (
-                // Full Popup Screen for Betting Lines
+            return (
+              // Full Popup Screen for Betting Lines
+              <Box
+                sx={{
+                  position: "fixed",
+                  backgroundColor: "rgba(0, 0, 0, 0.8)",
+                  justifyContent: "center",
+                  fontFamily: "monospace",
+                  width: "100%",
+                  maxHeight: "100vh",
+                  overflowY: "auto",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  zIndex: 1100,
+                  paddingBottom: "10%",
+                }}
+              >
+                {/* Header Away Team @ Home Team Box */}
                 <Box
                   sx={{
-                    position: "fixed",
                     backgroundColor: "rgba(0, 0, 0, 0.8)",
-                    justifyContent: "center",
-                    fontFamily: "monospace",
-                    width: "100%",
-                    maxHeight: "100vh",
-                    overflowY: "auto",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    zIndex: 1100,
+                    borderRadius: "1rem",
                   }}
                 >
-                  {/* Header Away Team @ Home Team Box */}
-                  <Box
+                  {/* Header Text (Away Team @ Home Team) */}
+                  <Typography
+                    variant="h6"
                     sx={{
-                      backgroundColor: "rgba(0, 0, 0, 0.8)",
-                      borderRadius: "1rem",
+                      position: "sticky",
+                      top: "0",
+                      textAlign: "center",
+                      paddingTop: "4vh",
+                      fontFamily: "monospace",
                     }}
                   >
-                    {/* Header Text (Away Team @ Home Team) */}
-                    <Typography
-                      variant="h6"
-                      sx={{
-                        textAlign: "center",
-                        paddingTop: "3rem",
-                        fontFamily: "monospace",
-                      }}
-                    >
-                      {nbaSelectedGame.awayTeam.teamTriCode} @{" "}
-                      {nbaSelectedGame.homeTeam.teamTriCode}
-                    </Typography>
+                    {nbaSelectedGame.awayTeam.teamTriCode} @{" "}
+                    {nbaSelectedGame.homeTeam.teamTriCode}
+                  </Typography>
 
                     {/* Exit ("X") Button In Top Right Corner*/}
                     <IconButton
@@ -857,39 +860,43 @@ function Dashboard() {
                       <CloseIcon />
                     </IconButton>
 
-                    {/* Betting Lines Buttons Header/Box */}
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        marginTop: "2rem",
-                        gap: "2rem",
-                      }}
-                    >
-                      {/* Betting Lines Category Buttons (PTS, REB, AST, etc.) */}
-                      {lineCategoryOptions.map((category) => (
-                        <button
-                          key={category}
-                          onClick={() => {
-                            setViewLineCategory(category);
-                          }}
-                          style={{
-                            fontFamily: "monospace",
-                            backgroundColor:
-                              viewLineCategory === category
-                                ? "white"
-                                : "transparent",
-                            color:
-                              viewLineCategory === category ? "black" : "white",
-                            border: "1px solid white",
-                            borderRadius: "5rem",
-                          }}
-                        >
-                          {category}
-                        </button>
-                      ))}
-                    </Box>
+                  {/* Betting Lines Buttons Header/Box */}
+                  <Box
+                    sx={{
+                      position: "sticky",
+                      top: "11%",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginTop: "2.2vh",
+                      marginLeft: "23vw",
+                      gap: "1.3vw",
+                      width: "55%",
+                    }}
+                  >
+                    {/* Betting Lines Category Buttons (PTS, REB, AST, etc.) */}
+                    {lineCategoryOptions.map((category) => (
+                      <button
+                        key={category}
+                        onClick={() => {
+                          setViewLineCategory(category);
+                        }}
+                        style={{
+                          fontFamily: "monospace",
+                          backgroundColor:
+                            viewLineCategory === category
+                              ? "white"
+                              : "transparent",
+                          color:
+                            viewLineCategory === category ? "black" : "white",
+                          border: "1px solid white",
+                          borderRadius: "5rem",
+                        }}
+                      >
+                        {category}
+                      </button>
+                    ))}
+                  </Box>
 
                     {/* All Player Squares Main Box/Section */}
                     <Box

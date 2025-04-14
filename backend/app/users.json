@@ -17,6 +17,24 @@
                 "expiration_date": "33/77",
                 "cvv": "123"
             }
+        },
+        {
+            "first_name": "Thien",
+            "last_name": "Nguyen",
+            "email": "thien.m.nguyen-1@ou.edu",
+            "password": "password123",
+            "address": "2200 Classen Blvd",
+            "birthday": "2002-10-06",
+            "balance": 10.0,
+            "wins": 0,
+            "losses": 1,
+            "payment_info": {
+                "credit_card": false,
+                "card_type": "",
+                "card_number": "",
+                "expiration_date": "",
+                "cvv": ""
+            }
         }
     ]
 }
