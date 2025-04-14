@@ -65,20 +65,26 @@ function Dashboard() {
           const data = await response.json();
           const userLineups = data.lineups ?? [];
 
-          let totalWon = 0;
-          let totalEntriesValue = 0;
+          let userWins = 0
+          let userLosses = 0;
+          let totalPayoutSum = 0;
+          let totalEntryDeposit = 0;
 
           userLineups.forEach((lineup) => {
-            if(lineup.result === "WON") {
-              totalWon += parseFloat(lineup.potential_payout);
-            }
+            const payout = parseFloat(lineup.actual_payout || 0);
+            const entry = parseFloat(lineup.entry_amount);
+
             if(lineup.result === "WON" || lineup.result === "LOST") {
-              totalEntriesValue += parseFloat(lineup.entry_amount);
+              totalEntryDeposit += entry;
+            }
+
+            if (payout > 0) {
+              totalPayoutSum += payout;
             }
           });
 
-          setUserTotalWon(totalWon);
-          setUserTotalEntriesValue(totalEntriesValue);
+          setUserTotalWon(totalPayoutSum);
+          setUserTotalEntriesValue(totalPayoutSum - totalEntryDeposit);
 
           const updatedUser = await fetch(`http://localhost:8000/funds/user/${user.email}`).then(res => res.json());
 

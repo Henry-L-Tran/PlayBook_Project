@@ -38,13 +38,12 @@ const PieChart = ({ totalWon, totalEntriesValue, wins, losses }) => {
                 height: "10rem",
                 borderRadius: "50%",
                 background: showTotalEntries
-              ? `conic-gradient(green ${winPercentage}%, red ${lossPercentage}%)`
-              : `conic-gradient(green 100%, red 0%)`,
+                ? `conic-gradient(green 0% ${winPercentage}%, red ${winPercentage}% 100%)`
+                : `conic-gradient(green 0% 100%)`,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 marginBottom: "10%",
-                transition: "background 0.8s ease-in-out",
             }}
             >
                 {/* Inner Circle for Balance Display Container */}
@@ -187,7 +186,7 @@ const PieChart = ({ totalWon, totalEntriesValue, wins, losses }) => {
                     },
                 }}
             >
-                Won Entries
+                Total Winnings
             </Button>
 
             {/* Total Entries Button */}
@@ -216,7 +215,7 @@ const PieChart = ({ totalWon, totalEntriesValue, wins, losses }) => {
                     },
                 }}
             >
-                Total Entries
+                Net Win-Loss
             </Button>
         </Box>
     </Box>

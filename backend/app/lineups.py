@@ -322,12 +322,11 @@ def fetch_user_live_lineup_data():
                         if multiplier > 0:
                             payout = round(lineup["entry_amount"] * multiplier, 2)
                             lineup["result"] = "WON"
-                            user_payout(lineup["email"], payout, user_win = True)
                             lineup["actual_payout"] = payout
+                            user_payout(lineup["email"], payout, user_win = True)
                         elif multiplier == 0:
-                            lineup["actual_payout"] = 0
-                        else:
                             lineup["result"] = "LOST"
+                            lineup["actual_payout"] = 0
                             user_payout(lineup["email"], 0, user_win = False)
 
                 # The Lineup Is Finalized, and The Live Data is Saved/Frozen
