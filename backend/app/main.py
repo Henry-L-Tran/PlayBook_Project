@@ -450,6 +450,110 @@ def fetch_val_upcoming_matches():
 
 threading.Thread(target=fetch_val_upcoming_matches, daemon=True).start()
 
+# Get VALORANT upcoming players from API
+def fetch_val_upcoming_players():
+    try:
+        reg_pattern = r"vlr\.gg/(\d{6})/" # Regex pattern to get match_id
+
+        # Get match results and filter them to tier 1 matches
+        matches = Vlr.vlr_upcoming_matches()
+        filtered_matches = val_filter_matches(matches)
+        match_results = []
+
+        # Loop through all matches
+        for match in filtered_matches:
+            # Grab match_id from vlr link
+            match_page = match["match_page"]
+            match_id_temp = re.search(reg_pattern, match_page)
+            match_id = match_id_temp.group(1)
+            print("MatchID: ", match_id)
+            
+            # Get players from each team
+            team1_player_data = valdata._get_basic_players(match_id, match["team1"], True)
+            team2_player_data = valdata._get_basic_players(match_id, match["team2"], False)
+
+            match_results.append(
+                {
+                    "match_id": match_id,
+
+
+                    "teama": match["team1"],
+                    "player1a": team1_player_data[0].name,
+                    "player2a": team1_player_data[1].name,
+                    "player3a": team1_player_data[2].name,
+                    "player4a": team1_player_data[3].name,
+                    "player5a": team1_player_data[4].name,
+
+
+                    "teamb": match["team2"],
+                    "player1b": team2_player_data[0].name,
+                    "player2b": team2_player_data[1].name,
+                    "player3b": team2_player_data[2].name,
+                    "player4b": team2_player_data[3].name,
+                    "player5b": team2_player_data[4].name,
+                }
+            )
+
+        with open("app/valorant_data/val_upcoming_players.json", "w") as file:
+            json.dump(match_results, file, indent=4)
+
+    except Exception as e:
+        print("Error retrieving match results:", e)
+
+threading.Thread(target=fetch_val_upcoming_players, daemon=True).start()
+
+# Get VALORANT live players from API
+def fetch_val_live_players():
+    try:
+        reg_pattern = r"vlr\.gg/(\d{6})/" # Regex pattern to get match_id
+
+        # Get match results and filter them to tier 1 matches
+        matches = Vlr.vlr_live_score()
+        filtered_matches = val_filter_matches(matches)
+        match_results = []
+
+        # Loop through all matches
+        for match in filtered_matches:
+            # Grab match_id from vlr link
+            match_page = match["match_page"]
+            match_id_temp = re.search(reg_pattern, match_page)
+            match_id = match_id_temp.group(1)
+            print("MatchID: ", match_id)
+            
+            # Get players from each team
+            team1_player_data = valdata._get_basic_players(match_id, match["team1"], True)
+            team2_player_data = valdata._get_basic_players(match_id, match["team2"], False)
+
+            match_results.append(
+                {
+                    "match_id": match_id,
+
+
+                    "teama": match["team1"],
+                    "player1a": team1_player_data[0].name,
+                    "player2a": team1_player_data[1].name,
+                    "player3a": team1_player_data[2].name,
+                    "player4a": team1_player_data[3].name,
+                    "player5a": team1_player_data[4].name,
+
+
+                    "teamb": match["team2"],
+                    "player1b": team2_player_data[0].name,
+                    "player2b": team2_player_data[1].name,
+                    "player3b": team2_player_data[2].name,
+                    "player4b": team2_player_data[3].name,
+                    "player5b": team2_player_data[4].name,
+                }
+            )
+
+        with open("app/valorant_data/val_live_players.json", "w") as file:
+            json.dump(match_results, file, indent=4)
+
+    except Exception as e:
+        print("Error retrieving match results:", e)
+
+threading.Thread(target=fetch_val_live_players, daemon=True).start()
+
 # Get VALORANT current live matches from API
 def fetch_val_live_matches():
     while True:    

@@ -20,7 +20,7 @@ def main():
         reg_pattern = r"vlr\.gg/(\d{6})/" # Regex pattern to get match_id
 
         # Get match results and filter them to tier 1 matches
-        matches = Vlr.vlr_upcoming_matches()
+        matches = Vlr.vlr_live_score()
         filtered_matches = val_filter_matches(matches)
         match_results = []
 
@@ -32,10 +32,9 @@ def main():
             match_id = match_id_temp.group(1)
             print("MatchID: ", match_id)
             
-            # Grab stats from first 2 maps
-            # match_map_1 = valdata.Round(valdata.Match(match_id).rounds[0], match_id)
-            team1_player_data = valdata._get_basic_players("458828", "DetonatioN FocusMe", True)
-            team2_player_data = valdata._get_basic_players("458828", "Paper Rex", False)
+            # Get players from each team
+            team1_player_data = valdata._get_basic_players(match_id, match["team1"], True)
+            team2_player_data = valdata._get_basic_players(match_id, match["team2"], False)
 
             match_results.append(
                 {
@@ -59,7 +58,7 @@ def main():
                 }
             )
 
-        with open("backend/app/valorant_data/val_upcoming_players.json", "w") as file:
+        with open("backend/app/valorant_data/val_live_players.json", "w") as file:
             json.dump(match_results, file, indent=4)
 
     except Exception as e:
