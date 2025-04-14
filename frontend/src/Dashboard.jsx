@@ -508,8 +508,14 @@ function Dashboard() {
                 </div>
 
                 {nbaLiveGames.gameData.length === 0 ? (
-                  <Typography className="text-2xl font-mono">
-                    No Scheduled Games
+                  <Typography
+                    sx={{
+                      fontSize: "1.5rem",
+                      fontFamily: "monospace",
+                      textAlign: "center",
+                    }}
+                  >
+                      No Scheduled Games
                   </Typography>
                 ) : (
                   nbaLiveGames.gameData.map((game, index) => (

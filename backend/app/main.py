@@ -275,7 +275,7 @@ def fetch_nba_live_scores():
         # Fetch NBA Live Scores Every 30 Seconds
         time.sleep(30)
 
-#threading.Thread(target=fetch_nba_live_scores, daemon=True).start()
+threading.Thread(target=fetch_nba_live_scores, daemon=True).start()
 
 
 
