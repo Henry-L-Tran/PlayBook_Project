@@ -261,6 +261,52 @@ def _get_players(round_id: str, match_id: str, team: str, is_team_a: bool):
 
             return player_1, player_2, player_3, player_4, player_5 
 
+def _get_basic_players(match_id: str, team: str, is_team_a: bool): 
+            response = requests.get(url + match_id + "/?game=all", headers=headers) 
+
+            soup = BeautifulSoup(response.text, 'html.parser') 
+
+            vm_stats_game = soup.find_all("div", {"class": "vm-stats-game mod-active"}) 
+
+            players_html = vm_stats_game[0].find_all("div", {"class": "text-of"}) 
+            flags_html  = vm_stats_game[0].find_all("i", {"class": "flag"}) 
+
+            i = 0 
+            names = [] 
+            countries = [] 
+
+            for player_html in players_html: 
+                if i <= 4 and is_team_a == True: 
+                    name = player_html.text.strip() 
+
+                    flag_html = flags_html[i] 
+                    country = flag_html["title"] 
+
+                    names.append(name) 
+                    countries.append(country) 
+
+                    i += 1 
+                elif i <= 4: 
+                    i += 1 
+                elif i > 4 and i <= 9 and is_team_a == False: 
+                    name = player_html.text.strip() 
+
+                    flag_html = flags_html[i] 
+                    country = flag_html["title"] 
+
+                    names.append(name) 
+                    countries.append(country) 
+
+                    i += 1 
+
+            player_1 = BasicPlayer(names[0], team, countries[0]) 
+            player_2 = BasicPlayer(names[1], team, countries[1]) 
+            player_3 = BasicPlayer(names[2], team, countries[2]) 
+            player_4 = BasicPlayer(names[3], team, countries[3]) 
+            player_5 = BasicPlayer(names[4], team, countries[4]) 
+
+            return player_1, player_2, player_3, player_4, player_5 
+
 class Event: 
     def __init__(self, id: str): 
         self.id = id 
@@ -300,7 +346,13 @@ class Player:
                 self.headshot = hs 
                 self.first_kill = fk 
                 self.first_death = fd 
-                self.stats = [self.rating, self.average_combat_score, self.kills, self.deaths, self.assists, self.kast, self.average_damage_per_round, self.headshot, self.first_kill, self.first_death] 
+                self.stats = [self.rating, self.average_combat_score, self.kills, self.deaths, self.assists, self.kast, self.average_damage_per_round, self.headshot, self.first_kill, self.first_death]
+
+class BasicPlayer: 
+            def __init__(self, name: str, team: str, country: str): 
+                self.name = name 
+                self.team = team 
+                self.country = country
 
 class Round: 
     def __init__(self, id: str, match_id: str): 
