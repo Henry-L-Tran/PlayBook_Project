@@ -436,5 +436,105 @@
         "result": "WON",
         "actual_payout": 15.0,
         "evaluated": true
+    },
+    {
+        "email": "thien.m.nguyen-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "thien.m.nguyen-1@ou.edu_1744639503497_3dd26dff-9376-4ee2-8b9f-b0b0e1ea75b4",
+        "entry_type": "Flex Play",
+        "entry_amount": 10.0,
+        "potential_payout": 50.0,
+        "entries": [
+            {
+                "player_id": 1641710,
+                "player_name": "Anthony Black",
+                "team_tri_code": "ORL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1641710.png",
+                "line_category": "PTS",
+                "projected_line": 9.5,
+                "users_pick": "Over",
+                "matchup": "ORL @ ATL",
+                "live_value": 20,
+                "status": "hit"
+            },
+            {
+                "player_id": 1627747,
+                "player_name": "Caris LeVert",
+                "team_tri_code": "ATL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1627747.png",
+                "line_category": "PTS",
+                "projected_line": 12.0,
+                "users_pick": "Over",
+                "matchup": "ORL @ ATL",
+                "live_value": "DNP",
+                "status": "DNP"
+            },
+            {
+                "player_id": 203991,
+                "player_name": "Clint Capela",
+                "team_tri_code": "ATL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/203991.png",
+                "line_category": "PTS",
+                "projected_line": 9.0,
+                "users_pick": "Under",
+                "matchup": "ORL @ ATL",
+                "live_value": "DNP",
+                "status": "DNP"
+            },
+            {
+                "player_id": 1631216,
+                "player_name": "Caleb Houstan",
+                "team_tri_code": "ORL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1631216.png",
+                "line_category": "PTS",
+                "projected_line": 4.0,
+                "users_pick": "Over",
+                "matchup": "ORL @ ATL",
+                "live_value": 13,
+                "status": "hit"
+            }
+        ],
+        "time": "2025-04-14T14:05:03.503653",
+        "result": "REFUNDED",
+        "actual_payout": 10.0,
+        "evaluated": true
+    },
+    {
+        "email": "thien.m.nguyen-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "thien.m.nguyen-1@ou.edu_1744639639999_4f778d7a-3ab5-4004-a2c3-67fcfddf35ab",
+        "entry_type": "Power Play",
+        "entry_amount": 100.0,
+        "potential_payout": 300.0,
+        "entries": [
+            {
+                "player_id": 1641710,
+                "player_name": "Anthony Black",
+                "team_tri_code": "ORL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1641710.png",
+                "line_category": "PTS",
+                "projected_line": 9.5,
+                "users_pick": "Over",
+                "matchup": "ORL @ ATL",
+                "live_value": 20,
+                "status": "hit"
+            },
+            {
+                "player_id": 203991,
+                "player_name": "Clint Capela",
+                "team_tri_code": "ATL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/203991.png",
+                "line_category": "PTS",
+                "projected_line": 9.0,
+                "users_pick": "Over",
+                "matchup": "ORL @ ATL",
+                "live_value": "DNP",
+                "status": "DNP"
+            }
+        ],
+        "time": "2025-04-14T14:07:20.001846",
+        "result": "LOST",
+        "actual_payout": 0,
+        "evaluated": true
     }
 ]
