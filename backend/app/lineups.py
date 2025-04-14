@@ -231,17 +231,28 @@ def fetch_user_live_lineup_data():
             for game in games:
                 home = game.get("homeTeam", {})
                 away = game.get("awayTeam", {})
-
-                # Checking Both teamTriCode and teamTricode (Idk Why it Alternates)
                 home_code = home.get("teamTricode") or home.get("teamTriCode")
                 away_code = away.get("teamTricode") or away.get("teamTriCode")
-
                 if home_code:
                     game_status[home_code] = game.get("gameStatus", 0)
                 if away_code:
                     game_status[away_code] = game.get("gameStatus", 0)
         except Exception as e:
             print("Error fetching game status:", e)
+
+        if not game_status:
+            try:
+                with open("app/nba_data/live_player_data.json", "r") as f:
+                    player_data = json.load(f).get("games", [])
+                    for player in player_data:
+                        if player.get("playerPlayed"):
+                            player_id = player.get("playerId")
+                            status = player.get("gameStatus")
+                            if player_id and status:
+                                game_status[player_id] = status
+            except Exception as e:
+                print("Fallback player status load failed:", e)
+
             
         # Updates the User's Lineups
         updated_lineups = []
@@ -271,7 +282,7 @@ def fetch_user_live_lineup_data():
 
                 # Checks if the Game is Final or Not
                 team_tri_code = entry["team_tri_code"]
-                if game_status.get(team_tri_code, 0) != 3:
+                if game_status.get(player_id, 0) != 3:
                     games_final = False
                 
 

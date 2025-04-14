@@ -536,5 +536,43 @@
         "result": "LOST",
         "actual_payout": 0,
         "evaluated": true
+    },
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "henry.l.tran-1@ou.edu_1744674740395_bab33460-8c27-4e8e-87f3-72cde05054e6",
+        "entry_type": "Power Play",
+        "entry_amount": 50.0,
+        "potential_payout": 150.0,
+        "entries": [
+            {
+                "player_id": 1631170,
+                "player_name": "Jaime Jaquez Jr.",
+                "team_tri_code": "MIA",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1631170.png",
+                "line_category": "PTS",
+                "projected_line": 8.5,
+                "users_pick": "Over",
+                "matchup": "WAS @ MIA",
+                "live_value": 41,
+                "status": "hit"
+            },
+            {
+                "player_id": 1630551,
+                "player_name": "Justin Champagnie",
+                "team_tri_code": "WAS",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630551.png",
+                "line_category": "PTS",
+                "projected_line": 9.0,
+                "users_pick": "Over",
+                "matchup": "WAS @ MIA",
+                "live_value": 27,
+                "status": "hit"
+            }
+        ],
+        "time": "2025-04-14T23:52:20.695051",
+        "result": "WON",
+        "actual_payout": 150.0,
+        "evaluated": true
     }
 ]
