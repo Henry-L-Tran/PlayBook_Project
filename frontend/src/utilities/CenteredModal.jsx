@@ -1,25 +1,35 @@
 import PropTypes from "prop-types";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-const CenteredModal = ({
-  isOpen,
-  message,
-  autoClose = false,
-  onClose,
-  opacity = 1,
-}) => {
+const CenteredModal = ({ isOpen, message, autoClose = true, onClose }) => {
+  const [visible, setVisible] = useState(isOpen);
+  const [opacity, setOpacity] = useState(1);
+
   useEffect(() => {
-    let timer;
-    if (isOpen && autoClose) {
-      // Close after 1.75 seconds
-      timer = setTimeout(() => {
-        onClose();
-      }, 1000);
+    let fadeTimer;
+    let closeTimer;
+
+    if (isOpen) {
+      setVisible(true);
+      setOpacity(1); // reset opacity when reopened
+
+      if (autoClose) {
+        // Start fading out a bit before closing
+        fadeTimer = setTimeout(() => setOpacity(0), 750);
+        closeTimer = setTimeout(() => {
+          setVisible(false);
+          onClose();
+        }, 1000);
+      }
     }
-    return () => clearTimeout(timer);
+
+    return () => {
+      clearTimeout(fadeTimer);
+      clearTimeout(closeTimer);
+    };
   }, [isOpen, autoClose, onClose]);
 
-  if (!isOpen) return null;
+  if (!visible) return null;
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-[1500]">
@@ -27,14 +37,20 @@ const CenteredModal = ({
         className="bg-black p-6 rounded-md shadow-lg"
         style={{
           opacity: opacity,
-          transition: "opacity 0.25s", // Slightly faster fade-in/out
+          transition: "opacity 0.25s ease-in-out",
         }}
       >
         <p className="text-white">{message}</p>
         {!autoClose && (
           <button
             className="mt-4 bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-md"
-            onClick={onClose}
+            onClick={() => {
+              setOpacity(0);
+              setTimeout(() => {
+                setVisible(false);
+                onClose();
+              }, 250); // match transition duration
+            }}
           >
             Close
           </button>
@@ -49,7 +65,6 @@ CenteredModal.propTypes = {
   message: PropTypes.string.isRequired,
   autoClose: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
-  opacity: PropTypes.number,
 };
 
 export default CenteredModal;
