@@ -99,7 +99,7 @@ function Valorant() {
             </Typography>
             {openLive ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </Box>
-          <Collapse in={openLive}>
+          <Collapse in={openLive} sx={{ mt: 2 }}>
             {liveMatches.map((match, index) => {
               const team1Round = getRoundValue(match.team1_round_ct, match.team1_round_t);
               const team2Round = getRoundValue(match.team2_round_ct, match.team2_round_ct === "N/A" ? match.team2_round_t : match.team2_round_ct);
@@ -183,7 +183,7 @@ function Valorant() {
           </Typography>
           {openUpcoming ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
         </Box>
-        <Collapse in={openUpcoming}>
+        <Collapse in={openUpcoming} sx={{ mt: 2 }}>
           {upcomingMatches.length > 0 ? (
             upcomingMatches.map((match, index) => (
               <Box
@@ -231,7 +231,7 @@ function Valorant() {
           </Typography>
           {openCompleted ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
         </Box>
-        <Collapse in={openCompleted}>
+        <Collapse in={openCompleted} sx={{ mt: 2 }}>
           {matchResults.length > 0 ? (
             matchResults.map((match, index) => (
               <Box
