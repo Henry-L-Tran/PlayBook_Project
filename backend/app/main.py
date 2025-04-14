@@ -588,8 +588,6 @@ threading.Thread(target=fetch_val_match_results, daemon=True).start()
 
 def fetch_val_player_kills():
     try:
-        reg_pattern = r"^/(\d{6})/" # Regex pattern to get match_id
-
         # Get match results and filter them
         matches = Vlr.vlr_match_results()
         filtered_matches = val_filter_matches(matches)
@@ -600,9 +598,7 @@ def fetch_val_player_kills():
         # Loop through all matches
         for match in filtered_matches:
             # Grab match_id from vlr link
-            match_page = match["match_page"]
-            match_id_temp = re.search(reg_pattern, match_page)
-            match_id = match_id_temp.group(1)
+            match_id = match["match_id"]
             
             # Grab stats from first 2 maps
             match_map_1 = valdata.Round(valdata.Match(match_id).rounds[0], match_id)
