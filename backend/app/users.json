@@ -7,8 +7,8 @@
             "password": "password123",
             "address": "1234 Main St",
             "birthday": "01/01/1990",
-            "balance": 170.0,
-            "wins": 1,
+            "balance": 295.0,
+            "wins": 2,
             "losses": 2,
             "payment_info": {
                 "credit_card": true,

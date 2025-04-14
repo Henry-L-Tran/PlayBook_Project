@@ -160,5 +160,67 @@
         "result": "LOST",
         "actual_payout": 0,
         "evaluated": true
+    },
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "henry.l.tran-1@ou.edu_1744613285078_4e29a7ff-f650-42ba-a46b-8c6755a69f86",
+        "entry_type": "Flex Play",
+        "entry_amount": 50.0,
+        "potential_payout": 250.0,
+        "entries": [
+            {
+                "player_id": 1628983,
+                "player_name": "Shai Gilgeous-Alexander",
+                "team_tri_code": "OKC",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1628983.png",
+                "line_category": "PTS",
+                "projected_line": 33.0,
+                "users_pick": "Over",
+                "matchup": "OKC @ NOP",
+                "live_value": "DNP",
+                "status": "DNP"
+            },
+            {
+                "player_id": 201939,
+                "player_name": "Stephen Curry",
+                "team_tri_code": "GSW",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/201939.png",
+                "line_category": "PTS",
+                "projected_line": 24.5,
+                "users_pick": "Over",
+                "matchup": "LAC @ GSW",
+                "live_value": 36,
+                "status": "hit"
+            },
+            {
+                "player_id": 202710,
+                "player_name": "Jimmy Butler III",
+                "team_tri_code": "GSW",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/202710.png",
+                "line_category": "PTS",
+                "projected_line": 17.5,
+                "users_pick": "Over",
+                "matchup": "LAC @ GSW",
+                "live_value": 30,
+                "status": "hit"
+            },
+            {
+                "player_id": 1629599,
+                "player_name": "Amir Coffey",
+                "team_tri_code": "LAC",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629599.png",
+                "line_category": "PTS",
+                "projected_line": 9.5,
+                "users_pick": "Under",
+                "matchup": "LAC @ GSW",
+                "live_value": 0,
+                "status": "hit"
+            }
+        ],
+        "time": "2025-04-14T06:48:05.387981",
+        "result": "WON",
+        "actual_payout": 125.0,
+        "evaluated": true
     }
 ]
