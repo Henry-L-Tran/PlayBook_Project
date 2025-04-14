@@ -179,6 +179,7 @@ def vlr_match_results():
     resp = requests.get(url, headers=headers)
     html = HTMLParser(resp.text)
     status = resp.status_code
+    reg_pattern = r"^/(\d{6})/"
 
     result = []
     for item in html.css("a.wf-module-item"):
@@ -225,6 +226,9 @@ def vlr_match_results():
         flag1 = flag_list[0]
         flag2 = flag_list[1]
 
+        match_id_temp = re.search(reg_pattern, url_path)
+        match_id = match_id_temp.group(1)
+
         result.append(
             {
                 "team1": team1,
@@ -238,6 +242,7 @@ def vlr_match_results():
                 "tournament_name": tourney,
                 "match_page": url_path,
                 "tournament_icon": tourney_icon_url,
+                "match_id": match_id,
             }
         )
     segments = {"status": status, "segments": result}
