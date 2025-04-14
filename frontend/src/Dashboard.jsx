@@ -335,7 +335,7 @@ function Dashboard() {
       });
 
       if (response.status === 200) {
-        setModalMessage("Lineup submitted successfully.");
+        setModalMessage("Lineup submitted successfully!");
         setIsModalOpen(true);
         setLineup({});
         setShowBettingLines(false);

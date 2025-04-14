@@ -222,5 +222,93 @@
         "result": "WON",
         "actual_payout": 125.0,
         "evaluated": true
+    },
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "henry.l.tran-1@ou.edu_1744619867195_f88531b1-74b4-4b18-88f7-f2a14fad4ddf",
+        "entry_type": "Power Play",
+        "entry_amount": 5.0,
+        "potential_payout": 15.0,
+        "entries": [
+            {
+                "player_id": 203999,
+                "player_name": "Nikola Joki\u0107",
+                "team_tri_code": "DEN",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/203999.png",
+                "line_category": "PTS",
+                "projected_line": 29.5,
+                "users_pick": "Over",
+                "matchup": "DEN @ HOU",
+                "live_value": 18,
+                "status": "miss"
+            },
+            {
+                "player_id": 1642263,
+                "player_name": "Reed Sheppard",
+                "team_tri_code": "HOU",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642263.png",
+                "line_category": "PTS",
+                "projected_line": 4.5,
+                "users_pick": "Under",
+                "matchup": "DEN @ HOU",
+                "live_value": 0,
+                "status": "hit"
+            }
+        ],
+        "time": "2025-04-14T08:37:47.698143",
+        "result": "LOST",
+        "actual_payout": 0,
+        "evaluated": true
+    },
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "henry.l.tran-1@ou.edu_1744619972534_4a41c4bc-f2ec-46a9-9f7c-896cff8ceb86",
+        "entry_type": "Power Play",
+        "entry_amount": 10.0,
+        "potential_payout": 50.0,
+        "entries": [
+            {
+                "player_id": 1630162,
+                "player_name": "Anthony Edwards",
+                "team_tri_code": "MIN",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630162.png",
+                "line_category": "PTS",
+                "projected_line": 27.5,
+                "users_pick": "Over",
+                "matchup": "UTA @ MIN",
+                "live_value": 43,
+                "status": "hit"
+            },
+            {
+                "player_id": 101108,
+                "player_name": "Chris Paul",
+                "team_tri_code": "SAS",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/101108.png",
+                "line_category": "PTS",
+                "projected_line": 9.0,
+                "users_pick": "Over",
+                "matchup": "TOR @ SAS",
+                "live_value": 15,
+                "status": "hit"
+            },
+            {
+                "player_id": 1630567,
+                "player_name": "Scottie Barnes",
+                "team_tri_code": "TOR",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630567.png",
+                "line_category": "PTS",
+                "projected_line": 19.5,
+                "users_pick": "Over",
+                "matchup": "TOR @ SAS",
+                "live_value": 35,
+                "status": "hit"
+            }
+        ],
+        "time": "2025-04-14T08:39:32.537635",
+        "result": "WON",
+        "actual_payout": 50.0,
+        "evaluated": true
     }
 ]
