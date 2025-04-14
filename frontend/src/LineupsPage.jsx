@@ -278,7 +278,55 @@ const LineupsPage = ({ user, setActiveComponent }) => {
                                             textAlign: "center",
                                         }}
                                     >
-                                        {activeLineupTabs === "Open" ? "Currently No Open Lineups!" : "Currently No Past Lineups!"}
+                                        {/* Shows No Open Lineups or No Past Lineups */}
+                                        {activeLineupTabs === "Open" ? (
+                                            <div style={{ textAlign: "center" }}>
+
+                                                {/* Currently No Open Lineups Text */}
+                                                <Typography
+                                                    sx={{
+                                                        fontFamily: "monospace",
+                                                        fontSize: "1.2rem",
+                                                        marginTop: "1rem",
+                                                    }}
+                                                >
+                                                    Currently No Open Lineups!
+                                                </Typography>
+
+                                                {/* Place a Lineup Button */}
+                                                <Button
+                                                variant="contained"
+                                                onClick={() => (setActiveComponent("lineup"))}
+                                                sx={{
+                                                    fontFamily: "monospace",
+                                                    backgroundColor: "rgba(0, 0, 0, 0.5)",
+                                                    border: "2px solid white",
+                                                    padding: "1rem 5.5rem",
+                                                    borderRadius: "0.5rem",
+                                                    color: "white",
+                                                    marginTop: "1rem",
+                                                    fontWeight: "bold",
+                                                    "&:hover": {
+                                                    backgroundColor: "transparent",
+                                                    color: "white",
+                                                    },
+                                                }}
+                                                >
+                                                Place a Lineup
+                                                </Button>
+                                            </div>
+                                            ) : (
+                                            <Typography
+                                                sx={{
+                                                fontFamily: "monospace",
+                                                fontSize: "1.2rem",
+                                                textAlign: "center",
+                                                marginTop: "1rem",
+                                                }}
+                                            >
+                                                Currently No Past Lineups!
+                                            </Typography>
+                                            )}
                                     </Typography>
                                 ) : (
                                     filteredLineups.map((lineup, idx) => (
