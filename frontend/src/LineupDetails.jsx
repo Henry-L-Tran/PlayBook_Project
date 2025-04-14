@@ -4,7 +4,13 @@ import CloseIcon from "@mui/icons-material/Close";
 import { calculatePayoutMultiplier, showPayoutMultipliers } from "./payoutMultiplier";
 
 const LineupDetails = ({ lineup, onClose, liveGames }) => {
-    const gameStatusColor = lineup.result === "WON" ? "green" : lineup.result === "LOST" ? "red" : "white";
+    const gameStatusColor = lineup.result === "WON"
+        ? "green"
+        : lineup.result === "LOST"
+        ? "red"
+        : lineup.result === "REFUNDED"
+        ? "gray"
+        : "white";
     
     // Toggles the Payout Multiplier Display
     const [showPayoutDetails, setShowPayoutDetails] = useState(false);
@@ -455,7 +461,6 @@ const LineupDetails = ({ lineup, onClose, liveGames }) => {
                                                         : entry.status === "miss"
                                                         ? "red"
                                                         : "white",
-                                                fontWeight: "bold",
                                                     fontWeight: "bold",
                                                 }}>
                                                     {entry.live_value ?? "-"}

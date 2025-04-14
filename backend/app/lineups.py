@@ -127,9 +127,9 @@ def user_payout(email: str, payout: float, user_win: bool):
             
             user["balance"] = user.get("balance", 0) + payout
 
-            if user_win:
+            if user_win is True:
                 user["wins"] = user.get("wins", 0) + 1
-            else:
+            elif user_win is False:
                 user["losses"] = user.get("losses", 0) + 1
             break
     saveUsers(users)
@@ -309,17 +309,22 @@ def fetch_user_live_lineup_data():
                     # If DNP, Parlay is Reduced to the Number of Valid Legs
                     valid_legs = [entry for entry in lineup["entries"] if entry["status"] != "DNP"]
                     total_legs = len(valid_legs)
-
                     hit_legs = len([entry for entry in valid_legs if entry["status"] == "hit"])
-                    multiplier = payout_multiplier(lineup["entry_type"], total_legs, hit_legs)
-
-                    if multiplier > 0:
-                        payout = round(lineup["entry_amount"] * multiplier, 2)
-                        lineup["result"] = "WON"
-                        user_payout(lineup["email"], payout, user_win = True)
+                    
+                    # Refunds User w/ DNP Functionality (Gives User Back Their Entry Amount)
+                    if (lineup["entry_type"] == "Power Play" and total_legs < 1) or (lineup["entry_type"] == "Flex Play" and total_legs <= 2):
+                        lineup["result"] = "REFUNDED"
+                        user_payout(lineup["email"], lineup["entry_amount"], user_win = None)
                     else:
-                        lineup["result"] = "LOST"
-                        user_payout(lineup["email"], 0, user_win = False)
+                        multiplier = payout_multiplier(lineup["entry_type"], total_legs, hit_legs)
+
+                        if multiplier > 0:
+                            payout = round(lineup["entry_amount"] * multiplier, 2)
+                            lineup["result"] = "WON"
+                            user_payout(lineup["email"], payout, user_win = True)
+                        else:
+                            lineup["result"] = "LOST"
+                            user_payout(lineup["email"], 0, user_win = False)
 
                 # The Lineup Is Finalized, and The Live Data is Saved/Frozen
                 lineup["evaluated"] = True

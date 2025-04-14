@@ -645,5 +645,42 @@
         "time": "2025-04-14T03:46:02.256477",
         "result": "LOST",
         "evaluated": true
+    },
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "henry.l.tran-1@ou.edu_1744603728798_05404fda-f233-4c3a-92f6-68fca09bae3a",
+        "entry_type": "Power Play",
+        "entry_amount": 5.0,
+        "potential_payout": 15.0,
+        "entries": [
+            {
+                "player_id": 2544,
+                "player_name": "LeBron James",
+                "team_tri_code": "LAL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png",
+                "line_category": "PTS",
+                "projected_line": 24.5,
+                "users_pick": "Over",
+                "matchup": "LAL @ POR",
+                "live_value": "DNP",
+                "status": "DNP"
+            },
+            {
+                "player_id": 1628369,
+                "player_name": "Jayson Tatum",
+                "team_tri_code": "BOS",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1628369.png",
+                "line_category": "PTS",
+                "projected_line": 27.0,
+                "users_pick": "Under",
+                "matchup": "CHA @ BOS",
+                "live_value": "DNP",
+                "status": "DNP"
+            }
+        ],
+        "time": "2025-04-14T04:08:48.804597",
+        "result": "REFUNDED",
+        "evaluated": true
     }
 ]

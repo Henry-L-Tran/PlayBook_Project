@@ -308,7 +308,13 @@ const LineupsPage = ({ user, setActiveComponent }) => {
 }
 
 const LineupBox = ({ lineup, onClick }) => {
-    const gameStatusColor = lineup.result === "WON" ? "green" : lineup.result === "LOST" ? "red" : "white";
+    const gameStatusColor = lineup.result === "WON"
+        ? "green"
+        : lineup.result === "LOST"
+        ? "red"
+        : lineup.result === "REFUNDED"
+        ? "gray"
+        : "white";
 
     return (
         // Lineup Date and Box Container
@@ -418,32 +424,37 @@ const LineupBox = ({ lineup, onClick }) => {
                             paddingLeft: "1rem",
                         }}
                     >
-                        {lineup.entries.map((entry, idx) => (
+                        {lineup.entries.map((entry, idx) => {
 
-                            // Player Pictures
-                            <img
-                                key={idx}
-                                src={entry.player_picture}
-                                alt={entry.player_name}
-                                style={{
-                                    display: "flex",
-                                    flexWrap: "wrap",
-                                    width: "5rem",
-                                    border: `2px solid ${
-                                        entry.status === "DNP" ? "gray" :
-                                        entry.status === "hit" ? "green" :
-                                        entry.status === "miss" ? "red" :
-                                        entry.live_value == null ? "white" :
-                                        "white"
-                                      }`,
-                                    borderRadius: "10rem",
-                                    objectFit: "cover",
-                                    imageRendering: "auto",
-                                    filter: entry.status === "DNP" ? "grayscale(50%) brightness(80%)" : "none",
-                                    opacity: entry.status === "DNP" ? 0.90 : 1,
-                                }}
-                            />
-                        ))}
+                            const refunded = lineup.result === "REFUNDED";
+                            const inactivePlayer = entry.status === "DNP" || refunded;
+                            
+                            return (
+                                // Player Pictures
+                                <img
+                                    key={idx}
+                                    src={entry.player_picture}
+                                    alt={entry.player_name}
+                                    style={{
+                                        display: "flex",
+                                        flexWrap: "wrap",
+                                        width: "5rem",
+                                        border: `2px solid ${
+                                            entry.status === "DNP" ? "gray" :
+                                            entry.status === "hit" ? "green" :
+                                            entry.status === "miss" ? "red" :
+                                            entry.live_value == null ? "white" :
+                                            "white"
+                                        }`,
+                                        borderRadius: "10rem",
+                                        objectFit: "cover",
+                                        imageRendering: "auto",
+                                        filter: inactivePlayer ? "grayscale(50%) brightness(80%)" : "none",
+                                        opacity: inactivePlayer ? 0.9 : 1,
+                                    }}
+                                />
+                            );
+                        })}
                     </Box>
 
                     {/* Lineup Entry Status Container */}
