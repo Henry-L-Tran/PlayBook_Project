@@ -10,12 +10,14 @@ from app.users import RegisterUser
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from nba_api.live.nba.endpoints import scoreboard
-from nba_api.stats.endpoints import boxscoretraditionalv2
 from nba_api.stats.static import players
 from nba_api.stats.endpoints import LeagueDashPlayerStats
 from app import lineups
 from vlrggapi.api.scrape import Vlr
 from valorantproapi import data as valdata
+
+# Replacing the BoxScoreTraditionalV2 w/ This Endpoint 
+from nba_api.live.nba.endpoints import boxscore
 
 app = FastAPI()
 app.include_router(lineups.router)
@@ -195,6 +197,8 @@ def register(user_data: RegisterUser):
         "address": user_data.address,
         "birthday": user_data.birthday,
         "balance": user_data.balance,
+        "wins": 0,
+        "losses": 0,
         "payment_info": {
             "credit_card": user_data.payment_info.credit_card,
             "card_type": user_data.payment_info.card_type,
@@ -304,27 +308,32 @@ def fetch_player_live_stats():
 
             for game_id in game_ids:
                 try:
-                    boxscore = boxscoretraditionalv2.BoxScoreTraditionalV2(game_id=game_id)
+                    live_boxscore = boxscore.BoxScore(game_id=game_id)
+                    playerStats = live_boxscore.get_dict()
 
-                    # Using Normalized Dict to Avoid Matching Header w/ Values 
-                    playerStats = boxscore.get_normalized_dict()["PlayerStats"]
+                    # Home and Away Players From Each Game
+                    home_players = playerStats["game"]["homeTeam"]["players"]
+                    away_players = playerStats["game"]["awayTeam"]["players"]
+                    all_players = home_players + away_players
 
-                    for player in playerStats:
+                    for player in all_players:
+                        stats = player["statistics"]
+
                         filtered_player_stats.append({
                             "gameId": game_id,
                             "gameStatus": game_status.get(game_id, 1),
-                            "playerId": player["PLAYER_ID"],
-                            "playerName": player["PLAYER_NAME"],
-                            "playerPosition": player["START_POSITION"],
-                            "teamId": player["TEAM_ID"],
-                            "teamTriCode": player["TEAM_ABBREVIATION"],
-                            "points": player["PTS"],
-                            "rebounds": player["REB"],
-                            "assists": player["AST"],
-                            "3ptMade": player["FG3M"],
-                            "steals": player["STL"],
-                            "blocks": player["BLK"],
-                            "turnovers": player["TO"],
+                            "playerId": player["personId"],
+                            "playerName": player["name"],
+                            "playerPosition": player.get("position", ""),
+                            "teamTricode": player.get("team", {}).get("teamTricode", ""),
+                            "points": stats.get("points", 0),
+                            "rebounds": stats.get("reboundsTotal", 0),
+                            "assists": stats.get("assists", 0),
+                            "3ptMade": stats.get("threePointersMade", 0),
+                            "steals": stats.get("steals", 0),
+                            "blocks": stats.get("blocks", 0),
+                            "turnovers": stats.get("turnovers", 0),
+                            "playerPlayed": player.get("played") == "1",
                         })
 
                     # Fetch Individual Player Stats Every 1.5 Seconds
@@ -426,32 +435,140 @@ def nba_scores():
 
 # Get VALORANT upcoming matches from API
 def fetch_val_upcoming_matches():
-    try:
-        # Retrieve upcoming matches and filter them
-        upcoming_matches = Vlr.vlr_upcoming_matches()
-        filtered_matches = val_filter_matches(upcoming_matches)
-        # Convert the result (a Python dictionary) to a JSON formatted string
-        with open("app/valorant_data/val_upcoming_matches.json", "w") as file:
+    while True:
+        try:
+            # Retrieve upcoming matches and filter them
+            upcoming_matches = Vlr.vlr_upcoming_matches()
+            filtered_matches = val_filter_matches(upcoming_matches)
+            # Write filtered matches to a JSON file
+            with open("app/valorant_data/val_upcoming_matches.json", "w") as file:
                 json.dump(filtered_matches, file, indent=4)
-    except Exception as e:
-        print("Error retrieving upcoming matches:", e)
+        except Exception as e:
+            print("Error retrieving upcoming matches:", e)
+        # Refresh every 30 seconds, or set to whatever interval you prefer
+        time.sleep(30)
 
 threading.Thread(target=fetch_val_upcoming_matches, daemon=True).start()
 
+# Get VALORANT upcoming players from API
+def fetch_val_upcoming_players():
+    try:
+        reg_pattern = r"vlr\.gg/(\d{6})/" # Regex pattern to get match_id
+
+        # Get match results and filter them to tier 1 matches
+        matches = Vlr.vlr_upcoming_matches()
+        filtered_matches = val_filter_matches(matches)
+        match_results = []
+
+        # Loop through all matches
+        for match in filtered_matches:
+            # Grab match_id from vlr link
+            match_page = match["match_page"]
+            match_id_temp = re.search(reg_pattern, match_page)
+            match_id = match_id_temp.group(1)
+            print("MatchID: ", match_id)
+            
+            # Get players from each team
+            team1_player_data = valdata._get_basic_players(match_id, match["team1"], True)
+            team2_player_data = valdata._get_basic_players(match_id, match["team2"], False)
+
+            match_results.append(
+                {
+                    "match_id": match_id,
+
+
+                    "teama": match["team1"],
+                    "player1a": team1_player_data[0].name,
+                    "player2a": team1_player_data[1].name,
+                    "player3a": team1_player_data[2].name,
+                    "player4a": team1_player_data[3].name,
+                    "player5a": team1_player_data[4].name,
+
+
+                    "teamb": match["team2"],
+                    "player1b": team2_player_data[0].name,
+                    "player2b": team2_player_data[1].name,
+                    "player3b": team2_player_data[2].name,
+                    "player4b": team2_player_data[3].name,
+                    "player5b": team2_player_data[4].name,
+                }
+            )
+
+        with open("app/valorant_data/val_upcoming_players.json", "w") as file:
+            json.dump(match_results, file, indent=4)
+
+    except Exception as e:
+        print("Error retrieving match results:", e)
+
+threading.Thread(target=fetch_val_upcoming_players, daemon=True).start()
+
+# Get VALORANT live players from API
+def fetch_val_live_players():
+    try:
+        reg_pattern = r"vlr\.gg/(\d{6})/" # Regex pattern to get match_id
+
+        # Get match results and filter them to tier 1 matches
+        matches = Vlr.vlr_live_score()
+        filtered_matches = val_filter_matches(matches)
+        match_results = []
+
+        # Loop through all matches
+        for match in filtered_matches:
+            # Grab match_id from vlr link
+            match_page = match["match_page"]
+            match_id_temp = re.search(reg_pattern, match_page)
+            match_id = match_id_temp.group(1)
+            print("MatchID: ", match_id)
+            
+            # Get players from each team
+            team1_player_data = valdata._get_basic_players(match_id, match["team1"], True)
+            team2_player_data = valdata._get_basic_players(match_id, match["team2"], False)
+
+            match_results.append(
+                {
+                    "match_id": match_id,
+
+
+                    "teama": match["team1"],
+                    "player1a": team1_player_data[0].name,
+                    "player2a": team1_player_data[1].name,
+                    "player3a": team1_player_data[2].name,
+                    "player4a": team1_player_data[3].name,
+                    "player5a": team1_player_data[4].name,
+
+
+                    "teamb": match["team2"],
+                    "player1b": team2_player_data[0].name,
+                    "player2b": team2_player_data[1].name,
+                    "player3b": team2_player_data[2].name,
+                    "player4b": team2_player_data[3].name,
+                    "player5b": team2_player_data[4].name,
+                }
+            )
+
+        with open("app/valorant_data/val_live_players.json", "w") as file:
+            json.dump(match_results, file, indent=4)
+
+    except Exception as e:
+        print("Error retrieving match results:", e)
+
+threading.Thread(target=fetch_val_live_players, daemon=True).start()
+
 # Get VALORANT current live matches from API
 def fetch_val_live_matches():
-    try:
-        # Retrieve live matches and filter them
-        live_Scores = Vlr.vlr_live_score()
-        filtered_matches = val_filter_matches(live_Scores)
-        # Write the result (a Python dictionary) to a JSON file
-        with open("app/valorant_data/val_live_scores.json", "w") as file:
-            json.dump(filtered_matches, file, indent=4)
-    except Exception as e:
-        print("Error retrieving live matches:", e)
+    while True:    
+        try:
+            # Retrieve live matches and filter them
+            live_Scores = Vlr.vlr_live_score()
+            filtered_matches = val_filter_matches(live_Scores)
+            # Write the result (a Python dictionary) to a JSON file
+            with open("app/valorant_data/val_live_scores.json", "w") as file:
+                json.dump(filtered_matches, file, indent=4)
+        except Exception as e:
+            print("Error retrieving live matches:", e)
 
-    # Update the score every 30 seconds
-    time.sleep(30)
+        # Update the score every 15 seconds
+        time.sleep(15)
 
 threading.Thread(target=fetch_val_live_matches, daemon=True).start()
 
@@ -587,42 +704,23 @@ def val_filter_matches(matches: dict):
                  break
 
     return filtered_matches
-
-# Fetch team names and logos from live matches
-def fetch_val_team_logos():
-    try:
-        with open("app/valorant_data/val_live_scores.json", "r") as file:
-            data = json.load(file)
-            logos = []
-
-            get_segments = data.get("data", {}).get("segments", [])
-
-            for game in get_segments:
-                logos.append(
-                    {
-                        "team 1": game["team1"],
-                        "team 2": game["team2"],
-                        "team1_logo": game["team1_logo"],
-                        "team2_logo": game["team2_logo"]
-                    }
-                )
-            
-            segments = {"segments": logos}
-            data = {"data": segments}
-
-            with open("app/valorant_data/val_live_game_logos.json", "w") as file:
-                json.dump(data, file, indent=4)
-        
-    except FileNotFoundError:
-        return {"message": "No Scores Found"}
     
-threading.Thread(target=fetch_val_team_logos, daemon=True).start()
-    
-# VALORANT Live Scores Route
+# VALORANT Upcoming Matches Route
 @app.get("/VALROANT/matches")
 def val_matches():
     try:
         with open("app/valorant_data/val_upcoming_matches.json", "r") as file:
+            data = json.load(file)
+            return data
+        
+    except FileNotFoundError:
+        return {"message": "No Macthes Found"}
+    
+# VALORANT Upcoming Players Route
+@app.get("/VALROANT/upcoming_players")
+def val_upcoming_players():
+    try:
+        with open("app/valorant_data/val_upcoming_players.json", "r") as file:
             data = json.load(file)
             return data
         
@@ -640,11 +738,44 @@ def val_live_scores():
     except FileNotFoundError:
         return {"message": "No Scores Found"}
     
+# VALORANT Live Players Route
+@app.get("/VALROANT/live_players")
+def val_live_players():
+    try:
+        with open("app/valorant_data/val_live_players.json", "r") as file:
+            data = json.load(file)
+            return data
+        
+    except FileNotFoundError:
+        return {"message": "No Scores Found"}
+    
 # VALORANT Player Stats Route
 @app.get("/VALROANT/player_stats")
 def val_player_stats():
     try:
         with open("app/valorant_data/val_recent_player_stats.json", "r") as file:
+            data = json.load(file)
+            return data
+        
+    except FileNotFoundError:
+        return {"message": "No Stats Found"}
+    
+# VALORANT Player Kills Route
+@app.get("/VALROANT/player_kills")
+def val_player_kills():
+    try:
+        with open("app/valorant_data/val_player_kills.json", "r") as file:
+            data = json.load(file)
+            return data
+        
+    except FileNotFoundError:
+        return {"message": "No Stats Found"}
+
+# VALORANT Match Results Route
+@app.get("/VALROANT/results")   
+def val_match_results():
+    try:
+        with open("app/valorant_data/val_match_results.json", "r") as file:
             data = json.load(file)
             return data
         

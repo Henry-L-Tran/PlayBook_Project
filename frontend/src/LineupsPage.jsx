@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Button } from '@mui/material';
 import axios from 'axios';
 import { format } from 'date-fns';
 import LineupDetails from "./LineupDetails";
@@ -77,7 +77,7 @@ const LineupsPage = ({ user, setActiveComponent }) => {
                         flexDirection: "row",
                         justifyContent: "center",
                         marginTop: "3%",
-                        height: "100%",
+                        minheight: "100vh",
                         gap: 3,
                     }}
                 >
@@ -93,6 +93,8 @@ const LineupsPage = ({ user, setActiveComponent }) => {
                             padding: 2,
                             borderRadius: "1rem",
                             border: "1px solid white",
+                            position: "sticky",
+                            top: "16%",
                         }}
                     >
                         {/* User's First and Last Name w/ Lineups Header Container */}
@@ -101,7 +103,7 @@ const LineupsPage = ({ user, setActiveComponent }) => {
                                 display: "flex",
                                 flexDirection: "column",
                                 justifyContent: "center",
-                                marginBottom: "10%",
+                                marginBottom: "2%",
                             }}
                         >
                             {/* User's First and Last Name */}
@@ -112,24 +114,91 @@ const LineupsPage = ({ user, setActiveComponent }) => {
                                     color: "white",
                                     textAlign: "center",
                                     fontSize: "1.5rem",
+                                    marginTop: "15%",
                                 }}
                             >
                                 {user.first_name} {user.last_name}
                             </Typography>
                         </Box>
 
+                        {/* Divider Line */}
+                            <Box
+                            sx={{
+                                borderBottom: "1px solid white",
+                                width: "85%",
+                                margin: "0.5rem auto",
+                            }}
+                        />
+
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "center",
+                                alignItems: "center",
+                            }}
+                        >
+                            {/* User's Wins */}
+                            <Typography
+                                sx={{
+                                    fontFamily: "monospace",
+                                    fontWeight: "bold",
+                                    color: "green",
+                                    textAlign: "center",
+                                    fontSize: "1.5rem",
+                                }}
+                            >
+                                {user?.wins ?? 0}
+                            </Typography>
+                            
+
+                            {/* Entries Won Text */}
+                            <Typography
+                                sx={{
+                                    fontFamily: "monospace",
+                                    color: "white",
+                                    textAlign: "center",
+                                }}
+                            >
+                                Entries Won
+                            </Typography>
+                        </Box>
+
+
+                        {/* Divider Line */}
+                        <Box
+                            sx={{
+                                borderBottom: "1px solid white",
+                                width: "85%",
+                                margin: "0.5rem auto",
+                            }}
+                        /> 
+
                         {/* Deposit Button */}
-                        <button
+                        <Button
                         onClick={() => setActiveComponent("funds")}
                             style={{
+                                marginTop: "4%",
                                 fontFamily: "monospace",
                                 fontWeight: "bold",
                                 color: "white",
                                 textAlign: "center",
+                                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                                border: "2px solid white",
+                                padding: "0.5rem 12rem",
+                                borderRadius: "0.5rem",
+                                "&:hover": {
+                                    textDecoration: "underline",
+                                },
+                                "&:focus": {
+                                    border: "none",
+                                    outline: "none",
+                                    boxShadow: "none",
+                                },
                             }}
                         >
                             Deposit
-                        </button>
+                        </Button>
                     </Box>
 
                     {/* Lineups Section Container */}
@@ -209,7 +278,55 @@ const LineupsPage = ({ user, setActiveComponent }) => {
                                             textAlign: "center",
                                         }}
                                     >
-                                        {activeLineupTabs === "Open" ? "Currently No Open Lineups!" : "Currently No Past Lineups!"}
+                                        {/* Shows No Open Lineups or No Past Lineups */}
+                                        {activeLineupTabs === "Open" ? (
+                                            <div style={{ textAlign: "center" }}>
+
+                                                {/* Currently No Open Lineups Text */}
+                                                <Typography
+                                                    sx={{
+                                                        fontFamily: "monospace",
+                                                        fontSize: "1.2rem",
+                                                        marginTop: "1rem",
+                                                    }}
+                                                >
+                                                    Currently No Open Lineups!
+                                                </Typography>
+
+                                                {/* Place a Lineup Button */}
+                                                <Button
+                                                variant="contained"
+                                                onClick={() => (setActiveComponent("lineup"))}
+                                                sx={{
+                                                    fontFamily: "monospace",
+                                                    backgroundColor: "rgba(0, 0, 0, 0.5)",
+                                                    border: "2px solid white",
+                                                    padding: "1rem 5.5rem",
+                                                    borderRadius: "0.5rem",
+                                                    color: "white",
+                                                    marginTop: "1rem",
+                                                    fontWeight: "bold",
+                                                    "&:hover": {
+                                                    backgroundColor: "transparent",
+                                                    color: "white",
+                                                    },
+                                                }}
+                                                >
+                                                Place a Lineup
+                                                </Button>
+                                            </div>
+                                            ) : (
+                                            <Typography
+                                                sx={{
+                                                fontFamily: "monospace",
+                                                fontSize: "1.2rem",
+                                                textAlign: "center",
+                                                marginTop: "1rem",
+                                                }}
+                                            >
+                                                Currently No Past Lineups!
+                                            </Typography>
+                                            )}
                                     </Typography>
                                 ) : (
                                     filteredLineups.map((lineup, idx) => (
@@ -239,7 +356,13 @@ const LineupsPage = ({ user, setActiveComponent }) => {
 }
 
 const LineupBox = ({ lineup, onClick }) => {
-    const gameStatusColor = lineup.result === "WON" ? "green" : lineup.result === "LOST" ? "red" : "white";
+    const gameStatusColor = lineup.result === "WON"
+        ? "green"
+        : lineup.result === "LOST"
+        ? "red"
+        : lineup.result === "REFUNDED"
+        ? "gray"
+        : "white";
 
     return (
         // Lineup Date and Box Container
@@ -349,24 +472,37 @@ const LineupBox = ({ lineup, onClick }) => {
                             paddingLeft: "1rem",
                         }}
                     >
-                        {lineup.entries.map((entry, idx) => (
+                        {lineup.entries.map((entry, idx) => {
 
-                            // Player Pictures
-                            <img
-                                key={idx}
-                                src={entry.player_picture}
-                                alt={entry.player_name}
-                                style={{
-                                    display: "flex",
-                                    flexWrap: "wrap",
-                                    width: "5rem",
-                                    border: `2px solid ${entry.status === 'hit' ? 'green' : entry.status === 'miss' ? 'red' : 'white'}`,
-                                    borderRadius: "10rem",
-                                    objectFit: "cover",
-                                    imageRendering: "auto",
-                                }}
-                            />
-                        ))}
+                            const refunded = lineup.result === "REFUNDED";
+                            const inactivePlayer = entry.status === "DNP" || refunded;
+                            
+                            return (
+                                // Player Pictures
+                                <img
+                                    key={idx}
+                                    src={entry.player_picture}
+                                    alt={entry.player_name}
+                                    style={{
+                                        display: "flex",
+                                        flexWrap: "wrap",
+                                        width: "5rem",
+                                        border: `2px solid ${
+                                            entry.status === "DNP" ? "gray" :
+                                            entry.status === "hit" ? "green" :
+                                            entry.status === "miss" ? "red" :
+                                            entry.live_value == null ? "white" :
+                                            "white"
+                                        }`,
+                                        borderRadius: "10rem",
+                                        objectFit: "cover",
+                                        imageRendering: "auto",
+                                        filter: inactivePlayer ? "grayscale(50%) brightness(80%)" : "none",
+                                        opacity: inactivePlayer ? 0.9 : 1,
+                                    }}
+                                />
+                            );
+                        })}
                     </Box>
 
                     {/* Lineup Entry Status Container */}
@@ -392,52 +528,6 @@ const LineupBox = ({ lineup, onClick }) => {
         </Box>
     )
 }
-
-
-const UserLineup = ({ entry }) => {
-    const { player_name, line_category, projected_line, live_value, users_pick, status } = entry;
-    const percent = Math.min((live_value / projected_line) * 100, 100);
-    const barColor = status === "hit" ? "green" : status === "miss" ? "red" : "gray";
-
-    return (
-        // User's Player Line Container
-        <Box className="player-line"
-            sx={{
-                overflow: "hidden",
-                position: "relative",
-            }}
-        >
-            {/* Player Stats */}
-            <Typography
-                sx={{
-                    fontFamily: "monospace",
-                    fontWeight: "bold",
-                    color: "white",
-                    textAlign: "center",
-                }}>
-                {player_name} • {line_category} • {users_pick} • {projected_line}
-            </Typography>
-
-            {/* Progress Bar Container */}
-            <Box className="progress-bar-container">
-
-                {/* Progress Bar */}
-                <Box
-                    className="progress-bar-fill"
-                    style={{width: `${percent}%`, backgroundColor: barColor}}
-                >
-                </Box>
-
-                {/* Player's Live Value */}
-                <Typography className="live-value">
-                    {live_value ?? "-"}
-                </Typography>
-            </Box>
-        </Box>
-    );
-};
-
-
 
 export default LineupsPage;
 

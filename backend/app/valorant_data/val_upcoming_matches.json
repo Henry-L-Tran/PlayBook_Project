@@ -1,90 +1,13 @@
 [
     {
-        "team1": "Nongshim RedForce",
-        "team2": "Team Secret",
-        "flag1": "flag_kr",
-        "flag2": "flag_ph",
-        "time_until_match": "1h 51m from now",
+        "team1": "DetonatioN FocusMe",
+        "team2": "Paper Rex",
+        "flag1": "flag_jp",
+        "flag2": "flag_sg",
+        "time_until_match": "1h 36m from now",
         "match_series": "Group Stage: Week 4",
         "match_event": "Champions Tour 2025: Pacific Stage 1",
-        "unix_timestamp": "2025-04-12 08:00:00",
-        "match_page": "https://www.vlr.gg/458823/nongshim-redforce-vs-team-secret-champions-tour-2025-pacific-stage-1-w4"
-    },
-    {
-        "team1": "Wolves Esports",
-        "team2": "All Gamers",
-        "flag1": "flag_cn",
-        "flag2": "flag_cn",
-        "time_until_match": "2h 51m from now",
-        "match_series": "Group Stage: Week 5",
-        "match_event": "Champions Tour 2025: China Stage 1",
-        "unix_timestamp": "2025-04-12 09:00:00",
-        "match_page": "https://www.vlr.gg/450073/wolves-esports-vs-all-gamers-champions-tour-2025-china-stage-1-w5"
-    },
-    {
-        "team1": "DRX",
-        "team2": "BOOM Esports",
-        "flag1": "flag_kr",
-        "flag2": "flag_id",
-        "time_until_match": "3h 51m from now",
-        "match_series": "Group Stage: Week 4",
-        "match_event": "Champions Tour 2025: Pacific Stage 1",
-        "unix_timestamp": "2025-04-12 10:00:00",
-        "match_page": "https://www.vlr.gg/458824/drx-vs-boom-esports-champions-tour-2025-pacific-stage-1-w4"
-    },
-    {
-        "team1": "Bilibili Gaming",
-        "team2": "Trace Esports",
-        "flag1": "flag_cn",
-        "flag2": "flag_cn",
-        "time_until_match": "4h 51m from now",
-        "match_series": "Group Stage: Week 5",
-        "match_event": "Champions Tour 2025: China Stage 1",
-        "unix_timestamp": "2025-04-12 11:00:00",
-        "match_page": "https://www.vlr.gg/450074/bilibili-gaming-vs-trace-esports-champions-tour-2025-china-stage-1-w5"
-    },
-    {
-        "team1": "FURIA",
-        "team2": "Cloud9",
-        "flag1": "flag_br",
-        "flag2": "flag_us",
-        "time_until_match": "14h 51m from now",
-        "match_series": "Group Stage: Week 4",
-        "match_event": "Champions Tour 2025: Americas Stage 1",
-        "unix_timestamp": "2025-04-12 21:00:00",
-        "match_page": "https://www.vlr.gg/459537/furia-vs-cloud9-champions-tour-2025-americas-stage-1-w4"
-    },
-    {
-        "team1": "Sentinels",
-        "team2": "LOUD",
-        "flag1": "flag_us",
-        "flag2": "flag_br",
-        "time_until_match": "17h 51m from now",
-        "match_series": "Group Stage: Week 4",
-        "match_event": "Champions Tour 2025: Americas Stage 1",
-        "unix_timestamp": "2025-04-13 00:00:00",
-        "match_page": "https://www.vlr.gg/459538/sentinels-vs-loud-champions-tour-2025-americas-stage-1-w4"
-    },
-    {
-        "team1": "T1",
-        "team2": "Rex Regum Qeon",
-        "flag1": "flag_kr",
-        "flag2": "flag_id",
-        "time_until_match": "1d 1h from now",
-        "match_series": "Group Stage: Week 4",
-        "match_event": "Champions Tour 2025: Pacific Stage 1",
-        "unix_timestamp": "2025-04-13 08:00:00",
-        "match_page": "https://www.vlr.gg/458825/t1-vs-rex-regum-qeon-champions-tour-2025-pacific-stage-1-w4"
-    },
-    {
-        "team1": "Titan Esports Club",
-        "team2": "Nova Esports",
-        "flag1": "flag_cn",
-        "flag2": "flag_cn",
-        "time_until_match": "1d 2h from now",
-        "match_series": "Group Stage: Week 5",
-        "match_event": "Champions Tour 2025: China Stage 1",
-        "unix_timestamp": "2025-04-13 09:00:00",
-        "match_page": "https://www.vlr.gg/450075/titan-esports-club-vs-nova-esports-champions-tour-2025-china-stage-1-w5"
+        "unix_timestamp": "2025-04-14 11:00:00",
+        "match_page": "https://www.vlr.gg/458828/detonation-focusme-vs-paper-rex-champions-tour-2025-pacific-stage-1-w4"
     }
 ]
