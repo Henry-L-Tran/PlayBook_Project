@@ -34,13 +34,13 @@ const CenteredModal = ({ isOpen, message, autoClose = true, onClose }) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center z-[1500]">
       <div
-        className="bg-black p-6 rounded-md shadow-lg"
+        className="bg-black p-6 rounded-md shadow-lg border border-gray-500"
         style={{
           opacity: opacity,
-          transition: "opacity 0.25s ease-in-out",
+          transition: "opacity 0.35s ease-in-out",
         }}
       >
-        <p className="text-white">{message}</p>
+        <p className="text-white font-mono">{message}</p>
         {!autoClose && (
           <button
             className="mt-4 bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-md"

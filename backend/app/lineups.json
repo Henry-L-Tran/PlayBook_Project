@@ -222,5 +222,219 @@
         "result": "WON",
         "actual_payout": 125.0,
         "evaluated": true
+    },
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "henry.l.tran-1@ou.edu_1744619867195_f88531b1-74b4-4b18-88f7-f2a14fad4ddf",
+        "entry_type": "Power Play",
+        "entry_amount": 5.0,
+        "potential_payout": 15.0,
+        "entries": [
+            {
+                "player_id": 203999,
+                "player_name": "Nikola Joki\u0107",
+                "team_tri_code": "DEN",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/203999.png",
+                "line_category": "PTS",
+                "projected_line": 29.5,
+                "users_pick": "Over",
+                "matchup": "DEN @ HOU",
+                "live_value": 18,
+                "status": "miss"
+            },
+            {
+                "player_id": 1642263,
+                "player_name": "Reed Sheppard",
+                "team_tri_code": "HOU",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642263.png",
+                "line_category": "PTS",
+                "projected_line": 4.5,
+                "users_pick": "Under",
+                "matchup": "DEN @ HOU",
+                "live_value": 0,
+                "status": "hit"
+            }
+        ],
+        "time": "2025-04-14T08:37:47.698143",
+        "result": "LOST",
+        "actual_payout": 0,
+        "evaluated": true
+    },
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "henry.l.tran-1@ou.edu_1744619972534_4a41c4bc-f2ec-46a9-9f7c-896cff8ceb86",
+        "entry_type": "Power Play",
+        "entry_amount": 10.0,
+        "potential_payout": 50.0,
+        "entries": [
+            {
+                "player_id": 1630162,
+                "player_name": "Anthony Edwards",
+                "team_tri_code": "MIN",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630162.png",
+                "line_category": "PTS",
+                "projected_line": 27.5,
+                "users_pick": "Over",
+                "matchup": "UTA @ MIN",
+                "live_value": 43,
+                "status": "hit"
+            },
+            {
+                "player_id": 101108,
+                "player_name": "Chris Paul",
+                "team_tri_code": "SAS",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/101108.png",
+                "line_category": "PTS",
+                "projected_line": 9.0,
+                "users_pick": "Over",
+                "matchup": "TOR @ SAS",
+                "live_value": 15,
+                "status": "hit"
+            },
+            {
+                "player_id": 1630567,
+                "player_name": "Scottie Barnes",
+                "team_tri_code": "TOR",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630567.png",
+                "line_category": "PTS",
+                "projected_line": 19.5,
+                "users_pick": "Over",
+                "matchup": "TOR @ SAS",
+                "live_value": 35,
+                "status": "hit"
+            }
+        ],
+        "time": "2025-04-14T08:39:32.537635",
+        "result": "WON",
+        "actual_payout": 50.0,
+        "evaluated": true
+    },
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "henry.l.tran-1@ou.edu_1744620584715_8ceafcc5-c5ed-4f54-9bc3-c4c668b69506",
+        "entry_type": "Flex Play",
+        "entry_amount": 10.0,
+        "potential_payout": 25.0,
+        "entries": [
+            {
+                "player_id": 1631170,
+                "player_name": "Jaime Jaquez Jr.",
+                "team_tri_code": "MIA",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1631170.png",
+                "line_category": "PTS",
+                "projected_line": 8.5,
+                "users_pick": "Over",
+                "matchup": "WAS @ MIA",
+                "live_value": 41,
+                "status": "hit"
+            },
+            {
+                "player_id": 1630551,
+                "player_name": "Justin Champagnie",
+                "team_tri_code": "WAS",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630551.png",
+                "line_category": "PTS",
+                "projected_line": 9.0,
+                "users_pick": "Over",
+                "matchup": "WAS @ MIA",
+                "live_value": 27,
+                "status": "hit"
+            },
+            {
+                "player_id": 1641732,
+                "player_name": "Colby Jones",
+                "team_tri_code": "WAS",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1641732.png",
+                "line_category": "PTS",
+                "projected_line": 4.0,
+                "users_pick": "Over",
+                "matchup": "WAS @ MIA",
+                "live_value": 20,
+                "status": "hit"
+            }
+        ],
+        "time": "2025-04-14T08:49:44.720330",
+        "result": "WON",
+        "actual_payout": 25.0,
+        "evaluated": true
+    },
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "henry.l.tran-1@ou.edu_1744620767624_7345623c-7cc4-46b9-92fd-6a5eb873a0cf",
+        "entry_type": "Power Play",
+        "entry_amount": 5.0,
+        "potential_payout": 15.0,
+        "entries": [
+            {
+                "player_id": 1642276,
+                "player_name": "Kel'el Ware",
+                "team_tri_code": "MIA",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642276.png",
+                "line_category": "PTS",
+                "projected_line": 9.5,
+                "users_pick": "Over",
+                "matchup": "WAS @ MIA",
+                "live_value": 13,
+                "status": "hit"
+            },
+            {
+                "player_id": 1642259,
+                "player_name": "Alex Sarr",
+                "team_tri_code": "WAS",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642259.png",
+                "line_category": "PTS",
+                "projected_line": 13.0,
+                "users_pick": "Under",
+                "matchup": "WAS @ MIA",
+                "live_value": 10,
+                "status": "hit"
+            }
+        ],
+        "time": "2025-04-14T08:52:47.626958",
+        "result": "WON",
+        "actual_payout": 15.0,
+        "evaluated": true
+    },
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "henry.l.tran-1@ou.edu_1744622549320_d71bb4e2-bf28-4636-b89d-200df1e52479",
+        "entry_type": "Power Play",
+        "entry_amount": 5.0,
+        "potential_payout": 15.0,
+        "entries": [
+            {
+                "player_id": 1630598,
+                "player_name": "Aaron Wiggins",
+                "team_tri_code": "OKC",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630598.png",
+                "line_category": "PTS",
+                "projected_line": 12.0,
+                "users_pick": "Over",
+                "matchup": "OKC @ NOP",
+                "live_value": 28,
+                "status": "hit"
+            },
+            {
+                "player_id": 201942,
+                "player_name": "DeMar DeRozan",
+                "team_tri_code": "SAC",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/201942.png",
+                "line_category": "PTS",
+                "projected_line": 22.0,
+                "users_pick": "Under",
+                "matchup": "PHX @ SAC",
+                "live_value": 8,
+                "status": "hit"
+            }
+        ],
+        "time": "2025-04-14T09:22:29.324672",
+        "result": "WON",
+        "actual_payout": 15.0,
+        "evaluated": true
     }
 ]
