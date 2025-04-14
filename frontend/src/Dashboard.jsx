@@ -13,6 +13,7 @@ import Valorant from "./Valorant";
 import "./Dashboard.css";
 import PieChart from "./PieChart";
 import CenteredModal from "./utilities/CenteredModal";
+import TeamBanner from "./TeamBanner";
 
 function Dashboard() {
   // State to Hold the Live Games and Player Stats
@@ -1103,6 +1104,10 @@ function Dashboard() {
                               </Box>
                             </Box>
                           ))}
+                      </Box>
+
+                      <Box>
+                        <TeamBanner nbaSelectedGame={nbaSelectedGame} />
                       </Box>
 
                       {/* Home Team Players Squares Column */}
