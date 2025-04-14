@@ -314,6 +314,7 @@ def fetch_user_live_lineup_data():
                     # Refunds User w/ DNP Functionality (Gives User Back Their Entry Amount)
                     if (lineup["entry_type"] == "Power Play" and total_legs < 1) or (lineup["entry_type"] == "Flex Play" and total_legs <= 2):
                         lineup["result"] = "REFUNDED"
+                        lineup["actual_payout"] = lineup["entry_amount"]
                         user_payout(lineup["email"], lineup["entry_amount"], user_win = None)
                     else:
                         multiplier = payout_multiplier(lineup["entry_type"], total_legs, hit_legs)
@@ -322,6 +323,9 @@ def fetch_user_live_lineup_data():
                             payout = round(lineup["entry_amount"] * multiplier, 2)
                             lineup["result"] = "WON"
                             user_payout(lineup["email"], payout, user_win = True)
+                            lineup["actual_payout"] = payout
+                        elif multiplier == 0:
+                            lineup["actual_payout"] = 0
                         else:
                             lineup["result"] = "LOST"
                             user_payout(lineup["email"], 0, user_win = False)

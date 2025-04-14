@@ -7,7 +7,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { v4 as uuidv4 } from "uuid";
 import Lineups from "./Lineups";
 import { calculatePayoutMultiplier } from "./payoutMultiplier";
-import { format } from "date-fns";
+import { format, parse, set } from "date-fns";
 import SearchBar from "./SearchBar";
 import Valorant from "./Valorant";
 import "./Dashboard.css";
@@ -33,6 +33,8 @@ function Dashboard() {
   const [currUser, setCurrUser] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
+  const [userTotalWon, setUserTotalWon] = useState(0);
+  const [userTotalEntriesValue, setUserTotalEntriesValue] = useState(0);
 
   // Function to Fetch Live NBA Games (Updates Every 30 Seconds)
   useEffect(() => {
@@ -59,10 +61,26 @@ function Dashboard() {
       const user = JSON.parse(localStorage.getItem("currUser"));
       if (user?.email) {
         try {
-          const response = await fetch(
-            `http://localhost:8000/funds/user/${user.email}`
-          );
-          const updatedUser = await response.json();
+          const response = await fetch(`http://localhost:8000/lineups/user/${user.email}`);
+          const data = await response.json();
+          const userLineups = data.lineups ?? [];
+
+          let totalWon = 0;
+          let totalEntriesValue = 0;
+
+          userLineups.forEach((lineup) => {
+            if(lineup.result === "WON") {
+              totalWon += parseFloat(lineup.potential_payout);
+            }
+            if(lineup.result === "WON" || lineup.result === "LOST") {
+              totalEntriesValue += parseFloat(lineup.entry_amount);
+            }
+          });
+
+          setUserTotalWon(totalWon);
+          setUserTotalEntriesValue(totalEntriesValue);
+
+          const updatedUser = await fetch(`http://localhost:8000/funds/user/${user.email}`).then(res => res.json());
 
           // Updates localStorage with the Updated User Data
           localStorage.setItem("currUser", JSON.stringify(updatedUser));
@@ -1413,7 +1431,8 @@ function Dashboard() {
 
           {/* Earnings Pie Chart */}
           <PieChart
-            balance={currUser?.balance ?? 0}
+            totalWon={userTotalWon}
+            totalEntriesValue={userTotalEntriesValue}
             wins={currUser?.wins ?? 0}
             losses={currUser?.losses ?? 0}
           />

@@ -1,7 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import { useState } from "react";
 
-const EarningsPieChart = ({ balance, wins, losses }) => {
+const PieChart = ({ totalWon, totalEntriesValue, wins, losses }) => {
   const totalGames = wins + losses;
   const winPercentage = totalGames > 0 ? (wins / totalGames) * 100 : 0;
   const lossPercentage = 100 - winPercentage;
@@ -68,7 +68,7 @@ const EarningsPieChart = ({ balance, wins, losses }) => {
                             fontSize: "1.3rem",
                         }}
                     >
-                        ${balance?.toFixed(2) ?? "0.00"}
+                        ${showTotalEntries ? totalEntriesValue.toFixed(2) : totalWon.toFixed(2)}
                     </Typography>
                 </Box>
             </Box>
@@ -223,4 +223,4 @@ const EarningsPieChart = ({ balance, wins, losses }) => {
   );
 };
 
-export default EarningsPieChart;
+export default PieChart;
