@@ -369,36 +369,281 @@
     {
         "email": "henry.l.tran-1@ou.edu",
         "category": "NBA",
-        "entry_id": "henry.l.tran-1@ou.edu_1744424560123_98d8bee0-19ff-496d-b125-b48f9b5b72c1",
-        "entry_type": "Power Play",
+        "entry_id": "henry.l.tran-1@ou.edu_1744597461084_89def3ce-70a6-4103-a372-d62538218d21",
+        "entry_type": "Flex Play",
         "entry_amount": 20.0,
-        "potential_payout": 60.0,
+        "potential_payout": 500.0,
         "entries": [
+            {
+                "player_id": 201939,
+                "player_name": "Stephen Curry",
+                "team_tri_code": "GSW",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/201939.png",
+                "line_category": "PTS",
+                "projected_line": 24.5,
+                "users_pick": "Over",
+                "matchup": "LAC @ GSW",
+                "live_value": 36,
+                "status": "hit"
+            },
+            {
+                "player_id": 201935,
+                "player_name": "James Harden",
+                "team_tri_code": "LAC",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/201935.png",
+                "line_category": "PTS",
+                "projected_line": 23.0,
+                "users_pick": "Under",
+                "matchup": "LAC @ GSW",
+                "live_value": 39,
+                "status": "miss"
+            },
             {
                 "player_id": 1630598,
                 "player_name": "Aaron Wiggins",
                 "team_tri_code": "OKC",
                 "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630598.png",
                 "line_category": "PTS",
-                "projected_line": 11.5,
+                "projected_line": 12.0,
                 "users_pick": "Over",
-                "matchup": "OKC @ UTA",
-                "live_value": "N/A",
-                "status": "pending"
+                "matchup": "OKC @ NOP",
+                "live_value": 28,
+                "status": "hit"
             },
             {
-                "player_id": 1641729,
-                "player_name": "Brice Sensabaugh",
-                "team_tri_code": "UTA",
-                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1641729.png",
+                "player_id": 201942,
+                "player_name": "DeMar DeRozan",
+                "team_tri_code": "SAC",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/201942.png",
                 "line_category": "PTS",
-                "projected_line": 10.5,
+                "projected_line": 22.0,
                 "users_pick": "Under",
-                "matchup": "OKC @ UTA",
-                "live_value": "N/A",
-                "status": "pending"
+                "matchup": "PHX @ SAC",
+                "live_value": 8,
+                "status": "hit"
+            },
+            {
+                "player_id": 1627826,
+                "player_name": "Ivica Zubac",
+                "team_tri_code": "LAC",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1627826.png",
+                "line_category": "REB",
+                "projected_line": 12.5,
+                "users_pick": "Over",
+                "matchup": "LAC @ GSW",
+                "live_value": 17,
+                "status": "hit"
+            },
+            {
+                "player_id": 1627741,
+                "player_name": "Buddy Hield",
+                "team_tri_code": "GSW",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1627741.png",
+                "line_category": "REB",
+                "projected_line": 3.0,
+                "users_pick": "Under",
+                "matchup": "LAC @ GSW",
+                "live_value": 1,
+                "status": "hit"
             }
         ],
-        "time": "2025-04-12T02:22:40.431891"
+        "time": "2025-04-14T02:24:21.090615",
+        "result": "WON",
+        "evaluated": true
+    },
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "henry.l.tran-1@ou.edu_1744599460503_904a2263-057f-4a3c-a6fc-17dda56475ae",
+        "entry_type": "Flex Play",
+        "entry_amount": 10.0,
+        "potential_payout": 100.0,
+        "entries": [
+            {
+                "player_id": 1628983,
+                "player_name": "Shai Gilgeous-Alexander",
+                "team_tri_code": "OKC",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1628983.png",
+                "line_category": "PTS",
+                "projected_line": 33.0,
+                "users_pick": "Over",
+                "matchup": "OKC @ NOP",
+                "live_value": "DNP",
+                "status": "DNP"
+            },
+            {
+                "player_id": 2544,
+                "player_name": "LeBron James",
+                "team_tri_code": "LAL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png",
+                "line_category": "PTS",
+                "projected_line": 24.5,
+                "users_pick": "Over",
+                "matchup": "LAL @ POR",
+                "live_value": "DNP",
+                "status": "DNP"
+            },
+            {
+                "player_id": 201939,
+                "player_name": "Stephen Curry",
+                "team_tri_code": "GSW",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/201939.png",
+                "line_category": "PTS",
+                "projected_line": 24.5,
+                "users_pick": "Over",
+                "matchup": "LAC @ GSW",
+                "live_value": 36,
+                "status": "hit"
+            },
+            {
+                "player_id": 202695,
+                "player_name": "Kawhi Leonard",
+                "team_tri_code": "LAC",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/202695.png",
+                "line_category": "PTS",
+                "projected_line": 21.5,
+                "users_pick": "Over",
+                "matchup": "LAC @ GSW",
+                "live_value": 33,
+                "status": "hit"
+            },
+            {
+                "player_id": 1641764,
+                "player_name": "Brandin Podziemski",
+                "team_tri_code": "GSW",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1641764.png",
+                "line_category": "BLKS + STLS",
+                "projected_line": 1.5,
+                "users_pick": "Under",
+                "matchup": "LAC @ GSW",
+                "live_value": 3,
+                "status": "miss"
+            }
+        ],
+        "time": "2025-04-14T02:57:40.812247",
+        "result": "WON",
+        "evaluated": true
+    },
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "henry.l.tran-1@ou.edu_1744601741975_54ed70ac-b88c-4816-af27-4931c2790f3c",
+        "entry_type": "Power Play",
+        "entry_amount": 5.0,
+        "potential_payout": 50.0,
+        "entries": [
+            {
+                "player_id": 1627747,
+                "player_name": "Caris LeVert",
+                "team_tri_code": "ATL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1627747.png",
+                "line_category": "PTS",
+                "projected_line": 12.0,
+                "users_pick": "Under",
+                "matchup": "ORL @ ATL",
+                "live_value": "DNP",
+                "status": "DNP"
+            },
+            {
+                "player_id": 1641710,
+                "player_name": "Anthony Black",
+                "team_tri_code": "ORL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1641710.png",
+                "line_category": "PTS",
+                "projected_line": 9.5,
+                "users_pick": "Over",
+                "matchup": "ORL @ ATL",
+                "live_value": 20,
+                "status": "hit"
+            },
+            {
+                "player_id": 1631216,
+                "player_name": "Caleb Houstan",
+                "team_tri_code": "ORL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1631216.png",
+                "line_category": "PTS",
+                "projected_line": 4.0,
+                "users_pick": "Under",
+                "matchup": "ORL @ ATL",
+                "live_value": 13,
+                "status": "miss"
+            },
+            {
+                "player_id": 1631230,
+                "player_name": "Dominick Barlow",
+                "team_tri_code": "ATL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1631230.png",
+                "line_category": "PTS",
+                "projected_line": 4.0,
+                "users_pick": "Under",
+                "matchup": "ORL @ ATL",
+                "live_value": 15,
+                "status": "miss"
+            }
+        ],
+        "time": "2025-04-14T03:35:41.980419",
+        "result": "LOST",
+        "evaluated": true
+    },
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "henry.l.tran-1@ou.edu_1744602362250_36b29559-3b45-4007-ba6d-16c754b2291d",
+        "entry_type": "Power Play",
+        "entry_amount": 5.0,
+        "potential_payout": 50.0,
+        "entries": [
+            {
+                "player_id": 1642348,
+                "player_name": "Justin Edwards",
+                "team_tri_code": "PHI",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642348.png",
+                "line_category": "PTS",
+                "projected_line": 10.0,
+                "users_pick": "Under",
+                "matchup": "CHI @ PHI",
+                "live_value": "DNP",
+                "status": "DNP"
+            },
+            {
+                "player_id": 1628989,
+                "player_name": "Kevin Huerter",
+                "team_tri_code": "CHI",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1628989.png",
+                "line_category": "PTS",
+                "projected_line": 10.0,
+                "users_pick": "Over",
+                "matchup": "CHI @ PHI",
+                "live_value": 18,
+                "status": "hit"
+            },
+            {
+                "player_id": 203932,
+                "player_name": "Aaron Gordon",
+                "team_tri_code": "DEN",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/203932.png",
+                "line_category": "PTS",
+                "projected_line": 14.5,
+                "users_pick": "Over",
+                "matchup": "DEN @ HOU",
+                "live_value": 18,
+                "status": "hit"
+            },
+            {
+                "player_id": 1641708,
+                "player_name": "Amen Thompson",
+                "team_tri_code": "HOU",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1641708.png",
+                "line_category": "PTS",
+                "projected_line": 14.0,
+                "users_pick": "Under",
+                "matchup": "DEN @ HOU",
+                "live_value": 15,
+                "status": "miss"
+            }
+        ],
+        "time": "2025-04-14T03:46:02.256477",
+        "result": "LOST",
+        "evaluated": true
     }
 ]

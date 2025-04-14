@@ -248,10 +248,9 @@ def fetch_user_live_lineup_data():
 
                 # If No Live Stats For the Player, Set Status to Pending, and Live Value to N/A
                 live_player = live_stats.get(player_id)
-                if not live_player:
-                    entry["live_value"] = "N/A"
-                    entry["status"] = "pending"
-                    games_final = False
+                if not live_player or live_player.get("playerPlayed") is False:
+                    entry["live_value"] = "DNP"
+                    entry["status"] = "DNP"
                     continue
 
                 # Checks if the Game is Final or Not
@@ -306,7 +305,12 @@ def fetch_user_live_lineup_data():
             # Determines the Lineup Result
             if games_final:
                 if lineup.get("result") is None or lineup["result"] == "IN PROGRESS":
-                    total_legs = len(lineup["entries"])
+                    
+                    # If DNP, Parlay is Reduced to the Number of Valid Legs
+                    valid_legs = [entry for entry in lineup["entries"] if entry["status"] != "DNP"]
+                    total_legs = len(valid_legs)
+
+                    hit_legs = len([entry for entry in valid_legs if entry["status"] == "hit"])
                     multiplier = payout_multiplier(lineup["entry_type"], total_legs, hit_legs)
 
                     if multiplier > 0:

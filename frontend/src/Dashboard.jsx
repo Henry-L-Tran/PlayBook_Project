@@ -522,6 +522,9 @@ function Dashboard() {
                     // Each Game Box
                     <div
                       key={index}
+                      style={{
+                        borderRadius: "1rem",
+                      }}
                       onClick={() => {
                         if (game.gameStatus === 3) {
                           setnbaselectedGame(game);
@@ -560,7 +563,10 @@ function Dashboard() {
                             <div className="flex items-center justify-center w-full gap-4 md:w-1/4 mb-2 md:mb-0 ">
                               <Typography
                                 variant="h6"
-                                sx={{ fontFamily: "monospace" }}
+                                sx={{ 
+                                  fontFamily: "monospace",
+                                  fontWeight: "bold",
+                                }}
                                 className={`mr-4 ${
                                   game.gameStatus === 3 &&
                                   game.awayTeam.score > game.homeTeam.score
@@ -573,7 +579,10 @@ function Dashboard() {
 
                               <Typography
                                 className="text-xs font-bold"
-                                sx={{ fontFamily: "monospace" }}
+                                sx={{ 
+                                  fontFamily: "monospace",
+                                  fontSize: "0.7rem",
+                                }}
                               >
                                 {game.awayTeam.wins} - {game.awayTeam.losses}
                               </Typography>
@@ -593,7 +602,10 @@ function Dashboard() {
                                           {period.period}
                                         </Typography>
                                         <Typography
-                                          sx={{ fontFamily: "monospace" }}
+                                          sx={{ 
+                                            fontFamily: "monospace",
+                                            fontWeight: "bold", 
+                                          }}
                                           className="text-xs"
                                         >
                                           {period.score}
@@ -605,7 +617,10 @@ function Dashboard() {
                                 {/* Away Team Score */}
                                 <Typography
                                   fontSize={20}
-                                  sx={{ fontFamily: "monospace" }}
+                                  sx={{ 
+                                    fontFamily: "monospace",
+                                    fontWeight: "bold", 
+                                  }}
                                   className={` text-xl ml-4 ${
                                     game.gameStatus === 3 &&
                                     game.awayTeam.score > game.homeTeam.score
@@ -627,7 +642,10 @@ function Dashboard() {
                             <div className="flex items-center justify-center w-full gap-4 md:w-1/4 mb-2 md:mb-0">
                               <Typography
                                 variant="h6"
-                                sx={{ fontFamily: "monospace" }}
+                                sx={{ 
+                                  fontFamily: "monospace",
+                                  fontWeight: "bold", 
+                                }}
                                 className={`mr-4 ${
                                   game.gameStatus === 3 &&
                                   game.homeTeam.score > game.awayTeam.score
@@ -639,7 +657,10 @@ function Dashboard() {
                               </Typography>
 
                               <Typography
-                                sx={{ fontFamily: "monospace" }}
+                                sx={{ 
+                                  fontFamily: "monospace",
+                                  fontSize: "0.7rem",
+                                }}
                                 className="text-xs font-bold"
                               >
                                 {game.homeTeam.wins} - {game.homeTeam.losses}
@@ -660,7 +681,10 @@ function Dashboard() {
                                           {period.period}
                                         </Typography>
                                         <Typography
-                                          sx={{ fontFamily: "monospace" }}
+                                          sx={{ 
+                                            fontFamily: "monospace",
+                                            fontWeight: "bold",
+                                          }}
                                           className="text-xs"
                                         >
                                           {period.score}
@@ -672,7 +696,10 @@ function Dashboard() {
 
                                 <Typography
                                   fontSize={20}
-                                  sx={{ fontFamily: "monospace" }}
+                                  sx={{ 
+                                    fontFamily: "monospace",
+                                    fontWeight: "bold", 
+                                  }}
                                   className={`text-xl ml-4 ${
                                     game.gameStatus === 3 &&
                                     game.homeTeam.score > game.awayTeam.score

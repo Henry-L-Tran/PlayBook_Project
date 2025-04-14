@@ -429,10 +429,18 @@ const LineupBox = ({ lineup, onClick }) => {
                                     display: "flex",
                                     flexWrap: "wrap",
                                     width: "5rem",
-                                    border: `2px solid ${entry.status === 'hit' ? 'green' : entry.status === 'miss' ? 'red' : 'white'}`,
+                                    border: `2px solid ${
+                                        entry.status === "DNP" ? "gray" :
+                                        entry.status === "hit" ? "green" :
+                                        entry.status === "miss" ? "red" :
+                                        entry.live_value == null ? "white" :
+                                        "white"
+                                      }`,
                                     borderRadius: "10rem",
                                     objectFit: "cover",
                                     imageRendering: "auto",
+                                    filter: entry.status === "DNP" ? "grayscale(50%) brightness(80%)" : "none",
+                                    opacity: entry.status === "DNP" ? 0.90 : 1,
                                 }}
                             />
                         ))}

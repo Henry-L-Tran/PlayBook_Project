@@ -260,7 +260,6 @@ const LineupDetails = ({ lineup, onClose, liveGames }) => {
                 >
                     {lineup.entries.map((entry, index) => {
                         const percent = Math.min((entry.live_value / entry.projected_line) * 100, 100);
-                        const barColor = entry.status === "hit" ? "green" : entry.status === "miss" ? "red" : "white";
 
                         return (
                             // Progress Bar Container
@@ -284,7 +283,15 @@ const LineupDetails = ({ lineup, onClose, liveGames }) => {
                                         width: "6rem",
                                         borderRadius: "5rem",
                                         marginRight: "1rem",
-                                        border: `2px solid ${barColor}`,
+                                        border: `2px solid ${
+                                            entry.status === "DNP" ? "gray" :
+                                            entry.live_value == null ? "white" :
+                                            entry.status === "hit" ? "green" :
+                                            entry.status === "miss" ? "red" :
+                                            "white"
+                                          }`,
+                                        filter: entry.status === "DNP" ? "grayscale(50%) brightness(80%)" : "none",
+                                        opacity: entry.status === "DNP" ? 0.90 : 1,
                                     }}
                                 />
 
@@ -344,11 +351,27 @@ const LineupDetails = ({ lineup, onClose, liveGames }) => {
                                         {/* Progress Bar w/ Filled Stat */}
                                         <Box
                                             sx={{
-                                                width: `${percent}%`,
+                                                width: entry.status === "DNP" ? "100%" : `${percent}%`,
                                                 height: "100%",
-                                                backgroundColor: barColor,
+                                                backgroundColor:
+                                                entry.status === "DNP"
+                                                    ? "#3f3f3f"
+                                                    : entry.live_value == null
+                                                    ? "transparent"
+                                                    : entry.status === "hit"
+                                                    ? "green"
+                                                    : entry.status === "miss"
+                                                    ? "red"
+                                                    : "rgba(255, 255, 255, 0.7)",
+                                                display: "flex",
+                                                justifyContent: "center",
+                                                alignItems: "center",
+                                                color: "white",
+                                                fontFamily: "monospace",
+                                                transition: "width 0.4s ease",
                                             }}
                                         />
+                                            {entry.status === "DNP" && "DNP"}
                                     </Box>
 
                                     {/* Player Projection & User's Pick Arrow, w/ Stat Category Container */}
@@ -423,7 +446,16 @@ const LineupDetails = ({ lineup, onClose, liveGames }) => {
                                                     fontFamily: "monospace",
                                                     left: `${percent}%`,
                                                     transform: "translateX(-90%)",
-                                                    color: barColor,
+                                                    color: entry.status === "DNP"
+                                                        ? "#3f3f3f"
+                                                        : entry.live_value == null
+                                                        ? "white"
+                                                        : entry.status === "hit"
+                                                        ? "green"
+                                                        : entry.status === "miss"
+                                                        ? "red"
+                                                        : "white",
+                                                fontWeight: "bold",
                                                     fontWeight: "bold",
                                                 }}>
                                                     {entry.live_value ?? "-"}
