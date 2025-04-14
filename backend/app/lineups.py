@@ -147,6 +147,22 @@ def submit_lineup(lineup_data: SubmitLineup):
     if len(team) == 1:
         raise HTTPException(status_code=400, detail="Lineups cannnot just contain players from the same team")
 
+    # Checks if the User Exists in the Database
+    users = loadUsers()
+    user = next((user for user in users if user["email"] == lineup_data.email), None)
+
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    # Checks if the User Has Enough Balance to Place the Bet
+    if float(user["balance"]) < float(lineup_data.entry_amount):
+        print("Insufficient balance")
+        raise HTTPException(status_code=400, detail="Insufficient balance")
+        
+    
+    # Deducts the Entry Amount from the User's Balance
+    user["balance"] = round(float(user["balance"]) - float(lineup_data.entry_amount), 2)
+    saveUsers(users)
 
     try:
         with open("app/nba_data/live_nba_scores.json", "r") as file:

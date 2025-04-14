@@ -32,7 +32,12 @@ const CenteredModal = ({ isOpen, message, autoClose = true, onClose }) => {
   if (!visible) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-[1500]">
+    <div className="fixed inset-0 flex items-center justify-center"
+      style={{
+        zIndex: 9999,
+        pointerEvents: "auto",
+      }}
+    >
       <div
         className="bg-black p-6 rounded-md shadow-lg border border-gray-500"
         style={{

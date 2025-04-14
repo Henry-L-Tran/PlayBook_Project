@@ -340,12 +340,37 @@ function Dashboard() {
         setIsModalOpen(true);
         setLineup({});
         setShowBettingLines(false);
-      } else {
-        setModalMessage("Error submitting lineup.");
+      } 
+      else {
+        let errorMessage = "Error submitting lineup.";
+      
+        try {
+          const errorData = await response.json();
+          errorMessage = errorData?.detail || errorMessage;
+        } 
+        
+        catch (jsonError) {
+          const text = await response.text();
+          if (text.includes("Insufficient balance")) {
+            errorMessage = "Insufficient balance. Please deposit funds!";
+          }
+        }
+      
+        if (errorMessage === "Insufficient balance") {
+          setModalMessage("Insufficient balance. Please deposit funds!");
+        } 
+        else if (errorMessage === "Lineups cannnot just contain players from the same team") {
+          setModalMessage("Lineups cannot include players from only one team.");
+        } 
+        else {
+          setModalMessage(errorMessage);
+        }
+      
         setIsModalOpen(true);
       }
     } catch (error) {
-      setModalMessage("Error submitting lineup.");
+      console.error("Error submitting lineup: ", error);
+      setModalMessage("Error submitting lineup. Please try again.");
       setIsModalOpen(true);
     }
   };
@@ -1369,6 +1394,13 @@ function Dashboard() {
         </Box>
       </Box>
 
+      {/* Modal */}
+      <CenteredModal
+        isOpen={isModalOpen}
+        message={modalMessage}
+        onClose={() => setIsModalOpen(false)}
+      />
+
       {/* ------Right Sidebar Display------ */}
       <Box
         className={`flex flex-col h-full rounded-2xl md:w-1/3 ${
@@ -1583,13 +1615,6 @@ function Dashboard() {
             </button>
           </Box>
         </Box>
-
-        {/* Modal */}
-        <CenteredModal
-          isOpen={isModalOpen}
-          message={modalMessage}
-          onClose={() => setIsModalOpen(false)}
-        />
       </Box>
     </Box>
   );
