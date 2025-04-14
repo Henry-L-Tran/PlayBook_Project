@@ -32,6 +32,14 @@ const Header = ({ onNavigate }) => {
     if (user) {
       setCurrUser(JSON.parse(user));
     }
+  
+    // Trying a 1 Second Interval Update (TEMP)
+    const interval = setInterval(() => {
+      const updatedUser = JSON.parse(localStorage.getItem("currUser"));
+      setCurrUser(updatedUser); 
+    }, 1000)
+  
+    return () => clearInterval(interval);
   }, []);
 
   const toggleDropdown = () => {
