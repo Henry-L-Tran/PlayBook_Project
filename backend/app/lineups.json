@@ -574,5 +574,105 @@
         "result": "WON",
         "actual_payout": 150.0,
         "evaluated": true
+    },
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "henry.l.tran-1@ou.edu_1744691082219_b80d9d4f-fd99-41a8-a17b-3949a3170eda",
+        "entry_type": "Power Play",
+        "entry_amount": 50.0,
+        "potential_payout": 250.0,
+        "entries": [
+            {
+                "player_id": 1630551,
+                "player_name": "Justin Champagnie",
+                "team_tri_code": "WAS",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630551.png",
+                "line_category": "PTS",
+                "projected_line": 9.0,
+                "users_pick": "Over",
+                "matchup": "WAS @ MIA",
+                "live_value": 27,
+                "status": "hit"
+            },
+            {
+                "player_id": 1631170,
+                "player_name": "Jaime Jaquez Jr.",
+                "team_tri_code": "MIA",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1631170.png",
+                "line_category": "PTS",
+                "projected_line": 8.5,
+                "users_pick": "Over",
+                "matchup": "WAS @ MIA",
+                "live_value": 41,
+                "status": "hit"
+            },
+            {
+                "player_id": 1642259,
+                "player_name": "Alex Sarr",
+                "team_tri_code": "WAS",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642259.png",
+                "line_category": "PTS",
+                "projected_line": 13.0,
+                "users_pick": "Under",
+                "matchup": "WAS @ MIA",
+                "live_value": 10,
+                "status": "hit"
+            }
+        ],
+        "time": "2025-04-15T04:24:42.542629",
+        "result": "WON",
+        "actual_payout": 250.0,
+        "evaluated": true
+    },
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "henry.l.tran-1@ou.edu_1744692684390_0bd9cbfc-4b05-4d51-ad5b-ea6d5d639aa0",
+        "entry_type": "Flex Play",
+        "entry_amount": 20.0,
+        "potential_payout": 50.0,
+        "entries": [
+            {
+                "player_id": 1642259,
+                "player_name": "Alex Sarr",
+                "team_tri_code": "WAS",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642259.png",
+                "line_category": "PTS",
+                "projected_line": 13.0,
+                "users_pick": "Under",
+                "matchup": "WAS @ MIA",
+                "live_value": 10,
+                "status": "hit"
+            },
+            {
+                "player_id": 1631170,
+                "player_name": "Jaime Jaquez Jr.",
+                "team_tri_code": "MIA",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1631170.png",
+                "line_category": "PTS",
+                "projected_line": 8.5,
+                "users_pick": "Over",
+                "matchup": "WAS @ MIA",
+                "live_value": 41,
+                "status": "hit"
+            },
+            {
+                "player_id": 1630551,
+                "player_name": "Justin Champagnie",
+                "team_tri_code": "WAS",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630551.png",
+                "line_category": "PTS",
+                "projected_line": 9.0,
+                "users_pick": "Over",
+                "matchup": "WAS @ MIA",
+                "live_value": 27,
+                "status": "hit"
+            }
+        ],
+        "time": "2025-04-15T04:51:24.716253",
+        "result": "WON",
+        "actual_payout": 50.0,
+        "evaluated": true
     }
 ]

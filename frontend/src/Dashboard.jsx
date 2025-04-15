@@ -576,7 +576,7 @@ function Dashboard() {
                         borderRadius: "1rem",
                       }}
                       onClick={() => {
-                        if (game.gameStatus === 3) {
+                        if (game.gameStatus === 1) {
                           setnbaselectedGame(game);
                           setShowBettingLines(true);
                         }
@@ -639,49 +639,50 @@ function Dashboard() {
                             </div>
 
                             {/* Away Team Periods and Score */}
-                            {(game.gameStatus === 2 ||
-                              game.gameStatus === 3) && (
-                              <div className="flex justify-between items-center w-full md:w-1/2 pl-0 md:pl-8">
-                                <div className="flex space-x-4 md:space-x-8">
-                                  {game.awayTeam.periods.map(
-                                    (period, index) => (
-                                      <div key={index} className="text-center">
-                                        <Typography
-                                          sx={{ fontFamily: "monospace" }}
-                                        >
-                                          {period.period}
-                                        </Typography>
-                                        <Typography
-                                          sx={{ 
-                                            fontFamily: "monospace",
-                                            fontWeight: "bold", 
-                                          }}
-                                          className="text-xs"
-                                        >
-                                          {period.score}
-                                        </Typography>
-                                      </div>
-                                    )
-                                  )}
-                                </div>
-                                {/* Away Team Score */}
-                                <Typography
-                                  fontSize={20}
-                                  sx={{ 
-                                    fontFamily: "monospace",
-                                    fontWeight: "bold", 
-                                  }}
-                                  className={` text-xl ml-4 ${
-                                    game.gameStatus === 3 &&
-                                    game.awayTeam.score > game.homeTeam.score
-                                      ? "text-green-700"
-                                      : "text-white"
-                                  }`}
-                                >
-                                  {game.awayTeam.score}
-                                </Typography>
+                            <div className="flex justify-between items-center w-full md:w-1/2 pl-0 md:pl-8"
+                              style={{
+                                visibility: game.gameStatus === 2 || game.gameStatus === 3 ? "visible" : "hidden",
+                              }}
+                              >
+                              <div className="flex space-x-4 md:space-x-8">
+                                {game.awayTeam.periods.map(
+                                  (period, index) => (
+                                    <div key={index} className="text-center">
+                                      <Typography
+                                        sx={{ fontFamily: "monospace" }}
+                                      >
+                                        {period.period}
+                                      </Typography>
+                                      <Typography
+                                        sx={{ 
+                                          fontFamily: "monospace",
+                                          fontWeight: "bold", 
+                                        }}
+                                        className="text-xs"
+                                      >
+                                        {period.score}
+                                      </Typography>
+                                    </div>
+                                  )
+                                )}
                               </div>
-                            )}
+                              {/* Away Team Score */}
+                              <Typography
+                                fontSize={20}
+                                sx={{ 
+                                  fontFamily: "monospace",
+                                  fontWeight: "bold", 
+                                }}
+                                className={` text-xl ml-4 ${
+                                  game.gameStatus === 3 &&
+                                  game.awayTeam.score > game.homeTeam.score
+                                    ? "text-green-700"
+                                    : "text-white"
+                                }`}
+                              >
+                                {game.awayTeam.score}
+                              </Typography>
+                            </div>
                           </div>
                         </div>
 
@@ -718,49 +719,50 @@ function Dashboard() {
                             </div>
 
                             {/* Home Team Periods and Score */}
-                            {(game.gameStatus === 2 ||
-                              game.gameStatus === 3) && (
-                              <div className="flex justify-between items-center w-full md:w-1/2 pl-0 md:pl-8">
-                                <div className="flex space-x-4 md:space-x-8">
-                                  {game.homeTeam.periods.map(
-                                    (period, index) => (
-                                      <div key={index} className="text-center">
-                                        <Typography
-                                          sx={{ fontFamily: "monospace" }}
-                                        >
-                                          {period.period}
-                                        </Typography>
-                                        <Typography
-                                          sx={{ 
-                                            fontFamily: "monospace",
-                                            fontWeight: "bold",
-                                          }}
-                                          className="text-xs"
-                                        >
-                                          {period.score}
-                                        </Typography>
-                                      </div>
-                                    )
-                                  )}
-                                </div>
-
-                                <Typography
-                                  fontSize={20}
-                                  sx={{ 
-                                    fontFamily: "monospace",
-                                    fontWeight: "bold", 
-                                  }}
-                                  className={`text-xl ml-4 ${
-                                    game.gameStatus === 3 &&
-                                    game.homeTeam.score > game.awayTeam.score
-                                      ? "text-green-700"
-                                      : "text-white"
-                                  }`}
-                                >
-                                  {game.homeTeam.score}
-                                </Typography>
+                            <div className="flex justify-between items-center w-full md:w-1/2 pl-0 md:pl-8"
+                              style={{
+                                visibility: game.gameStatus === 2 || game.gameStatus === 3 ? "visible" : "hidden",
+                              }}
+                            >
+                              <div className="flex space-x-4 md:space-x-8">
+                                {game.homeTeam.periods.map(
+                                  (period, index) => (
+                                    <div key={index} className="text-center">
+                                      <Typography
+                                        sx={{ fontFamily: "monospace" }}
+                                      >
+                                        {period.period}
+                                      </Typography>
+                                      <Typography
+                                        sx={{ 
+                                          fontFamily: "monospace",
+                                          fontWeight: "bold",
+                                        }}
+                                        className="text-xs"
+                                      >
+                                        {period.score}
+                                      </Typography>
+                                    </div>
+                                  )
+                                )}
                               </div>
-                            )}
+
+                              <Typography
+                                fontSize={20}
+                                sx={{ 
+                                  fontFamily: "monospace",
+                                  fontWeight: "bold", 
+                                }}
+                                className={`text-xl ml-4 ${
+                                  game.gameStatus === 3 &&
+                                  game.homeTeam.score > game.awayTeam.score
+                                    ? "text-green-700"
+                                    : "text-white"
+                                }`}
+                              >
+                                {game.homeTeam.score}
+                              </Typography>
+                            </div>
                           </div>
                         </div>
                       </div>

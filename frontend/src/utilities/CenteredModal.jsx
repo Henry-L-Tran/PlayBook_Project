@@ -54,7 +54,7 @@ const CenteredModal = ({ isOpen, message, autoClose = true, onClose }) => {
               setTimeout(() => {
                 setVisible(false);
                 onClose();
-              }, 250); // match transition duration
+              }, 250);
             }}
           >
             Close
