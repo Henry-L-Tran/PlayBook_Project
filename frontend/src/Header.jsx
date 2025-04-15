@@ -4,6 +4,7 @@ import Divider from "@mui/material/Divider";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import { useState, useEffect } from "react";
 import { useRef } from "react";
+import HelpCenterModal from "./HelpCenter";
 
 // Handles the Header Component & Routing
 // eslint-disable-next-line react/prop-types
@@ -32,13 +33,13 @@ const Header = ({ onNavigate }) => {
     if (user) {
       setCurrUser(JSON.parse(user));
     }
-  
+
     // Trying a 1 Second Interval Update (TEMP)
     const interval = setInterval(() => {
       const updatedUser = JSON.parse(localStorage.getItem("currUser"));
-      setCurrUser(updatedUser); 
-    }, 1000)
-  
+      setCurrUser(updatedUser);
+    }, 1000);
+
     return () => clearInterval(interval);
   }, []);
 
@@ -51,18 +52,17 @@ const Header = ({ onNavigate }) => {
     setShowUserProfileDropdown(false);
   };
 
+  const [showHelpCenterModal, setShowHelpCenterModal] = useState(false);
   const handleHelpCenter = () => {
     console.log("Help Center Accessed");
     setShowUserProfileDropdown(false);
+    setShowHelpCenterModal(true);
   };
 
   // Closes the Dropdown When Clicking Outside of It
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target)
-      ) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setShowUserProfileDropdown(false);
       }
     };
@@ -74,6 +74,11 @@ const Header = ({ onNavigate }) => {
   return (
     // Main Container for Header Component
     <div className="w-full sm:py-6 sm:px-12">
+      <HelpCenterModal
+        isOpen={showHelpCenterModal}
+        onClose={() => setShowHelpCenterModal(false)}
+      />
+
       {/* Header Container with Logo and Navigation Links */}
       <div className="flex flex-col sm:flex-row justify-between items-center w-full flex-wrap">
         {/* Logo and App Name */}
@@ -148,7 +153,7 @@ const Header = ({ onNavigate }) => {
               display: "flex",
               alignItems: "center",
               cursor: "pointer",
-              gap: 0.5
+              gap: 0.5,
             }}
           >
             {/* $ Text */}
@@ -178,7 +183,7 @@ const Header = ({ onNavigate }) => {
 
           {/* Entire User Profile Container */}
           <Box
-          ref={dropdownRef}
+            ref={dropdownRef}
             sx={{
               position: "relative",
               zIndex: 1000,
@@ -203,13 +208,13 @@ const Header = ({ onNavigate }) => {
                   textAlign: "center",
                   justifyContent: "center",
                   cursor: "pointer",
-                }}>
-
+                }}
+              >
                 {/* User Initials Text */}
                 <Typography
                   sx={{
                     color: "white",
-                    fontSize: "1.3rem", 
+                    fontSize: "1.3rem",
                     fontFamily: "monospace",
                     fontWeight: "bold",
                     marginTop: "0.45rem",
@@ -222,15 +227,15 @@ const Header = ({ onNavigate }) => {
 
               {/* Dropdown Arrow Icon */}
               <Typography
-                  sx={{
-                    color: "white",
-                    fontSize: "1.5rem",
-                    fontFamily: "monospace",
-                    fontWeight: "bold",
-                  }}
-                >
-                  ⌄
-                </Typography>
+                sx={{
+                  color: "white",
+                  fontSize: "1.5rem",
+                  fontFamily: "monospace",
+                  fontWeight: "bold",
+                }}
+              >
+                ⌄
+              </Typography>
             </Box>
 
             {/* User Profile Dropdown Menu Container */}
@@ -257,7 +262,6 @@ const Header = ({ onNavigate }) => {
                     },
                   }}
                 >
-
                   {/* Settings Option Text */}
                   <Typography
                     sx={{
@@ -335,7 +339,7 @@ const Header = ({ onNavigate }) => {
                   </Typography>
                 </Box>
               </Box>
-          )}
+            )}
           </Box>
         </div>
       </div>
