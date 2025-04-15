@@ -25,13 +25,13 @@ const HelpCenter = ({ isOpen, onClose }) => {
     <Box
       className="help-modal-backdrop"
       sx={{
-        backgroundColor: "rgba(0, 0, 0, 0.3)",
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
         position: "fixed",
         inset: 0,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        zIndex: 1000,
+        zIndex: 1350,
       }}
     >
 
@@ -57,18 +57,27 @@ const HelpCenter = ({ isOpen, onClose }) => {
       >
         {/* Close Button */}
         <Button
+          disableRipple
           onClick={onClose}
           sx={{
+            textTransform: "none",
             position: "absolute",
             top: "1rem",
             right: "1rem",
             backgroundColor: "transparent",
             color: "white",
-            border: "1px solid white",
-            borderRadius: "0.5rem",
+            fontWeight: "bold",
+            fontFamily: "monospace",
+            fontSize: "1.1rem",
             "&:hover": {
               backgroundColor: "transparent",
-              border: "2px solid white",
+              border: "none",
+              outline: "none",
+            },
+            "&:focus": {
+              border: "none",
+              outline: "none",
+              backgroundColor: "transparent",
             },
           }}
         >
@@ -78,18 +87,25 @@ const HelpCenter = ({ isOpen, onClose }) => {
         {/* Back Button Only Appears In Selected Help Tabs */}
         {activeSlide !== "menu" && (
           <Button
+            disableRipple
             onClick={() => setActiveSlide("menu")}
             sx={{
+              textTransform: "none",
               position: "absolute",
               top: "1rem",
               left: "1rem",
               backgroundColor: "transparent",
               color: "white",
-              border: "1px solid white",
-              borderRadius: "0.5rem",
+              fontWeight: "bold",
+              fontFamily: "monospace",
+              fontSize: "1.1rem",
               "&:hover": {
+                outline: "none",
                 backgroundColor: "transparent",
-                border: "2px solid white",
+              },
+              "&:focus": {
+                outline: "none",
+                backgroundColor: "transparent",
               },
             }}
           >
