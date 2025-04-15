@@ -453,6 +453,28 @@ function Dashboard() {
     }
   };
 
+  {/* Function for Player Line Scroll Animation */}
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+  
+    const elements = document.querySelectorAll(".fade-up");
+    elements.forEach((el) => observer.observe(el));
+  
+    return () => {
+      elements.forEach((el) => observer.unobserve(el));
+    };
+  }, []);
+  
+
   return (
     // Main Dashboard Container
     <Box
@@ -485,7 +507,7 @@ function Dashboard() {
               indicator: {
                 sx: {
                   backgroundColor: "white",
-                  height: "0.25rem",
+                  height: "0.3vh",
                   borderRadius: "1rem",
                   marginTop: "1rem",
                 },
@@ -497,7 +519,7 @@ function Dashboard() {
               },
             }}
             sx={{
-              marginTop: "1rem",
+              marginTop: "1.3vh",
               width: "100%",
               maxWidth: "100%",
               "& .MuiTabs-flexContainer": {
@@ -871,8 +893,8 @@ function Dashboard() {
                     <IconButton
                       sx={{
                         position: "absolute",
-                        right: "1rem",
-                        top: "1rem",
+                        right: "0.8vw",
+                        top: "2vh",
                         "&:hover": {
                           background: "none",
                         },
@@ -896,7 +918,7 @@ function Dashboard() {
                       marginTop: "2.2vh",
                       marginLeft: "23vw",
                       gap: "1.3vw",
-                      width: "55%",
+                      width: "55.5vw",
                     }}
                   >
                     {/* Betting Lines Category Buttons (PTS, REB, AST, etc.) */}
@@ -928,16 +950,16 @@ function Dashboard() {
                       sx={{
                         display: "flex",
                         justifyContent: "space-between",
-                        padding: "2rem 4rem",
+                        padding: "1.5vh 3vw",
                         width: "100%",
-                        gap: "2rem",
+                        gap: "1.5vw",
                       }}
                     >
                       {/* Away Team Players Squares Column */}
                       <Box
                         sx={{
                           flex: 1,
-                          paddingBottom: "4rem",
+                          paddingBottom: "2vh",
                         }}
                       >
                         {/* Away Team Tri-Code Header */}
@@ -947,7 +969,8 @@ function Dashboard() {
                             textAlign: "center",
                             width: "40%",
                             fontFamily: "monospace",
-                            marginBottom: "1rem",
+                            marginBottom: "1.2vh",
+                            marginLeft: "6.5vw"
                           }}
                         >
                           {nbaSelectedGame.awayTeam.teamTriCode}
@@ -963,6 +986,7 @@ function Dashboard() {
                             <Box
                               key={index}
                               id={`player-${player.playerId}`}
+                              className= "fade-up"
                               sx={{
                                 border: selectedSquare(player.playerId)
                                   ? "2px solid green"
@@ -970,13 +994,14 @@ function Dashboard() {
                                 borderRadius: "1rem",
                                 padding: 0,
                                 backgroundColor: "rgba(0, 0, 0, 0.5)",
-                                marginBottom: "1rem",
-                                width: "22rem",
-                                height: "18rem",
+                                marginBottom: "1.3vh",
+                                width: "14vw",
+                                height: "23vh",
                                 overflow: "hidden",
                                 display: "flex",
                                 flexDirection: "column",
                                 justifyContent: "space-between",
+                                marginLeft: "5vw",
                               }}
                             >
                               {/* Player Square Top Header Section */}
@@ -991,16 +1016,16 @@ function Dashboard() {
                                     display: "flex",
                                     justifyContent: "center",
                                     alignItems: "center",
-                                    marginTop: "0.5rem",
-                                    marginBottom: "0.5rem",
+                                    marginTop: "0.5vh",
+                                    marginBottom: "0.8vh",
                                   }}
                                 >
                                   <img
                                     src={player.playerPicture}
                                     alt={player.playerName}
                                     style={{
-                                      width: "6rem",
-                                      marginTop: "1rem",
+                                      width: "7.5vh",
+                                      marginTop: "1.2vh",
                                     }}
                                   />
                                 </Box>
@@ -1052,8 +1077,8 @@ function Dashboard() {
                                     sx={{
                                       fontFamily: "monospace",
                                       textAlign: "center",
-                                      marginTop: "0.5rem",
-                                      fontSize: "1.2rem",
+                                      marginTop: "0.6vh",
+                                      fontSize: "0.8vw",
                                       fontWeight: "bold",
                                     }}
                                   >
@@ -1066,8 +1091,8 @@ function Dashboard() {
                                       display: "flex",
                                       fontFamily: "monospace",
                                       textAlign: "center",
-                                      marginTop: "0.9rem",
-                                      fontSize: "0.8rem",
+                                      marginTop: "1.1vh",
+                                      fontSize: "0.6vw",
                                       justifyContent: "right",
                                       marginLeft: "0.5rem",
                                     }}
@@ -1158,7 +1183,8 @@ function Dashboard() {
                             textAlign: "center",
                             width: "40%",
                             fontFamily: "monospace",
-                            marginBottom: "1rem",
+                            marginBottom: "1.2vh",
+                            marginRight: "6.5vw",
                           }}
                         >
                           {nbaSelectedGame.homeTeam.teamTriCode}
@@ -1174,6 +1200,7 @@ function Dashboard() {
                             <Box
                               key={index}
                               id={`player-${player.playerId}`}
+                              className= "fade-up"
                               sx={{
                                 border: selectedSquare(player.playerId)
                                   ? "2px solid green"
@@ -1181,13 +1208,14 @@ function Dashboard() {
                                 borderRadius: "1rem",
                                 padding: 0,
                                 backgroundColor: "rgba(0, 0, 0, 0.5)",
-                                marginBottom: "1rem",
-                                width: "22rem",
-                                height: "18rem",
+                                marginBottom: "1.3vh",
+                                width: "14vw",
+                                height: "23vh",
                                 overflow: "hidden",
                                 display: "flex",
                                 flexDirection: "column",
                                 justifyContent: "space-between",
+                                marginRight: "5vw",
                               }}
                             >
                               {/* Player Square Top Header Section */}
@@ -1202,16 +1230,16 @@ function Dashboard() {
                                     display: "flex",
                                     justifyContent: "center",
                                     alignItems: "center",
-                                    marginTop: "0.5rem",
-                                    marginBottom: "0.5rem",
+                                    marginTop: "0.5vh",
+                                    marginBottom: "0.8vh",
                                   }}
                                 >
                                   <img
                                     src={player.playerPicture}
                                     alt={player.playerName}
                                     style={{
-                                      width: "6rem",
-                                      marginTop: "1rem",
+                                      width: "7.5vh",
+                                      marginTop: "1.2vh",
                                     }}
                                   />
                                 </Box>
@@ -1263,8 +1291,8 @@ function Dashboard() {
                                     sx={{
                                       fontFamily: "monospace",
                                       textAlign: "center",
-                                      marginTop: "0.5rem",
-                                      fontSize: "1.2rem",
+                                      marginTop: "0.6vh",
+                                      fontSize: "0.8vw",
                                       fontWeight: "bold",
                                     }}
                                   >
@@ -1277,10 +1305,10 @@ function Dashboard() {
                                       display: "flex",
                                       fontFamily: "monospace",
                                       textAlign: "center",
-                                      marginTop: "0.9rem",
-                                      fontSize: "0.8rem",
+                                      marginTop: "1.1vh",
+                                      fontSize: "0.6vw",
                                       justifyContent: "right",
-                                      marginLeft: "0.5rem",
+                                      marginLeft: "0.3vw",
                                     }}
                                   >
                                     {viewLineCategory}

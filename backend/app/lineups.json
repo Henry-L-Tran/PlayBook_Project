@@ -536,5 +536,91 @@
         "result": "LOST",
         "actual_payout": 0,
         "evaluated": true
+    },
+    {
+        "email": "thien.m.nguyen-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "thien.m.nguyen-1@ou.edu_1744672862552_e9965156-6c81-4e3c-bb0b-8162f9d8d71e",
+        "entry_type": "Power Play",
+        "entry_amount": 10.0,
+        "potential_payout": 375.0,
+        "entries": [
+            {
+                "player_id": 1627747,
+                "player_name": "Caris LeVert",
+                "team_tri_code": "ATL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1627747.png",
+                "line_category": "PTS",
+                "projected_line": 12.0,
+                "users_pick": "Over",
+                "matchup": "ORL @ ATL",
+                "live_value": "DNP",
+                "status": "DNP"
+            },
+            {
+                "player_id": 203991,
+                "player_name": "Clint Capela",
+                "team_tri_code": "ATL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/203991.png",
+                "line_category": "PTS",
+                "projected_line": 9.0,
+                "users_pick": "Under",
+                "matchup": "ORL @ ATL",
+                "live_value": "DNP",
+                "status": "DNP"
+            },
+            {
+                "player_id": 1631230,
+                "player_name": "Dominick Barlow",
+                "team_tri_code": "ATL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1631230.png",
+                "line_category": "PTS",
+                "projected_line": 4.0,
+                "users_pick": "Over",
+                "matchup": "ORL @ ATL",
+                "live_value": "DNP",
+                "status": "DNP"
+            },
+            {
+                "player_id": 1630175,
+                "player_name": "Cole Anthony",
+                "team_tri_code": "ORL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630175.png",
+                "line_category": "PTS",
+                "projected_line": 9.5,
+                "users_pick": "Over",
+                "matchup": "ORL @ ATL",
+                "live_value": "DNP",
+                "status": "DNP"
+            },
+            {
+                "player_id": 202709,
+                "player_name": "Cory Joseph",
+                "team_tri_code": "ORL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/202709.png",
+                "line_category": "PTS",
+                "projected_line": 3.5,
+                "users_pick": "Over",
+                "matchup": "ORL @ ATL",
+                "live_value": "DNP",
+                "status": "DNP"
+            },
+            {
+                "player_id": 1630532,
+                "player_name": "Franz Wagner",
+                "team_tri_code": "ORL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630532.png",
+                "line_category": "PTS",
+                "projected_line": 24.0,
+                "users_pick": "Over",
+                "matchup": "ORL @ ATL",
+                "live_value": "DNP",
+                "status": "DNP"
+            }
+        ],
+        "time": "2025-04-14T23:21:02.561479",
+        "result": "REFUNDED",
+        "actual_payout": 10.0,
+        "evaluated": true
     }
 ]
