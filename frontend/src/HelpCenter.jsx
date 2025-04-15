@@ -11,7 +11,7 @@ const helpCategories = [
   { id: 5, label: "FAQs" },
 ];
 
-const HelpCenterModal = ({ isOpen, onClose }) => {
+const HelpCenter = ({ isOpen, onClose }) => {
   const [activeSlide, setActiveSlide] = useState("menu");
 
   // NULL if Popup Is Not Open
@@ -20,9 +20,10 @@ const HelpCenterModal = ({ isOpen, onClose }) => {
   }
 
   return (
-
-    // Main Container for the Help Center Full Screen Popup
-    <Box className="help-modal-backdrop"
+    
+    // Main Container for the Help Center Fullscreen Popup
+    <Box
+      className="help-modal-backdrop"
       sx={{
         backgroundColor: "rgba(0, 0, 0, 0.3)",
         position: "fixed",
@@ -35,11 +36,12 @@ const HelpCenterModal = ({ isOpen, onClose }) => {
     >
 
       {/* Help Center Popup Container */}
-      <Box className="help-center-container"
+      <Box
+        className="help-center-container"
         sx={{
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
+          justifyContent: "flex-start",
           alignItems: "center",
           border: "2px solid white",
           borderRadius: "1rem",
@@ -47,15 +49,14 @@ const HelpCenterModal = ({ isOpen, onClose }) => {
           width: "100%",
           maxWidth: "700px",
           maxHeight: "90vh",
-          overflow: "hidden",
+          overflow: "auto",
           position: "relative",
           padding: "2rem",
           color: "white",
         }}
       >
-
         {/* Close Button */}
-        <Button className="close-btn"
+        <Button
           onClick={onClose}
           sx={{
             position: "absolute",
@@ -67,12 +68,6 @@ const HelpCenterModal = ({ isOpen, onClose }) => {
             borderRadius: "0.5rem",
             "&:hover": {
               backgroundColor: "transparent",
-              outline: "none",
-              border: "2px solid white",
-            },
-            "&:focus": {
-              outline: "none",
-              backgroundColor: "transparent",
               border: "2px solid white",
             },
           }}
@@ -80,264 +75,226 @@ const HelpCenterModal = ({ isOpen, onClose }) => {
           Close
         </Button>
 
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            marginBottom: "2rem",
+        {/* Back Button Only Appears In Selected Help Tabs */}
+        {activeSlide !== "menu" && (
+          <Button
+            onClick={() => setActiveSlide("menu")}
+            sx={{
+              position: "absolute",
+              top: "1rem",
+              left: "1rem",
+              backgroundColor: "transparent",
+              color: "white",
+              border: "1px solid white",
+              borderRadius: "0.5rem",
+              "&:hover": {
+                backgroundColor: "transparent",
+                border: "2px solid white",
+              },
+            }}
+          >
+            ← Back
+          </Button>
+        )}
+
+        {/* Help Center Header */}
+        <Box 
+          sx={{ 
+            marginBottom: "2rem", 
+            marginTop: "2rem" 
           }}
         >
+          {/* Help Center Title */}
           <Typography
             sx={{
               fontSize: "2rem",
-              color: "white",
               fontFamily: "monospace",
+              textAlign: "center",
             }}
           >
             Help Center
           </Typography>
         </Box>
 
-        {/* PlayBook Helper Header */}
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Typography
-            sx={{
-              fontSize: "1.2rem",
-              fontWeight: "bold",
-              color: "white",
-              fontFamily: "monospace",
-              marginBottom: "15%",
-            }}
-          >
-            How Can PlayBook Help You?
-          </Typography>
-        </Box>
+        {/* Help Center Main Menu */}
+        {activeSlide === "menu" ? (
+          <>
+            <Typography
+              sx={{
+                fontSize: "1.2rem",
+                fontWeight: "bold",
+                fontFamily: "monospace",
+                marginBottom: "2rem",
+              }}
+            >
+              How Can PlayBook Help You?
+            </Typography>
 
-        {/* Menu View */}
-        {activeSlide === "menu" && (
-          
-          // Help Categories Menu Container
-          <Box
-            sx={{
-              width: "100%",
-              display: "flex",
-              flexDirection: "column",
-              gap: 2
-            }}>
-            {helpCategories.map((topic) => (
-
-              // Each Help Category Option Container
-              <Box
-                key={topic.id}
-                onClick={() => setActiveSlide(topic.id)}
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  border: "1px solid white",
-                  borderRadius: "0.5rem",
-                  padding: "1rem 2rem",
-                  cursor: "pointer",
-                  backgroundColor: "transparent",
-                  "&:hover": {
-                    backgroundColor: "rgba(255, 255, 255, 0.1)",
-                  },
-                }}
-              >
-                {/* Help Category Text */}
-                <Typography
+            {/* Help Categories List */}
+            <Box
+              sx={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                gap: 2,
+              }}
+            >
+              {helpCategories.map((topic) => (
+                <Box
+                  key={topic.id}
+                  onClick={() => setActiveSlide(topic.id)}
                   sx={{
-                    fontFamily: "monospace",
-                    color: "white",
-                    fontWeight: "bold",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    border: "1px solid white",
+                    borderRadius: "0.5rem",
+                    padding: "1rem 2rem",
+                    cursor: "pointer",
+                    backgroundColor: "transparent",
+                    "&:hover": {
+                      backgroundColor: "rgba(255, 255, 255, 0.1)",
+                    },
                   }}
                 >
-                  {topic.label}
-                </Typography>
-              </Box>
-            ))}
-          </Box>
-        )}
+                  {/* Help Topic Text */}
+                  <Typography
+                    sx={{
+                      fontFamily: "monospace",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {topic.label}
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
 
-        <Divider
-          sx={{
-            width: "100%",
-            backgroundColor: "white",
-            margin: "1rem 0",
-            height: "1px",
-          }}
-        />
-
-        {/* Contact Us Section */}
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            border: "1px solid white",
-            borderRadius: "0.5rem",
-            padding: "2rem 3rem",
-          }}
-        >
-          <Typography
-            sx={{
-              fontSize: "1.3rem",
-              fontWeight: "bold",
-              color: "white",
-              fontFamily: "monospace",
-            }}
-          >
-            Contact Support
-          </Typography>
-
-          <Typography
-            sx={{
-              fontSize: "1rem",
-              fontFamily: "monospace",
-              color: "white",
-            }}
-          >
-            If you didn't find what you're looking for, we're here to help.
-          </Typography>
-
-          <Typography
-            sx={{
-              fontSize: "1rem",
-              fontFamily: "monospace",
-              color: "white",
-            }}
-          >
-            Email us at{" "}
-            <Typography
-              href="#"
+            <Divider
               sx={{
-                fontSize: "1rem",
-                fontFamily: "monospace",
+                width: "100%",
+                backgroundColor: "white",
+                margin: "2rem 0 1rem",
+                height: "1px",
               }}
-              onClick={(e) => {
-                e.preventDefault();
-                window.open(
-                  "mailto:support@playbook.com",
-                  "_blank",
-                  "noopener,noreferrer"
-                );
-              }}
-              className="text-blue-600 hover:underline"
-            >
-              support@playbook.com
-            </Typography>
-          </Typography>
-        </Box>
+            />
 
-        {/* Detail Slide View */}
-        {helpCategories.map((topic) =>
-          activeSlide === topic.id ? (
-
-            // Help Category Detail Slide Container
+            {/* Contact Support Box */}
             <Box
-              key={topic.id}
-              sx={{ 
-                padding: "1.5rem", 
-                color: "white" 
-              }}
-            >
-              <Button 
-              onClick={() => setActiveSlide("menu")}
               sx={{
-                position: "relative",
-                top: 0,
-                left: "1rem",
-                backgroundColor: "transparent",
-                color: "white",
                 border: "1px solid white",
                 borderRadius: "0.5rem",
-                "&:hover": {
-                  backgroundColor: "transparent",
-                  outline: "none",
-                  border: "2px solid white",
-                },
-                "&:focus": {
-                  outline: "none",
-                  backgroundColor: "transparent",
-                  border: "2px solid white",
-                },
+                padding: "2rem 3rem",
+                width: "100%",
               }}
+            >
+              {/* Contact Support Header */}
+              <Typography
+                sx={{
+                  fontSize: "1.3rem",
+                  fontWeight: "bold",
+                  fontFamily: "monospace",
+                  marginBottom: "1rem",
+                }}
               >
-                ← Back
-              </Button>
-
-              <Typography variant="h5" fontWeight="bold" mb={2}>
-                {topic.label}
+                Contact Support
               </Typography>
 
-              {/* Content For Each Help Category */}
-              {topic.id === 1 && (
-                <>
-                  <Typography>
-                    Test
-                  </Typography>
-                  <Typography >
-                    Test
-                  </Typography>
-                </>
-              )}
+              {/* Contact Support Description */}
+              <Typography
+                sx={{
+                  fontSize: "1rem",
+                  fontFamily: "monospace",
+                  marginBottom: "0.5rem",
+                }}
+              >
+                If you didn't find what you're looking for, we're here to help.
+              </Typography>
 
-              {topic.id === 2 && (
-                <>
-                  <Typography>
-                    Test
-                  </Typography>
-                  <Typography >
-                    Test
-                  </Typography>
-                </>
-              )}
-
-              {topic.id === 3 && (
-                <>
-                  <Typography>
-                    Test
-                  </Typography>
-                  <Typography>
-                    Test
-                  </Typography>
-                </>
-              )}
-
-              {topic.id === 4 && (
-                <>
-                  <Typography>
-                    Test
-                  </Typography>
-                  <Typography>
-                    Test
-                  </Typography>
-                </>
-              )}
-
-              {topic.id === 5 && (
-                <>
-                 <Typography>
-                    Test
-                  </Typography>
-                  <Typography>
-                    Test
-                  </Typography>
-                </>
-              )}
+              {/* Contact Support Email (NOT REAL EMAIL) */}
+              <Typography
+                sx={{
+                  fontSize: "1rem",
+                  fontFamily: "monospace",
+                }}
+              >
+                Email us at{" "}
+                <a
+                  href="mailto:support@playbook.com"
+                  style={{ color: "#3399ff" }}
+                >
+                  support@playbook.com
+                </a>
+              </Typography>
             </Box>
-          ) : null
+          </>
+        ) : (
+
+          // Selected Help Topic Container
+          <Box 
+            sx={{ 
+              width: "100%", 
+              paddingTop: "1rem" 
+            }}
+          >
+            {/* Selected Help Topic Header */}
+            <Typography
+              sx={{
+                fontSize: "1.5rem",
+                fontWeight: "bold",
+                fontFamily: "monospace",
+                marginBottom: "1rem",
+              }}
+            >
+              {
+                helpCategories.find((topic) => topic.id === activeSlide)?.label
+              }
+            </Typography>
+
+            {/* Deposit & Withdrawal Section */}
+            {activeSlide === 1 && (
+              <>
+                <Typography>TESTING</Typography>
+                <Typography>TESTING</Typography>
+              </>
+            )}
+
+            {/* Placing Entries Section */}
+            {activeSlide === 2 && (
+              <>
+                <Typography>TESTING</Typography>
+                <Typography>TESTING</Typography>
+              </>
+            )}
+
+            {/* Lineup Details & Payouts Section */}
+            {activeSlide === 3 && (
+              <>
+                <Typography>TESTING</Typography>
+                <Typography>TESTING</Typography>
+              </>
+            )}
+
+            {/* Promotions Section */}
+            {activeSlide === 4 && (
+              <>
+                <Typography>TESTING</Typography>
+                <Typography>TESTING</Typography>
+              </>
+            )}
+
+            {/* FAQs Section */}
+            {activeSlide === 5 && (
+              <>
+                <Typography>TESTING</Typography>
+                <Typography>TESTING</Typography>
+              </>
+            )}
+          </Box>
         )}
       </Box>
     </Box>
   );
 };
 
-export default HelpCenterModal;
+export default HelpCenter;
