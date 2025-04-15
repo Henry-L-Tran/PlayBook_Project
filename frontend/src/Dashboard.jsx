@@ -843,6 +843,7 @@ function Dashboard() {
                   bottom: 0,
                   zIndex: 1100,
                   paddingBottom: "10%",
+                  alignItems: "center",
                 }}
               >
                 {/* Header Away Team @ Home Team Box */}
@@ -889,14 +890,13 @@ function Dashboard() {
                   <Box
                     sx={{
                       position: "sticky",
-                      top: "11%",
+                      top: "10%",
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
                       marginTop: "2.2vh",
-                      marginLeft: "23vw",
                       gap: "1.3vw",
-                      width: "55%",
+                      width: "100%",
                     }}
                   >
                     {/* Betting Lines Category Buttons (PTS, REB, AST, etc.) */}
