@@ -1,106 +1,340 @@
-import { Box } from "@mui/material";
-import React from "react";
+import { Box, Button, Divider, Typography } from "@mui/material";
+import React, { useState } from "react";
+import "./HelpCenter.css";
+
+// Help Menu Categories
+const helpCategories = [
+  { id: 1, label: "Deposits & Withdrawals" },
+  { id: 2, label: "Placing Entries" },
+  { id: 3, label: "Lineup Details & Payouts" },
+  { id: 4, label: "Promotions" },
+  { id: 5, label: "FAQs" },
+];
 
 const HelpCenterModal = ({ isOpen, onClose }) => {
-  if (!isOpen) return null;
+  const [activeSlide, setActiveSlide] = useState("menu");
+
+  // NULL if Popup Is Not Open
+  if (!isOpen) {
+    return null;
+  }
 
   return (
-    <Box
-      sx={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}
-      className="fixed inset-0 flex items-center justify-center z-50"
+
+    // Main Container for the Help Center Full Screen Popup
+    <Box className="help-modal-backdrop"
+      sx={{
+        backgroundColor: "rgba(0, 0, 0, 0.3)",
+        position: "fixed",
+        inset: 0,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        zIndex: 1000,
+      }}
     >
-      <Box
+
+      {/* Help Center Popup Container */}
+      <Box className="help-center-container"
         sx={{
-          backgroundImage:
-            "linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('/images/playbook_background2.png')",
-          backgroundSize: "cover",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          border: "2px solid white",
+          borderRadius: "1rem",
+          boxShadow: "0 0 20px black",
+          width: "100%",
+          maxWidth: "700px",
+          maxHeight: "90vh",
+          overflow: "hidden",
+          position: "relative",
+          padding: "2rem",
+          color: "white",
         }}
-        className="bg-gray-900 border-2 border-white rounded-2xl shadow-xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-6 md:p-10 relative text-white font-mono"
       >
-        <button
+
+        {/* Close Button */}
+        <Button className="close-btn"
           onClick={onClose}
-          className="absolute top-4 right-4 text-white hover:text-white text-xl"
+          sx={{
+            position: "absolute",
+            top: "1rem",
+            right: "1rem",
+            backgroundColor: "transparent",
+            color: "white",
+            border: "1px solid white",
+            borderRadius: "0.5rem",
+            "&:hover": {
+              backgroundColor: "transparent",
+              outline: "none",
+              border: "2px solid white",
+            },
+            "&:focus": {
+              outline: "none",
+              backgroundColor: "transparent",
+              border: "2px solid white",
+            },
+          }}
         >
           Close
-        </button>
+        </Button>
 
-        <h1 className="text-4xl font-bold text-center text-white mb-8 font-mono">
-          Help Center
-        </h1>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            marginBottom: "2rem",
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: "2rem",
+              color: "white",
+              fontFamily: "monospace",
+            }}
+          >
+            Help Center
+          </Typography>
+        </Box>
 
-        <section className="mb-10">
-          <h2 className=" font-mono text-2xl font-semibold text-gray-300 mb-4">
-            Getting Started
-          </h2>
-          <div className="bg-gray-800 rounded-lg p-6 space-y-2 font-mono">
-            <p>
-              <strong>1.</strong> Sign up or log in to your Playbook account.
-            </p>
-            <p>
-              <strong>2.</strong> Add funds to your wallet from the dashboard.
-            </p>
-            <p>
-              <strong>3.</strong> Browse available games and place your bets.
-            </p>
-            <p>
-              <strong>4.</strong> Track your bets in the My Bets section.
-            </p>
-          </div>
-        </section>
+        {/* PlayBook Helper Header */}
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: "1.2rem",
+              fontWeight: "bold",
+              color: "white",
+              fontFamily: "monospace",
+              marginBottom: "15%",
+            }}
+          >
+            How Can PlayBook Help You?
+          </Typography>
+        </Box>
 
-        <section className="mb-10">
-          <h2 className="font-mono text-2xl font-semibold text-gray-300 mb-4">
-            Frequently Asked Questions
-          </h2>
-          <div className="font-mono bg-gray-800 rounded-lg p-6 space-y-4">
-            <div>
-              <h3 className="font-semibold font-mono text-gray-200">
-                How do I withdraw my winnings?
-              </h3>
-              <p className="text-gray-300 font-mono">
-                Go to your Wallet, click "Withdraw" and select your payout
-                method.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-gray-200 font-mono">
-                What sports can I bet on?
-              </h3>
-              <p className="text-gray-300 font-mono">
-                Playbook currently supports NFL, NBA, VAL, and LOL with more
-                coming soon.
-              </p>
-            </div>
-          </div>
-        </section>
+        {/* Menu View */}
+        {activeSlide === "menu" && (
+          
+          // Help Categories Menu Container
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              gap: 2
+            }}>
+            {helpCategories.map((topic) => (
 
-        <section>
-          <h2 className="text-2xl font-mono font-semibold text-gray-300 mb-4">
-            Contact Support
-          </h2>
-          <div className="bg-gray-800 rounded-lg p-6 space-y-2 font-mono">
-            <p className="text-gray-300">
-              If you didn't find what you're looking for, we're here to help.
-            </p>
-            <p className="text-gray-300 font-mono">
-              Email us at{" "}
-              <a
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  window.open(
-                    "mailto:support@playbook.com",
-                    "_blank",
-                    "noopener,noreferrer"
-                  );
+              // Each Help Category Option Container
+              <Box
+                key={topic.id}
+                onClick={() => setActiveSlide(topic.id)}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  border: "1px solid white",
+                  borderRadius: "0.5rem",
+                  padding: "1rem 2rem",
+                  cursor: "pointer",
+                  backgroundColor: "transparent",
+                  "&:hover": {
+                    backgroundColor: "rgba(255, 255, 255, 0.1)",
+                  },
                 }}
-                className="text-blue-600 hover:underline"
               >
-                support@playbook.com
-              </a>
-            </p>
-          </div>
-        </section>
+                {/* Help Category Text */}
+                <Typography
+                  sx={{
+                    fontFamily: "monospace",
+                    color: "white",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {topic.label}
+                </Typography>
+              </Box>
+            ))}
+          </Box>
+        )}
+
+        <Divider
+          sx={{
+            width: "100%",
+            backgroundColor: "white",
+            margin: "1rem 0",
+            height: "1px",
+          }}
+        />
+
+        {/* Contact Us Section */}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            border: "1px solid white",
+            borderRadius: "0.5rem",
+            padding: "2rem 3rem",
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: "1.3rem",
+              fontWeight: "bold",
+              color: "white",
+              fontFamily: "monospace",
+            }}
+          >
+            Contact Support
+          </Typography>
+
+          <Typography
+            sx={{
+              fontSize: "1rem",
+              fontFamily: "monospace",
+              color: "white",
+            }}
+          >
+            If you didn't find what you're looking for, we're here to help.
+          </Typography>
+
+          <Typography
+            sx={{
+              fontSize: "1rem",
+              fontFamily: "monospace",
+              color: "white",
+            }}
+          >
+            Email us at{" "}
+            <Typography
+              href="#"
+              sx={{
+                fontSize: "1rem",
+                fontFamily: "monospace",
+              }}
+              onClick={(e) => {
+                e.preventDefault();
+                window.open(
+                  "mailto:support@playbook.com",
+                  "_blank",
+                  "noopener,noreferrer"
+                );
+              }}
+              className="text-blue-600 hover:underline"
+            >
+              support@playbook.com
+            </Typography>
+          </Typography>
+        </Box>
+
+        {/* Detail Slide View */}
+        {helpCategories.map((topic) =>
+          activeSlide === topic.id ? (
+
+            // Help Category Detail Slide Container
+            <Box
+              key={topic.id}
+              sx={{ 
+                padding: "1.5rem", 
+                color: "white" 
+              }}
+            >
+              <Button 
+              onClick={() => setActiveSlide("menu")}
+              sx={{
+                position: "relative",
+                top: 0,
+                left: "1rem",
+                backgroundColor: "transparent",
+                color: "white",
+                border: "1px solid white",
+                borderRadius: "0.5rem",
+                "&:hover": {
+                  backgroundColor: "transparent",
+                  outline: "none",
+                  border: "2px solid white",
+                },
+                "&:focus": {
+                  outline: "none",
+                  backgroundColor: "transparent",
+                  border: "2px solid white",
+                },
+              }}
+              >
+                ← Back
+              </Button>
+
+              <Typography variant="h5" fontWeight="bold" mb={2}>
+                {topic.label}
+              </Typography>
+
+              {/* Content For Each Help Category */}
+              {topic.id === 1 && (
+                <>
+                  <Typography>
+                    Test
+                  </Typography>
+                  <Typography >
+                    Test
+                  </Typography>
+                </>
+              )}
+
+              {topic.id === 2 && (
+                <>
+                  <Typography>
+                    Test
+                  </Typography>
+                  <Typography >
+                    Test
+                  </Typography>
+                </>
+              )}
+
+              {topic.id === 3 && (
+                <>
+                  <Typography>
+                    Test
+                  </Typography>
+                  <Typography>
+                    Test
+                  </Typography>
+                </>
+              )}
+
+              {topic.id === 4 && (
+                <>
+                  <Typography>
+                    Test
+                  </Typography>
+                  <Typography>
+                    Test
+                  </Typography>
+                </>
+              )}
+
+              {topic.id === 5 && (
+                <>
+                 <Typography>
+                    Test
+                  </Typography>
+                  <Typography>
+                    Test
+                  </Typography>
+                </>
+              )}
+            </Box>
+          ) : null
+        )}
       </Box>
     </Box>
   );

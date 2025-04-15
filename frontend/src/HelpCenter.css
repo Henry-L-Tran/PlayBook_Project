@@ -1,0 +1,8 @@
+/* FOR HelpCenter.jsx */
+
+
+/* For the Background Image */
+.help-center-container {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('/images/playbook_background2.png');
+    background-size: cover;
+  }
