@@ -9,12 +9,14 @@ import {
   Box,
 } from "@mui/material";
 import CenteredModal from "./utilities/CenteredModal";
+import dayjs from "dayjs";
 
 // Register Component for User Registration
 function Register() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [autoCloseModal, setAutoCloseModal] = useState(false);
+  const todayMinus21 = dayjs().subtract(21, "year").format("YYYY-MM-DD");
 
   // State to Track User Input for Registration Form Data
   const [registerData, setRegisterData] = useState({
@@ -280,9 +282,11 @@ function Register() {
               type="date"
               name="birthday"
               fullWidth
+              helperText="You must be at least 21 years old to register"
               value={registerData.birthday}
               onChange={handleUserInput}
               InputLabelProps={{ shrink: true }}
+              inputProps={{ max: todayMinus21 }}
               sx={{
                 marginBottom: "2rem",
                 "& label.Mui-focused": { color: "white" },
