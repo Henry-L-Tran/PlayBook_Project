@@ -24,6 +24,12 @@ cd backend
 
 Activate the virtual environment:
 
+For Windows:
+```
+venv/Scripts/Activate
+```
+
+For Linux/MacOS:
 ```bash
 source venv/bin/activate
 ```
