@@ -49,45 +49,6 @@ function Valorant() {
   const [userTotalEntriesValue, setUserTotalEntriesValue] = useState(0);
   const [showBettingLines, setShowBettingLines] = useState(false);
 
-  const teamNameToOrg = {
-    "100 Thieves": "100T",
-    "Cloud9": "C9",
-    "Evil Geniuses": "EG",
-    "FURIA": "FURIA",
-    "KRÜ Esports": "KRÜ",
-    "Leviatán": "LEV",
-    "LOUD": "LOUD",
-    "MIBR": "MIBR",
-    "NRG Esports": "NRG",
-    "Sentinels": "SEN",
-    "G2 Esports": "G2",
-    "BBL Esports": "BBL",
-    "FNATIC": "FNC",
-    "FUT Esports": "FUT",
-    "Team Liquid": "TL",
-    "Team Heretics": "TH",
-    "Gen.G": "GEN",
-    "DRX": "DRX",
-    "T1": "T1",
-    "ZETA DIVISION": "ZETA",
-    "DetonatioN FocusMe": "DFM",
-    "Paper Rex": "PRX",
-    "Team Secret": "TS",
-    "Natus Vincere": "NAVI",
-    "Global Esports": "GE",
-    "JDG Esports": "JDG",
-    "Bilibili Gaming": "BLG",
-    "Karmine Corp": "KC",
-    "Dragon Ranger Gaming": "DRG",
-    "TYLOO": "TYL",
-    "Wolves Esports": "WOL",
-    "Valorant RED": "RED",
-    "2Game Esports": "2G",
-    "Vitality": "VIT",
-    "Apeks": "APEKS",
-    "Nova Esports": "NOVA",
-    "Rex Regum Qeon": "RRQ",
-  };
 
   const getStatCategory = (player) => {
     // Placeholder: return player's stat value (update as needed)
@@ -384,8 +345,8 @@ function Valorant() {
 
 
     const playersInMatch = (match) => {
-      const awayOrg = teamNameToOrg[match.team1];
-      const homeOrg = teamNameToOrg[match.team2];
+      const awayOrg = match.team1;
+      const homeOrg = match.team2;
     
       return valPlayerStats.filter(
         (player) =>
@@ -395,10 +356,10 @@ function Valorant() {
     };
 
 
-    const team1 = teamNameToOrg[selectedMatch?.team1]?.toUpperCase();
+    const team1 = selectedMatch?.team1?.toUpperCase();
     console.log("TARGETS: ", team1)
 
-    const team2 = teamNameToOrg[selectedMatch?.team2]?.toUpperCase();
+    const team2 = selectedMatch?.team2?.toUpperCase();
     console.log("TARGETS: ", team2)
 
     const awayPlayers = valPlayerStats.filter((player) => {
@@ -456,7 +417,7 @@ function Valorant() {
               fontFamily: "monospace",
             }}
           >
-            {selectedMatch.team1} vs {selectedMatch.team2}
+            {selectedMatch.team1} vs {selectedMatch.team2} - 2 Maps
           </Typography>
           <IconButton
             sx={{
@@ -491,7 +452,7 @@ function Valorant() {
                   fontFamily: "monospace",
                   backgroundColor: viewLineCategory === category ? "white" : "transparent",
                   color: viewLineCategory === category ? "black" : "white",
-                  border: "1px solid white",
+                  border: "1px solid gray",
                   borderRadius: "5rem",
                   padding: "0.5rem 1rem",
                   cursor: "pointer",
@@ -771,7 +732,7 @@ function Valorant() {
                 }}
                 sx={{
                   backgroundColor: "rgba(0, 0, 0, 0.5)",
-                  border: "1px solid white",
+                  border: "1px solid gray",
                   borderRadius: "1rem",
                   padding: "1rem",
                   marginBottom: "1rem",
