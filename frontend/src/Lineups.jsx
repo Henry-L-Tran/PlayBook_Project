@@ -27,21 +27,21 @@ function Lineups({
             {/* Outer Container for the Lineups Bar */}
             <Box
                 sx= {{
-                    position: "fixed",
+                    position: "absolute",
                     bottom: "2.5vh",
                     backgroundColor: "#111",
-                    padding: "0.5 rem, 1rem",
+                    padding: "0.5rem, 1rem",
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
                     borderTop: "1px solid #444",
-                    width: "65rem",
-                    height: "6rem",
+                    width: "45vw",
+                    height: "9vh",
                     borderRadius: "10rem", 
                     border: "2px solid white",
                     marginBottom: "1rem",
                     zIndex: 1300,
-                    marginLeft: "1.7vw",
+                    left: "27vw",
                 }}
             >
                 {/* Lineups Content */}
@@ -61,7 +61,6 @@ function Lineups({
                             alt={entry.player_name}
                             style={{
                                 width: "6rem",
-                        
                                 border: "2px solid white",
                                 borderRadius: "10rem",
                                 objectFit: "cover",
@@ -233,7 +232,7 @@ function Lineups({
                                             src={player.player_picture}
                                             alt={player.player_name}
                                             style={{
-                                                width: "8rem",
+                                                width: "7rem",
                                                 borderRadius: "0.5rem",
                                                 objectFit: "cover",
                                             }}
@@ -388,14 +387,14 @@ function Lineups({
                                         <Button
                                             onClick={() => setEntryType("Power Play")}
                                             sx={{
-                                                backgroundColor: entryType === "Power Play" ? "green" : "#222",
+                                                backgroundColor: "#222",
                                                 color: "white",
                                                 fontFamily: "monospace",
                                                 display: "flex",
                                                 flexDirection: "column",
-                                                border: entryType === "Power Play" ? "2px solid white" : "1px solid gray",
+                                                border: entryType === "Power Play" ? "2px solid green" : "1px solid gray",
                                                 "&:hover": {
-                                                    backgroundColor: entryType === "Power Play" ? "green" : "#333",
+                                                    borderColor: entryType === "Power Play" ? "green" : "#333",
                                                 },
                                             }}
                                         >
@@ -456,15 +455,19 @@ function Lineups({
                                                 key={type}
                                                 onClick={() => setEntryType(type)}
                                                 sx={{
-                                                    backgroundColor: entryType === type ? "green" : "#222",
+                                                    backgroundColor: "#222",
                                                     color: "white",
                                                     fontFamily: "monospace",
                                                     display: "flex",
                                                     flexDirection: "column",
-                                                    border: entryType === type ? "2px solid white" : "1px solid gray",
+                                                    border: entryType === type ? "2px solid green" : "1px solid gray",
                                                     "&:hover": {
-                                                        backgroundColor: entryType === type ? "green" : "#333",
+                                                        backgroundColor: "#333",
+                                                        borderColor: entryType === type ? "green" : "white",
                                                     },
+                                                    "&:active": {
+                                                        borderColor: "green",
+                                                    }
                                                 }}
                                             >
                                                 {/* Button Title */}
@@ -540,13 +543,15 @@ function Lineups({
                                 sx={{
                                     display: "flex",
                                     flexDirection: "row",
+                                    marginLeft: "3vw"
                                 }}
                             >
                                 <Typography
                                     sx={{
                                         fontFamily: "monospace",
-                                        fontSize: "1.5rem",
+                                        fontSize: "1.3rem",
                                         marginRight: "0.5vw",
+                                        marginTop: "0.5vh",
                                     }}
                                 >
                                     Entry Amount:
@@ -566,39 +571,56 @@ function Lineups({
                                         color: "white",
                                         border: "1px solid gray",
                                         borderRadius: "1rem",
-                                        width: "20rem",
+                                        width: "12rem",
                                         fontSize: "1.1rem",
                                         padding: "0.5rem 1rem",
                                         paddingLeft: "0.5vw",
                                     }}
                                 />
                             </Box>
-
-                            {/* Potential Winnings Display Contianer */}
+                            
                             <Box
                                 sx={{
                                     display: "flex",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    padding: "0.5rem 1rem",
-                                    border: "1px solid gray",
-                                    borderRadius: "1rem",
-                                    backgroundColor: "#222",
-                                    width: "15vw",
+                                    flexDirection: "row",
                                 }}
                             >
                                 <Typography
                                     sx={{
                                         fontFamily: "monospace",
-                                        fontSize: "1.1rem",
-                                        textAlign: "center",
-                                        color: "white",
+                                        fontSize: "1.3rem",
+                                        marginRight: "0.3vw",
+                                        marginTop: "0.5vh",
                                     }}
                                 >
-                                    To Win: 
-                                    {(
-                                        entryAmount * calculatePayoutMultiplier(entryType, lineup.length, lineup.length)).toFixed(2)}
+                                    To Win:
                                 </Typography>
+
+                                {/* Potential Winnings Display Contianer */}
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        padding: "0.5rem 1rem",
+                                        border: "1px solid gray",
+                                        borderRadius: "1rem",
+                                        backgroundColor: "#222",
+                                        width: "10vw",
+                                        marginRight: "3.2vw"
+                                    }}
+                                >
+                                    <Typography
+                                        sx={{
+                                            fontFamily: "monospace",
+                                            fontSize: "1.1rem",
+                                            textAlign: "center",
+                                            color: "white",
+                                        }}
+                                    >
+                                        {(entryAmount * calculatePayoutMultiplier(entryType, lineup.length, lineup.length)).toFixed(2)}
+                                    </Typography>
+                                </Box>
                             </Box>
                         </Box>       
 
@@ -608,7 +630,6 @@ function Lineups({
                                 display: "flex",
                                 justifyContent: "center",
                                 marginTop: "2rem",
-
                             }}
                         >
                             {/* Submit Lineup Button */}
@@ -626,7 +647,7 @@ function Lineups({
                                 cursor: "pointer",
                                 marginTop: "2vh",
                                 marginBottom: "2%",
-                                width: "95%",
+                                width: "78%",
                                 }}
                             >
                                 Submit Lineup

@@ -14,6 +14,8 @@ import "./Dashboard.css";
 import PieChart from "./PieChart";
 import CenteredModal from "./utilities/CenteredModal";
 import TeamBanner from "./TeamBanner";
+import * as NBAIcons from "react-nba-logos";
+
 
 function Dashboard() {
   // State to Hold the Live Games and Player Stats
@@ -473,7 +475,11 @@ function Dashboard() {
       elements.forEach((el) => observer.unobserve(el));
     };
   }, []);
-  
+
+  const TeamLogo = ({ teamTriCode, size }) => {
+      const Logo = NBAIcons[teamTriCode];
+      return Logo ? <Logo size = {size} /> : <p></p>
+  };
 
   return (
     // Main Dashboard Container
@@ -632,9 +638,10 @@ function Dashboard() {
                         <div className="flex flex-wrap items-center ">
                           <div className="w-3/4 flex justify-around ">
                             {/* Team Code and Record */}
-                            <div className="flex items-center justify-center w-full gap-4 md:w-1/4 mb-2 md:mb-0 ">
+                            <div className="flex items-center justify-center w-full gap-4 md:w-1/4 mb-2 md:mb-0">
+                              <TeamLogo teamTriCode={game.awayTeam.teamTriCode} size={75} />
                               <Typography
-                                variant="h6"
+                                variant="h5"
                                 sx={{ 
                                   fontFamily: "monospace",
                                   fontWeight: "bold",
@@ -654,6 +661,7 @@ function Dashboard() {
                                 sx={{ 
                                   fontFamily: "monospace",
                                   fontSize: "0.7rem",
+                                  marginTop: "0.2vh"
                                 }}
                               >
                                 {game.awayTeam.wins} - {game.awayTeam.losses}
@@ -712,8 +720,9 @@ function Dashboard() {
                           <div className="w-3/4 flex justify-around ">
                             {/* Team Code and Record */}
                             <div className="flex items-center justify-center w-full gap-4 md:w-1/4 mb-2 md:mb-0">
+                              <TeamLogo teamTriCode={game.homeTeam.teamTriCode} size={75} />
                               <Typography
-                                variant="h6"
+                                variant="h5"
                                 sx={{ 
                                   fontFamily: "monospace",
                                   fontWeight: "bold", 
@@ -732,6 +741,7 @@ function Dashboard() {
                                 sx={{ 
                                   fontFamily: "monospace",
                                   fontSize: "0.7rem",
+                                  marginTop: "0.2vh"
                                 }}
                                 className="text-xs font-bold"
                               >
@@ -916,9 +926,9 @@ function Dashboard() {
                       justifyContent: "center",
                       alignItems: "center",
                       marginTop: "2.2vh",
-                      marginLeft: "23vw",
+                      marginLeft: "17.5vw",
                       gap: "1.3vw",
-                      width: "55.5vw",
+                      width: "65vw",
                     }}
                   >
                     {/* Betting Lines Category Buttons (PTS, REB, AST, etc.) */}
@@ -1417,6 +1427,7 @@ function Dashboard() {
               onSubmit={submitLineup}
               isExpanded={showLineupBar}
               pickUpdate={userPickUpdate}
+              marginLeft={10}
             />
           )}
         </Box>
