@@ -1,5 +1,53 @@
 [
     {
+        "email": "temp@ou.edu",
+        "category": "VAL",
+        "entry_id": "player1_001",
+        "entry_type": "Flex Play",
+        "entry_amount": 50.0,
+        "potential_payout": 125.0,
+        "entries": [
+            {
+                "player_name": "Akame",
+                "player_team": "DetonatioN FocusMe",
+                "player_picture": "https://example.com/akame.jpg",
+                "line_category": "KILLS",
+                "projected_line": 30.0,
+                "users_pick": "Under",
+                "match_id": "458828",
+                "kill_value": 38,
+                "status": "miss"
+            },
+            {
+                "player_name": "gyen",
+                "player_team": "DetonatioN FocusMe",
+                "player_picture": "https://example.com/gyen.jpg",
+                "line_category": "KILLS",
+                "projected_line": 28.0,
+                "users_pick": "Over",
+                "match_id": "458828",
+                "kill_value": 29,
+                "status": "hit"
+            },
+            {
+                "player_name": "Jinboong",
+                "player_team": "DetonatioN FocusMe",
+                "player_picture": "https://example.com/jinboong.jpg",
+                "line_category": "KILLS",
+                "projected_line": 24.0,
+                "users_pick": "Over",
+                "match_id": "458828",
+                "kill_value": 25,
+                "status": "hit"
+            }
+        ],
+        "time": "2025-04-15T10:00:00.000000",
+        "result": "LOST",
+        "actual_payout": 0,
+        "evaluated": true,
+        "evaluation_date": "2025-04-15T11:00:00.000000"
+    },
+    {
         "email": "henry.l.tran-1@ou.edu",
         "category": "NBA",
         "entry_id": "henry.l.tran-1@ou.edu_1744611278538_2594bee3-299b-4871-9a64-43081a2758ee",
