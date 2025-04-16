@@ -296,6 +296,10 @@ function Register() {
                   "&:hover fieldset": { borderColor: "gray" },
                   "&.Mui-focused fieldset": { borderColor: "white" },
                 },
+                "& .MuiFormHelperText-root": {
+                  fontFamily: "monospace",
+                  color: "white",
+                },
               }}
             />
 
