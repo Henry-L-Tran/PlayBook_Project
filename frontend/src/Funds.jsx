@@ -74,7 +74,10 @@ function Funds() {
       if (response.status === 200) {
         setModalMessage("Card Information Saved");
         setIsModalOpen(true);
-        getUserData();
+        const updatedUser = { ...user, balance: data.balance };
+        setUser(updatedUser);
+        localStorage.setItem("currUser", JSON.stringify(updatedUser));
+        window.dispatchEvent(new Event("storage"));
 
       } 
       else {
@@ -122,7 +125,10 @@ function Funds() {
       if (response.status === 200) {
         setModalMessage(`${capitalize(type)} successful`);
         setIsModalOpen(true);
-        getUserData();
+        const updatedUser = { ...user, balance: data.balance };
+        setUser(updatedUser);
+        localStorage.setItem("currUser", JSON.stringify(updatedUser));
+        window.dispatchEvent(new Event("storage"));
 
         // Clear Input Fields After Saving
         setAmount("");

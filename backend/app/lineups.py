@@ -155,6 +155,22 @@ def submit_lineup(lineup_data: SubmitLineup):
     if len(team) == 1:
         raise HTTPException(status_code=400, detail="Lineups cannnot just contain players from the same team")
 
+    # Checks if the User Exists in the Database
+    users = loadUsers()
+    user = next((user for user in users if user["email"] == lineup_data.email), None)
+
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    # Checks if the User Has Enough Balance to Place the Bet
+    if float(user["balance"]) < float(lineup_data.entry_amount):
+        print("Insufficient balance")
+        raise HTTPException(status_code=400, detail="Insufficient balance")
+        
+    
+    # Deducts the Entry Amount from the User's Balance
+    user["balance"] = round(float(user["balance"]) - float(lineup_data.entry_amount), 2)
+    saveUsers(users)
 
     try:
         with open("app/nba_data/live_nba_scores.json", "r") as file:
@@ -223,17 +239,28 @@ def fetch_user_live_lineup_data():
             for game in games:
                 home = game.get("homeTeam", {})
                 away = game.get("awayTeam", {})
-
-                # Checking Both teamTriCode and teamTricode (Idk Why it Alternates)
                 home_code = home.get("teamTricode") or home.get("teamTriCode")
                 away_code = away.get("teamTricode") or away.get("teamTriCode")
-
                 if home_code:
                     game_status[home_code] = game.get("gameStatus", 0)
                 if away_code:
                     game_status[away_code] = game.get("gameStatus", 0)
         except Exception as e:
             print("Error fetching game status:", e)
+
+        if not game_status:
+            try:
+                with open("app/nba_data/live_player_data.json", "r") as f:
+                    player_data = json.load(f).get("games", [])
+                    for player in player_data:
+                        if player.get("playerPlayed"):
+                            player_id = player.get("playerId")
+                            status = player.get("gameStatus")
+                            if player_id and status:
+                                game_status[player_id] = status
+            except Exception as e:
+                print("Fallback player status load failed:", e)
+
             
         # Updates the User's Lineups
         updated_lineups = []
@@ -256,14 +283,27 @@ def fetch_user_live_lineup_data():
 
                 # If No Live Stats For the Player, Set Status to Pending, and Live Value to N/A
                 live_player = live_stats.get(player_id)
-                if not live_player or live_player.get("playerPlayed") is False:
+                if not live_player:
+                    entry["live_value"] = None
+                    entry["status"] = "pending"
+                    games_final = False
+                    continue
+
+                # If the Game is Final and Player Has Not Played, Set Status to DNP
+                if live_player.get("playerPlayed") is False and live_player.get("gameStatus") == 3:
                     entry["live_value"] = "DNP"
                     entry["status"] = "DNP"
                     continue
 
-                # Checks if the Game is Final or Not
-                team_tri_code = entry["team_tri_code"]
-                if game_status.get(team_tri_code, 0) != 3:
+                # Leaves the Entry as Pending if the Player Has Not Played and the Game is Not Final
+                if live_player.get("playerPlayed") is False and live_player.get("gameStatus") != 3:
+                    entry["live_value"] = None
+                    entry["status"] = "pending"
+                    games_final = False
+                    continue
+
+                team_code = entry["team_tri_code"]
+                if game_status.get(team_code, 0) != 3:
                     games_final = False
                 
 

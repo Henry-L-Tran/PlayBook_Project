@@ -8,14 +8,13 @@ import {
   Typography,
   Box,
 } from "@mui/material";
-
+import CenteredModal from "./utilities/CenteredModal";
 
 // Login Component for User Authentication
 function Login() {
-
   // State to Track User Input for Email and Password
   const [loginData, setLoginData] = useState({ email: "", password: "" });
-  
+
   // React Router Navigation
   const navigate = useNavigate();
 
@@ -25,11 +24,13 @@ function Login() {
     setLoginData({ ...loginData, [name]: value });
   };
 
-  // Function to Handle User Login on Form Submission 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+
+  // Function to Handle User Login on Form Submission
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    // Checks if Email and Password are Provided 
     try {
       const response = await fetch("http://localhost:8000/login", {
         method: "POST",
@@ -37,31 +38,24 @@ function Login() {
         body: JSON.stringify(loginData),
       });
 
-      // If Response is Sucessful, Store User Email in Local Storage and Redirect to Home Page
       if (response.status === 200) {
         const data = await response.json();
         localStorage.setItem("currUser", JSON.stringify(data.user));
         console.log("Login Successful, User:", data.user.email);
-        // Stores User's Information in Local Storage
-        localStorage.setItem("currUser", JSON.stringify(data.user));
-        // Redirect to Home Page
         navigate("/home");
-      } 
-      
-      // If Response is Not Sucessful, Log Error Message
-      else {
-        console.log("Login Failed");
+      } else {
+        setModalMessage("Login Failed: Incorrect email or password.");
+        setIsModalOpen(true);
       }
-    } 
-    
-    catch (error) {
+    } catch (error) {
+      setModalMessage("Login Failed: Server error or connection issue.");
+      setIsModalOpen(true);
       console.error("Login Failed:", error);
     }
   };
 
   return (
-
-    // Main Container for the Login Page (Entire Page) 
+    // Main Container for the Login Page (Entire Page)
     <Box
       className="flex items-center flex-col justify-center min-h-screen"
       sx={{
@@ -80,7 +74,6 @@ function Login() {
         overflowY: "auto",
       }}
     >
-
       {/* Logo Image at the Top Left of the Login Page */}
       <img
         src="/images/logo.png"
@@ -103,10 +96,8 @@ function Login() {
           marginTop: "-4rem",
         }}
       >
-
         {/* Entire Box for Login Form */}
         <CardContent className=" border-3 border-white rounded-md">
-
           {/* PlayBook Text */}
           <Typography
             className="text-center py-8 text-white"
@@ -119,7 +110,6 @@ function Login() {
 
           {/* Login Form with Email and Password Fields */}
           <form onSubmit={handleLogin} className="space-y-4 px-2">
-            
             {/* Email Input Field */}
             <TextField
               label="Email"
@@ -162,7 +152,6 @@ function Login() {
 
             {/* Container For Sign In Button and Register Button */}
             <div className="flex flex-col gap-4 mb-4">
-
               {/* Sign In Button */}
               <Button
                 type="submit"
@@ -202,6 +191,12 @@ function Login() {
           </form>
         </CardContent>
       </Card>
+      <CenteredModal
+        isOpen={isModalOpen}
+        message={modalMessage}
+        onClose={() => setIsModalOpen(false)}
+        autoClose={true}
+      />
     </Box>
   );
 }

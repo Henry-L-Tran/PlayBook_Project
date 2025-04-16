@@ -39,9 +39,29 @@
   color: #888;
 }
 
-*{
+* {
   -ms-overflow-style: none;
 }
 ::-webkit-scrollbar {
   display: none;
+}
+
+/* Target MUI input elements globally */
+.MuiInputBase-input {
+  font-family: monospace !important;
+  color: white;
+}
+
+.MuiOutlinedInput-root {
+  & fieldset {
+    border-color: white;
+  }
+
+  &:hover fieldset {
+    border-color: gray;
+  }
+
+  &.Mui-focused fieldset {
+    border-color: white;
+  }
 }
