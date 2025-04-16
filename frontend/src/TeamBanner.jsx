@@ -1,25 +1,5 @@
-import { useState } from "react";
-import { useEffect } from "react";
-import { Tabs, Tab } from "@mui/material";
 import { Box, Typography, Divider } from "@mui/material";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
-import { v4 as uuidv4 } from "uuid";
-import Lineups from "./Lineups";
-import { calculatePayoutMultiplier } from "./payoutMultiplier";
-import { format } from "date-fns";
-import SearchBar from "./SearchBar";
 import "./TeamBanner.css";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
-
 import * as NBAIcons from "react-nba-logos";
 import TeamColor from "./TeamColor";
 
@@ -45,54 +25,63 @@ function TeamBanner({ nbaSelectedGame}) {
     const awayColors = TeamColor[awayTriCode] || { primary: "gray", secondary: "white" };
     const homeColors = TeamColor[homeTriCode] || { primary: "gray", secondary: "white" };
 
-    
-
+    const slices = Array.from({length: 80});
 
     return (
         <Box
             sx ={{
                 position: "sticky",
-                top: "22%",
+                top: "5%",
             }}
         >
             {/* Team Banner */}
             <div className="banner-container">
-                <div className="banner"
+                <div className="banner-wrapper-vertical banner-border"
                     style={{
-                        backgroundColor: awayColors.primary,
-                        borderTopColor: awayColors.secondary,
-                        borderLeftColor: awayColors.secondary,
-                        borderRightColor: awayColors.secondary,
-                        borderBottomColor: awayColors.secondary,
                         display: "flex",
                         flexDirection: "column",
-                    }}>
-                    <TeamLogo teamTriCode={nbaSelectedGame.awayTeam.teamTriCode} size={180} />
-                    <div className="banner-icon"
-                        style ={{
-                            color: awayColors.secondary,
+                        borderColor: awayColors.secondary
+                }}>
+                    {slices.map((_, i) => (
+                        <div
+                        className="banner-row"
+                        key={`away-${i}`}
+                        style={{
+                            "--i": i,
+                            backgroundColor: awayColors.primary,
                         }}
-                    >{nbaSelectedGame.awayTeam.teamTriCode}</div>
+                        ></div>
+                    ))}
+
+                    <div className="banner-label" style={{ color: awayColors.secondary }}>
+                        <TeamLogo teamTriCode={awayTriCode} size={180} />
+                        {awayTriCode}
+                    </div>
                 </div>
                 
-                <div className="flex mt-115 text-3xl">V.S.</div>
+                <div className="flex mt-75 ml-1 text-4xl text-white font-bold">V.S.</div>
 
-                <div className="banner"
+                <div className="banner-wrapper-vertical banner-border"
                     style={{
-                        backgroundColor: homeColors.primary,
-                        borderTopColor: homeColors.secondary,
-                        borderLeftColor: homeColors.secondary,
-                        borderRightColor: homeColors.secondary,
-                        borderBottomColor: homeColors.secondary,
                         display: "flex",
                         flexDirection: "column",
-                    }}>
-                    <TeamLogo teamTriCode={nbaSelectedGame.homeTeam.teamTriCode} size={180} />
-                    <div className="banner-icon"
-                        style ={{
-                            color: homeColors.secondary,
+                        borderColor: homeColors.secondary
+                }}>
+                    {slices.map((_, i) => (
+                        <div
+                        className="banner-row"
+                        key={`home-${i}`}
+                        style={{
+                            "--i": i,
+                            backgroundColor: homeColors.primary,
                         }}
-                    >{nbaSelectedGame.homeTeam.teamTriCode}</div>
+                        ></div>
+                    ))}
+
+                    <div className="banner-label" style={{ color: homeColors.secondary }}>
+                        <TeamLogo teamTriCode={homeTriCode} size={180} />
+                        {homeTriCode}
+                    </div>
                 </div>
             </div>
         </Box>
