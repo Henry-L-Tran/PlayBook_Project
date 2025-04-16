@@ -394,7 +394,7 @@ function Valorant() {
               fontFamily: "monospace",
             }}
           >
-            {selectedMatch.team1} vs {selectedMatch.team2}
+            {selectedMatch.team1} vs {selectedMatch.team2} - 2 Maps
           </Typography>
           <IconButton
             sx={{
@@ -429,7 +429,7 @@ function Valorant() {
                   fontFamily: "monospace",
                   backgroundColor: viewLineCategory === category ? "white" : "transparent",
                   color: viewLineCategory === category ? "black" : "white",
-                  border: "1px solid white",
+                  border: "1px solid gray",
                   borderRadius: "5rem",
                   padding: "0.5rem 1rem",
                   cursor: "pointer",
@@ -709,7 +709,7 @@ function Valorant() {
                 }}
                 sx={{
                   backgroundColor: "rgba(0, 0, 0, 0.5)",
-                  border: "1px solid white",
+                  border: "1px solid gray",
                   borderRadius: "1rem",
                   padding: "1rem",
                   marginBottom: "1rem",
