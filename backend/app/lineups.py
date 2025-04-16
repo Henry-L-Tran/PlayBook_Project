@@ -24,6 +24,15 @@ class LineupEntry(BaseModel):
     users_pick: str
     matchup: str = "N/A"
 
+class ValLineupEntry(BaseModel):
+    player_name: str
+    player_team: str
+    player_picture: str
+    line_category: str
+    projected_line: float
+    users_pick: str
+    match_id: str = "N/A"
+
 class SubmitLineup(BaseModel):
     email: str
     category: str
@@ -32,6 +41,15 @@ class SubmitLineup(BaseModel):
     entry_amount: float
     potential_payout: float
     entries: List[LineupEntry]
+
+class ValSubmitLineup(BaseModel):
+    email: str
+    category: str
+    entry_id: str
+    entry_type: str
+    entry_amount: float
+    potential_payout: float
+    entries: List[ValLineupEntry]
 
 
 
@@ -202,6 +220,72 @@ def submit_lineup(lineup_data: SubmitLineup):
 
     return {"message": "Lineup submitted successfully!"}
 
+@router.post("/lineups/VALORANT/submit")
+def val_submit_lineup(lineup_data: ValSubmitLineup):
+
+    # Checks if the Lineup Has 2-6 Entries and Not All From the Same Team
+    if len(lineup_data.entries) < 2 or len(lineup_data.entries) > 6:
+        raise HTTPException(status_code=400, detail="Lineup must have at least 2 entries and at most 6 entries")
+
+    team = set(player.player_team for player in lineup_data.entries)
+    if len(team) == 1:
+        raise HTTPException(status_code=400, detail="Lineups cannnot just contain players from the same team")
+
+    # Checks if the User Exists in the Database
+    users = loadUsers()
+    user = next((user for user in users if user["email"] == lineup_data.email), None)
+
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    # Checks if the User Has Enough Balance to Place the Bet
+    if float(user["balance"]) < float(lineup_data.entry_amount):
+        print("Insufficient balance")
+        raise HTTPException(status_code=400, detail="Insufficient balance")
+        
+    
+    # Deducts the Entry Amount from the User's Balance
+    user["balance"] = round(float(user["balance"]) - float(lineup_data.entry_amount), 2)
+    saveUsers(users)
+
+    try:
+        with open("app/valorant_data/val_live_scores.json", "r") as file:
+            live_scores = json.load(file)
+    except:
+        live_scores = {"gameData": []}
+
+    # Freezing the Lineup Matchup Data When Parlay is Placed
+    def freeze_matchups_data(player_team):
+        for game in live_scores.get("gameData", []):
+            if game["team1"] == player_team or game["team2"] == player_team:
+                 return f'{game["team1"]} vs {game["team2"]}'
+        return "N/A"
+    
+    frozen_entries = []
+
+    for entry in lineup_data.entries:
+        entry_dict = entry.dict()
+        entry_dict["player_team"] = freeze_matchups_data(entry.player_team)
+        frozen_entries.append(entry_dict)
+
+    # Builds the New Lineup 
+    new_lineup = {
+        "email": lineup_data.email,
+        "category": lineup_data.category,
+        "entry_id": lineup_data.entry_id,
+        "entry_type": lineup_data.entry_type,
+        "entry_amount": lineup_data.entry_amount,
+        "potential_payout": lineup_data.potential_payout,
+        "entries": frozen_entries,
+        "time": datetime.utcnow().isoformat()
+    }
+
+    lineups = fetch_lineups()
+    lineups.append(new_lineup)
+    save_lineups(lineups)
+
+    return {"message": "Lineup submitted successfully!"}
+
 # Fetch All Lineups from a User
 @router.get("/lineups/user/{email}")
 def fetch_user_lineups(email: str):
@@ -215,12 +299,12 @@ def fetch_user_live_lineup_data():
     while True:
         lineups = fetch_lineups()
 
-        live_stats = {}
+        live_nba_stats = {}
         try:
             with open("app/nba_data/live_player_data.json", "r") as file:
                 data = json.load(file)
                 for player in data["games"]:
-                    live_stats[player["playerId"]] = player
+                    live_nba_stats[player["playerId"]] = player
         except:
             pass
 
@@ -231,17 +315,28 @@ def fetch_user_live_lineup_data():
             for game in games:
                 home = game.get("homeTeam", {})
                 away = game.get("awayTeam", {})
-
-                # Checking Both teamTriCode and teamTricode (Idk Why it Alternates)
                 home_code = home.get("teamTricode") or home.get("teamTriCode")
                 away_code = away.get("teamTricode") or away.get("teamTriCode")
-
                 if home_code:
                     game_status[home_code] = game.get("gameStatus", 0)
                 if away_code:
                     game_status[away_code] = game.get("gameStatus", 0)
         except Exception as e:
             print("Error fetching game status:", e)
+
+        if not game_status:
+            try:
+                with open("app/nba_data/live_player_data.json", "r") as f:
+                    player_data = json.load(f).get("games", [])
+                    for player in player_data:
+                        if player.get("playerPlayed"):
+                            player_id = player.get("playerId")
+                            status = player.get("gameStatus")
+                            if player_id and status:
+                                game_status[player_id] = status
+            except Exception as e:
+                print("Fallback player status load failed:", e)
+
             
         # Updates the User's Lineups
         updated_lineups = []
@@ -263,15 +358,28 @@ def fetch_user_live_lineup_data():
                 pick = entry["users_pick"]
 
                 # If No Live Stats For the Player, Set Status to Pending, and Live Value to N/A
-                live_player = live_stats.get(player_id)
-                if not live_player or live_player.get("playerPlayed") is False:
+                live_player = live_nba_stats.get(player_id)
+                if not live_player:
+                    entry["live_value"] = None
+                    entry["status"] = "pending"
+                    games_final = False
+                    continue
+
+                # If the Game is Final and Player Has Not Played, Set Status to DNP
+                if live_player.get("playerPlayed") is False and live_player.get("gameStatus") == 3:
                     entry["live_value"] = "DNP"
                     entry["status"] = "DNP"
                     continue
 
-                # Checks if the Game is Final or Not
-                team_tri_code = entry["team_tri_code"]
-                if game_status.get(team_tri_code, 0) != 3:
+                # Leaves the Entry as Pending if the Player Has Not Played and the Game is Not Final
+                if live_player.get("playerPlayed") is False and live_player.get("gameStatus") != 3:
+                    entry["live_value"] = None
+                    entry["status"] = "pending"
+                    games_final = False
+                    continue
+
+                team_code = entry["team_tri_code"]
+                if game_status.get(team_code, 0) != 3:
                     games_final = False
                 
 
@@ -358,9 +466,8 @@ def fetch_user_live_lineup_data():
 
 threading.Thread(target=fetch_user_live_lineup_data, daemon=True).start()
 
-
-
-
+def confirm_val_lineups():
+    
 
 
 

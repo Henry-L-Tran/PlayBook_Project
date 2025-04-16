@@ -102,20 +102,6 @@ function Dashboard() {
     fetchUpdatedUser();
   }, []);
 
-  // Function to Convert ISO Time to Game Clock Format (MM:SS)
-  const gameClockConverter = (isoTime) => {
-    if (!isoTime) return "00:00";
-
-    const time = isoTime.match(/PT(\d+)M(\d+(\.\d*)?)S/);
-    if (!time) return isoTime;
-
-    // Getting the Minutes and Seconds from the ISO Time
-    let minutes = time[1].padStart(2, "0");
-    let seconds = Math.floor(parseFloat(time[2])).toString().padStart(2, "0");
-
-    return `${minutes}:${seconds}`;
-  };
-
   // Function to Handle the Category Tab Change (NBA, NFL, VAL)
   const handleCategoryTabChange = (event, newValue) => {
     setActiveCategoryTab(newValue);
@@ -604,7 +590,7 @@ function Dashboard() {
                         borderRadius: "1rem",
                       }}
                       onClick={() => {
-                        if (game.gameStatus === 3) {
+                        if (game.gameStatus === 2) {
                           setnbaselectedGame(game);
                           setShowBettingLines(true);
                         }
@@ -620,16 +606,6 @@ function Dashboard() {
                         >
                           {game.gameStatusText}
                         </Typography>
-
-                        {game.gameStatus === 2 && (
-                          <Typography
-                            sx={{ fontFamily: "monospace" }}
-                            className="text-base md:text-xl font-mono text-right"
-                            fontSize={20}
-                          >
-                            {gameClockConverter(game.gameClock)}
-                          </Typography>
-                        )}
                       </div>
 
                       {/* Teams Container */}
@@ -669,49 +645,50 @@ function Dashboard() {
                             </div>
 
                             {/* Away Team Periods and Score */}
-                            {(game.gameStatus === 2 ||
-                              game.gameStatus === 3) && (
-                              <div className="flex justify-between items-center w-full md:w-1/2 pl-0 md:pl-8">
-                                <div className="flex space-x-4 md:space-x-8">
-                                  {game.awayTeam.periods.map(
-                                    (period, index) => (
-                                      <div key={index} className="text-center">
-                                        <Typography
-                                          sx={{ fontFamily: "monospace" }}
-                                        >
-                                          {period.period}
-                                        </Typography>
-                                        <Typography
-                                          sx={{ 
-                                            fontFamily: "monospace",
-                                            fontWeight: "bold", 
-                                          }}
-                                          className="text-xs"
-                                        >
-                                          {period.score}
-                                        </Typography>
-                                      </div>
-                                    )
-                                  )}
-                                </div>
-                                {/* Away Team Score */}
-                                <Typography
-                                  fontSize={20}
-                                  sx={{ 
-                                    fontFamily: "monospace",
-                                    fontWeight: "bold", 
-                                  }}
-                                  className={` text-xl ml-4 ${
-                                    game.gameStatus === 3 &&
-                                    game.awayTeam.score > game.homeTeam.score
-                                      ? "text-green-700"
-                                      : "text-white"
-                                  }`}
-                                >
-                                  {game.awayTeam.score}
-                                </Typography>
+                            <div className="flex justify-between items-center w-full md:w-1/2 pl-0 md:pl-8"
+                              style={{
+                                visibility: game.gameStatus === 2 || game.gameStatus === 3 ? "visible" : "hidden",
+                              }}
+                              >
+                              <div className="flex space-x-4 md:space-x-8">
+                                {game.awayTeam.periods.map(
+                                  (period, index) => (
+                                    <div key={index} className="text-center">
+                                      <Typography
+                                        sx={{ fontFamily: "monospace" }}
+                                      >
+                                        {period.period}
+                                      </Typography>
+                                      <Typography
+                                        sx={{ 
+                                          fontFamily: "monospace",
+                                          fontWeight: "bold", 
+                                        }}
+                                        className="text-xs"
+                                      >
+                                        {period.score}
+                                      </Typography>
+                                    </div>
+                                  )
+                                )}
                               </div>
-                            )}
+                              {/* Away Team Score */}
+                              <Typography
+                                fontSize={20}
+                                sx={{ 
+                                  fontFamily: "monospace",
+                                  fontWeight: "bold", 
+                                }}
+                                className={` text-xl ml-4 ${
+                                  game.gameStatus === 3 &&
+                                  game.awayTeam.score > game.homeTeam.score
+                                    ? "text-green-700"
+                                    : "text-white"
+                                }`}
+                              >
+                                {game.awayTeam.score}
+                              </Typography>
+                            </div>
                           </div>
                         </div>
 
@@ -750,49 +727,50 @@ function Dashboard() {
                             </div>
 
                             {/* Home Team Periods and Score */}
-                            {(game.gameStatus === 2 ||
-                              game.gameStatus === 3) && (
-                              <div className="flex justify-between items-center w-full md:w-1/2 pl-0 md:pl-8">
-                                <div className="flex space-x-4 md:space-x-8">
-                                  {game.homeTeam.periods.map(
-                                    (period, index) => (
-                                      <div key={index} className="text-center">
-                                        <Typography
-                                          sx={{ fontFamily: "monospace" }}
-                                        >
-                                          {period.period}
-                                        </Typography>
-                                        <Typography
-                                          sx={{ 
-                                            fontFamily: "monospace",
-                                            fontWeight: "bold",
-                                          }}
-                                          className="text-xs"
-                                        >
-                                          {period.score}
-                                        </Typography>
-                                      </div>
-                                    )
-                                  )}
-                                </div>
-
-                                <Typography
-                                  fontSize={20}
-                                  sx={{ 
-                                    fontFamily: "monospace",
-                                    fontWeight: "bold", 
-                                  }}
-                                  className={`text-xl ml-4 ${
-                                    game.gameStatus === 3 &&
-                                    game.homeTeam.score > game.awayTeam.score
-                                      ? "text-green-700"
-                                      : "text-white"
-                                  }`}
-                                >
-                                  {game.homeTeam.score}
-                                </Typography>
+                            <div className="flex justify-between items-center w-full md:w-1/2 pl-0 md:pl-8"
+                              style={{
+                                visibility: game.gameStatus === 2 || game.gameStatus === 3 ? "visible" : "hidden",
+                              }}
+                            >
+                              <div className="flex space-x-4 md:space-x-8">
+                                {game.homeTeam.periods.map(
+                                  (period, index) => (
+                                    <div key={index} className="text-center">
+                                      <Typography
+                                        sx={{ fontFamily: "monospace" }}
+                                      >
+                                        {period.period}
+                                      </Typography>
+                                      <Typography
+                                        sx={{ 
+                                          fontFamily: "monospace",
+                                          fontWeight: "bold",
+                                        }}
+                                        className="text-xs"
+                                      >
+                                        {period.score}
+                                      </Typography>
+                                    </div>
+                                  )
+                                )}
                               </div>
-                            )}
+
+                              <Typography
+                                fontSize={20}
+                                sx={{ 
+                                  fontFamily: "monospace",
+                                  fontWeight: "bold", 
+                                }}
+                                className={`text-xl ml-4 ${
+                                  game.gameStatus === 3 &&
+                                  game.homeTeam.score > game.awayTeam.score
+                                    ? "text-green-700"
+                                    : "text-white"
+                                }`}
+                              >
+                                {game.homeTeam.score}
+                              </Typography>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -920,7 +898,7 @@ function Dashboard() {
                   <Box
                     sx={{
                       position: "sticky",
-                      top: "11%",
+                      top: "10%",
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",

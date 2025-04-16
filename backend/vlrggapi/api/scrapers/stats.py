@@ -33,19 +33,8 @@ def vlr_stats(region: str, timespan: str):
             {
                 "player": player_name,
                 "org": org,
-                "agents": agents,
-                "rounds_played": rnd,
-                "rating": color_sq[0],
-                "average_combat_score": color_sq[1],
-                "kill_deaths": color_sq[2],
-                "kill_assists_survived_traded": color_sq[3],
-                "average_damage_per_round": color_sq[4],
-                "kills_per_round": color_sq[5],
-                "assists_per_round": color_sq[6],
-                "first_kills_per_round": color_sq[7],
-                "first_deaths_per_round": color_sq[8],
-                "headshot_percentage": color_sq[9],
-                "clutch_success_percentage": color_sq[10],
+                "average_kills_map": 20 * float(color_sq[5]),
+                "line": 20 * float(color_sq[5]) * 2
             }
         )
 
