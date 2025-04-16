@@ -1,0 +1,1267 @@
+{
+    "data": {
+        "status": 200,
+        "segments": [
+            {
+                "player": "Smoggy",
+                "org": "EDG",
+                "average_kills_rounds": 18.72
+            },
+            {
+                "player": "Cryocells",
+                "org": "100T",
+                "average_kills_rounds": 24.240000000000002
+            },
+            {
+                "player": "slowly",
+                "org": "TYL",
+                "average_kills_rounds": 21.84
+            },
+            {
+                "player": "Foxy9",
+                "org": "GEN",
+                "average_kills_rounds": 20.16
+            },
+            {
+                "player": "N4RRATE",
+                "org": "SEN",
+                "average_kills_rounds": 19.200000000000003
+            },
+            {
+                "player": "v1c",
+                "org": "C9",
+                "average_kills_rounds": 19.44
+            },
+            {
+                "player": "Ezeir",
+                "org": "NOVA",
+                "average_kills_rounds": 18.72
+            },
+            {
+                "player": "marteen",
+                "org": "KC",
+                "average_kills_rounds": 20.4
+            },
+            {
+                "player": "lukxo",
+                "org": "LOUD",
+                "average_kills_rounds": 23.52
+            },
+            {
+                "player": "Kai",
+                "org": "TE",
+                "average_kills_rounds": 21.12
+            },
+            {
+                "player": "Wo0t",
+                "org": "TH",
+                "average_kills_rounds": 21.12
+            },
+            {
+                "player": "dos9",
+                "org": "BME",
+                "average_kills_rounds": 18.0
+            },
+            {
+                "player": "Rarga",
+                "org": "XLG",
+                "average_kills_rounds": 21.6
+            },
+            {
+                "player": "invy",
+                "org": "TS",
+                "average_kills_rounds": 20.4
+            },
+            {
+                "player": "vo0kashu",
+                "org": "DRG",
+                "average_kills_rounds": 20.88
+            },
+            {
+                "player": "Keiko",
+                "org": "TL",
+                "average_kills_rounds": 20.64
+            },
+            {
+                "player": "xeus",
+                "org": "EF",
+                "average_kills_rounds": 22.32
+            },
+            {
+                "player": "MiniBoo",
+                "org": "TH",
+                "average_kills_rounds": 22.080000000000002
+            },
+            {
+                "player": "Karon",
+                "org": "GEN",
+                "average_kills_rounds": 19.68
+            },
+            {
+                "player": "johnqt",
+                "org": "SEN",
+                "average_kills_rounds": 17.04
+            },
+            {
+                "player": "Jemkin",
+                "org": "RRQ",
+                "average_kills_rounds": 22.080000000000002
+            },
+            {
+                "player": "Avez",
+                "org": "KC",
+                "average_kills_rounds": 19.44
+            },
+            {
+                "player": "Munchkin",
+                "org": "GEN",
+                "average_kills_rounds": 18.48
+            },
+            {
+                "player": "Viva",
+                "org": "XLG",
+                "average_kills_rounds": 16.56
+            },
+            {
+                "player": "whzy",
+                "org": "Toe",
+                "average_kills_rounds": 22.080000000000002
+            },
+            {
+                "player": "jawgemo",
+                "org": "G2",
+                "average_kills_rounds": 21.36
+            },
+            {
+                "player": "Xeppaa",
+                "org": "C9",
+                "average_kills_rounds": 18.48
+            },
+            {
+                "player": "leaf",
+                "org": "G2",
+                "average_kills_rounds": 19.919999999999998
+            },
+            {
+                "player": "Kushy",
+                "org": "RRQ",
+                "average_kills_rounds": 18.96
+            },
+            {
+                "player": "Mazino",
+                "org": "KR\u00dc",
+                "average_kills_rounds": 19.44
+            },
+            {
+                "player": "Verno",
+                "org": "MIBR",
+                "average_kills_rounds": 17.28
+            },
+            {
+                "player": "HYUNMIN",
+                "org": "DRX",
+                "average_kills_rounds": 21.36
+            },
+            {
+                "player": "Jinggg",
+                "org": "PRX",
+                "average_kills_rounds": 17.759999999999998
+            },
+            {
+                "player": "Yuicaw",
+                "org": "WOL",
+                "average_kills_rounds": 17.759999999999998
+            },
+            {
+                "player": "iZu",
+                "org": "T1",
+                "average_kills_rounds": 18.48
+            },
+            {
+                "player": "MrFaliN",
+                "org": "FUT",
+                "average_kills_rounds": 17.28
+            },
+            {
+                "player": "nAts",
+                "org": "TL",
+                "average_kills_rounds": 19.44
+            },
+            {
+                "player": "hiro",
+                "org": "NAVI",
+                "average_kills_rounds": 19.68
+            },
+            {
+                "player": "RieNs",
+                "org": "TH",
+                "average_kills_rounds": 18.240000000000002
+            },
+            {
+                "player": "TenTen",
+                "org": "ZETA",
+                "average_kills_rounds": 19.919999999999998
+            },
+            {
+                "player": "Knight",
+                "org": "BLG",
+                "average_kills_rounds": 17.04
+            },
+            {
+                "player": "keznit",
+                "org": "KR\u00dc",
+                "average_kills_rounds": 20.88
+            },
+            {
+                "player": "Famouz",
+                "org": "BME",
+                "average_kills_rounds": 22.56
+            },
+            {
+                "player": "trent",
+                "org": "G2",
+                "average_kills_rounds": 16.799999999999997
+            },
+            {
+                "player": "heybay",
+                "org": "TE",
+                "average_kills_rounds": 18.48
+            },
+            {
+                "player": "Levius",
+                "org": "BLG",
+                "average_kills_rounds": 16.080000000000002
+            },
+            {
+                "player": "Kr1stal",
+                "org": "GE",
+                "average_kills_rounds": 16.32
+            },
+            {
+                "player": "kaajak",
+                "org": "FNC",
+                "average_kills_rounds": 20.4
+            },
+            {
+                "player": "Scales",
+                "org": "TYL",
+                "average_kills_rounds": 18.0
+            },
+            {
+                "player": "SUYGETSU",
+                "org": "KC",
+                "average_kills_rounds": 16.799999999999997
+            },
+            {
+                "player": "Ruxic",
+                "org": "NAVI",
+                "average_kills_rounds": 17.28
+            },
+            {
+                "player": "NcSlasher",
+                "org": "BME",
+                "average_kills_rounds": 17.52
+            },
+            {
+                "player": "s0m",
+                "org": "NRG",
+                "average_kills_rounds": 18.48
+            },
+            {
+                "player": "Shao",
+                "org": "NAVI",
+                "average_kills_rounds": 17.28
+            },
+            {
+                "player": "Lysoar",
+                "org": "WOL",
+                "average_kills_rounds": 16.799999999999997
+            },
+            {
+                "player": "Flashback",
+                "org": "DRX",
+                "average_kills_rounds": 18.96
+            },
+            {
+                "player": "Akame",
+                "org": "DFM",
+                "average_kills_rounds": 18.72
+            },
+            {
+                "player": "aspas",
+                "org": "MIBR",
+                "average_kills_rounds": 20.16
+            },
+            {
+                "player": "kamyk",
+                "org": "M8",
+                "average_kills_rounds": 19.68
+            },
+            {
+                "player": "Elite",
+                "org": "KC",
+                "average_kills_rounds": 16.56
+            },
+            {
+                "player": "crashies",
+                "org": "FNC",
+                "average_kills_rounds": 17.04
+            },
+            {
+                "player": "valyn",
+                "org": "G2",
+                "average_kills_rounds": 17.28
+            },
+            {
+                "player": "OXY",
+                "org": "C9",
+                "average_kills_rounds": 21.36
+            },
+            {
+                "player": "CyvOph",
+                "org": "VIT",
+                "average_kills_rounds": 18.48
+            },
+            {
+                "player": "xffero",
+                "org": "RRQ",
+                "average_kills_rounds": 17.28
+            },
+            {
+                "player": "Flex1n",
+                "org": "DRG",
+                "average_kills_rounds": 18.240000000000002
+            },
+            {
+                "player": "BerserX",
+                "org": "BME",
+                "average_kills_rounds": 17.28
+            },
+            {
+                "player": "bang",
+                "org": "SEN",
+                "average_kills_rounds": 16.799999999999997
+            },
+            {
+                "player": "supamen",
+                "org": "EG",
+                "average_kills_rounds": 18.0
+            },
+            {
+                "player": "eeiu",
+                "org": "100T",
+                "average_kills_rounds": 16.56
+            },
+            {
+                "player": "nephh",
+                "org": "BLG",
+                "average_kills_rounds": 16.080000000000002
+            },
+            {
+                "player": "rushia",
+                "org": "BLG",
+                "average_kills_rounds": 15.600000000000001
+            },
+            {
+                "player": "stew",
+                "org": "JDG",
+                "average_kills_rounds": 18.96
+            },
+            {
+                "player": "SugarZ3ro",
+                "org": "ZETA",
+                "average_kills_rounds": 17.52
+            },
+            {
+                "player": "Rb",
+                "org": "TEC",
+                "average_kills_rounds": 17.52
+            },
+            {
+                "player": "Zap",
+                "org": "2G",
+                "average_kills_rounds": 18.240000000000002
+            },
+            {
+                "player": "cortezia",
+                "org": "RED",
+                "average_kills_rounds": 18.240000000000002
+            },
+            {
+                "player": "Chronicle",
+                "org": "FNC",
+                "average_kills_rounds": 17.28
+            },
+            {
+                "player": "MAGNUM",
+                "org": "BBL",
+                "average_kills_rounds": 17.04
+            },
+            {
+                "player": "Boaster",
+                "org": "FNC",
+                "average_kills_rounds": 14.399999999999999
+            },
+            {
+                "player": "UdoTan",
+                "org": "GE",
+                "average_kills_rounds": 18.240000000000002
+            },
+            {
+                "player": "Minny",
+                "org": "M8",
+                "average_kills_rounds": 16.799999999999997
+            },
+            {
+                "player": "Estrella",
+                "org": "DRX",
+                "average_kills_rounds": 18.72
+            },
+            {
+                "player": "primmie",
+                "org": "TLN",
+                "average_kills_rounds": 19.44
+            },
+            {
+                "player": "CHICHOO",
+                "org": "EDG",
+                "average_kills_rounds": 17.28
+            },
+            {
+                "player": "yosemite",
+                "org": "FPX",
+                "average_kills_rounds": 18.72
+            },
+            {
+                "player": "Demon1",
+                "org": "LEV",
+                "average_kills_rounds": 18.72
+            },
+            {
+                "player": "Francis",
+                "org": "NS",
+                "average_kills_rounds": 17.28
+            },
+            {
+                "player": "Monyet",
+                "org": "RRQ",
+                "average_kills_rounds": 16.56
+            },
+            {
+                "player": "Ash",
+                "org": "GEN",
+                "average_kills_rounds": 15.600000000000001
+            },
+            {
+                "player": "t3xture",
+                "org": "GEN",
+                "average_kills_rounds": 20.16
+            },
+            {
+                "player": "mada",
+                "org": "NRG",
+                "average_kills_rounds": 18.72
+            },
+            {
+                "player": "florescent",
+                "org": "APK",
+                "average_kills_rounds": 19.919999999999998
+            },
+            {
+                "player": "Persia",
+                "org": "NS",
+                "average_kills_rounds": 15.84
+            },
+            {
+                "player": "something",
+                "org": "PRX",
+                "average_kills_rounds": 16.56
+            },
+            {
+                "player": "NaturE",
+                "org": "EG",
+                "average_kills_rounds": 17.52
+            },
+            {
+                "player": "TvirusLuke",
+                "org": "TEC",
+                "average_kills_rounds": 21.36
+            },
+            {
+                "player": "ZmjjKK",
+                "org": "EDG",
+                "average_kills_rounds": 20.4
+            },
+            {
+                "player": "pANcada",
+                "org": "LOUD",
+                "average_kills_rounds": 16.56
+            },
+            {
+                "player": "kamo",
+                "org": "TL",
+                "average_kills_rounds": 18.72
+            },
+            {
+                "player": "Ninebody",
+                "org": "TYL",
+                "average_kills_rounds": 17.52
+            },
+            {
+                "player": "dgzin",
+                "org": "LOUD",
+                "average_kills_rounds": 19.68
+            },
+            {
+                "player": "zekken",
+                "org": "SEN",
+                "average_kills_rounds": 18.96
+            },
+            {
+                "player": "Meteor",
+                "org": "T1",
+                "average_kills_rounds": 19.200000000000003
+            },
+            {
+                "player": "Melser",
+                "org": "KR\u00dc",
+                "average_kills_rounds": 15.600000000000001
+            },
+            {
+                "player": "Ethan",
+                "org": "NRG",
+                "average_kills_rounds": 16.32
+            },
+            {
+                "player": "YOU",
+                "org": "XLG",
+                "average_kills_rounds": 16.080000000000002
+            },
+            {
+                "player": "AtaKaptan",
+                "org": "FUT",
+                "average_kills_rounds": 15.36
+            },
+            {
+                "player": "Killua",
+                "org": "TLN",
+                "average_kills_rounds": 17.759999999999998
+            },
+            {
+                "player": "Shyy",
+                "org": "KR\u00dc",
+                "average_kills_rounds": 15.36
+            },
+            {
+                "player": "BuZz",
+                "org": "T1",
+                "average_kills_rounds": 19.200000000000003
+            },
+            {
+                "player": "CB",
+                "org": "NOVA",
+                "average_kills_rounds": 18.96
+            },
+            {
+                "player": "GuanG",
+                "org": "NOVA",
+                "average_kills_rounds": 18.0
+            },
+            {
+                "player": "Boo",
+                "org": "TH",
+                "average_kills_rounds": 14.399999999999999
+            },
+            {
+                "player": "Spring",
+                "org": "WOL",
+                "average_kills_rounds": 18.240000000000002
+            },
+            {
+                "player": "stax",
+                "org": "T1",
+                "average_kills_rounds": 15.600000000000001
+            },
+            {
+                "player": "K1ra",
+                "org": "AG",
+                "average_kills_rounds": 18.0
+            },
+            {
+                "player": "xenom",
+                "org": "MIBR",
+                "average_kills_rounds": 16.32
+            },
+            {
+                "player": "lz",
+                "org": "2G",
+                "average_kills_rounds": 18.0
+            },
+            {
+                "player": "koalanoob",
+                "org": "NAVI",
+                "average_kills_rounds": 18.0
+            },
+            {
+                "player": "Autumn",
+                "org": "FPX",
+                "average_kills_rounds": 16.32
+            },
+            {
+                "player": "Sylvan",
+                "org": "T1",
+                "average_kills_rounds": 15.36
+            },
+            {
+                "player": "MaKo",
+                "org": "DRX",
+                "average_kills_rounds": 15.120000000000001
+            },
+            {
+                "player": "sociablEE",
+                "org": "BBL",
+                "average_kills_rounds": 17.28
+            },
+            {
+                "player": "OBONE",
+                "org": "NOVA",
+                "average_kills_rounds": 15.600000000000001
+            },
+            {
+                "player": "Derrek",
+                "org": "EG",
+                "average_kills_rounds": 15.600000000000001
+            },
+            {
+                "player": "paTiTek",
+                "org": "TL",
+                "average_kills_rounds": 14.399999999999999
+            },
+            {
+                "player": "Less",
+                "org": "VIT",
+                "average_kills_rounds": 16.32
+            },
+            {
+                "player": "PatMen",
+                "org": "PRX",
+                "average_kills_rounds": 14.879999999999999
+            },
+            {
+                "player": "PROFEK",
+                "org": "BBL",
+                "average_kills_rounds": 17.04
+            },
+            {
+                "player": "yetujey",
+                "org": "FUT",
+                "average_kills_rounds": 16.32
+            },
+            {
+                "player": "LewN",
+                "org": "BBL",
+                "average_kills_rounds": 18.48
+            },
+            {
+                "player": "crazyguy",
+                "org": "RRQ",
+                "average_kills_rounds": 15.36
+            },
+            {
+                "player": "margaret",
+                "org": "NS",
+                "average_kills_rounds": 16.32
+            },
+            {
+                "player": "CLZ",
+                "org": "ZETA",
+                "average_kills_rounds": 15.120000000000001
+            },
+            {
+                "player": "tex",
+                "org": "LEV",
+                "average_kills_rounds": 17.04
+            },
+            {
+                "player": "brawk",
+                "org": "NRG",
+                "average_kills_rounds": 15.36
+            },
+            {
+                "player": "Z1yan",
+                "org": "JDG",
+                "average_kills_rounds": 16.56
+            },
+            {
+                "player": "Sayf",
+                "org": "VIT",
+                "average_kills_rounds": 15.84
+            },
+            {
+                "player": "coconut",
+                "org": "XLG",
+                "average_kills_rounds": 14.399999999999999
+            },
+            {
+                "player": "free1ng",
+                "org": "DRX",
+                "average_kills_rounds": 16.56
+            },
+            {
+                "player": "Babyblue",
+                "org": "JDG",
+                "average_kills_rounds": 16.799999999999997
+            },
+            {
+                "player": "Asuna",
+                "org": "100T",
+                "average_kills_rounds": 15.600000000000001
+            },
+            {
+                "player": "Coco",
+                "org": "TEC",
+                "average_kills_rounds": 17.28
+            },
+            {
+                "player": "Abo",
+                "org": "TYL",
+                "average_kills_rounds": 17.04
+            },
+            {
+                "player": "C0M",
+                "org": "LEV",
+                "average_kills_rounds": 14.879999999999999
+            },
+            {
+                "player": "Ivy",
+                "org": "NS",
+                "average_kills_rounds": 14.64
+            },
+            {
+                "player": "Jamppi",
+                "org": "BBL",
+                "average_kills_rounds": 16.080000000000002
+            },
+            {
+                "player": "happywei",
+                "org": "XLG",
+                "average_kills_rounds": 18.240000000000002
+            },
+            {
+                "player": "batujnax",
+                "org": "APK",
+                "average_kills_rounds": 16.56
+            },
+            {
+                "player": "JessieVash",
+                "org": "TS",
+                "average_kills_rounds": 15.84
+            },
+            {
+                "player": "AvovA",
+                "org": "APK",
+                "average_kills_rounds": 14.16
+            },
+            {
+                "player": "BeYN",
+                "org": "DRX",
+                "average_kills_rounds": 13.68
+            },
+            {
+                "player": "gyen",
+                "org": "DFM",
+                "average_kills_rounds": 14.64
+            },
+            {
+                "player": "f0rsakeN",
+                "org": "PRX",
+                "average_kills_rounds": 17.759999999999998
+            },
+            {
+                "player": "Shiro",
+                "org": "BME",
+                "average_kills_rounds": 15.120000000000001
+            },
+            {
+                "player": "thyy",
+                "org": "TLN",
+                "average_kills_rounds": 15.600000000000001
+            },
+            {
+                "player": "Rossy",
+                "org": "LEV",
+                "average_kills_rounds": 16.080000000000002
+            },
+            {
+                "player": "Crws",
+                "org": "TLN",
+                "average_kills_rounds": 15.36
+            },
+            {
+                "player": "jkuro",
+                "org": "JDG",
+                "average_kills_rounds": 15.36
+            },
+            {
+                "player": "Askia",
+                "org": "2G",
+                "average_kills_rounds": 16.799999999999997
+            },
+            {
+                "player": "Dep",
+                "org": "ZETA",
+                "average_kills_rounds": 18.0
+            },
+            {
+                "player": "MOLSI",
+                "org": "APK",
+                "average_kills_rounds": 15.120000000000001
+            },
+            {
+                "player": "AAAAY",
+                "org": "FPX",
+                "average_kills_rounds": 16.080000000000002
+            },
+            {
+                "player": "benjyfishy",
+                "org": "TH",
+                "average_kills_rounds": 16.799999999999997
+            },
+            {
+                "player": "westside",
+                "org": "GX",
+                "average_kills_rounds": 17.04
+            },
+            {
+                "player": "Cloud",
+                "org": "GX",
+                "average_kills_rounds": 17.04
+            },
+            {
+                "player": "Serial",
+                "org": "TL",
+                "average_kills_rounds": 13.68
+            },
+            {
+                "player": "cauanzin",
+                "org": "LOUD",
+                "average_kills_rounds": 14.399999999999999
+            },
+            {
+                "player": "Zellsis",
+                "org": "SEN",
+                "average_kills_rounds": 15.120000000000001
+            },
+            {
+                "player": "hfmi0dzjc9z7",
+                "org": "TYL",
+                "average_kills_rounds": 15.600000000000001
+            },
+            {
+                "player": "MrCANI",
+                "org": "JDG",
+                "average_kills_rounds": 14.399999999999999
+            },
+            {
+                "player": "neT",
+                "org": "C9",
+                "average_kills_rounds": 14.399999999999999
+            },
+            {
+                "player": "K4DAVRA",
+                "org": "M8",
+                "average_kills_rounds": 14.64
+            },
+            {
+                "player": "mitch",
+                "org": "C9",
+                "average_kills_rounds": 14.64
+            },
+            {
+                "player": "Kicks",
+                "org": "VIT",
+                "average_kills_rounds": 13.440000000000001
+            },
+            {
+                "player": "Zyppan",
+                "org": "M8",
+                "average_kills_rounds": 14.16
+            },
+            {
+                "player": "yay",
+                "org": "EG",
+                "average_kills_rounds": 17.28
+            },
+            {
+                "player": "Juicy",
+                "org": "WOL",
+                "average_kills_rounds": 17.52
+            },
+            {
+                "player": "LuoK1ng",
+                "org": "TE",
+                "average_kills_rounds": 17.28
+            },
+            {
+                "player": "zander",
+                "org": "100T",
+                "average_kills_rounds": 13.919999999999998
+            },
+            {
+                "player": "FengF",
+                "org": "TE",
+                "average_kills_rounds": 15.120000000000001
+            },
+            {
+                "player": "purp0",
+                "org": "GX",
+                "average_kills_rounds": 15.120000000000001
+            },
+            {
+                "player": "Bai",
+                "org": "AG",
+                "average_kills_rounds": 15.84
+            },
+            {
+                "player": "Filu",
+                "org": "MKOI",
+                "average_kills_rounds": 17.04
+            },
+            {
+                "player": "kellyS",
+                "org": "GEXP",
+                "average_kills_rounds": 15.36
+            },
+            {
+                "player": "saadhak",
+                "org": "KC",
+                "average_kills_rounds": 13.68
+            },
+            {
+                "player": "Jremy",
+                "org": "TS",
+                "average_kills_rounds": 17.28
+            },
+            {
+                "player": "Jieni7",
+                "org": "EDG",
+                "average_kills_rounds": 15.84
+            },
+            {
+                "player": "gobera",
+                "org": "2G",
+                "average_kills_rounds": 15.120000000000001
+            },
+            {
+                "player": "waituu",
+                "org": "TYL",
+                "average_kills_rounds": 14.399999999999999
+            },
+            {
+                "player": "JonahP",
+                "org": "G2",
+                "average_kills_rounds": 12.72
+            },
+            {
+                "player": "SpiritZ1",
+                "org": "DRG",
+                "average_kills_rounds": 17.759999999999998
+            },
+            {
+                "player": "o0o0o",
+                "org": "NOVA",
+                "average_kills_rounds": 12.72
+            },
+            {
+                "player": "icy",
+                "org": "EG",
+                "average_kills_rounds": 17.04
+            },
+            {
+                "player": "nobody",
+                "org": "EDG",
+                "average_kills_rounds": 15.84
+            },
+            {
+                "player": "JitBoyS",
+                "org": "TLN",
+                "average_kills_rounds": 15.600000000000001
+            },
+            {
+                "player": "Derke",
+                "org": "VIT",
+                "average_kills_rounds": 15.36
+            },
+            {
+                "player": "Alfajer",
+                "org": "FNC",
+                "average_kills_rounds": 16.080000000000002
+            },
+            {
+                "player": "sheydos",
+                "org": "MKOI",
+                "average_kills_rounds": 14.879999999999999
+            },
+            {
+                "player": "Meiy",
+                "org": "DFM",
+                "average_kills_rounds": 16.32
+            },
+            {
+                "player": "SyouTa",
+                "org": "ZETA",
+                "average_kills_rounds": 15.120000000000001
+            },
+            {
+                "player": "runneR",
+                "org": "GX",
+                "average_kills_rounds": 13.440000000000001
+            },
+            {
+                "player": "Nicc",
+                "org": "DRG",
+                "average_kills_rounds": 12.96
+            },
+            {
+                "player": "mindfreak",
+                "org": "PRX",
+                "average_kills_rounds": 13.68
+            },
+            {
+                "player": "Haodong",
+                "org": "TEC",
+                "average_kills_rounds": 14.879999999999999
+            },
+            {
+                "player": "Khalil",
+                "org": "FUR",
+                "average_kills_rounds": 15.120000000000001
+            },
+            {
+                "player": "adverso",
+                "org": "KR\u00dc",
+                "average_kills_rounds": 12.96
+            },
+            {
+                "player": "Xdll",
+                "org": "ZETA",
+                "average_kills_rounds": 16.799999999999997
+            },
+            {
+                "player": "soulcas",
+                "org": "MKOI",
+                "average_kills_rounds": 12.96
+            },
+            {
+                "player": "silentzz",
+                "org": "2G",
+                "average_kills_rounds": 16.080000000000002
+            },
+            {
+                "player": "qRaxs",
+                "org": "FUT",
+                "average_kills_rounds": 13.919999999999998
+            },
+            {
+                "player": "Dambi",
+                "org": "NS",
+                "average_kills_rounds": 15.84
+            },
+            {
+                "player": "kiNgg",
+                "org": "LEV",
+                "average_kills_rounds": 14.64
+            },
+            {
+                "player": "PxS",
+                "org": "2G",
+                "average_kills_rounds": 13.440000000000001
+            },
+            {
+                "player": "d4v41",
+                "org": "PRX",
+                "average_kills_rounds": 14.879999999999999
+            },
+            {
+                "player": "5CM",
+                "org": "TYL",
+                "average_kills_rounds": 13.200000000000001
+            },
+            {
+                "player": "XII",
+                "org": "FPX",
+                "average_kills_rounds": 16.56
+            },
+            {
+                "player": "pryze",
+                "org": "FUR",
+                "average_kills_rounds": 13.200000000000001
+            },
+            {
+                "player": "Boostio",
+                "org": "100T",
+                "average_kills_rounds": 13.68
+            },
+            {
+                "player": "tuyz",
+                "org": "LOUD",
+                "average_kills_rounds": 12.72
+            },
+            {
+                "player": "FiNESSE",
+                "org": "NRG",
+                "average_kills_rounds": 12.72
+            },
+            {
+                "player": "Jinboong",
+                "org": "DFM",
+                "average_kills_rounds": 13.200000000000001
+            },
+            {
+                "player": "SiuFatBB",
+                "org": "WOL",
+                "average_kills_rounds": 13.68
+            },
+            {
+                "player": "Shr1mp",
+                "org": "FPX",
+                "average_kills_rounds": 12.96
+            },
+            {
+                "player": "artzin",
+                "org": "MIBR",
+                "average_kills_rounds": 14.16
+            },
+            {
+                "player": "Cangshu",
+                "org": "DRG",
+                "average_kills_rounds": 13.200000000000001
+            },
+            {
+                "player": "Biank",
+                "org": "TE",
+                "average_kills_rounds": 13.68
+            },
+            {
+                "player": "Papi",
+                "org": "GEXP",
+                "average_kills_rounds": 13.200000000000001
+            },
+            {
+                "player": "ANGE1",
+                "org": "NAVI",
+                "average_kills_rounds": 12.48
+            },
+            {
+                "player": "Wild0reoo",
+                "org": "TS",
+                "average_kills_rounds": 14.64
+            },
+            {
+                "player": "2GE",
+                "org": "TS",
+                "average_kills_rounds": 12.96
+            },
+            {
+                "player": "heat",
+                "org": "FUR",
+                "average_kills_rounds": 14.64
+            },
+            {
+                "player": "grubinho",
+                "org": "MKOI",
+                "average_kills_rounds": 12.0
+            },
+            {
+                "player": "Governor",
+                "org": "APK",
+                "average_kills_rounds": 12.24
+            },
+            {
+                "player": "Lsn",
+                "org": "AG",
+                "average_kills_rounds": 13.68
+            },
+            {
+                "player": "flyuh",
+                "org": "MKOI",
+                "average_kills_rounds": 13.440000000000001
+            },
+            {
+                "player": "raafa",
+                "org": "FUR",
+                "average_kills_rounds": 11.52
+            },
+            {
+                "player": "havoc",
+                "org": "FUR",
+                "average_kills_rounds": 15.600000000000001
+            },
+            {
+                "player": "player",
+                "org": "AGY",
+                "average_kills_rounds": 13.200000000000001
+            },
+            {
+                "player": "HanChe",
+                "org": "AG",
+                "average_kills_rounds": 12.72
+            },
+            {
+                "player": "Life",
+                "org": "FPX",
+                "average_kills_rounds": 16.080000000000002
+            },
+            {
+                "player": "Click",
+                "org": "M8",
+                "average_kills_rounds": 14.399999999999999
+            },
+            {
+                "player": "Suggest",
+                "org": "GEN",
+                "average_kills_rounds": 13.68
+            },
+            {
+                "player": "deLb",
+                "org": "AG",
+                "average_kills_rounds": 16.32
+            },
+            {
+                "player": "v1nny",
+                "org": "RED",
+                "average_kills_rounds": 10.56
+            },
+            {
+                "player": "tomaszy",
+                "org": "GX",
+                "average_kills_rounds": 12.0
+            },
+            {
+                "player": "Art",
+                "org": "DFM",
+                "average_kills_rounds": 10.08
+            },
+            {
+                "player": "Deryeon",
+                "org": "GE",
+                "average_kills_rounds": 12.72
+            },
+            {
+                "player": "patrickWHO",
+                "org": "GE",
+                "average_kills_rounds": 11.52
+            },
+            {
+                "player": "S1Mon",
+                "org": "EDG",
+                "average_kills_rounds": 20.88
+            },
+            {
+                "player": "Midi",
+                "org": "TE",
+                "average_kills_rounds": 13.440000000000001
+            }
+        ]
+    }
+}
