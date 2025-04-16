@@ -31,7 +31,7 @@ function TeamBanner({ nbaSelectedGame}) {
         <Box
             sx ={{
                 position: "sticky",
-                top: "22%",
+                top: "5%",
             }}
         >
             {/* Team Banner */}
@@ -59,7 +59,7 @@ function TeamBanner({ nbaSelectedGame}) {
                     </div>
                 </div>
                 
-                <div className="flex mt-115 ml-1 text-4xl text-white font-bold">V.S.</div>
+                <div className="flex mt-75 ml-1 text-4xl text-white font-bold">V.S.</div>
 
                 <div className="banner-wrapper-vertical banner-border"
                     style={{

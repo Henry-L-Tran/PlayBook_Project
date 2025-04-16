@@ -28,7 +28,7 @@ function Lineups({
             <Box
                 sx= {{
                     position: "absolute",
-                    bottom: "2.5vh",
+                    bottom: "0.5vh",
                     backgroundColor: "#111",
                     padding: "0.5rem, 1rem",
                     display: "flex",
@@ -541,7 +541,7 @@ function Lineups({
                                 sx={{
                                     display: "flex",
                                     flexDirection: "row",
-                                    marginLeft: "3vw"
+                                    marginLeft: "8%"
                                 }}
                             >
                                 <Typography
@@ -581,7 +581,7 @@ function Lineups({
                                 sx={{
                                     display: "flex",
                                     flexDirection: "row",
-                                    marginRight: "3.5%",
+                                    marginRight: "5.5%",
                                 }}
                             >
                                 <Typography

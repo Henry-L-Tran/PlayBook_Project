@@ -867,14 +867,13 @@ function Dashboard() {
                   justifyContent: "center",
                   fontFamily: "monospace",
                   width: "100%",
-                  maxHeight: "100vh",
-                  overflowY: "auto",
                   top: 0,
                   left: 0,
                   right: 0,
                   bottom: 0,
                   zIndex: 1100,
-                  paddingBottom: "10%",
+                  overflow: "hidden",
+                  paddingBottom: "5%",
                 }}
               >
                 {/* Header Away Team @ Home Team Box */}
@@ -955,6 +954,15 @@ function Dashboard() {
                     ))}
                   </Box>
 
+                  {/* SCROLL TESTING */}
+                  <Box
+                    sx={{
+                      maxHeight: "calc(100vh - 160px)",
+                      overflowY: "auto",
+                      padding: "1.5vh 3vw",
+                      marginTop: "2vh", 
+                    }}
+                  >
                     {/* All Player Squares Main Box/Section */}
                     <Box
                       sx={{
@@ -969,7 +977,7 @@ function Dashboard() {
                       <Box
                         sx={{
                           flex: 1,
-                          paddingBottom: "2vh",
+                          paddingBottom: "1.8vh",
                         }}
                       >
                         {/* Away Team Tri-Code Header */}
@@ -980,7 +988,7 @@ function Dashboard() {
                             width: "40%",
                             fontFamily: "monospace",
                             marginBottom: "1.2vh",
-                            marginLeft: "6.5vw"
+                            marginLeft: "32%"
                           }}
                         >
                           {nbaSelectedGame.awayTeam.teamTriCode}
@@ -1002,11 +1010,10 @@ function Dashboard() {
                                   ? "2px solid green"
                                   : "2px solid gray",
                                 borderRadius: "1rem",
-                                padding: 0,
                                 backgroundColor: "rgba(0, 0, 0, 0.5)",
                                 marginBottom: "1.3vh",
                                 width: "14vw",
-                                height: "23vh",
+                                height: "25vh",
                                 overflow: "hidden",
                                 display: "flex",
                                 flexDirection: "column",
@@ -1194,7 +1201,7 @@ function Dashboard() {
                             width: "40%",
                             fontFamily: "monospace",
                             marginBottom: "1.2vh",
-                            marginRight: "6.5vw",
+                            marginRight: "33%",
                           }}
                         >
                           {nbaSelectedGame.homeTeam.teamTriCode}
@@ -1220,7 +1227,7 @@ function Dashboard() {
                                 backgroundColor: "rgba(0, 0, 0, 0.5)",
                                 marginBottom: "1.3vh",
                                 width: "14vw",
-                                height: "23vh",
+                                height: "25vh",
                                 overflow: "hidden",
                                 display: "flex",
                                 flexDirection: "column",
@@ -1388,8 +1395,9 @@ function Dashboard() {
                     </Box>
                   </Box>
                 </Box>
-              );
-            })()}
+              </Box>
+            );
+          })()}
 
           {activeCategoryTab === "VAL" && (
             <Box
