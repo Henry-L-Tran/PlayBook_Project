@@ -466,7 +466,6 @@ def fetch_user_live_lineup_data():
 
 threading.Thread(target=fetch_user_live_lineup_data, daemon=True).start()
 
-def confirm_val_lineups():
     
 
 
