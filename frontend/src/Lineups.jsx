@@ -533,10 +533,8 @@ function Lineups({
                                 display: "flex",
                                 justifyContent: "space-between",
                                 alignItems: "center",
-                                marginTop: "3vh",
-                                marginLeft: "1.5vw",
-                                marginRight: "1.5vw",
-                                
+                                marginTop: "4%",
+                                marginLeft: "3.5%",
                             }}
                         >
                             <Box
@@ -551,7 +549,7 @@ function Lineups({
                                         fontFamily: "monospace",
                                         fontSize: "1.3rem",
                                         marginRight: "0.5vw",
-                                        marginTop: "0.5vh",
+                                        marginTop: "2%",
                                     }}
                                 >
                                     Entry Amount:
@@ -583,6 +581,7 @@ function Lineups({
                                 sx={{
                                     display: "flex",
                                     flexDirection: "row",
+                                    marginRight: "3.5%",
                                 }}
                             >
                                 <Typography
