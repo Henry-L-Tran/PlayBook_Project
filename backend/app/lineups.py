@@ -461,13 +461,103 @@ def fetch_user_live_lineup_data():
         
         save_lineups(lineups)
 
+        confirm_val_lineups()
+
         # 30 Second Delay Between Each Fetch
         time.sleep(30)
 
 threading.Thread(target=fetch_user_live_lineup_data, daemon=True).start()
 
-    
+def confirm_val_lineups():
+    lineups = fetch_lineups()
 
+    try:
+        with open("app/valorant_data/val_player_kills.json", "r") as file:
+            val_kills_data = json.load(file)
+    except Exception as e:
+        print("Error loading val_player_kills.json:", e)
+        val_kills_data = []
+
+    updated_lineups = []
+
+    for lineup in lineups:
+        # Process entries of type ValLineupEntry
+        entries = lineup.get("entries", [])
+        if not entries or "player_team" not in entries[0]:
+            # Not a Valorant lineup, leave unchanged
+            updated_lineups.append(lineup)
+            continue
+
+        hit_legs = 0
+        total_legs = len(entries)
+        
+        # Retrieve the match id from the first entry
+        match_id = entries[0].get("match_id", "N/A")
+        match_data = None
+        for match in val_kills_data:
+            if match.get("match_id") == match_id:
+                match_data = match
+                break
+
+        # Process each entry in the lineup
+        for entry in entries:
+            projected = entry.get("projected_line")
+            pick = entry.get("users_pick")
+            actual_kills = None
+
+            # Even if match data is not found, mark the entry as a miss
+            if match_data is not None:
+                found = False
+                # Iterate over both sides: player1a to player5a and player1b to player5b
+                for side in ["a", "b"]:
+                    for i in range(1, 6):
+                        player_key = f"player{i}{side}"
+                        if match_data.get(player_key) == entry.get("player_name"):
+                            kills_key = f"player{i}{side}_kills"
+                            actual_kills = match_data.get(kills_key)
+                            found = True
+                            break
+                    if found:
+                        break
+
+            # If actual_kills could not be found, default to 0 and mark the entry as a miss
+            if actual_kills is None:
+                actual_kills = 0
+
+            entry["kill_value"] = actual_kills
+
+            # Evaluate entry based on the user's pick (Over or Under)
+            if pick.lower() == "over":
+                if actual_kills > projected:
+                    entry["status"] = "hit"
+                    hit_legs += 1
+                else:
+                    entry["status"] = "miss"
+            elif pick.lower() == "under":
+                if actual_kills < projected:
+                    entry["status"] = "hit"
+                    hit_legs += 1
+                else:
+                    entry["status"] = "miss"
+            else:
+                entry["status"] = "invalid pick"
+
+        # Since every match is complete, mark the lineup as evaluated
+        lineup["evaluated"] = True
+        
+        # Calculate payout multiplier and overall result
+        multiplier = payout_multiplier(lineup.get("entry_type"), total_legs, hit_legs)
+        if hit_legs == total_legs:
+            lineup["result"] = "WON"
+            lineup["actual_payout"] = lineup.get("entry_amount", 0) * multiplier
+        else:
+            lineup["result"] = "LOST"
+            lineup["actual_payout"] = 0
+
+        updated_lineups.append(lineup)
+        
+    # Save the updated lineups back to lineups.json
+    save_lineups(updated_lineups)
 
 
 
