@@ -2,72 +2,6 @@
     "gameDate": "2025-04-15",
     "gameData": [
         {
-            "gameId": "0052400121",
-            "gameStatus": 3,
-            "gameStatusText": "Final",
-            "gameClock": "PT00M00.00S",
-            "homeTeam": {
-                "teamId": 1610612744,
-                "teamName": "Warriors",
-                "teamTriCode": "GSW",
-                "wins": 0,
-                "losses": 0,
-                "score": 121,
-                "periods": [
-                    {
-                        "period": 1,
-                        "periodType": "REGULAR",
-                        "score": 31
-                    },
-                    {
-                        "period": 2,
-                        "periodType": "REGULAR",
-                        "score": 36
-                    },
-                    {
-                        "period": 3,
-                        "periodType": "REGULAR",
-                        "score": 27
-                    },
-                    {
-                        "period": 4,
-                        "periodType": "REGULAR",
-                        "score": 27
-                    }
-                ]
-            },
-            "awayTeam": {
-                "teamId": 1610612763,
-                "teamName": "Grizzlies",
-                "teamTriCode": "MEM",
-                "wins": 0,
-                "losses": 0,
-                "score": 116,
-                "periods": [
-                    {
-                        "period": 1,
-                        "periodType": "REGULAR",
-                        "score": 25
-                    },
-                    {
-                        "period": 2,
-                        "periodType": "REGULAR",
-                        "score": 30
-                    },
-                    {
-                        "period": 3,
-                        "periodType": "REGULAR",
-                        "score": 36
-                    },
-                    {
-                        "period": 4,
-                        "periodType": "REGULAR",
-                        "score": 25
-                    }
-                ]
-            }
-        },
-        {
             "gameId": "0052400101",
             "gameStatus": 3,
             "gameStatusText": "Final",
@@ -129,6 +63,72 @@
                         "period": 4,
                         "periodType": "REGULAR",
                         "score": 22
+                    }
+                ]
+            }
+        },
+        {
+            "gameId": "0052400121",
+            "gameStatus": 3,
+            "gameStatusText": "Final",
+            "gameClock": "",
+            "homeTeam": {
+                "teamId": 1610612744,
+                "teamName": "Warriors",
+                "teamTriCode": "GSW",
+                "wins": 1,
+                "losses": 0,
+                "score": 121,
+                "periods": [
+                    {
+                        "period": 1,
+                        "periodType": "REGULAR",
+                        "score": 31
+                    },
+                    {
+                        "period": 2,
+                        "periodType": "REGULAR",
+                        "score": 36
+                    },
+                    {
+                        "period": 3,
+                        "periodType": "REGULAR",
+                        "score": 27
+                    },
+                    {
+                        "period": 4,
+                        "periodType": "REGULAR",
+                        "score": 27
+                    }
+                ]
+            },
+            "awayTeam": {
+                "teamId": 1610612763,
+                "teamName": "Grizzlies",
+                "teamTriCode": "MEM",
+                "wins": 0,
+                "losses": 1,
+                "score": 116,
+                "periods": [
+                    {
+                        "period": 1,
+                        "periodType": "REGULAR",
+                        "score": 25
+                    },
+                    {
+                        "period": 2,
+                        "periodType": "REGULAR",
+                        "score": 30
+                    },
+                    {
+                        "period": 3,
+                        "periodType": "REGULAR",
+                        "score": 36
+                    },
+                    {
+                        "period": 4,
+                        "periodType": "REGULAR",
+                        "score": 25
                     }
                 ]
             }
