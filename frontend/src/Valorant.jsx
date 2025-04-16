@@ -27,6 +27,10 @@ function Valorant() {
   const [selectedMatchKills, setSelectedMatchKills] = useState(null);
 
   // States and variables for the betting lines UI (used if match is not completed)
+  const [valLiveGames, setValLiveGames] = useState({
+    gameDate: "",
+    gameData: [],
+  });
   const [valSelectedGame, setvalselectedGame] = useState(null);
   const [viewLineCategory, setViewLineCategory] = useState("Kills");
   const lineCategoryOptions = [
