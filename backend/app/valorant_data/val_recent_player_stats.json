@@ -39,16 +39,16 @@
                 "line": 32.400000000000006
             },
             {
-                "player": "Ezeir",
-                "org": "NOVA",
-                "average_kills_map": 15.600000000000001,
-                "line": 31.200000000000003
-            },
-            {
                 "player": "marteen",
                 "org": "KC",
                 "average_kills_map": 17.0,
                 "line": 34.0
+            },
+            {
+                "player": "Ezeir",
+                "org": "NOVA",
+                "average_kills_map": 15.600000000000001,
+                "line": 31.200000000000003
             },
             {
                 "player": "lukxo",
@@ -63,10 +63,10 @@
                 "line": 35.2
             },
             {
-                "player": "Wo0t",
-                "org": "TH",
-                "average_kills_map": 17.6,
-                "line": 35.2
+                "player": "Rarga",
+                "org": "XLG",
+                "average_kills_map": 18.0,
+                "line": 36.0
             },
             {
                 "player": "dos9",
@@ -75,10 +75,10 @@
                 "line": 30.0
             },
             {
-                "player": "Rarga",
-                "org": "XLG",
-                "average_kills_map": 18.0,
-                "line": 36.0
+                "player": "Wo0t",
+                "org": "TH",
+                "average_kills_map": 17.6,
+                "line": 35.2
             },
             {
                 "player": "invy",
@@ -95,14 +95,8 @@
             {
                 "player": "Keiko",
                 "org": "TL",
-                "average_kills_map": 17.2,
-                "line": 34.4
-            },
-            {
-                "player": "xeus",
-                "org": "EF",
-                "average_kills_map": 18.6,
-                "line": 37.2
+                "average_kills_map": 16.8,
+                "line": 33.6
             },
             {
                 "player": "MiniBoo",
@@ -111,22 +105,16 @@
                 "line": 36.800000000000004
             },
             {
+                "player": "xeus",
+                "org": "EF",
+                "average_kills_map": 18.6,
+                "line": 37.2
+            },
+            {
                 "player": "Karon",
                 "org": "GEN",
                 "average_kills_map": 16.4,
                 "line": 32.8
-            },
-            {
-                "player": "johnqt",
-                "org": "SEN",
-                "average_kills_map": 14.2,
-                "line": 28.4
-            },
-            {
-                "player": "Jemkin",
-                "org": "RRQ",
-                "average_kills_map": 18.400000000000002,
-                "line": 36.800000000000004
             },
             {
                 "player": "Avez",
@@ -139,6 +127,18 @@
                 "org": "GEN",
                 "average_kills_map": 15.4,
                 "line": 30.8
+            },
+            {
+                "player": "johnqt",
+                "org": "SEN",
+                "average_kills_map": 14.2,
+                "line": 28.4
+            },
+            {
+                "player": "Jemkin",
+                "org": "RRQ",
+                "average_kills_map": 18.400000000000002,
+                "line": 36.800000000000004
             },
             {
                 "player": "Viva",
@@ -159,6 +159,12 @@
                 "line": 35.6
             },
             {
+                "player": "Kushy",
+                "org": "RRQ",
+                "average_kills_map": 15.8,
+                "line": 31.6
+            },
+            {
                 "player": "Xeppaa",
                 "org": "C9",
                 "average_kills_map": 15.4,
@@ -169,18 +175,6 @@
                 "org": "G2",
                 "average_kills_map": 16.599999999999998,
                 "line": 33.199999999999996
-            },
-            {
-                "player": "Kushy",
-                "org": "RRQ",
-                "average_kills_map": 15.8,
-                "line": 31.6
-            },
-            {
-                "player": "Mazino",
-                "org": "KR\u00dc",
-                "average_kills_map": 16.200000000000003,
-                "line": 32.400000000000006
             },
             {
                 "player": "Verno",
@@ -195,10 +189,16 @@
                 "line": 35.6
             },
             {
-                "player": "Jinggg",
-                "org": "PRX",
-                "average_kills_map": 14.8,
-                "line": 29.6
+                "player": "Mazino",
+                "org": "KR\u00dc",
+                "average_kills_map": 16.200000000000003,
+                "line": 32.400000000000006
+            },
+            {
+                "player": "MrFaliN",
+                "org": "FUT",
+                "average_kills_map": 14.399999999999999,
+                "line": 28.799999999999997
             },
             {
                 "player": "Yuicaw",
@@ -213,16 +213,10 @@
                 "line": 30.8
             },
             {
-                "player": "MrFaliN",
-                "org": "FUT",
-                "average_kills_map": 14.399999999999999,
-                "line": 28.799999999999997
-            },
-            {
-                "player": "nAts",
-                "org": "TL",
-                "average_kills_map": 16.200000000000003,
-                "line": 32.400000000000006
+                "player": "Jinggg",
+                "org": "PRX",
+                "average_kills_map": 14.8,
+                "line": 29.6
             },
             {
                 "player": "hiro",
@@ -243,16 +237,10 @@
                 "line": 33.199999999999996
             },
             {
-                "player": "Knight",
-                "org": "BLG",
-                "average_kills_map": 14.2,
-                "line": 28.4
-            },
-            {
-                "player": "keznit",
-                "org": "KR\u00dc",
-                "average_kills_map": 17.4,
-                "line": 34.8
+                "player": "nAts",
+                "org": "TL",
+                "average_kills_map": 16.0,
+                "line": 32.0
             },
             {
                 "player": "Famouz",
@@ -267,22 +255,28 @@
                 "line": 28.0
             },
             {
-                "player": "heybay",
-                "org": "TE",
-                "average_kills_map": 15.4,
-                "line": 30.8
+                "player": "keznit",
+                "org": "KR\u00dc",
+                "average_kills_map": 17.4,
+                "line": 34.8
+            },
+            {
+                "player": "Knight",
+                "org": "BLG",
+                "average_kills_map": 14.2,
+                "line": 28.4
+            },
+            {
+                "player": "SUYGETSU",
+                "org": "KC",
+                "average_kills_map": 14.0,
+                "line": 28.0
             },
             {
                 "player": "Levius",
                 "org": "BLG",
                 "average_kills_map": 13.4,
                 "line": 26.8
-            },
-            {
-                "player": "Kr1stal",
-                "org": "GE",
-                "average_kills_map": 13.600000000000001,
-                "line": 27.200000000000003
             },
             {
                 "player": "kaajak",
@@ -297,16 +291,16 @@
                 "line": 30.0
             },
             {
-                "player": "SUYGETSU",
-                "org": "KC",
-                "average_kills_map": 14.0,
-                "line": 28.0
+                "player": "Kr1stal",
+                "org": "GE",
+                "average_kills_map": 13.600000000000001,
+                "line": 27.200000000000003
             },
             {
-                "player": "Ruxic",
-                "org": "NAVI",
-                "average_kills_map": 14.399999999999999,
-                "line": 28.799999999999997
+                "player": "heybay",
+                "org": "TE",
+                "average_kills_map": 15.4,
+                "line": 30.8
             },
             {
                 "player": "NcSlasher",
@@ -321,22 +315,10 @@
                 "line": 30.8
             },
             {
-                "player": "Shao",
-                "org": "NAVI",
-                "average_kills_map": 14.399999999999999,
-                "line": 28.799999999999997
-            },
-            {
                 "player": "Lysoar",
                 "org": "WOL",
                 "average_kills_map": 14.0,
                 "line": 28.0
-            },
-            {
-                "player": "Flashback",
-                "org": "DRX",
-                "average_kills_map": 15.8,
-                "line": 31.6
             },
             {
                 "player": "Akame",
@@ -345,22 +327,28 @@
                 "line": 31.200000000000003
             },
             {
+                "player": "Ruxic",
+                "org": "NAVI",
+                "average_kills_map": 14.399999999999999,
+                "line": 28.799999999999997
+            },
+            {
                 "player": "aspas",
                 "org": "MIBR",
                 "average_kills_map": 16.8,
                 "line": 33.6
             },
             {
-                "player": "kamyk",
-                "org": "M8",
-                "average_kills_map": 16.4,
-                "line": 32.8
+                "player": "Shao",
+                "org": "NAVI",
+                "average_kills_map": 14.399999999999999,
+                "line": 28.799999999999997
             },
             {
-                "player": "Elite",
-                "org": "KC",
-                "average_kills_map": 13.799999999999999,
-                "line": 27.599999999999998
+                "player": "Flashback",
+                "org": "DRX",
+                "average_kills_map": 15.8,
+                "line": 31.6
             },
             {
                 "player": "crashies",
@@ -375,6 +363,18 @@
                 "line": 28.799999999999997
             },
             {
+                "player": "kamyk",
+                "org": "M8",
+                "average_kills_map": 16.4,
+                "line": 32.8
+            },
+            {
+                "player": "Elite",
+                "org": "KC",
+                "average_kills_map": 13.799999999999999,
+                "line": 27.599999999999998
+            },
+            {
                 "player": "OXY",
                 "org": "C9",
                 "average_kills_map": 17.8,
@@ -387,16 +387,34 @@
                 "line": 30.8
             },
             {
-                "player": "xffero",
-                "org": "RRQ",
-                "average_kills_map": 14.399999999999999,
-                "line": 28.799999999999997
-            },
-            {
                 "player": "Flex1n",
                 "org": "DRG",
                 "average_kills_map": 15.2,
                 "line": 30.4
+            },
+            {
+                "player": "supamen",
+                "org": "EG",
+                "average_kills_map": 15.0,
+                "line": 30.0
+            },
+            {
+                "player": "Kicks",
+                "org": "VIT",
+                "average_kills_map": 13.200000000000001,
+                "line": 26.400000000000002
+            },
+            {
+                "player": "eeiu",
+                "org": "100T",
+                "average_kills_map": 13.799999999999999,
+                "line": 27.599999999999998
+            },
+            {
+                "player": "xffero",
+                "org": "RRQ",
+                "average_kills_map": 14.399999999999999,
+                "line": 28.799999999999997
             },
             {
                 "player": "BerserX",
@@ -411,16 +429,10 @@
                 "line": 28.0
             },
             {
-                "player": "supamen",
-                "org": "EG",
-                "average_kills_map": 15.0,
-                "line": 30.0
-            },
-            {
-                "player": "eeiu",
-                "org": "100T",
-                "average_kills_map": 13.799999999999999,
-                "line": 27.599999999999998
+                "player": "rushia",
+                "org": "BLG",
+                "average_kills_map": 13.0,
+                "line": 26.0
             },
             {
                 "player": "nephh",
@@ -429,22 +441,10 @@
                 "line": 26.8
             },
             {
-                "player": "rushia",
-                "org": "BLG",
-                "average_kills_map": 13.0,
-                "line": 26.0
-            },
-            {
                 "player": "stew",
                 "org": "JDG",
                 "average_kills_map": 15.8,
                 "line": 31.6
-            },
-            {
-                "player": "SugarZ3ro",
-                "org": "ZETA",
-                "average_kills_map": 14.6,
-                "line": 29.2
             },
             {
                 "player": "Rb",
@@ -453,14 +453,20 @@
                 "line": 29.2
             },
             {
-                "player": "Zap",
-                "org": "2G",
-                "average_kills_map": 15.2,
-                "line": 30.4
+                "player": "SugarZ3ro",
+                "org": "ZETA",
+                "average_kills_map": 14.6,
+                "line": 29.2
             },
             {
                 "player": "cortezia",
                 "org": "RED",
+                "average_kills_map": 15.2,
+                "line": 30.4
+            },
+            {
+                "player": "Zap",
+                "org": "2G",
                 "average_kills_map": 15.2,
                 "line": 30.4
             },
@@ -477,42 +483,6 @@
                 "line": 28.4
             },
             {
-                "player": "Boaster",
-                "org": "FNC",
-                "average_kills_map": 12.0,
-                "line": 24.0
-            },
-            {
-                "player": "UdoTan",
-                "org": "GE",
-                "average_kills_map": 15.2,
-                "line": 30.4
-            },
-            {
-                "player": "Minny",
-                "org": "M8",
-                "average_kills_map": 14.0,
-                "line": 28.0
-            },
-            {
-                "player": "Estrella",
-                "org": "DRX",
-                "average_kills_map": 15.600000000000001,
-                "line": 31.200000000000003
-            },
-            {
-                "player": "primmie",
-                "org": "TLN",
-                "average_kills_map": 16.200000000000003,
-                "line": 32.400000000000006
-            },
-            {
-                "player": "CHICHOO",
-                "org": "EDG",
-                "average_kills_map": 14.399999999999999,
-                "line": 28.799999999999997
-            },
-            {
                 "player": "yosemite",
                 "org": "FPX",
                 "average_kills_map": 15.600000000000001,
@@ -525,40 +495,40 @@
                 "line": 31.200000000000003
             },
             {
-                "player": "Francis",
-                "org": "NS",
+                "player": "Minny",
+                "org": "M8",
+                "average_kills_map": 14.0,
+                "line": 28.0
+            },
+            {
+                "player": "CHICHOO",
+                "org": "EDG",
                 "average_kills_map": 14.399999999999999,
                 "line": 28.799999999999997
             },
             {
-                "player": "Monyet",
-                "org": "RRQ",
-                "average_kills_map": 13.799999999999999,
-                "line": 27.599999999999998
+                "player": "primmie",
+                "org": "TLN",
+                "average_kills_map": 16.200000000000003,
+                "line": 32.400000000000006
             },
             {
-                "player": "Ash",
-                "org": "GEN",
-                "average_kills_map": 13.0,
-                "line": 26.0
+                "player": "UdoTan",
+                "org": "GE",
+                "average_kills_map": 15.2,
+                "line": 30.4
             },
             {
-                "player": "t3xture",
-                "org": "GEN",
-                "average_kills_map": 16.8,
-                "line": 33.6
+                "player": "Boaster",
+                "org": "FNC",
+                "average_kills_map": 12.0,
+                "line": 24.0
             },
             {
-                "player": "mada",
-                "org": "NRG",
+                "player": "Estrella",
+                "org": "DRX",
                 "average_kills_map": 15.600000000000001,
                 "line": 31.200000000000003
-            },
-            {
-                "player": "florescent",
-                "org": "APK",
-                "average_kills_map": 16.599999999999998,
-                "line": 33.199999999999996
             },
             {
                 "player": "Persia",
@@ -567,10 +537,16 @@
                 "line": 26.400000000000002
             },
             {
-                "player": "something",
-                "org": "PRX",
+                "player": "Monyet",
+                "org": "RRQ",
                 "average_kills_map": 13.799999999999999,
                 "line": 27.599999999999998
+            },
+            {
+                "player": "Francis",
+                "org": "NS",
+                "average_kills_map": 14.399999999999999,
+                "line": 28.799999999999997
             },
             {
                 "player": "NaturE",
@@ -579,22 +555,46 @@
                 "line": 29.2
             },
             {
+                "player": "mada",
+                "org": "NRG",
+                "average_kills_map": 15.600000000000001,
+                "line": 31.200000000000003
+            },
+            {
                 "player": "TvirusLuke",
                 "org": "TEC",
                 "average_kills_map": 17.8,
                 "line": 35.6
             },
             {
+                "player": "something",
+                "org": "PRX",
+                "average_kills_map": 13.799999999999999,
+                "line": 27.599999999999998
+            },
+            {
+                "player": "t3xture",
+                "org": "GEN",
+                "average_kills_map": 16.8,
+                "line": 33.6
+            },
+            {
+                "player": "Ash",
+                "org": "GEN",
+                "average_kills_map": 13.0,
+                "line": 26.0
+            },
+            {
+                "player": "zekken",
+                "org": "SEN",
+                "average_kills_map": 15.8,
+                "line": 31.6
+            },
+            {
                 "player": "ZmjjKK",
                 "org": "EDG",
                 "average_kills_map": 17.0,
                 "line": 34.0
-            },
-            {
-                "player": "pANcada",
-                "org": "LOUD",
-                "average_kills_map": 13.799999999999999,
-                "line": 27.599999999999998
             },
             {
                 "player": "kamo",
@@ -615,10 +615,22 @@
                 "line": 32.8
             },
             {
-                "player": "zekken",
-                "org": "SEN",
-                "average_kills_map": 15.8,
-                "line": 31.6
+                "player": "pANcada",
+                "org": "LOUD",
+                "average_kills_map": 13.799999999999999,
+                "line": 27.599999999999998
+            },
+            {
+                "player": "Ethan",
+                "org": "NRG",
+                "average_kills_map": 13.600000000000001,
+                "line": 27.200000000000003
+            },
+            {
+                "player": "Killua",
+                "org": "TLN",
+                "average_kills_map": 14.8,
+                "line": 29.6
             },
             {
                 "player": "Meteor",
@@ -627,16 +639,16 @@
                 "line": 32.0
             },
             {
+                "player": "Shyy",
+                "org": "KR\u00dc",
+                "average_kills_map": 12.8,
+                "line": 25.6
+            },
+            {
                 "player": "Melser",
                 "org": "KR\u00dc",
                 "average_kills_map": 13.0,
                 "line": 26.0
-            },
-            {
-                "player": "Ethan",
-                "org": "NRG",
-                "average_kills_map": 13.600000000000001,
-                "line": 27.200000000000003
             },
             {
                 "player": "YOU",
@@ -651,22 +663,10 @@
                 "line": 25.6
             },
             {
-                "player": "Killua",
-                "org": "TLN",
-                "average_kills_map": 14.8,
-                "line": 29.6
-            },
-            {
-                "player": "Shyy",
-                "org": "KR\u00dc",
-                "average_kills_map": 12.8,
-                "line": 25.6
-            },
-            {
-                "player": "BuZz",
-                "org": "T1",
-                "average_kills_map": 16.0,
-                "line": 32.0
+                "player": "GuanG",
+                "org": "NOVA",
+                "average_kills_map": 15.0,
+                "line": 30.0
             },
             {
                 "player": "CB",
@@ -675,16 +675,10 @@
                 "line": 31.6
             },
             {
-                "player": "GuanG",
-                "org": "NOVA",
-                "average_kills_map": 15.0,
-                "line": 30.0
-            },
-            {
-                "player": "Boo",
-                "org": "TH",
-                "average_kills_map": 12.0,
-                "line": 24.0
+                "player": "BuZz",
+                "org": "T1",
+                "average_kills_map": 16.0,
+                "line": 32.0
             },
             {
                 "player": "Spring",
@@ -693,14 +687,14 @@
                 "line": 30.4
             },
             {
-                "player": "stax",
-                "org": "T1",
-                "average_kills_map": 13.0,
-                "line": 26.0
+                "player": "Boo",
+                "org": "TH",
+                "average_kills_map": 12.0,
+                "line": 24.0
             },
             {
-                "player": "K1ra",
-                "org": "AG",
+                "player": "lz",
+                "org": "2G",
                 "average_kills_map": 15.0,
                 "line": 30.0
             },
@@ -711,40 +705,28 @@
                 "line": 27.200000000000003
             },
             {
-                "player": "lz",
-                "org": "2G",
-                "average_kills_map": 15.0,
-                "line": 30.0
-            },
-            {
                 "player": "koalanoob",
                 "org": "NAVI",
                 "average_kills_map": 15.0,
                 "line": 30.0
             },
             {
-                "player": "Autumn",
-                "org": "FPX",
-                "average_kills_map": 13.600000000000001,
-                "line": 27.200000000000003
+                "player": "Less",
+                "org": "VIT",
+                "average_kills_map": 14.0,
+                "line": 28.0
             },
             {
-                "player": "Sylvan",
+                "player": "K1ra",
+                "org": "AG",
+                "average_kills_map": 15.0,
+                "line": 30.0
+            },
+            {
+                "player": "stax",
                 "org": "T1",
-                "average_kills_map": 12.8,
-                "line": 25.6
-            },
-            {
-                "player": "MaKo",
-                "org": "DRX",
-                "average_kills_map": 12.6,
-                "line": 25.2
-            },
-            {
-                "player": "sociablEE",
-                "org": "BBL",
-                "average_kills_map": 14.399999999999999,
-                "line": 28.799999999999997
+                "average_kills_map": 13.0,
+                "line": 26.0
             },
             {
                 "player": "OBONE",
@@ -759,16 +741,40 @@
                 "line": 26.0
             },
             {
-                "player": "paTiTek",
-                "org": "TL",
-                "average_kills_map": 12.0,
-                "line": 24.0
+                "player": "florescent",
+                "org": "APK",
+                "average_kills_map": 16.200000000000003,
+                "line": 32.400000000000006
             },
             {
-                "player": "Less",
-                "org": "VIT",
+                "player": "Autumn",
+                "org": "FPX",
                 "average_kills_map": 13.600000000000001,
                 "line": 27.200000000000003
+            },
+            {
+                "player": "Sylvan",
+                "org": "T1",
+                "average_kills_map": 12.8,
+                "line": 25.6
+            },
+            {
+                "player": "paTiTek",
+                "org": "TL",
+                "average_kills_map": 11.399999999999999,
+                "line": 22.799999999999997
+            },
+            {
+                "player": "MaKo",
+                "org": "DRX",
+                "average_kills_map": 12.6,
+                "line": 25.2
+            },
+            {
+                "player": "sociablEE",
+                "org": "BBL",
+                "average_kills_map": 14.399999999999999,
+                "line": 28.799999999999997
             },
             {
                 "player": "PatMen",
@@ -777,16 +783,16 @@
                 "line": 24.8
             },
             {
+                "player": "crazyguy",
+                "org": "RRQ",
+                "average_kills_map": 12.8,
+                "line": 25.6
+            },
+            {
                 "player": "PROFEK",
                 "org": "BBL",
                 "average_kills_map": 14.2,
                 "line": 28.4
-            },
-            {
-                "player": "yetujey",
-                "org": "FUT",
-                "average_kills_map": 13.600000000000001,
-                "line": 27.200000000000003
             },
             {
                 "player": "LewN",
@@ -795,22 +801,16 @@
                 "line": 30.8
             },
             {
-                "player": "crazyguy",
-                "org": "RRQ",
-                "average_kills_map": 12.8,
-                "line": 25.6
-            },
-            {
-                "player": "margaret",
-                "org": "NS",
+                "player": "yetujey",
+                "org": "FUT",
                 "average_kills_map": 13.600000000000001,
                 "line": 27.200000000000003
             },
             {
-                "player": "CLZ",
-                "org": "ZETA",
-                "average_kills_map": 12.6,
-                "line": 25.2
+                "player": "MOLSI",
+                "org": "APK",
+                "average_kills_map": 13.799999999999999,
+                "line": 27.599999999999998
             },
             {
                 "player": "tex",
@@ -831,22 +831,16 @@
                 "line": 27.599999999999998
             },
             {
-                "player": "Sayf",
-                "org": "VIT",
-                "average_kills_map": 13.200000000000001,
-                "line": 26.400000000000002
+                "player": "CLZ",
+                "org": "ZETA",
+                "average_kills_map": 12.6,
+                "line": 25.2
             },
             {
-                "player": "coconut",
-                "org": "XLG",
-                "average_kills_map": 12.0,
-                "line": 24.0
-            },
-            {
-                "player": "free1ng",
-                "org": "DRX",
-                "average_kills_map": 13.799999999999999,
-                "line": 27.599999999999998
+                "player": "margaret",
+                "org": "NS",
+                "average_kills_map": 13.600000000000001,
+                "line": 27.200000000000003
             },
             {
                 "player": "Babyblue",
@@ -855,10 +849,10 @@
                 "line": 28.0
             },
             {
-                "player": "Asuna",
-                "org": "100T",
-                "average_kills_map": 13.0,
-                "line": 26.0
+                "player": "Abo",
+                "org": "TYL",
+                "average_kills_map": 14.2,
+                "line": 28.4
             },
             {
                 "player": "Coco",
@@ -867,10 +861,22 @@
                 "line": 28.799999999999997
             },
             {
-                "player": "Abo",
-                "org": "TYL",
-                "average_kills_map": 14.2,
-                "line": 28.4
+                "player": "free1ng",
+                "org": "DRX",
+                "average_kills_map": 13.799999999999999,
+                "line": 27.599999999999998
+            },
+            {
+                "player": "coconut",
+                "org": "XLG",
+                "average_kills_map": 12.0,
+                "line": 24.0
+            },
+            {
+                "player": "Asuna",
+                "org": "100T",
+                "average_kills_map": 13.0,
+                "line": 26.0
             },
             {
                 "player": "C0M",
@@ -891,16 +897,10 @@
                 "line": 26.8
             },
             {
-                "player": "happywei",
-                "org": "XLG",
-                "average_kills_map": 15.2,
-                "line": 30.4
-            },
-            {
-                "player": "batujnax",
-                "org": "APK",
-                "average_kills_map": 13.799999999999999,
-                "line": 27.599999999999998
+                "player": "f0rsakeN",
+                "org": "PRX",
+                "average_kills_map": 14.8,
+                "line": 29.6
             },
             {
                 "player": "JessieVash",
@@ -909,10 +909,16 @@
                 "line": 26.400000000000002
             },
             {
-                "player": "AvovA",
-                "org": "APK",
-                "average_kills_map": 11.799999999999999,
-                "line": 23.599999999999998
+                "player": "thyy",
+                "org": "TLN",
+                "average_kills_map": 13.0,
+                "line": 26.0
+            },
+            {
+                "player": "Shiro",
+                "org": "BME",
+                "average_kills_map": 12.6,
+                "line": 25.2
             },
             {
                 "player": "BeYN",
@@ -927,22 +933,22 @@
                 "line": 24.4
             },
             {
-                "player": "f0rsakeN",
-                "org": "PRX",
-                "average_kills_map": 14.8,
-                "line": 29.6
+                "player": "batujnax",
+                "org": "APK",
+                "average_kills_map": 14.2,
+                "line": 28.4
             },
             {
-                "player": "Shiro",
-                "org": "BME",
-                "average_kills_map": 12.6,
-                "line": 25.2
+                "player": "happywei",
+                "org": "XLG",
+                "average_kills_map": 15.2,
+                "line": 30.4
             },
             {
-                "player": "thyy",
-                "org": "TLN",
-                "average_kills_map": 13.0,
-                "line": 26.0
+                "player": "westside",
+                "org": "GX",
+                "average_kills_map": 14.2,
+                "line": 28.4
             },
             {
                 "player": "Rossy",
@@ -951,34 +957,10 @@
                 "line": 26.8
             },
             {
-                "player": "Crws",
-                "org": "TLN",
-                "average_kills_map": 12.8,
-                "line": 25.6
-            },
-            {
-                "player": "jkuro",
-                "org": "JDG",
-                "average_kills_map": 12.8,
-                "line": 25.6
-            },
-            {
                 "player": "Askia",
                 "org": "2G",
                 "average_kills_map": 14.0,
                 "line": 28.0
-            },
-            {
-                "player": "Dep",
-                "org": "ZETA",
-                "average_kills_map": 15.0,
-                "line": 30.0
-            },
-            {
-                "player": "MOLSI",
-                "org": "APK",
-                "average_kills_map": 12.6,
-                "line": 25.2
             },
             {
                 "player": "AAAAY",
@@ -987,16 +969,34 @@
                 "line": 26.8
             },
             {
+                "player": "Dep",
+                "org": "ZETA",
+                "average_kills_map": 15.0,
+                "line": 30.0
+            },
+            {
                 "player": "benjyfishy",
                 "org": "TH",
                 "average_kills_map": 14.0,
                 "line": 28.0
             },
             {
-                "player": "westside",
-                "org": "GX",
-                "average_kills_map": 14.2,
-                "line": 28.4
+                "player": "jkuro",
+                "org": "JDG",
+                "average_kills_map": 12.8,
+                "line": 25.6
+            },
+            {
+                "player": "Crws",
+                "org": "TLN",
+                "average_kills_map": 12.8,
+                "line": 25.6
+            },
+            {
+                "player": "Sayf",
+                "org": "VIT",
+                "average_kills_map": 12.6,
+                "line": 25.2
             },
             {
                 "player": "Cloud",
@@ -1007,8 +1007,8 @@
             {
                 "player": "Serial",
                 "org": "TL",
-                "average_kills_map": 11.399999999999999,
-                "line": 22.799999999999997
+                "average_kills_map": 10.8,
+                "line": 21.6
             },
             {
                 "player": "cauanzin",
@@ -1017,10 +1017,10 @@
                 "line": 24.0
             },
             {
-                "player": "Zellsis",
-                "org": "SEN",
-                "average_kills_map": 12.6,
-                "line": 25.2
+                "player": "MrCANI",
+                "org": "JDG",
+                "average_kills_map": 12.0,
+                "line": 24.0
             },
             {
                 "player": "hfmi0dzjc9z7",
@@ -1029,10 +1029,10 @@
                 "line": 26.0
             },
             {
-                "player": "MrCANI",
-                "org": "JDG",
-                "average_kills_map": 12.0,
-                "line": 24.0
+                "player": "Zellsis",
+                "org": "SEN",
+                "average_kills_map": 12.6,
+                "line": 25.2
             },
             {
                 "player": "neT",
@@ -1053,10 +1053,16 @@
                 "line": 24.4
             },
             {
-                "player": "Kicks",
-                "org": "VIT",
+                "player": "AvovA",
+                "org": "APK",
                 "average_kills_map": 11.200000000000001,
                 "line": 22.400000000000002
+            },
+            {
+                "player": "Derke",
+                "org": "VIT",
+                "average_kills_map": 13.4,
+                "line": 26.8
             },
             {
                 "player": "Zyppan",
@@ -1065,16 +1071,16 @@
                 "line": 23.599999999999998
             },
             {
-                "player": "yay",
-                "org": "EG",
-                "average_kills_map": 14.399999999999999,
-                "line": 28.799999999999997
-            },
-            {
                 "player": "Juicy",
                 "org": "WOL",
                 "average_kills_map": 14.6,
                 "line": 29.2
+            },
+            {
+                "player": "yay",
+                "org": "EG",
+                "average_kills_map": 14.399999999999999,
+                "line": 28.799999999999997
             },
             {
                 "player": "LuoK1ng",
@@ -1087,6 +1093,12 @@
                 "org": "100T",
                 "average_kills_map": 11.6,
                 "line": 23.2
+            },
+            {
+                "player": "kellyS",
+                "org": "GEXP",
+                "average_kills_map": 12.8,
+                "line": 25.6
             },
             {
                 "player": "FengF",
@@ -1107,22 +1119,16 @@
                 "line": 26.400000000000002
             },
             {
-                "player": "Filu",
-                "org": "MKOI",
-                "average_kills_map": 14.2,
-                "line": 28.4
-            },
-            {
-                "player": "kellyS",
-                "org": "GEXP",
-                "average_kills_map": 12.8,
-                "line": 25.6
-            },
-            {
                 "player": "saadhak",
                 "org": "KC",
                 "average_kills_map": 11.399999999999999,
                 "line": 22.799999999999997
+            },
+            {
+                "player": "Filu",
+                "org": "MKOI",
+                "average_kills_map": 14.2,
+                "line": 28.4
             },
             {
                 "player": "Jremy",
@@ -1131,16 +1137,10 @@
                 "line": 28.799999999999997
             },
             {
-                "player": "Jieni7",
-                "org": "EDG",
-                "average_kills_map": 13.200000000000001,
-                "line": 26.400000000000002
-            },
-            {
-                "player": "gobera",
-                "org": "2G",
-                "average_kills_map": 12.6,
-                "line": 25.2
+                "player": "JonahP",
+                "org": "G2",
+                "average_kills_map": 10.600000000000001,
+                "line": 21.200000000000003
             },
             {
                 "player": "waituu",
@@ -1149,10 +1149,16 @@
                 "line": 24.0
             },
             {
-                "player": "JonahP",
-                "org": "G2",
-                "average_kills_map": 10.600000000000001,
-                "line": 21.200000000000003
+                "player": "gobera",
+                "org": "2G",
+                "average_kills_map": 12.6,
+                "line": 25.2
+            },
+            {
+                "player": "Jieni7",
+                "org": "EDG",
+                "average_kills_map": 13.200000000000001,
+                "line": 26.400000000000002
             },
             {
                 "player": "SpiritZ1",
@@ -1161,16 +1167,16 @@
                 "line": 29.6
             },
             {
-                "player": "o0o0o",
-                "org": "NOVA",
-                "average_kills_map": 10.600000000000001,
-                "line": 21.200000000000003
-            },
-            {
                 "player": "icy",
                 "org": "EG",
                 "average_kills_map": 14.2,
                 "line": 28.4
+            },
+            {
+                "player": "o0o0o",
+                "org": "NOVA",
+                "average_kills_map": 10.600000000000001,
+                "line": 21.200000000000003
             },
             {
                 "player": "nobody",
@@ -1185,10 +1191,10 @@
                 "line": 26.0
             },
             {
-                "player": "Derke",
-                "org": "VIT",
-                "average_kills_map": 12.8,
-                "line": 25.6
+                "player": "Meiy",
+                "org": "DFM",
+                "average_kills_map": 13.600000000000001,
+                "line": 27.200000000000003
             },
             {
                 "player": "Alfajer",
@@ -1199,14 +1205,8 @@
             {
                 "player": "sheydos",
                 "org": "MKOI",
-                "average_kills_map": 12.4,
-                "line": 24.8
-            },
-            {
-                "player": "Meiy",
-                "org": "DFM",
-                "average_kills_map": 13.600000000000001,
-                "line": 27.200000000000003
+                "average_kills_map": 12.0,
+                "line": 24.0
             },
             {
                 "player": "SyouTa",
@@ -1227,22 +1227,16 @@
                 "line": 21.6
             },
             {
-                "player": "mindfreak",
-                "org": "PRX",
-                "average_kills_map": 11.399999999999999,
-                "line": 22.799999999999997
+                "player": "Khalil",
+                "org": "FUR",
+                "average_kills_map": 12.6,
+                "line": 25.2
             },
             {
                 "player": "Haodong",
                 "org": "TEC",
                 "average_kills_map": 12.4,
                 "line": 24.8
-            },
-            {
-                "player": "Khalil",
-                "org": "FUR",
-                "average_kills_map": 12.6,
-                "line": 25.2
             },
             {
                 "player": "adverso",
@@ -1257,16 +1251,22 @@
                 "line": 28.0
             },
             {
-                "player": "soulcas",
-                "org": "MKOI",
-                "average_kills_map": 10.8,
-                "line": 21.6
+                "player": "mindfreak",
+                "org": "PRX",
+                "average_kills_map": 11.399999999999999,
+                "line": 22.799999999999997
             },
             {
                 "player": "silentzz",
                 "org": "2G",
                 "average_kills_map": 13.4,
                 "line": 26.8
+            },
+            {
+                "player": "soulcas",
+                "org": "MKOI",
+                "average_kills_map": 11.6,
+                "line": 23.2
             },
             {
                 "player": "qRaxs",
@@ -1287,12 +1287,6 @@
                 "line": 24.4
             },
             {
-                "player": "PxS",
-                "org": "2G",
-                "average_kills_map": 11.200000000000001,
-                "line": 22.400000000000002
-            },
-            {
                 "player": "d4v41",
                 "org": "PRX",
                 "average_kills_map": 12.4,
@@ -1305,16 +1299,16 @@
                 "line": 22.0
             },
             {
+                "player": "PxS",
+                "org": "2G",
+                "average_kills_map": 11.200000000000001,
+                "line": 22.400000000000002
+            },
+            {
                 "player": "XII",
                 "org": "FPX",
                 "average_kills_map": 13.799999999999999,
                 "line": 27.599999999999998
-            },
-            {
-                "player": "pryze",
-                "org": "FUR",
-                "average_kills_map": 11.0,
-                "line": 22.0
             },
             {
                 "player": "Boostio",
@@ -1329,22 +1323,16 @@
                 "line": 21.200000000000003
             },
             {
-                "player": "FiNESSE",
-                "org": "NRG",
-                "average_kills_map": 10.600000000000001,
-                "line": 21.200000000000003
-            },
-            {
-                "player": "Jinboong",
-                "org": "DFM",
+                "player": "pryze",
+                "org": "FUR",
                 "average_kills_map": 11.0,
                 "line": 22.0
             },
             {
-                "player": "SiuFatBB",
-                "org": "WOL",
-                "average_kills_map": 11.399999999999999,
-                "line": 22.799999999999997
+                "player": "FiNESSE",
+                "org": "NRG",
+                "average_kills_map": 10.600000000000001,
+                "line": 21.200000000000003
             },
             {
                 "player": "Shr1mp",
@@ -1353,10 +1341,28 @@
                 "line": 21.6
             },
             {
+                "player": "SiuFatBB",
+                "org": "WOL",
+                "average_kills_map": 11.399999999999999,
+                "line": 22.799999999999997
+            },
+            {
+                "player": "Jinboong",
+                "org": "DFM",
+                "average_kills_map": 11.0,
+                "line": 22.0
+            },
+            {
                 "player": "artzin",
                 "org": "MIBR",
                 "average_kills_map": 11.799999999999999,
                 "line": 23.599999999999998
+            },
+            {
+                "player": "Papi",
+                "org": "GEXP",
+                "average_kills_map": 11.0,
+                "line": 22.0
             },
             {
                 "player": "Cangshu",
@@ -1371,28 +1377,22 @@
                 "line": 22.799999999999997
             },
             {
-                "player": "Papi",
-                "org": "GEXP",
-                "average_kills_map": 11.0,
-                "line": 22.0
-            },
-            {
                 "player": "ANGE1",
                 "org": "NAVI",
                 "average_kills_map": 10.4,
                 "line": 20.8
             },
             {
-                "player": "Wild0reoo",
-                "org": "TS",
-                "average_kills_map": 12.2,
-                "line": 24.4
-            },
-            {
                 "player": "2GE",
                 "org": "TS",
                 "average_kills_map": 10.8,
                 "line": 21.6
+            },
+            {
+                "player": "Wild0reoo",
+                "org": "TS",
+                "average_kills_map": 12.2,
+                "line": 24.4
             },
             {
                 "player": "heat",
@@ -1407,12 +1407,6 @@
                 "line": 20.0
             },
             {
-                "player": "Governor",
-                "org": "APK",
-                "average_kills_map": 10.2,
-                "line": 20.4
-            },
-            {
                 "player": "Lsn",
                 "org": "AG",
                 "average_kills_map": 11.399999999999999,
@@ -1421,8 +1415,8 @@
             {
                 "player": "flyuh",
                 "org": "MKOI",
-                "average_kills_map": 11.200000000000001,
-                "line": 22.400000000000002
+                "average_kills_map": 11.0,
+                "line": 22.0
             },
             {
                 "player": "raafa",
@@ -1449,16 +1443,22 @@
                 "line": 21.200000000000003
             },
             {
-                "player": "Life",
-                "org": "FPX",
-                "average_kills_map": 13.4,
-                "line": 26.8
+                "player": "Governor",
+                "org": "APK",
+                "average_kills_map": 9.8,
+                "line": 19.6
             },
             {
                 "player": "Click",
                 "org": "M8",
                 "average_kills_map": 12.0,
                 "line": 24.0
+            },
+            {
+                "player": "Life",
+                "org": "FPX",
+                "average_kills_map": 13.4,
+                "line": 26.8
             },
             {
                 "player": "Suggest",
@@ -1485,16 +1485,16 @@
                 "line": 20.0
             },
             {
-                "player": "Art",
-                "org": "DFM",
-                "average_kills_map": 8.4,
-                "line": 16.8
-            },
-            {
                 "player": "Deryeon",
                 "org": "GE",
                 "average_kills_map": 10.600000000000001,
                 "line": 21.200000000000003
+            },
+            {
+                "player": "Art",
+                "org": "DFM",
+                "average_kills_map": 8.4,
+                "line": 16.8
             },
             {
                 "player": "patrickWHO",

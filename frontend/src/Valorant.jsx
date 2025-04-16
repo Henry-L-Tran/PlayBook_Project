@@ -8,6 +8,7 @@ import { calculatePayoutMultiplier } from "./payoutMultiplier";
 import { format, parse, set } from "date-fns";
 import SearchBar from "./SearchBar";
 import CenteredModal from "./utilities/CenteredModal";
+import ValorantLinesPopup from "./ValorantLinesPopup";
 
 function Valorant() {
   // State for Valorant match data
@@ -34,7 +35,7 @@ function Valorant() {
   const [valPlayerStats, setvalPlayerStats] = useState([]);
   const [viewLineCategory, setViewLineCategory] = useState("Kills");
   const lineCategoryOptions = [
-    "Kills",
+    "Maps 1-2 Kills",
   ];
   const [lineup, setLineup] = useState({});
   const currentLineup = lineup[viewLineCategory] || [];
@@ -48,15 +49,49 @@ function Valorant() {
   const [userTotalEntriesValue, setUserTotalEntriesValue] = useState(0);
   const [showBettingLines, setShowBettingLines] = useState(false);
 
-  // Dummy helper functions (customize as needed for your Valorant data)
-  const playersInGame = (match) => {
-    // Assume each match object contains an array "players"
-    return match.players || [];
+  const teamNameToOrg = {
+    "100 Thieves": "100T",
+    "Cloud9": "C9",
+    "Evil Geniuses": "EG",
+    "FURIA": "FURIA",
+    "KRÜ Esports": "KRÜ",
+    "Leviatán": "LEV",
+    "LOUD": "LOUD",
+    "MIBR": "MIBR",
+    "NRG Esports": "NRG",
+    "Sentinels": "SEN",
+    "G2 Esports": "G2",
+    "BBL Esports": "BBL",
+    "FNATIC": "FNC",
+    "FUT Esports": "FUT",
+    "Team Liquid": "TL",
+    "Team Heretics": "TH",
+    "Gen.G": "GEN",
+    "DRX": "DRX",
+    "T1": "T1",
+    "ZETA DIVISION": "ZETA",
+    "DetonatioN FocusMe": "DFM",
+    "Paper Rex": "PRX",
+    "Team Secret": "TS",
+    "Natus Vincere": "NAVI",
+    "Global Esports": "GE",
+    "JDG Esports": "JDG",
+    "Bilibili Gaming": "BLG",
+    "Karmine Corp": "KC",
+    "Dragon Ranger Gaming": "DRG",
+    "TYLOO": "TYL",
+    "Wolves Esports": "WOL",
+    "Valorant RED": "RED",
+    "2Game Esports": "2G",
+    "Vitality": "VIT",
+    "Apeks": "APEKS",
+    "Nova Esports": "NOVA",
+    "Rex Regum Qeon": "RRQ",
   };
 
   const getStatCategory = (player) => {
     // Placeholder: return player's stat value (update as needed)
-    return player.stat || 0;
+    return player.line || 0;
   };
 
   // Helper for round values (if applicable)
@@ -158,7 +193,8 @@ function Valorant() {
             "http://localhost:8000/VALROANT/player_stats"
           );
           const data = await response.json();
-          setvalPlayerStats(data.players);
+          console.log("Player Stats: ", data.data.segments);
+          setvalPlayerStats(data.data.segments);
         } catch (error) {
           console.error("Error: ", error);
         }
@@ -168,7 +204,6 @@ function Valorant() {
 
     // Handles the Select/Deselect of Players Over/Under
     const handleUserLines = (player, usersPick) => {
-      const playerId = player.playerId;
   
       setLineup((prevLines) => {
         const categoryLineup = prevLines[viewLineCategory] || [];
@@ -176,7 +211,7 @@ function Valorant() {
         // Prevents Duplicate Players in the Same Lineup
         const noDuplicatePlayers = Object.values(prevLines).flat();
         const playerAlreadyExists = noDuplicatePlayers.find(
-          (entry) => entry.player_id === playerId
+          (entry) => entry.player === player
         );
   
         if (
@@ -188,7 +223,7 @@ function Valorant() {
         }
   
         const existing = categoryLineup.find(
-          (entry) => entry.player_id === playerId
+          (entry) => entry.player === player
         );
   
         let newCategoryLineup;
@@ -196,12 +231,12 @@ function Valorant() {
         if (existing) {
           if (existing.users_pick === usersPick) {
             newCategoryLineup = categoryLineup.filter(
-              (entry) => entry.player_id !== playerId
+              (entry) => entry.player_id !== player
             );
           } else {
             // If Player is Selected but Over/Under is Changed, Update the Existing Entry
             newCategoryLineup = categoryLineup.map((entry) =>
-              entry.player_id === playerId
+              entry.player_id === player
                 ? { ...entry, users_pick: usersPick }
                 : entry
             );
@@ -209,7 +244,7 @@ function Valorant() {
         } else {
           // If Player is Not Selected, Add the Player to the Lineup
           const newEntry = {
-            player_id: player.playerId,
+            player_id: player.player,
             player_name: player.playerName,
             team_tri_code: player.teamTriCode,
             player_picture: player.playerPicture,
@@ -304,19 +339,19 @@ function Valorant() {
     };
   
     // Function to Highlight the Selected Over/Under Buttons Green
-    const selectedBetButton = (playerId, pick) => {
+    const selectedBetButton = (player, pick) => {
       return currentLineup.some(
-        (entry) => entry.player_id === playerId && entry.users_pick === pick
+        (entry) => entry.player_id === player && entry.users_pick === pick
       );
     };
   
     // Function to Highlight the Selected Player Card Green
-    const selectedSquare = (playerId) => {
-      return currentLineup.some((entry) => entry.player_id === playerId);
+    const selectedSquare = (player) => {
+      return currentLineup.some((entry) => entry.player_id === player);
     };
   
     // Function to Update the Lineup with the Selected Player's Pick in the Lineup Builder Popup
-    const userPickUpdate = (playerId, pick) => {
+    const userPickUpdate = (player, pick) => {
       if (pick === "Clear All") {
         setLineup({});
         return;
@@ -330,14 +365,14 @@ function Valorant() {
   
           if (pick === "Remove") {
             const filteredLineup = categoryLineup.filter(
-              (entry) => entry.player_id !== playerId
+              (entry) => entry.player_id !== player
             );
             if (filteredLineup.length > 0) {
               newPick[category] = filteredLineup;
             }
           } else {
             newPick[category] = prevLines[category].map((entry) =>
-              entry.player_id === playerId
+              entry.player_id === player
                 ? { ...entry, users_pick: pick }
                 : entry
             );
@@ -347,18 +382,45 @@ function Valorant() {
       });
     };
 
+
+    const playersInMatch = (match) => {
+      const awayOrg = teamNameToOrg[match.team1];
+      const homeOrg = teamNameToOrg[match.team2];
+    
+      return valPlayerStats.filter(
+        (player) =>
+          player.org?.toUpperCase() === awayOrg ||
+          player.org?.toUpperCase() === homeOrg
+      );
+    };
+
+
+    const team1 = teamNameToOrg[selectedMatch?.team1]?.toUpperCase();
+    console.log("TARGETS: ", team1)
+
+    const team2 = teamNameToOrg[selectedMatch?.team2]?.toUpperCase();
+    console.log("TARGETS: ", team2)
+
+    const awayPlayers = valPlayerStats.filter((player) => {
+      const playerOrg = player.org?.toUpperCase();
+      return playerOrg === team1
+      
+    });
+
+    const homePlayers = valPlayerStats.filter((player) => {
+      const playerOrg = player.org?.toUpperCase();
+      return playerOrg === team2
+      
+    });
+
+    console.log(awayPlayers)
+    console.log(homePlayers)
+    console.log(valPlayerStats.length)
+
   // Render the betting lines modal (identical style to your NBA view)
   const renderBettingModal = () => {
     // For the betting lines UI (used when the match is not completed)
     // In this snippet, we filter players based on teamTriCode from the selected match.
-    const awayPlayers = playersInGame(selectedMatch).filter(
-      (player) =>
-        player.teamTriCode === selectedMatch.awayTeam.teamTriCode
-    );
-    const homePlayers = playersInGame(selectedMatch).filter(
-      (player) =>
-        player.teamTriCode === selectedMatch.homeTeam.teamTriCode
-    );
 
     return (
       <Box
@@ -791,8 +853,22 @@ function Valorant() {
         </Collapse>
       </Box>
 
-      {/* Popup Modal for Betting Lines or Kills Overview */}
-      {showBettingLines && selectedMatch && renderBettingModal()}
+      {showBettingLines && selectedMatch && !selectedMatch.time_completed ? (
+        <ValorantLinesPopup
+          selectedMatch={selectedMatch}
+          setShowBettingLines={setShowBettingLines}
+          valPlayerStats={valPlayerStats}
+          awayPlayers={awayPlayers}
+          homePlayers={homePlayers}
+          viewLineCategory={viewLineCategory}
+          setViewLineCategory={setViewLineCategory}
+          handleUserLines={handleUserLines}
+          selectedBetButton={selectedBetButton}
+          selectedSquare={selectedSquare}
+          getStatCategory={getStatCategory}
+          lineCategoryOptions={lineCategoryOptions}
+        />
+      ) : showBettingLines && selectedMatch && renderBettingModal()}
     </Box>
   );
 }
