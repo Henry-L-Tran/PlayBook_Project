@@ -1,1 +1,68 @@
-[]
+[
+    {
+        "team1": "Team Vitality",
+        "team2": "Apeks",
+        "flag1": "flag_eu",
+        "flag2": "flag_eu",
+        "time_until_match": "7h 1m from now",
+        "match_series": "Group Stage: Week 4",
+        "match_event": "Champions Tour 2025: EMEA Stage 1",
+        "unix_timestamp": "2025-04-16 15:00:00",
+        "match_page": "https://www.vlr.gg/459845/team-vitality-vs-apeks-champions-tour-2025-emea-stage-1-w4"
+    },
+    {
+        "team1": "Team Liquid",
+        "team2": "KOI",
+        "flag1": "flag_eu",
+        "flag2": "flag_eu",
+        "time_until_match": "10h 1m from now",
+        "match_series": "Group Stage: Week 4",
+        "match_event": "Champions Tour 2025: EMEA Stage 1",
+        "unix_timestamp": "2025-04-16 18:00:00",
+        "match_page": "https://www.vlr.gg/459846/team-liquid-vs-koi-champions-tour-2025-emea-stage-1-w4"
+    },
+    {
+        "team1": "Titan Esports Club",
+        "team2": "Wolves Esports",
+        "flag1": "flag_cn",
+        "flag2": "flag_cn",
+        "time_until_match": "1d 1h from now",
+        "match_series": "Playoffs: Upper Round 1",
+        "match_event": "Champions Tour 2025: China Stage 1",
+        "unix_timestamp": "2025-04-17 09:00:00",
+        "match_page": "https://www.vlr.gg/473233/titan-esports-club-vs-wolves-esports-champions-tour-2025-china-stage-1-ur1"
+    },
+    {
+        "team1": "Xi Lai Gaming",
+        "team2": "Nova Esports",
+        "flag1": "flag_cn",
+        "flag2": "flag_cn",
+        "time_until_match": "1d 3h from now",
+        "match_series": "Playoffs: Upper Round 1",
+        "match_event": "Champions Tour 2025: China Stage 1",
+        "unix_timestamp": "2025-04-17 11:00:00",
+        "match_page": "https://www.vlr.gg/473234/xi-lai-gaming-vs-nova-esports-champions-tour-2025-china-stage-1-ur1"
+    },
+    {
+        "team1": "Gentle Mates",
+        "team2": "BBL Esports",
+        "flag1": "flag_eu",
+        "flag2": "flag_eu",
+        "time_until_match": "1d 7h from now",
+        "match_series": "Group Stage: Week 4",
+        "match_event": "Champions Tour 2025: EMEA Stage 1",
+        "unix_timestamp": "2025-04-17 15:00:00",
+        "match_page": "https://www.vlr.gg/459847/gentle-mates-vs-bbl-esports-champions-tour-2025-emea-stage-1-w4"
+    },
+    {
+        "team1": "GIANTX",
+        "team2": "FNATIC",
+        "flag1": "flag_eu",
+        "flag2": "flag_eu",
+        "time_until_match": "1d 10h from now",
+        "match_series": "Group Stage: Week 4",
+        "match_event": "Champions Tour 2025: EMEA Stage 1",
+        "unix_timestamp": "2025-04-17 18:00:00",
+        "match_page": "https://www.vlr.gg/459848/giantx-vs-fnatic-champions-tour-2025-emea-stage-1-w4"
+    }
+]

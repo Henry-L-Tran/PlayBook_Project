@@ -24,6 +24,14 @@ class LineupEntry(BaseModel):
     users_pick: str
     matchup: str = "N/A"
 
+class ValLineupEntry(BaseModel):
+    player_name: str
+    player_picture: str
+    line_category: str
+    projected_line: float
+    users_pick: str
+    match_id: str = "N/A"
+
 class SubmitLineup(BaseModel):
     email: str
     category: str

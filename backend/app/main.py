@@ -555,22 +555,22 @@ def fetch_val_live_players():
 threading.Thread(target=fetch_val_live_players, daemon=True).start()
 
 # Get VALORANT current live matches from API
-def fetch_val_live_matches():
-    while True:    
-        try:
-            # Retrieve live matches and filter them
-            live_Scores = Vlr.vlr_live_score()
-            filtered_matches = val_filter_matches(live_Scores)
-            # Write the result (a Python dictionary) to a JSON file
-            with open("app/valorant_data/val_live_scores.json", "w") as file:
-                json.dump(filtered_matches, file, indent=4)
-        except Exception as e:
-            print("Error retrieving live matches:", e)
+# def fetch_val_live_matches():
+#     while True:    
+#         try:
+#             # Retrieve live matches and filter them
+#             live_Scores = Vlr.vlr_live_score()
+#             filtered_matches = val_filter_matches(live_Scores)
+#             # Write the result (a Python dictionary) to a JSON file
+#             with open("app/valorant_data/val_live_scores.json", "w") as file:
+#                 json.dump(filtered_matches, file, indent=4)
+#         except Exception as e:
+#             print("Error retrieving live matches:", e)
 
-        # Update the score every 15 seconds
-        time.sleep(15)
+#         # Update the score every 15 seconds
+#         time.sleep(15)
 
-threading.Thread(target=fetch_val_live_matches, daemon=True).start()
+# threading.Thread(target=fetch_val_live_matches, daemon=True).start()
 
 # Retrieve most recent tier 1 match results
 def fetch_val_match_results():
@@ -678,6 +678,19 @@ def fetch_val_player_kills():
 
 threading.Thread(target=fetch_val_player_kills, daemon=True).start()
 
+# Player recent stats
+def fetch_val_player_stats():
+    try:
+        # Retrieve match results and filter them
+        player_stats = Vlr.vlr_stats("all", "30")
+        # Write the result (a Python dictionary) to a JSON file
+        with open("app/valorant_data/val_recent_player_stats.json", "w") as file:
+            json.dump(player_stats, file, indent=4)
+    except Exception as e:
+        print("Error retrieving live matches:", e)
+
+threading.Thread(target=fetch_val_player_stats, daemon=True).start()
+
 # Filter only tier 1 (Riot Partnered) teams matches
 def val_filter_matches(matches: dict):
     t1_teams = ["100 Thieves", "Cloud9", "Evil Geniuses", "FURIA", "KRÜ Esports", "Leviatán", "LOUD", "MIBR", "NRG Esports", "Sentinels", "G2 Esports", "2Game Esports",
@@ -772,6 +785,17 @@ def val_player_kills():
 def val_match_results():
     try:
         with open("app/valorant_data/val_match_results.json", "r") as file:
+            data = json.load(file)
+            return data
+        
+    except FileNotFoundError:
+        return {"message": "No Stats Found"}
+    
+# VALORANT Player Stats Route
+@app.get("/VALROANT/player_stats")
+def val_player_stats():
+    try:
+        with open("app/valorant_data/val_recent_player_stats.json", "r") as file:
             data = json.load(file)
             return data
         
