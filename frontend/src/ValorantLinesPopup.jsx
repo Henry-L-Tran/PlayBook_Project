@@ -16,6 +16,21 @@ const ValorantLinesPopup = ({
   setShowBettingLines,
   lineCategoryOptions,
 }) => {
+
+// Function to Round the Player's Line
+  const lineRounding = (line) => {
+    const lineInteger = parseFloat(line);
+    const lineDecimal = lineInteger % 1;
+
+    // If the Line is Less Than 0.3, or Greater Than 0.7, Use 0.5 Line
+    if (lineDecimal >= 0.3 && lineDecimal <= 0.7) {
+      return Math.floor(lineInteger) + 0.5;
+    } else {
+      // If Anything Else, Use Flat Line
+      return Math.round(lineInteger).toString();
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -113,7 +128,7 @@ const ValorantLinesPopup = ({
                       {player.player}
                     </Typography>
                     <Typography sx={{ color: "gray", fontSize: "0.9rem" }}>
-                      Line: {getStatCategory(player)}
+                      {lineRounding(getStatCategory(player))} Kills
                     </Typography>
 
                     <Box sx={{ display: "flex", mt: 1, width: "100%" }}>
