@@ -1,7 +1,6 @@
 import { Typography, Button, Box, Link, IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Divider from "@mui/material/Divider";
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import { useState, useEffect } from "react";
 import { useRef } from "react";
 import HelpCenterModal from "./HelpCenter";
