@@ -28,10 +28,10 @@ function Valorant() {
 
   // States and variables for the betting lines UI (used if match is not completed)
   const [valLiveGames, setValLiveGames] = useState({
-    gameDate: "",
     gameData: [],
   });
   const [valSelectedGame, setvalselectedGame] = useState(null);
+  const [valPlayerStats, setvalPlayerStats] = useState([]);
   const [viewLineCategory, setViewLineCategory] = useState("Kills");
   const lineCategoryOptions = [
     "Kills",
@@ -149,6 +149,22 @@ function Valorant() {
       setSelectedMatchKills(null);
     }
   }, [selectedMatch]);
+
+    // Function to Fetch Player Season Stats for the Selected Game (Gets the Averages)
+    useEffect(() => {
+      const fetchvalPlayerStats = async () => {
+        try {
+          const response = await fetch(
+            "http://localhost:8000/VALROANT/player_stats"
+          );
+          const data = await response.json();
+          setvalPlayerStats(data.players);
+        } catch (error) {
+          console.error("Error: ", error);
+        }
+      };
+      fetchvalPlayerStats();
+    }, []);
 
     // Handles the Select/Deselect of Players Over/Under
     const handleUserLines = (player, usersPick) => {

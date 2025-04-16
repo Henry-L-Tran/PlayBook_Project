@@ -33,7 +33,8 @@ def vlr_stats(region: str, timespan: str):
             {
                 "player": player_name,
                 "org": org,
-                "average_kills_rounds": 24 * float(color_sq[5])
+                "average_kills_map": 20 * float(color_sq[5]),
+                "line": 20 * float(color_sq[5]) * 2
             }
         )
 
