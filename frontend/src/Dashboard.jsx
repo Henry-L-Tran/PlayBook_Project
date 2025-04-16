@@ -14,6 +14,8 @@ import "./Dashboard.css";
 import PieChart from "./PieChart";
 import CenteredModal from "./utilities/CenteredModal";
 import TeamBanner from "./TeamBanner";
+import * as NBAIcons from "react-nba-logos";
+
 
 function Dashboard() {
   // State to Hold the Live Games and Player Stats
@@ -439,6 +441,32 @@ function Dashboard() {
     }
   };
 
+  {/* Function for Player Line Scroll Animation */}
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+  
+    const elements = document.querySelectorAll(".fade-up");
+    elements.forEach((el) => observer.observe(el));
+  
+    return () => {
+      elements.forEach((el) => observer.unobserve(el));
+    };
+  }, []);
+
+  const TeamLogo = ({ teamTriCode, size }) => {
+      const Logo = NBAIcons[teamTriCode];
+      return Logo ? <Logo size = {size} /> : <p></p>
+  };
+
   return (
     // Main Dashboard Container
     <Box
@@ -471,7 +499,7 @@ function Dashboard() {
               indicator: {
                 sx: {
                   backgroundColor: "white",
-                  height: "0.25rem",
+                  height: "0.3vh",
                   borderRadius: "1rem",
                   marginTop: "1rem",
                 },
@@ -483,7 +511,7 @@ function Dashboard() {
               },
             }}
             sx={{
-              marginTop: "1rem",
+              marginTop: "1.3vh",
               width: "100%",
               maxWidth: "100%",
               "& .MuiTabs-flexContainer": {
@@ -562,7 +590,7 @@ function Dashboard() {
                         borderRadius: "1rem",
                       }}
                       onClick={() => {
-                        if (game.gameStatus === 2) {
+                        if (game.gameStatus === 3) {
                           setnbaselectedGame(game);
                           setShowBettingLines(true);
                         }
@@ -586,9 +614,10 @@ function Dashboard() {
                         <div className="flex flex-wrap items-center ">
                           <div className="w-3/4 flex justify-around ">
                             {/* Team Code and Record */}
-                            <div className="flex items-center justify-center w-full gap-4 md:w-1/4 mb-2 md:mb-0 ">
+                            <div className="flex items-center justify-center w-full gap-4 md:w-1/4 mb-2 md:mb-0">
+                              <TeamLogo teamTriCode={game.awayTeam.teamTriCode} size={75} />
                               <Typography
-                                variant="h6"
+                                variant="h5"
                                 sx={{ 
                                   fontFamily: "monospace",
                                   fontWeight: "bold",
@@ -608,6 +637,7 @@ function Dashboard() {
                                 sx={{ 
                                   fontFamily: "monospace",
                                   fontSize: "0.7rem",
+                                  marginTop: "0.2vh"
                                 }}
                               >
                                 {game.awayTeam.wins} - {game.awayTeam.losses}
@@ -667,8 +697,9 @@ function Dashboard() {
                           <div className="w-3/4 flex justify-around ">
                             {/* Team Code and Record */}
                             <div className="flex items-center justify-center w-full gap-4 md:w-1/4 mb-2 md:mb-0">
+                              <TeamLogo teamTriCode={game.homeTeam.teamTriCode} size={75} />
                               <Typography
-                                variant="h6"
+                                variant="h5"
                                 sx={{ 
                                   fontFamily: "monospace",
                                   fontWeight: "bold", 
@@ -687,6 +718,7 @@ function Dashboard() {
                                 sx={{ 
                                   fontFamily: "monospace",
                                   fontSize: "0.7rem",
+                                  marginTop: "0.2vh"
                                 }}
                                 className="text-xs font-bold"
                               >
@@ -813,15 +845,13 @@ function Dashboard() {
                   justifyContent: "center",
                   fontFamily: "monospace",
                   width: "100%",
-                  maxHeight: "100vh",
-                  overflowY: "auto",
                   top: 0,
                   left: 0,
                   right: 0,
                   bottom: 0,
                   zIndex: 1100,
-                  paddingBottom: "10%",
-                  alignItems: "center",
+                  overflow: "hidden",
+                  paddingBottom: "5%",
                 }}
               >
                 {/* Header Away Team @ Home Team Box */}
@@ -850,8 +880,8 @@ function Dashboard() {
                     <IconButton
                       sx={{
                         position: "absolute",
-                        right: "1rem",
-                        top: "1rem",
+                        right: "0.8vw",
+                        top: "2vh",
                         "&:hover": {
                           background: "none",
                         },
@@ -873,8 +903,9 @@ function Dashboard() {
                       justifyContent: "center",
                       alignItems: "center",
                       marginTop: "2.2vh",
+                      marginLeft: "17.5vw",
                       gap: "1.3vw",
-                      width: "100%",
+                      width: "65vw",
                     }}
                   >
                     {/* Betting Lines Category Buttons (PTS, REB, AST, etc.) */}
@@ -901,21 +932,30 @@ function Dashboard() {
                     ))}
                   </Box>
 
+                  {/* SCROLL TESTING */}
+                  <Box
+                    sx={{
+                      maxHeight: "calc(100vh - 160px)",
+                      overflowY: "auto",
+                      padding: "1.5vh 3vw",
+                      marginTop: "2vh", 
+                    }}
+                  >
                     {/* All Player Squares Main Box/Section */}
                     <Box
                       sx={{
                         display: "flex",
                         justifyContent: "space-between",
-                        padding: "2rem 4rem",
+                        padding: "1.5vh 3vw",
                         width: "100%",
-                        gap: "2rem",
+                        gap: "1.5vw",
                       }}
                     >
                       {/* Away Team Players Squares Column */}
                       <Box
                         sx={{
                           flex: 1,
-                          paddingBottom: "4rem",
+                          paddingBottom: "1.8vh",
                         }}
                       >
                         {/* Away Team Tri-Code Header */}
@@ -925,7 +965,8 @@ function Dashboard() {
                             textAlign: "center",
                             width: "40%",
                             fontFamily: "monospace",
-                            marginBottom: "1rem",
+                            marginBottom: "1.2vh",
+                            marginLeft: "32%"
                           }}
                         >
                           {nbaSelectedGame.awayTeam.teamTriCode}
@@ -941,20 +982,21 @@ function Dashboard() {
                             <Box
                               key={index}
                               id={`player-${player.playerId}`}
+                              className= "fade-up"
                               sx={{
                                 border: selectedSquare(player.playerId)
                                   ? "2px solid green"
                                   : "2px solid gray",
                                 borderRadius: "1rem",
-                                padding: 0,
                                 backgroundColor: "rgba(0, 0, 0, 0.5)",
-                                marginBottom: "1rem",
-                                width: "22rem",
-                                height: "18rem",
+                                marginBottom: "1.3vh",
+                                width: "14vw",
+                                height: "25vh",
                                 overflow: "hidden",
                                 display: "flex",
                                 flexDirection: "column",
                                 justifyContent: "space-between",
+                                marginLeft: "5vw",
                               }}
                             >
                               {/* Player Square Top Header Section */}
@@ -969,16 +1011,16 @@ function Dashboard() {
                                     display: "flex",
                                     justifyContent: "center",
                                     alignItems: "center",
-                                    marginTop: "0.5rem",
-                                    marginBottom: "0.5rem",
+                                    marginTop: "0.5vh",
+                                    marginBottom: "0.8vh",
                                   }}
                                 >
                                   <img
                                     src={player.playerPicture}
                                     alt={player.playerName}
                                     style={{
-                                      width: "6rem",
-                                      marginTop: "1rem",
+                                      width: "7.5vh",
+                                      marginTop: "1.2vh",
                                     }}
                                   />
                                 </Box>
@@ -1030,8 +1072,8 @@ function Dashboard() {
                                     sx={{
                                       fontFamily: "monospace",
                                       textAlign: "center",
-                                      marginTop: "0.5rem",
-                                      fontSize: "1.2rem",
+                                      marginTop: "0.6vh",
+                                      fontSize: "0.8vw",
                                       fontWeight: "bold",
                                     }}
                                   >
@@ -1044,8 +1086,8 @@ function Dashboard() {
                                       display: "flex",
                                       fontFamily: "monospace",
                                       textAlign: "center",
-                                      marginTop: "0.9rem",
-                                      fontSize: "0.8rem",
+                                      marginTop: "1.1vh",
+                                      fontSize: "0.6vw",
                                       justifyContent: "right",
                                       marginLeft: "0.5rem",
                                     }}
@@ -1136,7 +1178,8 @@ function Dashboard() {
                             textAlign: "center",
                             width: "40%",
                             fontFamily: "monospace",
-                            marginBottom: "1rem",
+                            marginBottom: "1.2vh",
+                            marginRight: "33%",
                           }}
                         >
                           {nbaSelectedGame.homeTeam.teamTriCode}
@@ -1152,6 +1195,7 @@ function Dashboard() {
                             <Box
                               key={index}
                               id={`player-${player.playerId}`}
+                              className= "fade-up"
                               sx={{
                                 border: selectedSquare(player.playerId)
                                   ? "2px solid green"
@@ -1159,13 +1203,14 @@ function Dashboard() {
                                 borderRadius: "1rem",
                                 padding: 0,
                                 backgroundColor: "rgba(0, 0, 0, 0.5)",
-                                marginBottom: "1rem",
-                                width: "22rem",
-                                height: "18rem",
+                                marginBottom: "1.3vh",
+                                width: "14vw",
+                                height: "25vh",
                                 overflow: "hidden",
                                 display: "flex",
                                 flexDirection: "column",
                                 justifyContent: "space-between",
+                                marginRight: "5vw",
                               }}
                             >
                               {/* Player Square Top Header Section */}
@@ -1180,16 +1225,16 @@ function Dashboard() {
                                     display: "flex",
                                     justifyContent: "center",
                                     alignItems: "center",
-                                    marginTop: "0.5rem",
-                                    marginBottom: "0.5rem",
+                                    marginTop: "0.5vh",
+                                    marginBottom: "0.8vh",
                                   }}
                                 >
                                   <img
                                     src={player.playerPicture}
                                     alt={player.playerName}
                                     style={{
-                                      width: "6rem",
-                                      marginTop: "1rem",
+                                      width: "7.5vh",
+                                      marginTop: "1.2vh",
                                     }}
                                   />
                                 </Box>
@@ -1241,8 +1286,8 @@ function Dashboard() {
                                     sx={{
                                       fontFamily: "monospace",
                                       textAlign: "center",
-                                      marginTop: "0.5rem",
-                                      fontSize: "1.2rem",
+                                      marginTop: "0.6vh",
+                                      fontSize: "0.8vw",
                                       fontWeight: "bold",
                                     }}
                                   >
@@ -1255,10 +1300,10 @@ function Dashboard() {
                                       display: "flex",
                                       fontFamily: "monospace",
                                       textAlign: "center",
-                                      marginTop: "0.9rem",
-                                      fontSize: "0.8rem",
+                                      marginTop: "1.1vh",
+                                      fontSize: "0.6vw",
                                       justifyContent: "right",
-                                      marginLeft: "0.5rem",
+                                      marginLeft: "0.3vw",
                                     }}
                                   >
                                     {viewLineCategory}
@@ -1328,8 +1373,9 @@ function Dashboard() {
                     </Box>
                   </Box>
                 </Box>
-              );
-            })()}
+              </Box>
+            );
+          })()}
 
           {activeCategoryTab === "VAL" && (
             <Box
@@ -1367,6 +1413,7 @@ function Dashboard() {
               onSubmit={submitLineup}
               isExpanded={showLineupBar}
               pickUpdate={userPickUpdate}
+              marginLeft={10}
             />
           )}
         </Box>

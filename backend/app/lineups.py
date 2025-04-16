@@ -555,7 +555,7 @@ def confirm_val_lineups():
             lineup["actual_payout"] = 0
 
         updated_lineups.append(lineup)
-
+        
     # Save the updated lineups back to lineups.json
     save_lineups(updated_lineups)
 
