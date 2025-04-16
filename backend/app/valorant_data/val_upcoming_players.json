@@ -58,5 +58,35 @@
         "player3b": "CB",
         "player4b": "GuanG",
         "player5b": "Ezeir"
+    },
+    {
+        "match_id": "459847",
+        "teama": "Gentle Mates",
+        "player1a": "K4DAVRA",
+        "player2a": "Minny",
+        "player3a": "Zyppan",
+        "player4a": "Click",
+        "player5a": "kamyk",
+        "teamb": "BBL Esports",
+        "player1b": "LewN",
+        "player2b": "Jamppi",
+        "player3b": "PROFEK",
+        "player4b": "sociablEE",
+        "player5b": "MAGNUM"
+    },
+    {
+        "match_id": "459848",
+        "teama": "GIANTX",
+        "player1a": "Cloud",
+        "player2a": "purp0",
+        "player3a": "runneR",
+        "player4a": "westside",
+        "player5a": "tomaszy",
+        "teamb": "FNATIC",
+        "player1b": "Boaster",
+        "player2b": "Alfajer",
+        "player3b": "Chronicle",
+        "player4b": "kaajak",
+        "player5b": "crashies"
     }
 ]

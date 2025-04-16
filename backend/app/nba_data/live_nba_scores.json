@@ -2,103 +2,37 @@
     "gameDate": "2025-04-15",
     "gameData": [
         {
-            "gameId": "0052400101",
-            "gameStatus": 1,
-            "gameStatusText": "7:30 pm ET",
-            "gameClock": "",
-            "homeTeam": {
-                "teamId": 1610612753,
-                "teamName": "Magic",
-                "teamTriCode": "ORL",
-                "wins": 0,
-                "losses": 0,
-                "score": 0,
-                "periods": [
-                    {
-                        "period": 1,
-                        "periodType": "REGULAR",
-                        "score": 0
-                    },
-                    {
-                        "period": 2,
-                        "periodType": "REGULAR",
-                        "score": 0
-                    },
-                    {
-                        "period": 3,
-                        "periodType": "REGULAR",
-                        "score": 0
-                    },
-                    {
-                        "period": 4,
-                        "periodType": "REGULAR",
-                        "score": 0
-                    }
-                ]
-            },
-            "awayTeam": {
-                "teamId": 1610612737,
-                "teamName": "Hawks",
-                "teamTriCode": "ATL",
-                "wins": 0,
-                "losses": 0,
-                "score": 0,
-                "periods": [
-                    {
-                        "period": 1,
-                        "periodType": "REGULAR",
-                        "score": 0
-                    },
-                    {
-                        "period": 2,
-                        "periodType": "REGULAR",
-                        "score": 0
-                    },
-                    {
-                        "period": 3,
-                        "periodType": "REGULAR",
-                        "score": 0
-                    },
-                    {
-                        "period": 4,
-                        "periodType": "REGULAR",
-                        "score": 0
-                    }
-                ]
-            }
-        },
-        {
             "gameId": "0052400121",
-            "gameStatus": 1,
-            "gameStatusText": "10:00 pm ET",
-            "gameClock": "",
+            "gameStatus": 3,
+            "gameStatusText": "Final",
+            "gameClock": "PT00M00.00S",
             "homeTeam": {
                 "teamId": 1610612744,
                 "teamName": "Warriors",
                 "teamTriCode": "GSW",
                 "wins": 0,
                 "losses": 0,
-                "score": 0,
+                "score": 121,
                 "periods": [
                     {
                         "period": 1,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 31
                     },
                     {
                         "period": 2,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 36
                     },
                     {
                         "period": 3,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 27
                     },
                     {
                         "period": 4,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 27
                     }
                 ]
             },
@@ -108,27 +42,93 @@
                 "teamTriCode": "MEM",
                 "wins": 0,
                 "losses": 0,
-                "score": 0,
+                "score": 116,
                 "periods": [
                     {
                         "period": 1,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 25
                     },
                     {
                         "period": 2,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 30
                     },
                     {
                         "period": 3,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 36
                     },
                     {
                         "period": 4,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 25
+                    }
+                ]
+            }
+        },
+        {
+            "gameId": "0052400101",
+            "gameStatus": 3,
+            "gameStatusText": "Final",
+            "gameClock": "",
+            "homeTeam": {
+                "teamId": 1610612753,
+                "teamName": "Magic",
+                "teamTriCode": "ORL",
+                "wins": 1,
+                "losses": 0,
+                "score": 120,
+                "periods": [
+                    {
+                        "period": 1,
+                        "periodType": "REGULAR",
+                        "score": 32
+                    },
+                    {
+                        "period": 2,
+                        "periodType": "REGULAR",
+                        "score": 29
+                    },
+                    {
+                        "period": 3,
+                        "periodType": "REGULAR",
+                        "score": 18
+                    },
+                    {
+                        "period": 4,
+                        "periodType": "REGULAR",
+                        "score": 41
+                    }
+                ]
+            },
+            "awayTeam": {
+                "teamId": 1610612737,
+                "teamName": "Hawks",
+                "teamTriCode": "ATL",
+                "wins": 0,
+                "losses": 1,
+                "score": 95,
+                "periods": [
+                    {
+                        "period": 1,
+                        "periodType": "REGULAR",
+                        "score": 17
+                    },
+                    {
+                        "period": 2,
+                        "periodType": "REGULAR",
+                        "score": 30
+                    },
+                    {
+                        "period": 3,
+                        "periodType": "REGULAR",
+                        "score": 26
+                    },
+                    {
+                        "period": 4,
+                        "periodType": "REGULAR",
+                        "score": 22
                     }
                 ]
             }

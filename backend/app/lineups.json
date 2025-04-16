@@ -674,5 +674,141 @@
         "result": "WON",
         "actual_payout": 50.0,
         "evaluated": true
+    },
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "henry.l.tran-1@ou.edu_1744767325853_a26cd941-7e5f-48d0-b1da-cf3d028ed2af",
+        "entry_type": "Power Play",
+        "entry_amount": 3.0,
+        "potential_payout": 15.0,
+        "entries": [
+            {
+                "player_id": 1630532,
+                "player_name": "Franz Wagner",
+                "team_tri_code": "ORL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630532.png",
+                "line_category": "PTS",
+                "projected_line": 24.0,
+                "users_pick": "Over",
+                "matchup": "ATL @ ORL",
+                "live_value": 13,
+                "status": "miss"
+            },
+            {
+                "player_id": 1629027,
+                "player_name": "Trae Young",
+                "team_tri_code": "ATL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629027.png",
+                "line_category": "PTS",
+                "projected_line": 24.0,
+                "users_pick": "Over",
+                "matchup": "ATL @ ORL",
+                "live_value": 28,
+                "status": "hit"
+            },
+            {
+                "player_id": 1642258,
+                "player_name": "Zaccharie Risacher",
+                "team_tri_code": "ATL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642258.png",
+                "line_category": "PTS",
+                "projected_line": 12.5,
+                "users_pick": "Under",
+                "matchup": "ATL @ ORL",
+                "live_value": 7,
+                "status": "hit"
+            }
+        ],
+        "time": "2025-04-16T01:35:25.860990",
+        "result": "LOST",
+        "actual_payout": 0,
+        "evaluated": true
+    },
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "henry.l.tran-1@ou.edu_1744767426918_faeef930-78ca-4b0e-92c5-711a914af801",
+        "entry_type": "Power Play",
+        "entry_amount": 15.0,
+        "potential_payout": 562.5,
+        "entries": [
+            {
+                "player_id": 203110,
+                "player_name": "Draymond Green",
+                "team_tri_code": "GSW",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/203110.png",
+                "line_category": "REB + AST",
+                "projected_line": 11.5,
+                "users_pick": "Over",
+                "matchup": "MEM @ GSW",
+                "live_value": 16,
+                "status": "hit"
+            },
+            {
+                "player_id": 201939,
+                "player_name": "Stephen Curry",
+                "team_tri_code": "GSW",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/201939.png",
+                "line_category": "PTS",
+                "projected_line": 24.5,
+                "users_pick": "Over",
+                "matchup": "MEM @ GSW",
+                "live_value": 37,
+                "status": "hit"
+            },
+            {
+                "player_id": 1630583,
+                "player_name": "Santi Aldama",
+                "team_tri_code": "MEM",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630583.png",
+                "line_category": "PTS",
+                "projected_line": 12.5,
+                "users_pick": "Under",
+                "matchup": "MEM @ GSW",
+                "live_value": 14,
+                "status": "miss"
+            },
+            {
+                "player_id": 202710,
+                "player_name": "Jimmy Butler III",
+                "team_tri_code": "GSW",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/202710.png",
+                "line_category": "BLKS + STLS",
+                "projected_line": 1.5,
+                "users_pick": "Over",
+                "matchup": "MEM @ GSW",
+                "live_value": 3,
+                "status": "hit"
+            },
+            {
+                "player_id": 1629630,
+                "player_name": "Ja Morant",
+                "team_tri_code": "MEM",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629630.png",
+                "line_category": "PTS + REB + AST",
+                "projected_line": 34.5,
+                "users_pick": "Over",
+                "matchup": "MEM @ GSW",
+                "live_value": 28,
+                "status": "miss"
+            },
+            {
+                "player_id": 1630217,
+                "player_name": "Desmond Bane",
+                "team_tri_code": "MEM",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630217.png",
+                "line_category": "3PM",
+                "projected_line": 2.5,
+                "users_pick": "Over",
+                "matchup": "MEM @ GSW",
+                "live_value": 5,
+                "status": "hit"
+            }
+        ],
+        "time": "2025-04-16T01:37:06.921669",
+        "result": "LOST",
+        "actual_payout": 0,
+        "evaluated": true
     }
 ]

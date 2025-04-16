@@ -100,20 +100,6 @@ function Dashboard() {
     fetchUpdatedUser();
   }, []);
 
-  // Function to Convert ISO Time to Game Clock Format (MM:SS)
-  const gameClockConverter = (isoTime) => {
-    if (!isoTime) return "00:00";
-
-    const time = isoTime.match(/PT(\d+)M(\d+(\.\d*)?)S/);
-    if (!time) return isoTime;
-
-    // Getting the Minutes and Seconds from the ISO Time
-    let minutes = time[1].padStart(2, "0");
-    let seconds = Math.floor(parseFloat(time[2])).toString().padStart(2, "0");
-
-    return `${minutes}:${seconds}`;
-  };
-
   // Function to Handle the Category Tab Change (NBA, NFL, VAL)
   const handleCategoryTabChange = (event, newValue) => {
     setActiveCategoryTab(newValue);
@@ -576,7 +562,7 @@ function Dashboard() {
                         borderRadius: "1rem",
                       }}
                       onClick={() => {
-                        if (game.gameStatus === 1) {
+                        if (game.gameStatus === 2) {
                           setnbaselectedGame(game);
                           setShowBettingLines(true);
                         }
@@ -592,16 +578,6 @@ function Dashboard() {
                         >
                           {game.gameStatusText}
                         </Typography>
-
-                        {game.gameStatus === 2 && (
-                          <Typography
-                            sx={{ fontFamily: "monospace" }}
-                            className="text-base md:text-xl font-mono text-right"
-                            fontSize={20}
-                          >
-                            {gameClockConverter(game.gameClock)}
-                          </Typography>
-                        )}
                       </div>
 
                       {/* Teams Container */}

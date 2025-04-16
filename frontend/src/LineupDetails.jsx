@@ -291,11 +291,14 @@ const LineupDetails = ({ lineup, onClose, liveGames }) => {
                                         marginRight: "1rem",
                                         border: `2px solid ${
                                             entry.status === "DNP" ? "gray" :
-                                            entry.live_value == null ? "white" :
-                                            entry.status === "hit" ? "green" :
-                                            entry.status === "miss" ? "red" :
-                                            "white"
-                                          }`,
+                                            (lineup.result === "WON" || lineup.result === "LOST")
+                                              ? entry.status === "hit"
+                                                ? "green"
+                                                : entry.status === "miss"
+                                                ? "red"
+                                                : "white"
+                                              : "white"
+                                        }`,
                                         filter: entry.status === "DNP" ? "grayscale(50%) brightness(80%)" : "none",
                                         opacity: entry.status === "DNP" ? 0.90 : 1,
                                     }}
@@ -360,15 +363,14 @@ const LineupDetails = ({ lineup, onClose, liveGames }) => {
                                                 width: entry.status === "DNP" ? "100%" : `${percent}%`,
                                                 height: "100%",
                                                 backgroundColor:
-                                                entry.status === "DNP"
-                                                    ? "#3f3f3f"
-                                                    : entry.live_value == null
-                                                    ? "transparent"
-                                                    : entry.status === "hit"
-                                                    ? "green"
-                                                    : entry.status === "miss"
-                                                    ? "red"
-                                                    : "rgba(255, 255, 255, 0.7)",
+                                                    entry.status === "DNP" ? "#3f3f3f" :
+                                                    (lineup.result === "WON" || lineup.result === "LOST")
+                                                        ? entry.status === "hit"
+                                                        ? "green"
+                                                        : entry.status === "miss"
+                                                        ? "red"
+                                                        : "white"
+                                                        : "white",
                                                 display: "flex",
                                                 justifyContent: "center",
                                                 alignItems: "center",
@@ -454,13 +456,13 @@ const LineupDetails = ({ lineup, onClose, liveGames }) => {
                                                     transform: "translateX(-90%)",
                                                     color: entry.status === "DNP"
                                                         ? "#3f3f3f"
-                                                        : entry.live_value == null
-                                                        ? "white"
-                                                        : entry.status === "hit"
-                                                        ? "green"
-                                                        : entry.status === "miss"
-                                                        ? "red"
-                                                        : "white",
+                                                        : (lineup.result === "WON" || lineup.result === "LOST")
+                                                            ? entry.status === "hit"
+                                                            ? "green"
+                                                            : entry.status === "miss"
+                                                            ? "red"
+                                                            : "white"
+                                                            : "white",
                                                     fontWeight: "bold",
                                                 }}>
                                                     {entry.live_value ?? "-"}

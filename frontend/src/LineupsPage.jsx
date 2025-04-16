@@ -489,10 +489,13 @@ const LineupBox = ({ lineup, onClick }) => {
                                         width: "5rem",
                                         border: `2px solid ${
                                             entry.status === "DNP" ? "gray" :
-                                            entry.status === "hit" ? "green" :
-                                            entry.status === "miss" ? "red" :
-                                            entry.live_value == null ? "white" :
-                                            "white"
+                                            (lineup.result === "WON" || lineup.result === "LOST")
+                                              ? entry.status === "hit"
+                                                ? "green"
+                                                : entry.status === "miss"
+                                                ? "red"
+                                                : "white"
+                                              : "white"
                                         }`,
                                         borderRadius: "10rem",
                                         objectFit: "cover",
