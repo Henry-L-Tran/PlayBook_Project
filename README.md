@@ -67,6 +67,12 @@ Install frontend dependencies:
 npm install
 ```
 
+If this throws any errors, try installing the dependencies with this extension of it:
+```
+npm install --legacy-peer-deps
+```
+
+
 Start the development server:
 
 ```bash
