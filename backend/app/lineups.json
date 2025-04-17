@@ -1118,5 +1118,67 @@
         "result": "WON",
         "actual_payout": 50.0,
         "evaluated": true
+    },
+    {
+        "email": "thien.m.nguyen-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "thien.m.nguyen-1@ou.edu_1744880167953_0789975d-8e62-4150-a056-10b6fdc8f128",
+        "entry_type": "Flex Play",
+        "entry_amount": 5.0,
+        "potential_payout": 25.0,
+        "entries": [
+            {
+                "player_id": 203952,
+                "player_name": "Andrew Wiggins",
+                "team_tri_code": "MIA",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/203952.png",
+                "line_category": "PTS",
+                "projected_line": 18.0,
+                "users_pick": "Over",
+                "matchup": "MIA @ CHI",
+                "live_value": 20,
+                "status": "hit"
+            },
+            {
+                "player_id": 1631207,
+                "player_name": "Dalen Terry",
+                "team_tri_code": "CHI",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1631207.png",
+                "line_category": "PTS",
+                "projected_line": 4.5,
+                "users_pick": "Under",
+                "matchup": "MIA @ CHI",
+                "live_value": 2,
+                "status": "hit"
+            },
+            {
+                "player_id": 1630245,
+                "player_name": "Ayo Dosunmu",
+                "team_tri_code": "CHI",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630245.png",
+                "line_category": "PTS",
+                "projected_line": 12.5,
+                "users_pick": "Under",
+                "matchup": "MIA @ CHI",
+                "live_value": "DNP",
+                "status": "DNP"
+            },
+            {
+                "player_id": 1631170,
+                "player_name": "Jaime Jaquez Jr.",
+                "team_tri_code": "MIA",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1631170.png",
+                "line_category": "PTS",
+                "projected_line": 8.5,
+                "users_pick": "Under",
+                "matchup": "MIA @ CHI",
+                "live_value": 0,
+                "status": "hit"
+            }
+        ],
+        "time": "2025-04-17T08:56:07.956483",
+        "result": "WON",
+        "actual_payout": 12.5,
+        "evaluated": true
     }
 ]

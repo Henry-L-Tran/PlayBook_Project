@@ -1,6 +1,10 @@
 import React from "react";
 import { Box, Typography, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import TeamBanner from "./TeamBanner";
+import { valorantTeamLogo } from "./TeamColor";
+import ValorantTeamBanner from "./ValorantTeamBanner";
+
 
 const ValorantLinesPopup = ({
   selectedMatch,
@@ -16,6 +20,26 @@ const ValorantLinesPopup = ({
   setShowBettingLines,
   lineCategoryOptions,
 }) => {
+
+  const TeamBanner = ({ selectedMatch }) => {
+    return (
+      <Box>
+        <Box
+          component="img"
+          src={selectedMatch?.team1_logo}
+          alt={selectedMatch?.team1}
+          sx={{ width: "60px", height: "60px", objectFit: "contain", mb: 1 }}
+        />
+        <Typography sx={{ color: "white" }}>VS</Typography>
+        <Box
+          component="img"
+          src={selectedMatch?.team2_logo}
+          alt={selectedMatch?.team2}
+          sx={{ width: "60px", height: "60px", objectFit: "contain", mt: 1 }}
+        />
+      </Box>
+    );
+  };
 
 // Function to Round the Player's Line
   const lineRounding = (line) => {
@@ -89,84 +113,223 @@ const ValorantLinesPopup = ({
           ))}
         </Box>
 
+        {/* All Player Squares Main Box/Section */}
         <Box
           sx={{
             display: "flex",
             justifyContent: "space-between",
-            gap: "2rem",
-            flexWrap: "wrap",
+            padding: "1.5vh 3vw",
+            width: "100%",
+            gap: "1.5vw",
           }}
         >
-          {[{ label: selectedMatch.team1, players: awayPlayers }, { label: selectedMatch.team2, players: homePlayers }].map(
-            (side, idx) => (
-              <Box key={idx} sx={{ flex: 1, minWidth: "300px" }}>
-                <Typography
-                  variant="h6"
-                  align="center"
-                  sx={{ color: "white", mb: 2 }}
-                >
-                  {side.label}
-                </Typography>
+          {/* Away Team Players Column */}
+          <Box sx={{ flex: 1, paddingBottom: "1.8vh" }}>
+            <Typography
+              variant="h6"
+              sx={{
+                textAlign: "center",
+                width: "40%",
+                fontFamily: "monospace",
+                marginBottom: "1.2vh",
+                marginLeft: "28%",
+                color: "white"
+              }}
+            >
+              {selectedMatch.team1}
+            </Typography>
 
-                {side.players?.map((player, index) => (
-                  <Box
-                    key={index}
-                    sx={{
-                      border: selectedSquare(player)
-                        ? "2px solid green"
-                        : "2px solid gray",
-                      borderRadius: "1rem",
-                      backgroundColor: "rgba(255,255,255,0.05)",
-                      padding: "1rem",
-                      mb: 2,
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
+            {awayPlayers.map((player, index) => (
+              <Box
+                key={index}
+                sx={{
+                  border: selectedSquare(player) ? "2px solid green" : "2px solid gray",
+                  borderRadius: "1rem",
+                  backgroundColor: "rgba(0, 0, 0, 0.5)",
+                  marginBottom: "1.3vh",
+                  width: "14vw",
+                  height: "25vh",
+                  overflow: "hidden",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  marginLeft: "5vw",
+                }}
+              >
+                <Box sx={{ padding: "0.5rem" }}>
+                  <Box sx={{ display: "flex", justifyContent: "center", marginBottom: "0.8vh" }}>
+                    <img
+                      src={valorantTeamLogo[player.org]?.logo || valorantTeamLogo["N/A"]}
+                      alt={player.org}
+                      style={{ width: "6.5vh", paddingTop: "10%" }}
+                    />
+                  </Box>
+                  <Typography sx={{ fontFamily: "monospace", fontSize: "1.2rem", textAlign: "center", color: "white" }}>
+                    {player.player}
+                  </Typography>
+                  <Typography
+                    sx={{ fontFamily: "monospace", fontSize: "0.8rem", textAlign: "center", color: "gray" }}
+                  >
+                    vs {selectedMatch.team2}
+                  </Typography>
+                  <Box sx={{ display: "flex", justifyContent: "center" }}>
+                    <Typography
+                      sx={{ fontFamily: "monospace", fontSize: "0.8vw", fontWeight: "bold", marginTop: "0.6vh", color: "white" }}
+                    >
+                      {lineRounding(getStatCategory(player))}
+                    </Typography>
+                    <Typography
+                      sx={{ fontFamily: "monospace", fontSize: "0.6vw", marginTop: "1.1vh", marginLeft: "0.5rem", color: "gray" }}
+                    >
+                      Kills
+                    </Typography>
+                  </Box>
+                </Box>
+
+                <Box sx={{ display: "flex", borderTop: "1px solid gray", width: "100%" }}>
+                  <button
+                    onClick={() => handleUserLines(player, "Under")}
+                    style={{
+                      flex: 1,
+                      backgroundColor: selectedBetButton(player, "Under") ? "green" : "transparent",
+                      color: "white",
+                      padding: "0.5rem",
+                      fontFamily: "monospace",
+                      border: "none",
+                      borderRight: "1px solid gray",
+                      cursor: "pointer",
+                      borderRadius: "0 0 0 1rem",
                     }}
                   >
-                    <Typography sx={{ color: "white", fontSize: "1.1rem" }}>
-                      {player.player}
-                    </Typography>
-                    <Typography sx={{ color: "gray", fontSize: "0.9rem" }}>
-                      {lineRounding(getStatCategory(player))} Kills
-                    </Typography>
-
-                    <Box sx={{ display: "flex", mt: 1, width: "100%" }}>
-                      <button
-                        onClick={() => handleUserLines(player, "Under")}
-                        style={{
-                          flex: 1,
-                          padding: "0.5rem",
-                          backgroundColor: selectedBetButton(player, "Under") ? "green" : "transparent",
-                          color: "white",
-                          border: "1px solid gray",
-                          borderRight: "none",
-                          borderRadius: "0 0 0 10px",
-                          cursor: "pointer",
-                        }}
-                      >
-                        ↓ Under
-                      </button>
-                      <button
-                        onClick={() => handleUserLines(player, "Over")}
-                        style={{
-                          flex: 1,
-                          padding: "0.5rem",
-                          backgroundColor: selectedBetButton(player, "Over") ? "green" : "transparent",
-                          color: "white",
-                          border: "1px solid gray",
-                          borderRadius: "0 0 10px 0",
-                          cursor: "pointer",
-                        }}
-                      >
-                        ↑ Over
-                      </button>
-                    </Box>
-                  </Box>
-                ))}
+                    ↓ Under
+                  </button>
+                  <button
+                    onClick={() => handleUserLines(player, "Over")}
+                    style={{
+                      flex: 1,
+                      backgroundColor: selectedBetButton(player, "Over") ? "green" : "transparent",
+                      color: "white",
+                      padding: "0.5rem",
+                      fontFamily: "monospace",
+                      border: "none",
+                      cursor: "pointer",
+                      borderRadius: "0 0 1rem 0",
+                    }}
+                  >
+                    ↑ Over
+                  </button>
+                </Box>
               </Box>
-            )
-          )}
+            ))}
+          </Box>
+
+          <Box>
+            <ValorantTeamBanner
+              homeTeam={selectedMatch.team2}
+              awayTeam={selectedMatch.team1}
+              logos={valorantTeamLogo}
+            />
+          </Box>
+
+          {/* Home Team Players Column */}
+          <Box sx={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
+            <Typography
+              variant="h6"
+              sx={{
+                textAlign: "center",
+                width: "40%",
+                fontFamily: "monospace",
+                marginBottom: "1.2vh",
+                marginRight: "27%",
+                color: "white"
+              }}
+            >
+              {selectedMatch.team2}
+            </Typography>
+
+            {homePlayers.map((player, index) => (
+              <Box
+                key={index}
+                sx={{
+                  border: selectedSquare(player) ? "2px solid green" : "2px solid gray",
+                  borderRadius: "1rem",
+                  backgroundColor: "rgba(0, 0, 0, 0.5)",
+                  marginBottom: "1.3vh",
+                  width: "14vw",
+                  height: "25vh",
+                  overflow: "hidden",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  marginRight: "5vw",
+                }}
+              >
+                <Box sx={{ padding: "0.5rem" }}>
+                  <Box sx={{ display: "flex", justifyContent: "center", marginBottom: "0.8vh" }}>
+                    <img
+                      src={valorantTeamLogo[player.org]?.logo || valorantTeamLogo["N/A"]}
+                      alt={player.org}
+                      style={{ width: "6.5vh", paddingTop: "10%",}}
+                    />
+                  </Box>
+                  <Typography sx={{ fontFamily: "monospace", textAlign: "center", color: "white" }}>
+                    {player.player}
+                  </Typography>
+                  <Typography
+                    sx={{ fontFamily: "monospace", fontSize: "0.8rem", textAlign: "center", color: "gray" }}
+                  >
+                    vs {selectedMatch.team1}
+                  </Typography>
+                  <Box sx={{ display: "flex", justifyContent: "center" }}>
+                    <Typography
+                      sx={{ fontFamily: "monospace", fontSize: "0.8vw", fontWeight: "bold", marginTop: "0.6vh", color: "white" }}
+                    >
+                      {lineRounding(getStatCategory(player))}
+                    </Typography>
+                    <Typography
+                      sx={{ fontFamily: "monospace", fontSize: "0.6vw", marginTop: "1.1vh", marginLeft: "0.5rem", color: "gray" }}
+                    >
+                      Kills
+                    </Typography>
+                  </Box>
+                </Box>
+
+                <Box sx={{ display: "flex", borderTop: "1px solid gray", width: "100%" }}>
+                  <button
+                    onClick={() => handleUserLines(player, "Under")}
+                    style={{
+                      flex: 1,
+                      backgroundColor: selectedBetButton(player, "Under") ? "green" : "transparent",
+                      color: "white",
+                      padding: "0.5rem",
+                      fontFamily: "monospace",
+                      border: "none",
+                      borderRight: "1px solid gray",
+                      cursor: "pointer",
+                      borderRadius: "0 0 0 1rem",
+                    }}
+                  >
+                    ↓ Under
+                  </button>
+                  <button
+                    onClick={() => handleUserLines(player, "Over")}
+                    style={{
+                      flex: 1,
+                      backgroundColor: selectedBetButton(player, "Over") ? "green" : "transparent",
+                      color: "white",
+                      padding: "0.5rem",
+                      fontFamily: "monospace",
+                      border: "none",
+                      cursor: "pointer",
+                      borderRadius: "0 0 1rem 0",
+                    }}
+                  >
+                    ↑ Over
+                  </button>
+                </Box>
+              </Box>
+            ))}
+          </Box>
         </Box>
       </Box>
     </Box>

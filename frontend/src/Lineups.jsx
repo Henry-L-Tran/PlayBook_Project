@@ -4,7 +4,7 @@ import { useState } from 'react';
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { calculatePayoutMultiplier, showPayoutMultipliers } from './payoutMultiplier';  
-
+import { valorantTeamLogo } from "./TeamColor";
 
 // Lineups Component For Lines Page/Popup
 function Lineups({
@@ -53,7 +53,6 @@ function Lineups({
                     }}
                 >
                     {lineup.map((entry, index) => (
-
                         // Player Pictures
                         <img
                             key={index}
