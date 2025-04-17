@@ -14,15 +14,29 @@ router = APIRouter()
 
 ##### Models #####
 
+# Model for Both NBA and VAL Lineup Entries
 class LineupEntry(BaseModel):
-    player_id: int
+
+    # NBA Parameter
+    player_id: int | None = None
+    # BOTH Parameters
     player_name: str
-    team_tri_code: str
+    # NBA Parameter
+    team_tri_code: str | None = None
+    # VAL Parameter
+    player_team: str | None = None
+    # BOTH Parameters
     player_picture: str
+    # BOTH Parameters
     line_category: str
+    # BOTH Parameters
     projected_line: float
+    # BOTH Parameters
     users_pick: str
+    # BOTH Parameters
     matchup: str = "N/A"
+    # VAL Parameter
+    match_id: str | None = None
 
 class ValLineupEntry(BaseModel):
     player_name: str

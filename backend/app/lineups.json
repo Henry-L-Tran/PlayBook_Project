@@ -998,7 +998,7 @@
                 "projected_line": 18.0,
                 "users_pick": "Over",
                 "matchup": "MIA @ CHI",
-                "live_value": 12,
+                "live_value": 15,
                 "status": "miss"
             },
             {
@@ -1010,7 +1010,7 @@
                 "projected_line": 18.0,
                 "users_pick": "Over",
                 "matchup": "MIA @ CHI",
-                "live_value": 11,
+                "live_value": 15,
                 "status": "miss"
             },
             {
@@ -1022,8 +1022,8 @@
                 "projected_line": 14.5,
                 "users_pick": "Over",
                 "matchup": "MIA @ CHI",
-                "live_value": 13,
-                "status": "miss"
+                "live_value": 23,
+                "status": "hit"
             }
         ],
         "time": "2025-04-16T23:15:46.712741"

@@ -1387,7 +1387,10 @@ function Dashboard() {
               }}
             >
               {/* This is where the new Valorant component is rendered */}
-              <Valorant />
+              <Valorant
+                lineup={lineup}
+                setLineup={setLineup}
+              />
             </Box>
           )}
 

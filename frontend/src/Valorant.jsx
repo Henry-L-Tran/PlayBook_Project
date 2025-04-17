@@ -10,7 +10,7 @@ import SearchBar from "./SearchBar";
 import CenteredModal from "./utilities/CenteredModal";
 import ValorantLinesPopup from "./ValorantLinesPopup";
 
-function Valorant() {
+function Valorant({ lineup, setLineup }) {
   // State for Valorant match data
   const [liveMatches, setLiveMatches] = useState([]);
   const [upcomingMatches, setUpcomingMatches] = useState([]);
@@ -27,19 +27,11 @@ function Valorant() {
   // New state to store kills data for the selected match (fetched from /VALROANT/player_kills)
   const [selectedMatchKills, setSelectedMatchKills] = useState(null);
 
-  // States and variables for the betting lines UI (used if match is not completed)
-  const [valLiveGames, setValLiveGames] = useState({
-    gameData: [],
-  });
   const [valSelectedGame, setvalselectedGame] = useState(null);
   const [valPlayerStats, setvalPlayerStats] = useState([]);
-  const [viewLineCategory, setViewLineCategory] = useState("Kills");
-  const lineCategoryOptions = [
-    "Maps 1-2 Kills",
-  ];
-  const [lineup, setLineup] = useState({});
+  const [viewLineCategory, setViewLineCategory] = useState("Maps 1-2 Kills");
+  const lineCategoryOptions = ["Maps 1-2 Kills"];
   const currentLineup = lineup[viewLineCategory] || [];
-  const [showLineupBar, setShowLineupBar] = useState(false);
   const [entryType, setEntryType] = useState("");
   const [entryAmount, setEntryAmount] = useState("");
   const [currUser, setCurrUser] = useState(null);
@@ -165,47 +157,32 @@ function Valorant() {
 
     // Handles the Select/Deselect of Players Over/Under
     const handleUserLines = (player, usersPick) => {
-  
-      setLineup((prevLines) => {
-        const categoryLineup = prevLines[viewLineCategory] || [];
-  
-        // Prevents Duplicate Players in the Same Lineup
-        const noDuplicatePlayers = Object.values(prevLines).flat();
-        const playerAlreadyExists = noDuplicatePlayers.find(
-          (entry) => entry.player_name === player.player
-        );
-  
-        if (
-          playerAlreadyExists &&
-          playerAlreadyExists.line_category !== viewLineCategory
-        ) {
-          console.log("Cannot use the same player more than once in a lineup.");
-          return prevLines;
-        }
-  
+      setLineup((prevLineup) => {
+        const categoryLineup = prevLineup[viewLineCategory] || [];
+    
         const existing = categoryLineup.find(
           (entry) => entry.player_name === player.player
         );
-  
-        let newCategoryLineup;
-  
+    
+        let updatedCategory;
+    
         if (existing) {
           if (existing.users_pick === usersPick) {
-            newCategoryLineup = categoryLineup.filter(
+            updatedCategory = categoryLineup.filter(
               (entry) => entry.player_name !== player.player
             );
           } 
           
           else {
-            // If Player is Selected but Over/Under is Changed, Update the Existing Entry
-            newCategoryLineup = categoryLineup.map((entry) =>
+            updatedCategory = categoryLineup.map((entry) =>
               entry.player_name === player.player
                 ? { ...entry, users_pick: usersPick }
                 : entry
             );
           }
-        } else {
-          // If Player is Not Selected, Add the Player to the Lineup
+        } 
+        
+        else {
           const newEntry = {
             player_id: null,
             player_name: player.player,
@@ -216,13 +193,13 @@ function Valorant() {
             users_pick: usersPick,
             matchup: `${selectedMatch?.team1} @ ${selectedMatch?.team2}`,
           };
-  
-          newCategoryLineup = [...categoryLineup, newEntry];
+    
+          updatedCategory = [...categoryLineup, newEntry];
         }
-  
+    
         return {
-          ...prevLines,
-          [viewLineCategory]: newCategoryLineup,
+          ...prevLineup,
+          [viewLineCategory]: updatedCategory,
         };
       });
     };
@@ -303,14 +280,14 @@ function Valorant() {
   
     // Function to Highlight the Selected Over/Under Buttons Green
     const selectedBetButton = (player, pick) => {
-      return currentLineup.some(
-        (entry) => entry.player_name === player.player && entry.users_pick === pick
+      return (lineup[viewLineCategory] || []).some((entry) => entry.player_name === player.player && entry.users_pick === pick
       );
     };
   
     // Function to Highlight the Selected Player Card Green
-    const selectedSquare = (player) => {
-      return currentLineup.some((entry) => entry.player_name === player.player);
+    const selectedSquare = (player) => {return (lineup[viewLineCategory] || []).some(
+        (entry) => entry.player_name === player.player
+      );
     };
   
     // Function to Update the Lineup with the Selected Player's Pick in the Lineup Builder Popup
@@ -324,10 +301,10 @@ function Valorant() {
         const newPick = {};
   
         for (const category in prevLines) {
-          const categoryLineup = prevLines[category];
+          const lineup = prevLines[category];
   
           if (pick === "Remove") {
-            const filteredLineup = categoryLineup.filter(
+            const filteredLineup = lineup.filter(
               (entry) => entry.player !== player
             );
             if (filteredLineup.length > 0) {
