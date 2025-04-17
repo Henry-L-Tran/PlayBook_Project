@@ -3,26 +3,26 @@
     "gameData": [
         {
             "gameId": "0052400111",
-            "gameStatus": 1,
-            "gameStatusText": "7:30 pm ET",
-            "gameClock": "",
+            "gameStatus": 2,
+            "gameStatusText": "Half",
+            "gameClock": "PT00M00.00S",
             "homeTeam": {
                 "teamId": 1610612741,
                 "teamName": "Bulls",
                 "teamTriCode": "CHI",
                 "wins": 0,
                 "losses": 0,
-                "score": 0,
+                "score": 47,
                 "periods": [
                     {
                         "period": 1,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 28
                     },
                     {
                         "period": 2,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 19
                     },
                     {
                         "period": 3,
@@ -42,17 +42,17 @@
                 "teamTriCode": "MIA",
                 "wins": 0,
                 "losses": 0,
-                "score": 0,
+                "score": 71,
                 "periods": [
                     {
                         "period": 1,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 39
                     },
                     {
                         "period": 2,
                         "periodType": "REGULAR",
-                        "score": 0
+                        "score": 32
                     },
                     {
                         "period": 3,

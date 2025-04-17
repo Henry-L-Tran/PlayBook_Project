@@ -112,7 +112,7 @@ const ValorantLinesPopup = ({
                   <Box
                     key={index}
                     sx={{
-                      border: selectedSquare(player.player)
+                      border: selectedSquare(player)
                         ? "2px solid green"
                         : "2px solid gray",
                       borderRadius: "1rem",
@@ -137,12 +137,7 @@ const ValorantLinesPopup = ({
                         style={{
                           flex: 1,
                           padding: "0.5rem",
-                          backgroundColor: selectedBetButton(
-                            player.player,
-                            "Under"
-                          )
-                            ? "green"
-                            : "transparent",
+                          backgroundColor: selectedBetButton(player, "Under") ? "green" : "transparent",
                           color: "white",
                           border: "1px solid gray",
                           borderRight: "none",
@@ -157,12 +152,7 @@ const ValorantLinesPopup = ({
                         style={{
                           flex: 1,
                           padding: "0.5rem",
-                          backgroundColor: selectedBetButton(
-                            player.player,
-                            "Over"
-                          )
-                            ? "green"
-                            : "transparent",
+                          backgroundColor: selectedBetButton(player, "Over") ? "green" : "transparent",
                           color: "white",
                           border: "1px solid gray",
                           borderRadius: "0 0 10px 0",

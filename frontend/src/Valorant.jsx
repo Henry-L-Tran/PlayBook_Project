@@ -172,7 +172,7 @@ function Valorant() {
         // Prevents Duplicate Players in the Same Lineup
         const noDuplicatePlayers = Object.values(prevLines).flat();
         const playerAlreadyExists = noDuplicatePlayers.find(
-          (entry) => entry.player === player
+          (entry) => entry.player_name === player.player
         );
   
         if (
@@ -184,7 +184,7 @@ function Valorant() {
         }
   
         const existing = categoryLineup.find(
-          (entry) => entry.player === player
+          (entry) => entry.player_name === player.player
         );
   
         let newCategoryLineup;
@@ -192,12 +192,14 @@ function Valorant() {
         if (existing) {
           if (existing.users_pick === usersPick) {
             newCategoryLineup = categoryLineup.filter(
-              (entry) => entry.player_id !== player
+              (entry) => entry.player_name !== player.player
             );
-          } else {
+          } 
+          
+          else {
             // If Player is Selected but Over/Under is Changed, Update the Existing Entry
             newCategoryLineup = categoryLineup.map((entry) =>
-              entry.player_id === player
+              entry.player_name === player.player
                 ? { ...entry, users_pick: usersPick }
                 : entry
             );
@@ -205,14 +207,14 @@ function Valorant() {
         } else {
           // If Player is Not Selected, Add the Player to the Lineup
           const newEntry = {
-            player_id: player.player,
-            player_name: player.playerName,
-            team_tri_code: player.teamTriCode,
-            player_picture: player.playerPicture,
+            player_id: null,
+            player_name: player.player,
+            team_tri_code: player.org || null,
+            player_picture: null,
             line_category: viewLineCategory,
             projected_line: parseFloat(getStatCategory(player)),
             users_pick: usersPick,
-            matchup: `${valSelectedGame.awayTeam.teamTriCode} @ ${valSelectedGame.homeTeam.teamTriCode}`,
+            matchup: `${selectedMatch?.team1} @ ${selectedMatch?.team2}`,
           };
   
           newCategoryLineup = [...categoryLineup, newEntry];
@@ -302,13 +304,13 @@ function Valorant() {
     // Function to Highlight the Selected Over/Under Buttons Green
     const selectedBetButton = (player, pick) => {
       return currentLineup.some(
-        (entry) => entry.player_id === player && entry.users_pick === pick
+        (entry) => entry.player_name === player.player && entry.users_pick === pick
       );
     };
   
     // Function to Highlight the Selected Player Card Green
     const selectedSquare = (player) => {
-      return currentLineup.some((entry) => entry.player_id === player);
+      return currentLineup.some((entry) => entry.player_name === player.player);
     };
   
     // Function to Update the Lineup with the Selected Player's Pick in the Lineup Builder Popup
@@ -326,14 +328,14 @@ function Valorant() {
   
           if (pick === "Remove") {
             const filteredLineup = categoryLineup.filter(
-              (entry) => entry.player_id !== player
+              (entry) => entry.player !== player
             );
             if (filteredLineup.length > 0) {
               newPick[category] = filteredLineup;
             }
           } else {
             newPick[category] = prevLines[category].map((entry) =>
-              entry.player_id === player
+              entry.player === player
                 ? { ...entry, users_pick: pick }
                 : entry
             );
@@ -641,6 +643,7 @@ function Valorant() {
                   key={index}
                   onClick={() => {
                     setSelectedMatch(match);
+                    setvalselectedGame(match);
                     setShowBettingLines(true);
                   }}
                   sx={{
