@@ -947,85 +947,61 @@
     },
     {
         "email": "henry.l.tran-1@ou.edu",
-        "category": "NBA",
-        "entry_id": "henry.l.tran-1@ou.edu_1744845346678_7c9bdcf7-d0f7-4be4-aadc-3449ed409d71",
+        "category": "VAL",
+        "entry_id": "henry.l.tran-1@ou.edu_1744857368174_360c7677-6ee0-4a1b-8fda-cf5cc47712fc",
         "entry_type": "Flex Play",
-        "entry_amount": 20.0,
-        "potential_payout": 500.0,
+        "entry_amount": 5.0,
+        "potential_payout": 25.0,
         "entries": [
-            {
-                "player_id": 1627734,
-                "player_name": "Domantas Sabonis",
-                "team_tri_code": "SAC",
-                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1627734.png",
-                "line_category": "PTS",
-                "projected_line": 19.0,
-                "users_pick": "Under",
-                "matchup": "DAL @ SAC",
-                "live_value": null,
-                "status": "pending"
-            },
-            {
-                "player_id": 201942,
-                "player_name": "DeMar DeRozan",
-                "team_tri_code": "SAC",
-                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/201942.png",
-                "line_category": "PTS",
-                "projected_line": 22.0,
-                "users_pick": "Over",
-                "matchup": "DAL @ SAC",
-                "live_value": null,
-                "status": "pending"
-            },
             {
                 "player_id": 203076,
                 "player_name": "Anthony Davis",
                 "team_tri_code": "DAL",
+                "player_team": null,
                 "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/203076.png",
                 "line_category": "PTS",
                 "projected_line": 24.5,
                 "users_pick": "Over",
                 "matchup": "DAL @ SAC",
-                "live_value": null,
-                "status": "pending"
+                "match_id": null
             },
             {
-                "player_id": 203952,
-                "player_name": "Andrew Wiggins",
-                "team_tri_code": "MIA",
-                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/203952.png",
+                "player_id": 201942,
+                "player_name": "DeMar DeRozan",
+                "team_tri_code": "SAC",
+                "player_team": null,
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/201942.png",
                 "line_category": "PTS",
-                "projected_line": 18.0,
-                "users_pick": "Over",
-                "matchup": "MIA @ CHI",
-                "live_value": 15,
-                "status": "miss"
+                "projected_line": 22.0,
+                "users_pick": "Under",
+                "matchup": "DAL @ SAC",
+                "match_id": null
             },
             {
-                "player_id": 1628389,
-                "player_name": "Bam Adebayo",
-                "team_tri_code": "MIA",
-                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1628389.png",
-                "line_category": "PTS",
-                "projected_line": 18.0,
+                "player_id": null,
+                "player_name": "TvirusLuke",
+                "team_tri_code": "Titan Esports Club",
+                "player_team": null,
+                "player_picture": null,
+                "line_category": "Maps 1-2 Kills",
+                "projected_line": 35.6,
                 "users_pick": "Over",
-                "matchup": "MIA @ CHI",
-                "live_value": 15,
-                "status": "miss"
+                "matchup": "N/A",
+                "match_id": null
             },
             {
-                "player_id": 1630581,
-                "player_name": "Josh Giddey",
-                "team_tri_code": "CHI",
-                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630581.png",
-                "line_category": "PTS",
-                "projected_line": 14.5,
-                "users_pick": "Over",
-                "matchup": "MIA @ CHI",
-                "live_value": 23,
-                "status": "hit"
+                "player_id": null,
+                "player_name": "Lysoar",
+                "team_tri_code": "Wolves Esports",
+                "player_team": null,
+                "player_picture": null,
+                "line_category": "Maps 1-2 Kills",
+                "projected_line": 28.0,
+                "users_pick": "Under",
+                "matchup": "N/A",
+                "match_id": null
             }
         ],
-        "time": "2025-04-16T23:15:46.712741"
+        "time": "2025-04-17T02:36:08.181618"
     }
 ]

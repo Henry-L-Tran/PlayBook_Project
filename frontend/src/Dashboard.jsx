@@ -590,7 +590,7 @@ function Dashboard() {
                         borderRadius: "1rem",
                       }}
                       onClick={() => {
-                        if (game.gameStatus === 1) {
+                        if (game.gameStatus === 2) {
                           setnbaselectedGame(game);
                           setShowBettingLines(true);
                         }
