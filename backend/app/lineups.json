@@ -962,8 +962,8 @@
                 "projected_line": 19.0,
                 "users_pick": "Under",
                 "matchup": "DAL @ SAC",
-                "live_value": null,
-                "status": "pending"
+                "live_value": 11,
+                "status": "hit"
             },
             {
                 "player_id": 201942,
@@ -974,8 +974,8 @@
                 "projected_line": 22.0,
                 "users_pick": "Over",
                 "matchup": "DAL @ SAC",
-                "live_value": null,
-                "status": "pending"
+                "live_value": 33,
+                "status": "hit"
             },
             {
                 "player_id": 203076,
@@ -986,8 +986,8 @@
                 "projected_line": 24.5,
                 "users_pick": "Over",
                 "matchup": "DAL @ SAC",
-                "live_value": null,
-                "status": "pending"
+                "live_value": 27,
+                "status": "hit"
             },
             {
                 "player_id": 203952,
@@ -998,8 +998,8 @@
                 "projected_line": 18.0,
                 "users_pick": "Over",
                 "matchup": "MIA @ CHI",
-                "live_value": 12,
-                "status": "miss"
+                "live_value": 20,
+                "status": "hit"
             },
             {
                 "player_id": 1628389,
@@ -1010,7 +1010,7 @@
                 "projected_line": 18.0,
                 "users_pick": "Over",
                 "matchup": "MIA @ CHI",
-                "live_value": 11,
+                "live_value": 15,
                 "status": "miss"
             },
             {
@@ -1022,10 +1022,51 @@
                 "projected_line": 14.5,
                 "users_pick": "Over",
                 "matchup": "MIA @ CHI",
-                "live_value": 13,
-                "status": "miss"
+                "live_value": 25,
+                "status": "hit"
             }
         ],
-        "time": "2025-04-16T23:15:46.712741"
+        "time": "2025-04-16T23:15:46.712741",
+        "result": "WON",
+        "actual_payout": 40.0,
+        "evaluated": true
+    },
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "henry.l.tran-1@ou.edu_1744878351237_975e49d7-4c77-40db-87a2-7da809f5bbd7",
+        "entry_type": "Power Play",
+        "entry_amount": 5.0,
+        "potential_payout": 15.0,
+        "entries": [
+            {
+                "player_id": 203952,
+                "player_name": "Andrew Wiggins",
+                "team_tri_code": "MIA",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/203952.png",
+                "line_category": "PTS",
+                "projected_line": 18.0,
+                "users_pick": "Over",
+                "matchup": "MIA @ CHI",
+                "live_value": 20,
+                "status": "hit"
+            },
+            {
+                "player_id": 1629632,
+                "player_name": "Coby White",
+                "team_tri_code": "CHI",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629632.png",
+                "line_category": "PTS",
+                "projected_line": 20.5,
+                "users_pick": "Under",
+                "matchup": "MIA @ CHI",
+                "live_value": 17,
+                "status": "hit"
+            }
+        ],
+        "time": "2025-04-17T08:25:51.245695",
+        "result": "WON",
+        "actual_payout": 15.0,
+        "evaluated": true
     }
 ]
