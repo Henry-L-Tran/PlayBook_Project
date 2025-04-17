@@ -217,8 +217,16 @@ def submit_lineup(lineup_data: SubmitLineup):
             
         return "N/A"
     
-    # def get_match_id():
-
+    def get_match_id(team):
+        for game in val_live_scores:
+            if game["team1"] == team or game["team2"] == team:
+                 return game["match_id"]
+            
+        for game in val_upcoming:
+            if game["team1"] == team or game["team2"] == team:
+                 return game["match_id"]
+        
+        return "N/A"
     
     frozen_entries = []
 
@@ -227,6 +235,7 @@ def submit_lineup(lineup_data: SubmitLineup):
 
         if entry.player_id == None:
             entry_dict["matchup"] = freeze_valmatchups_data(entry.team_tri_code)
+            entry_dict["match_id"] = get_match_id(entry.team_tri_code)
         else:
             entry_dict["matchup"] = freeze_matchups_data(entry.team_tri_code)
 
@@ -261,9 +270,14 @@ def fetch_user_lineups(email: str):
 
 # Fetch and Updates All Live Stats From the User's Lineups Automatically
 def fetch_user_live_lineup_data():
+    """
+    Periodically updates all user lineups with live NBA and VAL data,
+    then finalizes parlays once all games are complete.
+    """
     while True:
         lineups = fetch_lineups()
 
+        # Load Valorant kill data
         try:
             with open("app/valorant_data/val_player_kills.json", "r") as file:
                 val_kills_data = json.load(file)
@@ -271,216 +285,182 @@ def fetch_user_live_lineup_data():
             print("Error loading val_player_kills.json:", e)
             val_kills_data = []
 
+        # Load live NBA player stats
         live_nba_stats = {}
         try:
             with open("app/nba_data/live_player_data.json", "r") as file:
                 data = json.load(file)
-                for player in data["games"]:
+                for player in data.get("games", []):
                     live_nba_stats[player["playerId"]] = player
-        except:
+        except Exception:
             pass
 
-        # Loads NBA Game Status to See if Game is Final or Not
+        # Build NBA game status by team code
         game_status = {}
         try:
             games = scoreboard.ScoreBoard().get_dict()["scoreboard"]["games"]
             for game in games:
                 home = game.get("homeTeam", {})
                 away = game.get("awayTeam", {})
-                home_code = home.get("teamTricode") or home.get("teamTriCode")
-                away_code = away.get("teamTricode") or away.get("teamTriCode")
-                if home_code:
-                    game_status[home_code] = game.get("gameStatus", 0)
-                if away_code:
-                    game_status[away_code] = game.get("gameStatus", 0)
+                for team in (home, away):
+                    code = team.get("teamTricode") or team.get("teamTriCode")
+                    if code:
+                        game_status[code] = game.get("gameStatus", 0)
         except Exception as e:
             print("Error fetching game status:", e)
 
+        # Fallback: use individual player statuses
         if not game_status:
             try:
                 with open("app/nba_data/live_player_data.json", "r") as f:
-                    player_data = json.load(f).get("games", [])
-                    for player in player_data:
+                    for player in json.load(f).get("games", []):
                         if player.get("playerPlayed"):
-                            player_id = player.get("playerId")
-                            status = player.get("gameStatus")
-                            if player_id and status:
-                                game_status[player_id] = status
+                            game_status[player["playerId"]] = player.get("gameStatus", 0)
             except Exception as e:
                 print("Fallback player status load failed:", e)
 
-            
-        # Updates the User's Lineups
         updated_lineups = []
+
+        # Process each lineup
         for lineup in lineups:
-            if lineup.get("evaluated") is True:
+            if lineup.get("evaluated"):
                 updated_lineups.append(lineup)
                 continue
-                
-            games_final = True
 
-            # The User's Number of Legs That They Hit
             hit_legs = 0
+            games_pending = False
 
-            # Checks if the User's Lineup is Still Active or Not
+            # Evaluate each entry in the lineup
             for entry in lineup["entries"]:
                 line = entry["projected_line"]
-                category = entry["line_category"]
                 pick = entry["users_pick"]
+                category = entry["line_category"]
 
-#------------------------------------NBA Entry Section------------------------------------
-            if entry.get("player_id") is not None:
-                player_id = entry["player_id"]
-                live_player = live_nba_stats.get(player_id)
+# ------------------------------- NBA Entries ------------------------------- 
+                if entry.get("player_id") is not None:
+                    live_player = live_nba_stats.get(entry["player_id"])
+                    if not live_player:
+                        entry["live_value"] = None
+                        entry["status"] = "pending"
+                        games_pending = True
+                        continue
 
-                if not live_player:
-                    entry["live_value"] = None
-                    entry["status"] = "pending"
-                    games_final = False
-                    continue
+                    # DNP handling
+                    if live_player.get("playerPlayed") is False and live_player.get("gameStatus") == 3:
+                        entry["live_value"] = "DNP"
+                        entry["status"] = "DNP"
+                        continue
 
-                # If the Game is Final and Player Has Not Played, Set Status to DNP
-                if live_player.get("playerPlayed") is False and live_player.get("gameStatus") == 3:
-                    entry["live_value"] = "DNP"
-                    entry["status"] = "DNP"
-                    continue
+                    # Pending if not final
+                    if live_player.get("playerPlayed") is False and live_player.get("gameStatus") != 3:
+                        entry["live_value"] = None
+                        entry["status"] = "pending"
+                        games_pending = True
+                        continue
 
-                # Leaves the Entry as Pending if the Player Has Not Played and the Game is Not Final
-                if live_player.get("playerPlayed") is False and live_player.get("gameStatus") != 3:
-                    entry["live_value"] = None
-                    entry["status"] = "pending"
-                    games_final = False
-                    continue
+                    # Check if game still active
+                    team_code = entry["team_tri_code"]
+                    if game_status.get(team_code, 0) != 3:
+                        games_pending = True
 
-                team_code = entry["team_tri_code"]
-                if game_status.get(team_code, 0) != 3:
-                    games_final = False
-                
+                    # Compute stat value
+                    if category == "PTS":
+                        value = live_player["points"]
+                    elif category == "REB":
+                        value = live_player["rebounds"]
+                    elif category == "AST":
+                        value = live_player["assists"]
+                    elif category == "3PM":
+                        value = live_player["3ptMade"]
+                    elif category == "BLKS + STLS":
+                        value = live_player["blocks"] + live_player["steals"]
+                    elif category == "TO":
+                        value = live_player["turnovers"]
+                    elif category == "PTS + REB":
+                        value = live_player["points"] + live_player["rebounds"]
+                    elif category == "PTS + AST":
+                        value = live_player["points"] + live_player["assists"]
+                    elif category == "REB + AST":
+                        value = live_player["rebounds"] + live_player["assists"]
+                    elif category == "PTS + REB + AST":
+                        value = live_player["points"] + live_player["rebounds"] + live_player["assists"]
+                    else:
+                        value = 0
 
-                # Gets the Live Player Stats For Lineups Update
-                if category == "PTS":
-                    value = live_player["points"]
-                elif category == "REB":
-                    value = live_player["rebounds"]
-                elif category == "AST":
-                    value = live_player["assists"]
-                elif category == "3PM":
-                    value = live_player["3ptMade"]
-                elif category == "BLKS + STLS":
-                    value = live_player["blocks"] + live_player["steals"]
-                elif category == "TO":
-                    value = live_player["turnovers"]
-                elif category == "PTS + REB":
-                    value = live_player["points"] + live_player["rebounds"]
-                elif category == "PTS + AST":
-                    value = live_player["points"] + live_player["assists"]
-                elif category == "REB + AST":
-                    value = live_player["rebounds"] + live_player["assists"]
-                elif category == "PTS + REB + AST":
-                    value = live_player["points"] + live_player["rebounds"] + live_player["assists"]
-                else:
-                    value = 0
+                    entry["live_value"] = value
 
-                entry["live_value"] = value
+                    # Determine hit/miss
+                    if value is None:
+                        entry["status"] = "pending"
+                        games_pending = True
+                    else:
+                        if pick == "Over" and value > line:
+                            entry["status"] = "hit"
+                        elif pick == "Under" and value < line:
+                            entry["status"] = "hit"
+                        else:
+                            entry["status"] = "miss"
 
-
-                # If No Live Stats For the Player, Set Status to Pending, and Games Final to False
-                if value is None:
-                    entry["status"] = "pending"
-                    games_final = False
-                    continue
-
-                # Checks if the User's Line Hits or Not
-                if pick == "Over" and value > line:
-                    entry["status"] = "hit"
-                    hit_legs += 1
-                elif pick == "Under" and value < line:
-                    entry["status"] = "hit"
-                    hit_legs += 1
-                else:
-                    entry["status"] = "miss"
-
-
-#------------------------------------VAL Entry Section------------------------------------
-            
-            elif entry.get("match_id") is not None:
-                val_match_id = entry["match_id"]
-                player_name = entry["player_name"]
-                actual_kills = None
-
-                val_match_data = next((
-                    match for match in val_kills_data if match.get("match_id") == val_match_id), None)
-
-                if val_match_data:
-                    for side in ["a", "b"]:
-                        for i in range(1, 6):
-                            name_key = f"player{i}{side}"
-                            if val_match_data.get(name_key) == player_name:
-                                kills_key = f"player{i}{side}_kills"
-                                actual_kills = val_match_data.get(kills_key)
-                                break
-
-                # Default to 0 if kill data is missing
-                if actual_kills is None:
+# ------------------------------- VAL Entries ------------------------------- 
+                elif entry.get("match_id") is not None:
+                    val_match_data = next((m for m in val_kills_data if m.get("match_id") == entry["match_id"]), None)
                     actual_kills = 0
+                    if val_match_data:
+                        for side in ("a", "b"):
+                            for i in range(1, 6):
+                                name_key = f"player{i}{side}"
+                                if val_match_data.get(name_key) == entry["player_name"]:
+                                    kills_key = f"{name_key}_kills"
+                                    actual_kills = val_match_data.get(kills_key, 0)
+                                    break
+                    entry["kill_value"] = actual_kills
 
-                entry["kill_value"] = actual_kills
-
-                if pick.lower() == "over":
-                    if actual_kills > line:
+                    if pick.lower() == "over" and actual_kills > line:
                         entry["status"] = "hit"
-                        hit_legs += 1
+                    elif pick.lower() == "under" and actual_kills < line:
+                        entry["status"] = "hit"
                     else:
                         entry["status"] = "miss"
-                elif pick.lower() == "under":
-                    if actual_kills < line:
-                        entry["status"] = "hit"
-                        hit_legs += 1
-                    else:
-                        entry["status"] = "miss"
+
+                # Tally hits and pending
+                if entry.get("status") == "hit":
+                    hit_legs += 1
+                if entry.get("status") == "pending":
+                    games_pending = True
+
+            # Finalize lineup once no pending entries
+            if not games_pending:
+                valid_legs = [e for e in lineup["entries"] if e.get("status") != "DNP"]
+                total_legs = len(valid_legs)
+                hit_legs = len([e for e in valid_legs if e.get("status") == "hit"]);
+
+                # Refund logic
+                if (lineup["entry_type"] == "Power Play" and total_legs < 2) or (lineup["entry_type"] == "Flex Play" and total_legs < 3):
+                    lineup["result"] = "REFUNDED"
+                    lineup["actual_payout"] = lineup["entry_amount"]
+                    user_payout(lineup["email"], lineup["entry_amount"], user_win=None)
                 else:
-                    entry["status"] = "invalid pick"
-
-
-            # Determines the Lineup Result
-            if games_final:
-                if lineup.get("result") is None or lineup["result"] == "IN PROGRESS":
-                    
-                    # If DNP, Parlay is Reduced to the Number of Valid Legs
-                    valid_legs = [entry for entry in lineup["entries"] if entry["status"] != "DNP"]
-                    total_legs = len(valid_legs)
-                    hit_legs = len([entry for entry in valid_legs if entry["status"] == "hit"])
-                    
-                    # Refunds User w/ DNP Functionality (Gives User Back Their Entry Amount)
-                    if (lineup["entry_type"] == "Power Play" and total_legs < 1) or (lineup["entry_type"] == "Flex Play" and total_legs <= 2):
-                        lineup["result"] = "REFUNDED"
-                        lineup["actual_payout"] = lineup["entry_amount"]
-                        user_payout(lineup["email"], lineup["entry_amount"], user_win = None)
+                    multiplier = payout_multiplier(lineup["entry_type"], total_legs, hit_legs)
+                    if multiplier > 0:
+                        payout = round(lineup["entry_amount"] * multiplier, 2)
+                        lineup["result"] = "WON"
+                        lineup["actual_payout"] = payout
+                        user_payout(lineup["email"], payout, user_win=True)
                     else:
-                        multiplier = payout_multiplier(lineup["entry_type"], total_legs, hit_legs)
+                        lineup["result"] = "LOST"
+                        lineup["actual_payout"] = 0
+                        user_payout(lineup["email"], 0, user_win=False)
 
-                        if multiplier > 0:
-                            payout = round(lineup["entry_amount"] * multiplier, 2)
-                            lineup["result"] = "WON"
-                            lineup["actual_payout"] = payout
-                            user_payout(lineup["email"], payout, user_win = True)
-                        elif multiplier == 0:
-                            lineup["result"] = "LOST"
-                            lineup["actual_payout"] = 0
-                            user_payout(lineup["email"], 0, user_win = False)
-
-                # The Lineup Is Finalized, and The Live Data is Saved/Frozen
                 lineup["evaluated"] = True
 
             updated_lineups.append(lineup)
-            print("Game Status:", game_status)
-        
-        save_lineups(lineups)
 
-        # 30 Second Delay Between Each Fetch
+        save_lineups(updated_lineups)
         time.sleep(30)
 
+# Start background thread
 threading.Thread(target=fetch_user_live_lineup_data, daemon=True).start()
+
 
 
 

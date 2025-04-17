@@ -915,7 +915,9 @@
                 "projected_line": 24.5,
                 "users_pick": "Over",
                 "matchup": "DAL @ SAC",
-                "match_id": null
+                "match_id": null,
+                "live_value": 27,
+                "status": "hit"
             },
             {
                 "player_id": 201942,
@@ -927,7 +929,9 @@
                 "projected_line": 22.0,
                 "users_pick": "Under",
                 "matchup": "DAL @ SAC",
-                "match_id": null
+                "match_id": null,
+                "live_value": 33,
+                "status": "miss"
             },
             {
                 "player_id": null,
@@ -954,12 +958,15 @@
                 "match_id": null
             }
         ],
-        "time": "2025-04-17T02:36:08.181618"
+        "time": "2025-04-17T02:36:08.181618",
+        "result": "LOST",
+        "actual_payout": 0,
+        "evaluated": true
     },
     {
         "email": "henry.l.tran-1@ou.edu",
         "category": "VAL",
-        "entry_id": "henry.l.tran-1@ou.edu_1744883808288_35585dfe-b9f2-4365-af5d-e068216fb614",
+        "entry_id": "henry.l.tran-1@ou.edu_1744884929417_993ba539-a05a-4bde-bf30-7e6ffdd2a3f2",
         "entry_type": "Power Play",
         "entry_amount": 5.0,
         "potential_payout": 25.0,
@@ -968,39 +975,98 @@
                 "player_id": null,
                 "player_name": "kaajak",
                 "team_tri_code": "FNATIC",
-                "player_team": null,
                 "player_picture": null,
                 "line_category": "Maps 1-2 Kills",
                 "projected_line": 34.0,
                 "users_pick": "Over",
                 "matchup": "GIANTX vs FNATIC",
-                "match_id": null
+                "match_id": "459848",
+                "kill_value": 33,
+                "status": "miss"
             },
             {
                 "player_id": null,
                 "player_name": "Chronicle",
                 "team_tri_code": "FNATIC",
-                "player_team": null,
                 "player_picture": null,
                 "line_category": "Maps 1-2 Kills",
                 "projected_line": 28.799999999999997,
                 "users_pick": "Over",
                 "matchup": "GIANTX vs FNATIC",
-                "match_id": null
+                "match_id": "459848",
+                "kill_value": 30,
+                "status": "hit"
             },
             {
                 "player_id": null,
                 "player_name": "Cloud",
                 "team_tri_code": "GIANTX",
-                "player_team": null,
                 "player_picture": null,
                 "line_category": "Maps 1-2 Kills",
                 "projected_line": 28.4,
                 "users_pick": "Under",
                 "matchup": "GIANTX vs FNATIC",
-                "match_id": null
+                "match_id": "459848",
+                "kill_value": 34,
+                "status": "miss"
             }
         ],
-        "time": "2025-04-17T09:56:48.625048"
+        "time": "2025-04-17T10:15:29.427054",
+        "result": "LOST",
+        "actual_payout": 0,
+        "evaluated": true
+    },
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "VAL",
+        "entry_id": "henry.l.tran-1@ou.edu_1744886771705_662df3db-65d5-4a79-b007-801fcdf23a7d",
+        "entry_type": "Power Play",
+        "entry_amount": 10.0,
+        "potential_payout": 50.0,
+        "entries": [
+            {
+                "player_id": null,
+                "player_name": "westside",
+                "team_tri_code": "GIANTX",
+                "player_picture": null,
+                "line_category": "Maps 1-2 Kills",
+                "projected_line": 28.4,
+                "users_pick": "Over",
+                "matchup": "GIANTX vs FNATIC",
+                "match_id": "459848",
+                "kill_value": 38,
+                "status": "hit"
+            },
+            {
+                "player_id": null,
+                "player_name": "kaajak",
+                "team_tri_code": "FNATIC",
+                "player_picture": null,
+                "line_category": "Maps 1-2 Kills",
+                "projected_line": 34.0,
+                "users_pick": "Under",
+                "matchup": "GIANTX vs FNATIC",
+                "match_id": "459848",
+                "kill_value": 33,
+                "status": "hit"
+            },
+            {
+                "player_id": null,
+                "player_name": "crashies",
+                "team_tri_code": "FNATIC",
+                "player_picture": null,
+                "line_category": "Maps 1-2 Kills",
+                "projected_line": 28.4,
+                "users_pick": "Under",
+                "matchup": "GIANTX vs FNATIC",
+                "match_id": "459848",
+                "kill_value": 24,
+                "status": "hit"
+            }
+        ],
+        "time": "2025-04-17T10:46:11.713785",
+        "result": "WON",
+        "actual_payout": 50.0,
+        "evaluated": true
     }
 ]
