@@ -1068,5 +1068,55 @@
         "result": "WON",
         "actual_payout": 15.0,
         "evaluated": true
+    },
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "henry.l.tran-1@ou.edu_1744879340049_82f0aa87-a80d-460c-9691-8fae445ab0a4",
+        "entry_type": "Flex Play",
+        "entry_amount": 50.0,
+        "potential_payout": 125.0,
+        "entries": [
+            {
+                "player_id": 1629632,
+                "player_name": "Coby White",
+                "team_tri_code": "CHI",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629632.png",
+                "line_category": "PTS",
+                "projected_line": 20.5,
+                "users_pick": "Over",
+                "matchup": "MIA @ CHI",
+                "live_value": 17,
+                "status": "miss"
+            },
+            {
+                "player_id": 203076,
+                "player_name": "Anthony Davis",
+                "team_tri_code": "DAL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/203076.png",
+                "line_category": "PTS",
+                "projected_line": 24.5,
+                "users_pick": "Over",
+                "matchup": "DAL @ SAC",
+                "live_value": 27,
+                "status": "hit"
+            },
+            {
+                "player_id": 201942,
+                "player_name": "DeMar DeRozan",
+                "team_tri_code": "SAC",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/201942.png",
+                "line_category": "PTS",
+                "projected_line": 22.0,
+                "users_pick": "Over",
+                "matchup": "DAL @ SAC",
+                "live_value": 33,
+                "status": "hit"
+            }
+        ],
+        "time": "2025-04-17T08:42:20.052765",
+        "result": "WON",
+        "actual_payout": 50.0,
+        "evaluated": true
     }
 ]
