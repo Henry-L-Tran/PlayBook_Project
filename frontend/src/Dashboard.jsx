@@ -903,9 +903,9 @@ function Dashboard() {
                       justifyContent: "center",
                       alignItems: "center",
                       marginTop: "2.2vh",
-                      marginLeft: "17.5vw",
+                      marginLeft: "10%",
                       gap: "1.3vw",
-                      width: "65vw",
+                      width: "80%",
                     }}
                   >
                     {/* Betting Lines Category Buttons (PTS, REB, AST, etc.) */}

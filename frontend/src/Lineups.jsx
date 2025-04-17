@@ -36,7 +36,7 @@ function Lineups({
                     alignItems: "center",
                     borderTop: "1px solid #444",
                     width: "45vw",
-                    height: "9vh",
+                    height: "10%",
                     borderRadius: "10rem", 
                     border: "2px solid white",
                     marginBottom: "1rem",
@@ -59,7 +59,7 @@ function Lineups({
                             src={entry.player_picture}
                             alt={entry.player_name}
                             style={{
-                                width: "6rem",
+                                width: "5rem",
                                 border: "2px solid white",
                                 borderRadius: "10rem",
                                 objectFit: "cover",
