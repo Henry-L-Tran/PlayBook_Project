@@ -612,7 +612,7 @@ function Dashboard() {
                       <div className="flex flex-col space-y-8 w-full ">
                         {/* Away Team Row */}
                         <div className="flex flex-wrap items-center ">
-                          <div className="w-3/4 flex justify-around ">
+                          <div className="w-[78%] flex justify-around ">
                             {/* Team Code and Record */}
                             <div className="flex items-center justify-center w-full gap-4 md:w-1/4 mb-2 md:mb-0">
                               <TeamLogo teamTriCode={game.awayTeam.teamTriCode} size={75} />
@@ -694,7 +694,7 @@ function Dashboard() {
 
                         {/* Home Team Row */}
                         <div className="flex flex-wrap items-center">
-                          <div className="w-3/4 flex justify-around ">
+                          <div className="w-[78%] flex justify-around ">
                             {/* Team Code and Record */}
                             <div className="flex items-center justify-center w-full gap-4 md:w-1/4 mb-2 md:mb-0">
                               <TeamLogo teamTriCode={game.homeTeam.teamTriCode} size={75} />
@@ -991,7 +991,7 @@ function Dashboard() {
                                 backgroundColor: "rgba(0, 0, 0, 0.5)",
                                 marginBottom: "1.3vh",
                                 width: "14vw",
-                                height: "25vh",
+                                height: "7",
                                 overflow: "hidden",
                                 display: "flex",
                                 flexDirection: "column",
@@ -1205,7 +1205,7 @@ function Dashboard() {
                                 backgroundColor: "rgba(0, 0, 0, 0.5)",
                                 marginBottom: "1.3vh",
                                 width: "14vw",
-                                height: "25vh",
+                                height: "8%",
                                 overflow: "hidden",
                                 display: "flex",
                                 flexDirection: "column",

@@ -187,6 +187,7 @@ const LineupsPage = ({ user, setActiveComponent }) => {
                                 border: "2px solid white",
                                 padding: "0.5rem 12rem",
                                 borderRadius: "0.5rem",
+                                width: "85%",
                                 "&:hover": {
                                     textDecoration: "underline",
                                 },
