@@ -42,6 +42,10 @@ def vlr_upcoming_matches():
             ).strftime("%Y-%m-%d %H:%M:%S")
             url_path = "https://www.vlr.gg/" + item.attributes["href"]
 
+            reg_pattern = r"vlr\.gg/(\d{6})/"
+            match_id_temp = re.search(reg_pattern, url_path)
+            match_id = match_id_temp.group(1)
+
             result.append(
                 {
                     "team1": teams[0],
@@ -53,6 +57,7 @@ def vlr_upcoming_matches():
                     "match_event": match_event,
                     "unix_timestamp": timestamp,
                     "match_page": url_path,
+                    "match_id": match_id
                 }
             )
 
@@ -104,6 +109,10 @@ def vlr_live_score():
                 tz=timezone.utc,
             ).strftime("%Y-%m-%d %H:%M:%S")
             url_path = "https://www.vlr.gg/" + match.attributes["href"]
+
+            reg_pattern = r"vlr\.gg/(\d{6})/"
+            match_id_temp = re.search(reg_pattern, url_path)
+            match_id = match_id_temp.group(1)
 
             match_page = requests.get(url_path, headers=headers)
             match_html = HTMLParser(match_page.text)
@@ -163,6 +172,7 @@ def vlr_live_score():
                     "match_series": match_series,
                     "unix_timestamp": timestamp,
                     "match_page": url_path,
+                    "match_id": match_id
                 }
             )
 

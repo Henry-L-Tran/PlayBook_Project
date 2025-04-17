@@ -2,72 +2,6 @@
     "gameDate": "2025-04-16",
     "gameData": [
         {
-            "gameId": "0052400131",
-            "gameStatus": 2,
-            "gameStatusText": "Half",
-            "gameClock": "PT00M00.00S",
-            "homeTeam": {
-                "teamId": 1610612758,
-                "teamName": "Kings",
-                "teamTriCode": "SAC",
-                "wins": 0,
-                "losses": 0,
-                "score": 48,
-                "periods": [
-                    {
-                        "period": 1,
-                        "periodType": "REGULAR",
-                        "score": 29
-                    },
-                    {
-                        "period": 2,
-                        "periodType": "REGULAR",
-                        "score": 19
-                    },
-                    {
-                        "period": 3,
-                        "periodType": "REGULAR",
-                        "score": 0
-                    },
-                    {
-                        "period": 4,
-                        "periodType": "REGULAR",
-                        "score": 0
-                    }
-                ]
-            },
-            "awayTeam": {
-                "teamId": 1610612742,
-                "teamName": "Mavericks",
-                "teamTriCode": "DAL",
-                "wins": 0,
-                "losses": 0,
-                "score": 71,
-                "periods": [
-                    {
-                        "period": 1,
-                        "periodType": "REGULAR",
-                        "score": 27
-                    },
-                    {
-                        "period": 2,
-                        "periodType": "REGULAR",
-                        "score": 44
-                    },
-                    {
-                        "period": 3,
-                        "periodType": "REGULAR",
-                        "score": 0
-                    },
-                    {
-                        "period": 4,
-                        "periodType": "REGULAR",
-                        "score": 0
-                    }
-                ]
-            }
-        },
-        {
             "gameId": "0052400111",
             "gameStatus": 3,
             "gameStatusText": "Final",
@@ -124,6 +58,72 @@
                         "period": 3,
                         "periodType": "REGULAR",
                         "score": 17
+                    },
+                    {
+                        "period": 4,
+                        "periodType": "REGULAR",
+                        "score": 21
+                    }
+                ]
+            }
+        },
+        {
+            "gameId": "0052400131",
+            "gameStatus": 3,
+            "gameStatusText": "Final",
+            "gameClock": "",
+            "homeTeam": {
+                "teamId": 1610612758,
+                "teamName": "Kings",
+                "teamTriCode": "SAC",
+                "wins": 0,
+                "losses": 1,
+                "score": 106,
+                "periods": [
+                    {
+                        "period": 1,
+                        "periodType": "REGULAR",
+                        "score": 29
+                    },
+                    {
+                        "period": 2,
+                        "periodType": "REGULAR",
+                        "score": 19
+                    },
+                    {
+                        "period": 3,
+                        "periodType": "REGULAR",
+                        "score": 33
+                    },
+                    {
+                        "period": 4,
+                        "periodType": "REGULAR",
+                        "score": 25
+                    }
+                ]
+            },
+            "awayTeam": {
+                "teamId": 1610612742,
+                "teamName": "Mavericks",
+                "teamTriCode": "DAL",
+                "wins": 1,
+                "losses": 0,
+                "score": 120,
+                "periods": [
+                    {
+                        "period": 1,
+                        "periodType": "REGULAR",
+                        "score": 27
+                    },
+                    {
+                        "period": 2,
+                        "periodType": "REGULAR",
+                        "score": 44
+                    },
+                    {
+                        "period": 3,
+                        "periodType": "REGULAR",
+                        "score": 28
                     },
                     {
                         "period": 4,

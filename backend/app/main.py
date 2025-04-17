@@ -453,8 +453,6 @@ threading.Thread(target=fetch_val_upcoming_matches, daemon=True).start()
 # Get VALORANT upcoming players from API
 def fetch_val_upcoming_players():
     try:
-        reg_pattern = r"vlr\.gg/(\d{6})/" # Regex pattern to get match_id
-
         # Get match results and filter them to tier 1 matches
         matches = Vlr.vlr_upcoming_matches()
         filtered_matches = val_filter_matches(matches)
@@ -462,19 +460,13 @@ def fetch_val_upcoming_players():
 
         # Loop through all matches
         for match in filtered_matches:
-            # Grab match_id from vlr link
-            match_page = match["match_page"]
-            match_id_temp = re.search(reg_pattern, match_page)
-            match_id = match_id_temp.group(1)
-            print("MatchID: ", match_id)
-            
             # Get players from each team
             team1_player_data = valdata._get_basic_players(match_id, match["team1"], True)
             team2_player_data = valdata._get_basic_players(match_id, match["team2"], False)
 
             match_results.append(
                 {
-                    "match_id": match_id,
+                    "match_id": match["match_id"],
 
 
                     "teama": match["team1"],
@@ -505,8 +497,6 @@ threading.Thread(target=fetch_val_upcoming_players, daemon=True).start()
 # Get VALORANT live players from API
 def fetch_val_live_players():
     try:
-        reg_pattern = r"vlr\.gg/(\d{6})/" # Regex pattern to get match_id
-
         # Get match results and filter them to tier 1 matches
         matches = Vlr.vlr_live_score()
         filtered_matches = val_filter_matches(matches)
@@ -514,10 +504,8 @@ def fetch_val_live_players():
 
         # Loop through all matches
         for match in filtered_matches:
-            # Grab match_id from vlr link
-            match_page = match["match_page"]
-            match_id_temp = re.search(reg_pattern, match_page)
-            match_id = match_id_temp.group(1)
+            # Grab match_id
+            match_id = match["match_id"]
             print("MatchID: ", match_id)
             
             # Get players from each team
@@ -586,97 +574,97 @@ def fetch_val_match_results():
 
 threading.Thread(target=fetch_val_match_results, daemon=True).start()
 
-def fetch_val_player_kills():
-    try:
-        # Get match results and filter them
-        matches = Vlr.vlr_match_results()
-        filtered_matches = val_filter_matches(matches)
-        match_results = []
+# def fetch_val_player_kills():
+#     try:
+#         # Get match results and filter them
+#         matches = Vlr.vlr_match_results()
+#         filtered_matches = val_filter_matches(matches)
+#         match_results = []
 
-        player_attrs = ['player_1', 'player_2', 'player_3', 'player_4', 'player_5']
+#         player_attrs = ['player_1', 'player_2', 'player_3', 'player_4', 'player_5']
 
-        # Loop through all matches
-        for match in filtered_matches:
-            # Grab match_id from vlr link
-            match_id = match["match_id"]
+#         # Loop through all matches
+#         for match in filtered_matches:
+#             # Grab match_id from vlr link
+#             match_id = match["match_id"]
             
-            # Grab stats from first 2 maps
-            match_map_1 = valdata.Round(valdata.Match(match_id).rounds[0], match_id)
-            match_map_2 = valdata.Round(valdata.Match(match_id).rounds[1], match_id)
+#             # Grab stats from first 2 maps
+#             match_map_1 = valdata.Round(valdata.Match(match_id).rounds[0], match_id)
+#             match_map_2 = valdata.Round(valdata.Match(match_id).rounds[1], match_id)
 
-            team1_players = {}
-            team2_players = {}
+#             team1_players = {}
+#             team2_players = {}
 
-            # Assign initial kills for both teams
-            for attr in player_attrs:
-                # Dynamically get the player object from team A using getatt.
-                player_a = getattr(match_map_1.team_a, attr)
-                key_a = player_a.name.lower()
-                team1_players[key_a] = int(player_a.kills)
+#             # Assign initial kills for both teams
+#             for attr in player_attrs:
+#                 # Dynamically get the player object from team A using getatt.
+#                 player_a = getattr(match_map_1.team_a, attr)
+#                 key_a = player_a.name.lower()
+#                 team1_players[key_a] = int(player_a.kills)
 
-                # Similarly for team B.
-                player_b = getattr(match_map_1.team_b, attr)
-                key_b = player_b.name.lower()
-                team2_players[key_b] = int(player_b.kills)
+#                 # Similarly for team B.
+#                 player_b = getattr(match_map_1.team_b, attr)
+#                 key_b = player_b.name.lower()
+#                 team2_players[key_b] = int(player_b.kills)
 
-            # Add to the kills already recorded.
-            for attr in player_attrs:
-                player_a = getattr(match_map_2.team_a, attr)
-                key_a = player_a.name.lower()
-                team1_players[key_a] += int(player_a.kills)
+#             # Add to the kills already recorded.
+#             for attr in player_attrs:
+#                 player_a = getattr(match_map_2.team_a, attr)
+#                 key_a = player_a.name.lower()
+#                 team1_players[key_a] += int(player_a.kills)
 
-                player_b = getattr(match_map_2.team_b, attr)
-                key_b = player_b.name.lower()
-                team2_players[key_b] += int(player_b.kills)
+#                 player_b = getattr(match_map_2.team_b, attr)
+#                 key_b = player_b.name.lower()
+#                 team2_players[key_b] += int(player_b.kills)
 
-            # Append the matches players stats tot match_results
-            match_results.append(
-                {
-                    "match_id": match_id,
-
-
-                    "teama": match["team1"],
-                    "player1a": match_map_1.team_a.player_1.name,
-                    "player1a_kills": team1_players.get(match_map_1.team_a.player_1.name.lower()),
-
-                    "player2a": match_map_1.team_a.player_2.name,
-                    "player2a_kills": team1_players.get(match_map_1.team_a.player_2.name.lower()),
-
-                    "player3a": match_map_1.team_a.player_3.name,
-                    "player3a_kills": team1_players.get(match_map_1.team_a.player_3.name.lower()),
-
-                    "player4a": match_map_1.team_a.player_4.name,
-                    "player4a_kills": team1_players.get(match_map_1.team_a.player_4.name.lower()),
-
-                    "player5a": match_map_1.team_a.player_5.name,
-                    "player5a_kills": team1_players.get(match_map_1.team_a.player_5.name.lower()),
+#             # Append the matches players stats tot match_results
+#             match_results.append(
+#                 {
+#                     "match_id": match_id,
 
 
-                    "teamb": match["team2"],
-                    "player1b": match_map_1.team_b.player_1.name,
-                    "player1b_kills": team2_players.get(match_map_1.team_b.player_1.name.lower()),
+#                     "teama": match["team1"],
+#                     "player1a": match_map_1.team_a.player_1.name,
+#                     "player1a_kills": team1_players.get(match_map_1.team_a.player_1.name.lower()),
 
-                    "player2b": match_map_1.team_b.player_2.name,
-                    "player2b_kills": team2_players.get(match_map_1.team_b.player_2.name.lower()),
+#                     "player2a": match_map_1.team_a.player_2.name,
+#                     "player2a_kills": team1_players.get(match_map_1.team_a.player_2.name.lower()),
 
-                    "player3b": match_map_1.team_b.player_3.name,
-                    "player3b_kills": team2_players.get(match_map_1.team_b.player_3.name.lower()),
+#                     "player3a": match_map_1.team_a.player_3.name,
+#                     "player3a_kills": team1_players.get(match_map_1.team_a.player_3.name.lower()),
 
-                    "player4b": match_map_1.team_b.player_4.name,
-                    "player4b_kills": team2_players.get(match_map_1.team_b.player_4.name.lower()),
+#                     "player4a": match_map_1.team_a.player_4.name,
+#                     "player4a_kills": team1_players.get(match_map_1.team_a.player_4.name.lower()),
 
-                    "player5b": match_map_1.team_b.player_5.name,
-                    "player5b_kills": team2_players.get(match_map_1.team_b.player_5.name.lower()),
-                }
-            )
+#                     "player5a": match_map_1.team_a.player_5.name,
+#                     "player5a_kills": team1_players.get(match_map_1.team_a.player_5.name.lower()),
 
-            with open("app/valorant_data/val_player_kills.json", "w") as file:
-                json.dump(match_results, file, indent=4)
 
-    except Exception as e:
-        print("Error retrieving match results:", e)
+#                     "teamb": match["team2"],
+#                     "player1b": match_map_1.team_b.player_1.name,
+#                     "player1b_kills": team2_players.get(match_map_1.team_b.player_1.name.lower()),
 
-threading.Thread(target=fetch_val_player_kills, daemon=True).start()
+#                     "player2b": match_map_1.team_b.player_2.name,
+#                     "player2b_kills": team2_players.get(match_map_1.team_b.player_2.name.lower()),
+
+#                     "player3b": match_map_1.team_b.player_3.name,
+#                     "player3b_kills": team2_players.get(match_map_1.team_b.player_3.name.lower()),
+
+#                     "player4b": match_map_1.team_b.player_4.name,
+#                     "player4b_kills": team2_players.get(match_map_1.team_b.player_4.name.lower()),
+
+#                     "player5b": match_map_1.team_b.player_5.name,
+#                     "player5b_kills": team2_players.get(match_map_1.team_b.player_5.name.lower()),
+#                 }
+#             )
+
+#             with open("app/valorant_data/val_player_kills.json", "w") as file:
+#                 json.dump(match_results, file, indent=4)
+
+#     except Exception as e:
+#         print("Error retrieving match results:", e)
+
+# threading.Thread(target=fetch_val_player_kills, daemon=True).start()
 
 # Player recent stats
 def fetch_val_player_stats():

@@ -21,10 +21,8 @@ class LineupEntry(BaseModel):
     player_id: int | None = None
     # BOTH Parameters
     player_name: str
-    # NBA Parameter
+    # BOTH Parameter
     team_tri_code: str | None = None
-    # VAL Parameter
-    player_team: str | None = None
     # BOTH Parameters
     player_picture: str | None = None
     # BOTH Parameters
@@ -161,8 +159,6 @@ def submit_lineup(lineup_data: SubmitLineup):
     for player in lineup_data.entries:
         if player.team_tri_code:
             team.add(player.team_tri_code)
-        elif player.player_team:
-            team.add(player.player_team)
 
     if len(team) == 1:
         raise HTTPException(status_code=400, detail="Lineups cannnot just contain players from the same team")
@@ -190,6 +186,18 @@ def submit_lineup(lineup_data: SubmitLineup):
     except:
         live_scores = {"gameData": []}
 
+    try:
+        with open("app/valorant_data/val_live_scores.json", "r") as file:
+            val_live_scores = json.load(file)
+    except:
+        val_live_scores = {"gameData": []}
+
+    try:
+        with open("app/valorant_data/val_upcoming_matches.json", "r") as file:
+            val_upcoming = json.load(file)
+    except:
+        val_upcoming = {"gameData": []}
+
     # Freezing the Lineup Matchup Data When Parlay is Placed
     def freeze_matchups_data(team_tri_code):
         for game in live_scores.get("gameData", []):
@@ -197,11 +205,31 @@ def submit_lineup(lineup_data: SubmitLineup):
                  return f'{game["awayTeam"]["teamTriCode"]} @ {game["homeTeam"]["teamTriCode"]}'
         return "N/A"
     
+        # Freezing the Lineup Matchup Data When Parlay is Placed
+    def freeze_valmatchups_data(player_team):
+        for game in val_live_scores:
+            if game["team1"] == player_team or game["team2"] == player_team:
+                 return f'{game["team1"]} vs {game["team2"]}'
+            
+        for game in val_upcoming:
+            if game["team1"] == player_team or game["team2"] == player_team:
+                 return f'{game["team1"]} vs {game["team2"]}'
+            
+        return "N/A"
+    
+    # def get_match_id():
+
+    
     frozen_entries = []
 
     for entry in lineup_data.entries:
         entry_dict = entry.dict()
-        entry_dict["matchup"] = freeze_matchups_data(entry.team_tri_code)
+
+        if entry.player_id == None:
+            entry_dict["matchup"] = freeze_valmatchups_data(entry.team_tri_code)
+        else:
+            entry_dict["matchup"] = freeze_matchups_data(entry.team_tri_code)
+
         frozen_entries.append(entry_dict)
 
     # Builds the New Lineup 
@@ -449,60 +477,10 @@ def fetch_user_live_lineup_data():
         
         save_lineups(lineups)
 
-        confirm_val_lineups()
-
         # 30 Second Delay Between Each Fetch
         time.sleep(30)
 
 threading.Thread(target=fetch_user_live_lineup_data, daemon=True).start()
-
-def confirm_val_lineups():
-    lineups = fetch_lineups()
-
-    try:
-        with open("app/valorant_data/val_player_kills.json", "r") as file:
-            val_kills_data = json.load(file)
-    except Exception as e:
-        print("Error loading val_player_kills.json:", e)
-        val_kills_data = []
-
-    updated_lineups = []
-
-    for lineup in lineups:
-        # Process entries of type ValLineupEntry
-        entries = lineup.get("entries", [])
-        if not entries or "player_team" not in entries[0]:
-            # Not a Valorant lineup, leave unchanged
-            updated_lineups.append(lineup)
-            continue
-
-        hit_legs = 0
-        total_legs = len(entries)
-        
-        # Retrieve the match id from the first entry
-        match_id = entries[0].get("match_id", "N/A")
-        match_data = None
-        for match in val_kills_data:
-            if match.get("match_id") == match_id:
-                match_data = match
-                break
-
-        # Since every match is complete, mark the lineup as evaluated
-        lineup["evaluated"] = True
-        
-        # Calculate payout multiplier and overall result
-        multiplier = payout_multiplier(lineup.get("entry_type"), total_legs, hit_legs)
-        if hit_legs == total_legs:
-            lineup["result"] = "WON"
-            lineup["actual_payout"] = lineup.get("entry_amount", 0) * multiplier
-        else:
-            lineup["result"] = "LOST"
-            lineup["actual_payout"] = 0
-
-        updated_lineups.append(lineup)
-        
-    # Save the updated lineups back to lineups.json
-    save_lineups(updated_lineups)
 
 
 

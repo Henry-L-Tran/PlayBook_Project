@@ -56,7 +56,7 @@ const ValorantLinesPopup = ({
         </IconButton>
 
         <Typography variant="h5" align="center" sx={{ color: "white", mb: 3 }}>
-          {selectedMatch.team1} @ {selectedMatch.team2}
+          {selectedMatch.team1} vs {selectedMatch.team2}
         </Typography>
 
         {/* Line category buttons */}
