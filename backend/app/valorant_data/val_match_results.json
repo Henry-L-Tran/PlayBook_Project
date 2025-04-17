@@ -1,12 +1,26 @@
 [
     {
+        "team1": "Titan Esports Club",
+        "team2": "Wolves Esports",
+        "score1": "0",
+        "score2": "2",
+        "flag1": "flag_cn",
+        "flag2": "flag_cn",
+        "time_completed": "3h 4m ago",
+        "round_info": "Playoffs-Upper Round 1",
+        "tournament_name": "Champions Tour 2025: China Stage 1",
+        "match_page": "/473233/titan-esports-club-vs-wolves-esports-champions-tour-2025-china-stage-1-ur1",
+        "tournament_icon": "https://owcdn.net/img/65dd97cea9a25.png",
+        "match_id": "473233"
+    },
+    {
         "team1": "Team Liquid",
         "team2": "KOI",
         "score1": "2",
         "score2": "0",
         "flag1": "flag_eu",
         "flag2": "flag_eu",
-        "time_completed": "17h 25m ago",
+        "time_completed": "18h 44m ago",
         "round_info": "Group Stage-Week 4",
         "tournament_name": "Champions Tour 2025: EMEA Stage 1",
         "match_page": "/459846/team-liquid-vs-koi-champions-tour-2025-emea-stage-1-w4",
@@ -20,25 +34,11 @@
         "score2": "0",
         "flag1": "flag_eu",
         "flag2": "flag_eu",
-        "time_completed": "19h 45m ago",
+        "time_completed": "21h 4m ago",
         "round_info": "Group Stage-Week 4",
         "tournament_name": "Champions Tour 2025: EMEA Stage 1",
         "match_page": "/459845/team-vitality-vs-apeks-champions-tour-2025-emea-stage-1-w4",
         "tournament_icon": "https://owcdn.net/img/65ab59620a233.png",
         "match_id": "459845"
-    },
-    {
-        "team1": "DetonatioN FocusMe",
-        "team2": "Paper Rex",
-        "score1": "1",
-        "score2": "2",
-        "flag1": "flag_jp",
-        "flag2": "flag_sg",
-        "time_completed": "3d 0h ago",
-        "round_info": "Group Stage-Week 4",
-        "tournament_name": "Champions Tour 2025: Pacific Stage 1",
-        "match_page": "/458828/detonation-focusme-vs-paper-rex-champions-tour-2025-pacific-stage-1-w4",
-        "tournament_icon": "https://owcdn.net/img/640f5ae002674.png",
-        "match_id": "458828"
     }
 ]

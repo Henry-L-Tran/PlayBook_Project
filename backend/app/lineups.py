@@ -236,6 +236,7 @@ def submit_lineup(lineup_data: SubmitLineup):
         if entry.player_id == None:
             entry_dict["matchup"] = freeze_valmatchups_data(entry.team_tri_code)
             entry_dict["match_id"] = get_match_id(entry.team_tri_code)
+            entry_dict["player_picture"] = "https://diamond-dapp.vercel.app/sidebar/logo2.png"
         else:
             entry_dict["matchup"] = freeze_matchups_data(entry.team_tri_code)
 
