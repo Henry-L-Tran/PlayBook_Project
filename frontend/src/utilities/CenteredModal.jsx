@@ -11,10 +11,9 @@ const CenteredModal = ({ isOpen, message, autoClose = true, onClose }) => {
 
     if (isOpen) {
       setVisible(true);
-      setOpacity(1); // reset opacity when reopened
+      setOpacity(1); 
 
       if (autoClose) {
-        // Start fading out a bit before closing
         fadeTimer = setTimeout(() => setOpacity(0), 750);
         closeTimer = setTimeout(() => {
           setVisible(false);

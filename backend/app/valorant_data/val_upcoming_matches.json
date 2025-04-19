@@ -1,57 +1,90 @@
 [
     {
-        "team1": "Xi Lai Gaming",
-        "team2": "Nova Esports",
+        "team1": "Paper Rex",
+        "team2": "Global Esports",
+        "flag1": "flag_sg",
+        "flag2": "flag_in",
+        "time_until_match": "4h 0m from now",
+        "match_series": "Group Stage: Week 5",
+        "match_event": "Champions Tour 2025: Pacific Stage 1",
+        "unix_timestamp": "2025-04-19 08:00:00",
+        "match_page": "https://www.vlr.gg/458830/paper-rex-vs-global-esports-champions-tour-2025-pacific-stage-1-w5"
+    },
+    {
+        "team1": "Bilibili Gaming",
+        "team2": "Wolves Esports",
         "flag1": "flag_cn",
         "flag2": "flag_cn",
-        "time_until_match": "10m from now",
-        "match_series": "Playoffs: Upper Round 1",
+        "time_until_match": "5h 0m from now",
+        "match_series": "Playoffs: Upper Semifinals",
         "match_event": "Champions Tour 2025: China Stage 1",
-        "unix_timestamp": "2025-04-17 11:30:00",
-        "match_page": "https://www.vlr.gg/473234/xi-lai-gaming-vs-nova-esports-champions-tour-2025-china-stage-1-ur1"
+        "unix_timestamp": "2025-04-19 09:00:00",
+        "match_page": "https://www.vlr.gg/473237/bilibili-gaming-vs-wolves-esports-champions-tour-2025-china-stage-1-ubsf"
     },
     {
-        "team1": "Gentle Mates",
-        "team2": "BBL Esports",
-        "flag1": "flag_eu",
-        "flag2": "flag_eu",
-        "time_until_match": "3h 40m from now",
-        "match_series": "Group Stage: Week 4",
-        "match_event": "Champions Tour 2025: EMEA Stage 1",
-        "unix_timestamp": "2025-04-17 15:00:00",
-        "match_page": "https://www.vlr.gg/459847/gentle-mates-vs-bbl-esports-champions-tour-2025-emea-stage-1-w4"
+        "team1": "T1",
+        "team2": "TALON",
+        "flag1": "flag_kr",
+        "flag2": "flag_th",
+        "time_until_match": "6h 0m from now",
+        "match_series": "Group Stage: Week 5",
+        "match_event": "Champions Tour 2025: Pacific Stage 1",
+        "unix_timestamp": "2025-04-19 10:00:00",
+        "match_page": "https://www.vlr.gg/458831/t1-vs-talon-champions-tour-2025-pacific-stage-1-w5"
     },
     {
-        "team1": "GIANTX",
-        "team2": "FNATIC",
-        "flag1": "flag_eu",
-        "flag2": "flag_eu",
-        "time_until_match": "6h 40m from now",
-        "match_series": "Group Stage: Week 4",
-        "match_event": "Champions Tour 2025: EMEA Stage 1",
-        "unix_timestamp": "2025-04-17 18:00:00",
-        "match_page": "https://www.vlr.gg/459848/giantx-vs-fnatic-champions-tour-2025-emea-stage-1-w4"
-    },
-    {
-        "team1": "Titan Esports Club",
-        "team2": "Dragon Ranger Gaming",
+        "team1": "EDward Gaming",
+        "team2": "Xi Lai Gaming",
         "flag1": "flag_cn",
         "flag2": "flag_cn",
-        "time_until_match": "21h 40m from now",
-        "match_series": "Playoffs: Lower Round 1",
+        "time_until_match": "7h 0m from now",
+        "match_series": "Playoffs: Upper Semifinals",
         "match_event": "Champions Tour 2025: China Stage 1",
-        "unix_timestamp": "2025-04-18 09:00:00",
-        "match_page": "https://www.vlr.gg/473235/titan-esports-club-vs-dragon-ranger-gaming-champions-tour-2025-china-stage-1-lr1"
+        "unix_timestamp": "2025-04-19 11:00:00",
+        "match_page": "https://www.vlr.gg/473238/edward-gaming-vs-xi-lai-gaming-champions-tour-2025-china-stage-1-ubsf"
+    },
+    {
+        "team1": "Sentinels",
+        "team2": "2Game Esports",
+        "flag1": "flag_us",
+        "flag2": "flag_br",
+        "time_until_match": "17h 0m from now",
+        "match_series": "Group Stage: Week 5",
+        "match_event": "Champions Tour 2025: Americas Stage 1",
+        "unix_timestamp": "2025-04-19 21:00:00",
+        "match_page": "https://www.vlr.gg/459543/sentinels-vs-2game-esports-champions-tour-2025-americas-stage-1-w5"
+    },
+    {
+        "team1": "KR\u00dc Esports",
+        "team2": "100 Thieves",
+        "flag1": "flag_ar",
+        "flag2": "flag_us",
+        "time_until_match": "20h 0m from now",
+        "match_series": "Group Stage: Week 5",
+        "match_event": "Champions Tour 2025: Americas Stage 1",
+        "unix_timestamp": "2025-04-20 00:00:00",
+        "match_page": "https://www.vlr.gg/459544/kr-esports-vs-100-thieves-champions-tour-2025-americas-stage-1-w5"
+    },
+    {
+        "team1": "DRX",
+        "team2": "Gen.G",
+        "flag1": "flag_kr",
+        "flag2": "flag_kr",
+        "time_until_match": "1d 4h from now",
+        "match_series": "Group Stage: Week 5",
+        "match_event": "Champions Tour 2025: Pacific Stage 1",
+        "unix_timestamp": "2025-04-20 08:00:00",
+        "match_page": "https://www.vlr.gg/458832/drx-vs-gen-g-champions-tour-2025-pacific-stage-1-w5"
     },
     {
         "team1": "TBD",
         "team2": "Trace Esports",
         "flag1": "flag_un",
         "flag2": "flag_cn",
-        "time_until_match": "23h 40m from now",
-        "match_series": "Playoffs: Lower Round 1",
+        "time_until_match": "1d 5h from now",
+        "match_series": "Playoffs: Lower Round 2",
         "match_event": "Champions Tour 2025: China Stage 1",
-        "unix_timestamp": "2025-04-18 11:00:00",
-        "match_page": "https://www.vlr.gg/473236/trace-esports-vs-tbd-champions-tour-2025-china-stage-1-lr1"
+        "unix_timestamp": "2025-04-20 09:00:00",
+        "match_page": "https://www.vlr.gg/473240/trace-esports-vs-tbd-champions-tour-2025-china-stage-1-lr2"
     }
 ]

@@ -15,8 +15,8 @@
                 "projected_line": 30.0,
                 "users_pick": "Under",
                 "match_id": "458828",
-                "kill_value": 38,
-                "status": "miss"
+                "kill_value": 0,
+                "status": "hit"
             },
             {
                 "player_name": "gyen",
@@ -26,8 +26,8 @@
                 "projected_line": 28.0,
                 "users_pick": "Over",
                 "match_id": "458828",
-                "kill_value": 29,
-                "status": "hit"
+                "kill_value": 0,
+                "status": "miss"
             },
             {
                 "player_name": "Jinboong",
@@ -37,8 +37,8 @@
                 "projected_line": 24.0,
                 "users_pick": "Over",
                 "match_id": "458828",
-                "kill_value": 25,
-                "status": "hit"
+                "kill_value": 0,
+                "status": "miss"
             }
         ],
         "time": "2025-04-15T10:00:00.000000",
@@ -1179,6 +1179,44 @@
         "time": "2025-04-17T08:56:07.956483",
         "result": "WON",
         "actual_payout": 12.5,
+        "evaluated": true
+    },
+    {
+        "email": "henry.l.tran-1@ou.edu",
+        "category": "NBA",
+        "entry_id": "henry.l.tran-1@ou.edu_1745029547986_db3c0a35-c91c-467c-a920-1e20343ea004",
+        "entry_type": "Power Play",
+        "entry_amount": 5.0,
+        "potential_payout": 15.0,
+        "entries": [
+            {
+                "player_id": 202692,
+                "player_name": "Alec Burks",
+                "team_tri_code": "MIA",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/202692.png",
+                "line_category": "PTS",
+                "projected_line": 7.0,
+                "users_pick": "Over",
+                "matchup": "MIA @ ATL",
+                "live_value": 5,
+                "status": "miss"
+            },
+            {
+                "player_id": 1629027,
+                "player_name": "Trae Young",
+                "team_tri_code": "ATL",
+                "player_picture": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629027.png",
+                "line_category": "PTS",
+                "projected_line": 24.0,
+                "users_pick": "Over",
+                "matchup": "MIA @ ATL",
+                "live_value": 29,
+                "status": "hit"
+            }
+        ],
+        "time": "2025-04-19T02:25:48.305675",
+        "result": "LOST",
+        "actual_payout": 0,
         "evaluated": true
     }
 ]
